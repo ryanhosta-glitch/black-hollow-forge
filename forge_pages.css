@@ -1,0 +1,13 @@
+/* Black Hollow Forge - universal mobile page switcher */
+#bh-page-switcher,#bh-page-switcher *{box-sizing:border-box}
+#bh-page-switcher{position:fixed!important;right:max(12px,env(safe-area-inset-right))!important;top:max(12px,env(safe-area-inset-top))!important;z-index:2147483000!important;font:14px/1.4 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;color:#f7f0e7!important;isolation:isolate}
+#bh-page-switcher .bh-trigger{display:flex;align-items:center;gap:8px;padding:11px 15px;min-height:44px;border-radius:999px;border:1px solid #bc9461;background:#15121b;color:#f8edda;font:700 14px system-ui;box-shadow:0 5px 20px #0009;cursor:pointer;touch-action:manipulation}
+#bh-page-switcher .bh-trigger:hover,#bh-page-switcher .bh-trigger:focus-visible{background:#34273a;outline:2px solid #d1ae78;outline-offset:2px}
+#bh-page-switcher .bh-panel{position:absolute;right:0;top:calc(100% + 9px);width:min(310px,calc(100vw - 24px));max-height:min(76vh,620px);overflow:auto;overscroll-behavior:contain;border:1px solid #846b54;border-radius:14px;background:#14131cee;box-shadow:0 16px 40px #000b;padding:11px;backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px)}
+#bh-page-switcher [hidden]{display:none!important}
+#bh-page-switcher .bh-heading{font:700 11px system-ui;letter-spacing:.12em;color:#cfaf83;text-transform:uppercase;margin:10px 10px 5px}
+#bh-page-switcher a{display:block;color:#f4eadd;text-decoration:none!important;border-radius:8px;padding:10px 11px;min-height:42px;font:500 14px/1.35 system-ui}
+#bh-page-switcher a:hover,#bh-page-switcher a:focus-visible{background:#443449;outline:1px solid #bc9461}
+#bh-page-switcher a[aria-current="page"]{background:#423343;color:#ffe7af;font-weight:750}
+#bh-page-switcher .bh-note{font:12px/1.35 system-ui;color:#b9acaf;margin:10px 9px 5px}
+@media(max-width:680px){#bh-page-switcher{top:auto!important;bottom:max(14px,env(safe-area-inset-bottom))!important;right:max(12px,env(safe-area-inset-right))!important}#bh-page-switcher .bh-panel{top:auto;bottom:calc(100% + 9px);max-height:min(67dvh,550px)}#bh-page-switcher .bh-trigger{padding:13px 16px}body{min-width:0}}
