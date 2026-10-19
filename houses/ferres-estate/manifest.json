@@ -1,0 +1,75 @@
+{
+  "format": "black-hollow-house",
+  "version": "1.0-prototype",
+  "name": "Ferre's Estate",
+  "id": "ferre-s-estate",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "entry": {
+    "roomId": "fe-f1-room1",
+    "openingId": "fe-main-outside-entrance"
+  },
+  "floors": [
+    {
+      "id": "floor_00",
+      "name": "Basement",
+      "model": "geometry/floor_00.glb",
+      "roomIds": [
+        "fe-f0-room1",
+        "fe-f0-room2",
+        "fe-f0-room3",
+        "fe-f0-room4",
+        "fe-f0-hall",
+        "fe-f0-regular"
+      ]
+    },
+    {
+      "id": "floor_01",
+      "name": "Ground Floor",
+      "model": "geometry/floor_01.glb",
+      "roomIds": [
+        "fe-f1-room1",
+        "fe-f1-room2",
+        "fe-f1-room3",
+        "fe-f1-room4",
+        "fe-f1-hall",
+        "fe-f1-regular",
+        "fe-f1-spiral"
+      ]
+    },
+    {
+      "id": "floor_02",
+      "name": "Second Floor",
+      "model": "geometry/floor_02.glb",
+      "roomIds": [
+        "fe-f2-room1",
+        "fe-f2-room2",
+        "fe-f2-room3",
+        "fe-f2-room4",
+        "fe-f2-hall",
+        "fe-f2-regular",
+        "fe-f2-spiral"
+      ]
+    },
+    {
+      "id": "floor_03",
+      "name": "Third Floor",
+      "model": "geometry/floor_03.glb",
+      "roomIds": [
+        "fe-f3-room1",
+        "fe-f3-room2",
+        "fe-f3-room3",
+        "fe-f3-room4",
+        "fe-f3-hall",
+        "fe-f3-regular"
+      ]
+    }
+  ],
+  "navigation": "navigation/collision.json",
+  "magic": "navigation/magic.json",
+  "roof": "geometry/roof.glb",
+  "specialRooms": {
+    "mainHall": "geometry/special_main_hall.glb",
+    "floor13Conservatory": "geometry/special_floor13_conservatory.glb"
+  },
+  "runtimeStatus": "compiled-geometry-only; gameplay bridge and magical traversal not yet wired"
+}

@@ -1,0 +1,11 @@
+{
+  "status": "passed-with-warnings",
+  "errors": [],
+  "warnings": [
+    "No architectural elevator shaft. Game-controlled Impossible Elevator remains separate."
+  ],
+  "totalRooms": 26,
+  "floors": 4,
+  "magicRepairs": 0,
+  "allRoomsReachableWithMagic": true
+}

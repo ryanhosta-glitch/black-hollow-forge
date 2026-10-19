@@ -1,0 +1,858 @@
+{
+  "units": "feet",
+  "sourceRoomCount": 26,
+  "rooms": [
+    {
+      "id": "fe-f0-room1",
+      "name": "The Forgotten Crypt",
+      "floor": 0,
+      "type": "room",
+      "roomType": "room",
+      "boundsFeet": {
+        "x": 0,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f0-door1-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5,
+          "shared": "fe-f0-door1"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 0
+    },
+    {
+      "id": "fe-f0-room2",
+      "name": "Alchemist’s Laboratory",
+      "floor": 0,
+      "type": "room",
+      "roomType": "room",
+      "boundsFeet": {
+        "x": 28,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f0-door2-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.5,
+          "shared": "fe-f0-door2"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 1
+    },
+    {
+      "id": "fe-f0-room3",
+      "name": "Cursed Wine Cellar",
+      "floor": 0,
+      "type": "room",
+      "roomType": "room",
+      "boundsFeet": {
+        "x": 0,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f0-door3-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5,
+          "shared": "fe-f0-door3"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 0
+    },
+    {
+      "id": "fe-f0-room4",
+      "name": "The Whispering Vault",
+      "floor": 0,
+      "type": "room",
+      "roomType": "room",
+      "boundsFeet": {
+        "x": 28,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f0-door4-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.5,
+          "shared": "fe-f0-door4"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 1
+    },
+    {
+      "id": "fe-f0-hall",
+      "name": "Basement — Central Corridor",
+      "floor": 0,
+      "type": "room",
+      "roomType": "hallway",
+      "boundsFeet": {
+        "x": 20,
+        "y": 0,
+        "l": 8,
+        "w": 46,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f0-door1-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.15217391304347827,
+          "shared": "fe-f0-door1"
+        },
+        {
+          "id": "fe-f0-door2-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.15217391304347827,
+          "shared": "fe-f0-door2"
+        },
+        {
+          "id": "fe-f0-door3-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.5869565217391305,
+          "shared": "fe-f0-door3"
+        },
+        {
+          "id": "fe-f0-door4-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5869565217391305,
+          "shared": "fe-f0-door4"
+        },
+        {
+          "id": "fe-f0-regular-entry-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.8695652173913043,
+          "shared": "fe-f0-regular-entry"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": null
+    },
+    {
+      "id": "fe-f0-regular",
+      "name": "The Grand Switchback Stairs",
+      "floor": 0,
+      "type": "stairs",
+      "roomType": "staircase",
+      "boundsFeet": {
+        "x": 12,
+        "y": 34,
+        "l": 8,
+        "w": 12,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f0-regular-entry-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5,
+          "shared": "fe-f0-regular-entry"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": null
+    },
+    {
+      "id": "fe-f1-room1",
+      "name": "Grand Entrance Hall",
+      "floor": 1,
+      "type": "room",
+      "roomType": "foyer",
+      "boundsFeet": {
+        "x": 0,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f1-door1-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5,
+          "shared": "fe-f1-door1"
+        },
+        {
+          "id": "fe-main-outside-entrance",
+          "type": "door",
+          "style": "wood",
+          "wall": "top",
+          "pos": 0.5,
+          "shared": null
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 0
+    },
+    {
+      "id": "fe-f1-room2",
+      "name": "The Speaking Portrait Gallery",
+      "floor": 1,
+      "type": "room",
+      "roomType": "room",
+      "boundsFeet": {
+        "x": 28,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f1-door2-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.5,
+          "shared": "fe-f1-door2"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 1
+    },
+    {
+      "id": "fe-f1-room3",
+      "name": "The Midnight Library",
+      "floor": 1,
+      "type": "room",
+      "roomType": "library",
+      "boundsFeet": {
+        "x": 0,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f1-door3-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5,
+          "shared": "fe-f1-door3"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 0
+    },
+    {
+      "id": "fe-f1-room4",
+      "name": "The Phantom Ballroom",
+      "floor": 1,
+      "type": "room",
+      "roomType": "room",
+      "boundsFeet": {
+        "x": 28,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f1-door4-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.5,
+          "shared": "fe-f1-door4"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 1
+    },
+    {
+      "id": "fe-f1-hall",
+      "name": "Ground Floor — Central Corridor",
+      "floor": 1,
+      "type": "room",
+      "roomType": "hallway",
+      "boundsFeet": {
+        "x": 20,
+        "y": 0,
+        "l": 8,
+        "w": 46,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f1-door1-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.15217391304347827,
+          "shared": "fe-f1-door1"
+        },
+        {
+          "id": "fe-f1-door2-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.15217391304347827,
+          "shared": "fe-f1-door2"
+        },
+        {
+          "id": "fe-f1-door3-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.5869565217391305,
+          "shared": "fe-f1-door3"
+        },
+        {
+          "id": "fe-f1-door4-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5869565217391305,
+          "shared": "fe-f1-door4"
+        },
+        {
+          "id": "fe-f1-regular-entry-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.8695652173913043,
+          "shared": "fe-f1-regular-entry"
+        },
+        {
+          "id": "fe-f1-spiral-entry-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.8695652173913043,
+          "shared": "fe-f1-spiral-entry"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": null
+    },
+    {
+      "id": "fe-f1-regular",
+      "name": "The Grand Switchback Stairs",
+      "floor": 1,
+      "type": "stairs",
+      "roomType": "staircase",
+      "boundsFeet": {
+        "x": 12,
+        "y": 34,
+        "l": 8,
+        "w": 12,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f1-regular-entry-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5,
+          "shared": "fe-f1-regular-entry"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": null
+    },
+    {
+      "id": "fe-f1-spiral",
+      "name": "The Serpent Spiral Stair",
+      "floor": 1,
+      "type": "stairs",
+      "roomType": "staircase",
+      "boundsFeet": {
+        "x": 28,
+        "y": 34,
+        "l": 12,
+        "w": 12,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f1-spiral-entry-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.5,
+          "shared": "fe-f1-spiral-entry"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": null
+    },
+    {
+      "id": "fe-f2-room1",
+      "name": "The Seer’s Chamber",
+      "floor": 2,
+      "type": "room",
+      "roomType": "room",
+      "boundsFeet": {
+        "x": 0,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f2-door1-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5,
+          "shared": "fe-f2-door1"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 0
+    },
+    {
+      "id": "fe-f2-room2",
+      "name": "Moonlit Conservatory",
+      "floor": 2,
+      "type": "room",
+      "roomType": "conservatory",
+      "boundsFeet": {
+        "x": 28,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f2-door2-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.5,
+          "shared": "fe-f2-door2"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 1
+    },
+    {
+      "id": "fe-f2-room3",
+      "name": "The Dollmaker’s Workshop",
+      "floor": 2,
+      "type": "room",
+      "roomType": "room",
+      "boundsFeet": {
+        "x": 0,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f2-door3-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5,
+          "shared": "fe-f2-door3"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 0
+    },
+    {
+      "id": "fe-f2-room4",
+      "name": "The Mirror Room",
+      "floor": 2,
+      "type": "room",
+      "roomType": "room",
+      "boundsFeet": {
+        "x": 28,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f2-door4-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.5,
+          "shared": "fe-f2-door4"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 1
+    },
+    {
+      "id": "fe-f2-hall",
+      "name": "Second Floor — Central Corridor",
+      "floor": 2,
+      "type": "room",
+      "roomType": "hallway",
+      "boundsFeet": {
+        "x": 20,
+        "y": 0,
+        "l": 8,
+        "w": 46,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f2-door1-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.15217391304347827,
+          "shared": "fe-f2-door1"
+        },
+        {
+          "id": "fe-f2-door2-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.15217391304347827,
+          "shared": "fe-f2-door2"
+        },
+        {
+          "id": "fe-f2-door3-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.5869565217391305,
+          "shared": "fe-f2-door3"
+        },
+        {
+          "id": "fe-f2-door4-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5869565217391305,
+          "shared": "fe-f2-door4"
+        },
+        {
+          "id": "fe-f2-regular-entry-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.8695652173913043,
+          "shared": "fe-f2-regular-entry"
+        },
+        {
+          "id": "fe-f2-spiral-entry-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.8695652173913043,
+          "shared": "fe-f2-spiral-entry"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": null
+    },
+    {
+      "id": "fe-f2-regular",
+      "name": "The Raven Staircase",
+      "floor": 2,
+      "type": "stairs",
+      "roomType": "staircase",
+      "boundsFeet": {
+        "x": 12,
+        "y": 34,
+        "l": 8,
+        "w": 12,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f2-regular-entry-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5,
+          "shared": "fe-f2-regular-entry"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": null
+    },
+    {
+      "id": "fe-f2-spiral",
+      "name": "The Serpent Spiral Stair",
+      "floor": 2,
+      "type": "stairs",
+      "roomType": "staircase",
+      "boundsFeet": {
+        "x": 28,
+        "y": 34,
+        "l": 12,
+        "w": 12,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f2-spiral-entry-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.5,
+          "shared": "fe-f2-spiral-entry"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": null
+    },
+    {
+      "id": "fe-f3-room1",
+      "name": "The Founder’s Study",
+      "floor": 3,
+      "type": "room",
+      "roomType": "room",
+      "boundsFeet": {
+        "x": 0,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f3-door1-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5,
+          "shared": "fe-f3-door1"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 0
+    },
+    {
+      "id": "fe-f3-room2",
+      "name": "The Raven Observatory",
+      "floor": 3,
+      "type": "room",
+      "roomType": "room",
+      "boundsFeet": {
+        "x": 28,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f3-door2-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.5,
+          "shared": "fe-f3-door2"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 1
+    },
+    {
+      "id": "fe-f3-room3",
+      "name": "The Spell Archive",
+      "floor": 3,
+      "type": "room",
+      "roomType": "library",
+      "boundsFeet": {
+        "x": 0,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f3-door3-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5,
+          "shared": "fe-f3-door3"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 0
+    },
+    {
+      "id": "fe-f3-room4",
+      "name": "The Attic Nursery",
+      "floor": 3,
+      "type": "room",
+      "roomType": "room",
+      "boundsFeet": {
+        "x": 28,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f3-door4-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.5,
+          "shared": "fe-f3-door4"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": 1
+    },
+    {
+      "id": "fe-f3-hall",
+      "name": "Third Floor — Central Corridor",
+      "floor": 3,
+      "type": "room",
+      "roomType": "hallway",
+      "boundsFeet": {
+        "x": 20,
+        "y": 0,
+        "l": 8,
+        "w": 46,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f3-door1-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.15217391304347827,
+          "shared": "fe-f3-door1"
+        },
+        {
+          "id": "fe-f3-door2-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.15217391304347827,
+          "shared": "fe-f3-door2"
+        },
+        {
+          "id": "fe-f3-door3-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.5869565217391305,
+          "shared": "fe-f3-door3"
+        },
+        {
+          "id": "fe-f3-door4-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5869565217391305,
+          "shared": "fe-f3-door4"
+        },
+        {
+          "id": "fe-f3-regular-entry-a",
+          "type": "door",
+          "style": "wood",
+          "wall": "left",
+          "pos": 0.8695652173913043,
+          "shared": "fe-f3-regular-entry"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": null
+    },
+    {
+      "id": "fe-f3-regular",
+      "name": "The Raven Staircase",
+      "floor": 3,
+      "type": "stairs",
+      "roomType": "staircase",
+      "boundsFeet": {
+        "x": 12,
+        "y": 34,
+        "l": 8,
+        "w": 12,
+        "h": 10
+      },
+      "openings": [
+        {
+          "id": "fe-f3-regular-entry-b",
+          "type": "door",
+          "style": "wood",
+          "wall": "right",
+          "pos": 0.5,
+          "shared": "fe-f3-regular-entry"
+        }
+      ],
+      "embeddedStair": null,
+      "haunting": null
+    }
+  ],
+  "elevatorShafts": {},
+  "entry": {
+    "roomId": "fe-f1-room1",
+    "openingId": "fe-main-outside-entrance"
+  },
+  "specialScenes": {
+    "mainHall": {
+      "originalRoomId": "fe-f1-room1",
+      "scene": "geometry/special_main_hall.glb",
+      "mode": "portal-pocket",
+      "portalReturnRoom": "fe-f1-room1",
+      "impossibleElevator": {
+        "positionMeters": [
+          0,
+          5.25,
+          14.0
+        ]
+      }
+    },
+    "floor13Conservatory": {
+      "scene": "geometry/special_floor13_conservatory.glb",
+      "mode": "separate-dimension"
+    }
+  }
+}
