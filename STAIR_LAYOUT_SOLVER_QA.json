@@ -1,0 +1,213 @@
+{
+  "schema": "black-hollow-stair-layout-screen-0.1",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "sourceModified": false,
+  "inspectionOnly": true,
+  "playerCollisionCertified": false,
+  "method": "Conservative parametric 2D screening; sizes inferred from room l/w/h feet; design dimensions are prototypes, not local building-code certification",
+  "links": [
+    {
+      "linkId": "connection_022",
+      "type": "switchback",
+      "lower": "fe-f0-regular",
+      "upper": "fe-f1-regular",
+      "floorIndices": [
+        0,
+        1
+      ],
+      "roomFootprintMeters": [
+        2.438,
+        3.658
+      ],
+      "floorRiseMeters": 3.048,
+      "totalRisers": 18,
+      "riserHeightMeters": 0.1693,
+      "landingClearanceRequiredMeters": [
+        0.95,
+        1.2
+      ],
+      "status": "UNRESOLVED_REQUIRES_MAGICAL_REPAIR_OR_REDRAW",
+      "footprintScreenPassed": false,
+      "physicsCertified": false,
+      "requires": [
+        "Door swing and room entry swept capsule clearance",
+        "Correct permanent slabs and roof cuts",
+        "Actual headroom at every tread",
+        "Actual collision along route",
+        "Structural connection to landing at both ends"
+      ],
+      "design": {
+        "flights": 2,
+        "risersPerFlight": [
+          9,
+          9
+        ],
+        "treadDepthM": 0.255,
+        "clearWidthM": 0.84,
+        "intermediateLandingDepthM": 0.95,
+        "requiredBoundingRectangleM": [
+          2.06,
+          4.18
+        ],
+        "availableBoundingRectangleM": [
+          2.438,
+          3.658
+        ],
+        "issues": [
+          "Unresolved landings or run require geometry changes inside authored stairwell"
+        ]
+      }
+    },
+    {
+      "linkId": "connection_023",
+      "type": "switchback",
+      "lower": "fe-f1-regular",
+      "upper": "fe-f2-regular",
+      "floorIndices": [
+        1,
+        2
+      ],
+      "roomFootprintMeters": [
+        2.438,
+        3.658
+      ],
+      "floorRiseMeters": 3.048,
+      "totalRisers": 18,
+      "riserHeightMeters": 0.1693,
+      "landingClearanceRequiredMeters": [
+        0.95,
+        1.2
+      ],
+      "status": "UNRESOLVED_REQUIRES_MAGICAL_REPAIR_OR_REDRAW",
+      "footprintScreenPassed": false,
+      "physicsCertified": false,
+      "requires": [
+        "Door swing and room entry swept capsule clearance",
+        "Correct permanent slabs and roof cuts",
+        "Actual headroom at every tread",
+        "Actual collision along route",
+        "Structural connection to landing at both ends"
+      ],
+      "design": {
+        "flights": 2,
+        "risersPerFlight": [
+          9,
+          9
+        ],
+        "treadDepthM": 0.255,
+        "clearWidthM": 0.84,
+        "intermediateLandingDepthM": 0.95,
+        "requiredBoundingRectangleM": [
+          2.06,
+          4.18
+        ],
+        "availableBoundingRectangleM": [
+          2.438,
+          3.658
+        ],
+        "issues": [
+          "Unresolved landings or run require geometry changes inside authored stairwell"
+        ]
+      }
+    },
+    {
+      "linkId": "connection_024",
+      "type": "spiral",
+      "lower": "fe-f1-spiral",
+      "upper": "fe-f2-spiral",
+      "floorIndices": [
+        1,
+        2
+      ],
+      "roomFootprintMeters": [
+        3.658,
+        3.658
+      ],
+      "floorRiseMeters": 3.048,
+      "totalRisers": 18,
+      "riserHeightMeters": 0.1693,
+      "landingClearanceRequiredMeters": [
+        0.95,
+        1.2
+      ],
+      "status": "FOOTPRINT_CANDIDATE_NOT_CERTIFIED",
+      "footprintScreenPassed": true,
+      "physicsCertified": false,
+      "requires": [
+        "Door swing and room entry swept capsule clearance",
+        "Correct permanent slabs and roof cuts",
+        "Actual headroom at every tread",
+        "Actual collision along route",
+        "Structural connection to landing at both ends"
+      ],
+      "design": {
+        "outerRadiusM": 1.709,
+        "centralCoreRadiusM": 0.18,
+        "walkingLineRadiusM": 0.944,
+        "anglePerRiserDegrees": 30.0,
+        "walkingLineTreadM": 0.494,
+        "estimatedTurnClearanceM": 2.032,
+        "turns": 1.5,
+        "issues": []
+      }
+    },
+    {
+      "linkId": "connection_025",
+      "type": "switchback",
+      "lower": "fe-f2-regular",
+      "upper": "fe-f3-regular",
+      "floorIndices": [
+        2,
+        3
+      ],
+      "roomFootprintMeters": [
+        2.438,
+        3.658
+      ],
+      "floorRiseMeters": 3.048,
+      "totalRisers": 18,
+      "riserHeightMeters": 0.1693,
+      "landingClearanceRequiredMeters": [
+        0.95,
+        1.2
+      ],
+      "status": "UNRESOLVED_REQUIRES_MAGICAL_REPAIR_OR_REDRAW",
+      "footprintScreenPassed": false,
+      "physicsCertified": false,
+      "requires": [
+        "Door swing and room entry swept capsule clearance",
+        "Correct permanent slabs and roof cuts",
+        "Actual headroom at every tread",
+        "Actual collision along route",
+        "Structural connection to landing at both ends"
+      ],
+      "design": {
+        "flights": 2,
+        "risersPerFlight": [
+          9,
+          9
+        ],
+        "treadDepthM": 0.255,
+        "clearWidthM": 0.84,
+        "intermediateLandingDepthM": 0.95,
+        "requiredBoundingRectangleM": [
+          2.06,
+          4.18
+        ],
+        "availableBoundingRectangleM": [
+          2.438,
+          3.658
+        ],
+        "issues": [
+          "Unresolved landings or run require geometry changes inside authored stairwell"
+        ]
+      }
+    }
+  ],
+  "counts": {
+    "links": 4,
+    "footprintCandidates": 1,
+    "unresolved": 3,
+    "gameplayCertified": 0
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "checkpoint": "Shared landing mesh/collision contract",
+  "sourceHashVerified": true,
+  "landingMeshes": 8,
+  "landingsPerFloor": [
+    1,
+    3,
+    3,
+    1
+  ],
+  "linksWithLandingGeometry": 4,
+  "fullyWalkableStairLinks": 0,
+  "stairFlightStatus": "BLOCKED_PENDING_GEOMETRIC_SOLVER",
+  "limitations": [
+    "Solve stair footprint and headroom for switchback or spiral",
+    "Cut permanent slab openings in floor GLBs",
+    "Test continuous swept capsule travel from authored door through both landings",
+    "Validate door swing, furnishing and guardrails",
+    "Unify with runtime player navigation"
+  ]
+}

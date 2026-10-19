@@ -1,0 +1,17 @@
+{
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "floorCount": 4,
+  "rooms": 26,
+  "eligibleWindowlessRooms": 10,
+  "enhancedRooms": 6,
+  "actualCutoutWindows": 12,
+  "verifiedWindowMeshNodes": 12,
+  "originalHauntUnchanged": true,
+  "existingStairSafetyFilesPreserved": true,
+  "physicalGameplayCertified": false,
+  "knownLimitations": [
+    "Window glazing transparency and lighting require in-browser validation",
+    "Roof is still a faceted footprint heightfield, not a watertight multi-wing roof",
+    "PBR textures, sculpted showcases, and exact capsule collision remain pending"
+  ]
+}

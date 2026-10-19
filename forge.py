@@ -11,7 +11,7 @@ import trimesh
 from magical import compile_magic
 from integrity import compile_integrity
 from embellish import architectural_details, roof_exterior
-from victorian_architecture import build_exterior_facade
+from victorian_architecture import build_exterior_facade, forge_window_plan
 from special_scenes import build as build_special
 
 def slug(s): return re.sub(r'[^a-z0-9]+','-',s.lower()).strip('-') or 'house'
@@ -33,6 +33,9 @@ def wall_section(scene,rid,wall,x,z,w,d,t,bottom,top,a,b,color,label,detail=True
 
 def render_floor(floor,outfile,index):
  scene=trimesh.Scene();parts=0
+ plans=forge_window_plan(floor)
+ enhanced={}
+ for wplan in plans["windows"]: enhanced.setdefault(wplan["roomId"],[]).append(wplan)
  for r in floor.get('rooms',[]):
   x,z,w,d=(float(r[k]) for k in ('x','y','l','w'));h=max(4,float(r.get('h',10)))
   k=.3048;x*=k;z*=k;w*=k;d*=k;h*=k;t=.15;rid=str(r.get('id','unknown'))
@@ -57,7 +60,10 @@ def render_floor(floor,outfile,index):
      zz=z+j*.34
      box(scene,rid+f'-herringbone-end-{j}',(x+w/2,.003,zz),(w,.006,.012),(63,41,34,255))
   box(scene,rid+'-ceiling',(x+w/2,h+.04,z+d/2),(w,.08,d),(83,73,76,255));parts+=2
-  opens=r.get('openings') or []
+  opens=list(r.get('openings') or [])
+  # Forge-owned openings are merged for rendering, NOT written to the source blueprint.
+  for win in enhanced.get(rid,[]):
+   opens.append({'type':'window','wall':win['wall'],'pos':win['pos'],'width':win['widthMeters']/k,'forgeGenerated':True})
   for wall in ('top','bottom','left','right'):
    horizontal=wall in ('top','bottom');length=w if horizontal else d
    holes=[]
@@ -108,13 +114,21 @@ def render_floor(floor,outfile,index):
     if a<cursor:a=cursor
     if b<=a:continue
     section(cursor,a,0,h,str(n)+'-solid')
-    if typ=='window':section(a,b,0,min(h,.90),'sill-'+str(n));section(a,b,min(h,2.1),h,'lintel-'+str(n))
+    if typ=='window':
+     sill=min(h*.3,.90);lintel=min(h-.25,2.1)
+     section(a,b,0,sill,'sill-'+str(n));section(a,b,lintel,h,'lintel-'+str(n))
+     # Glazing is visual and does not act as an opaque room wall.
+     if horizontal:wc=(x+(a+b)/2,(sill+lintel)/2,z+(d if wall=='top' else 0));wd=(b-a,max(.05,lintel-sill),.025)
+     else:wc=(x+(w if wall=='right' else 0),(sill+lintel)/2,z+(a+b)/2);wd=(.025,max(.05,lintel-sill),b-a)
+     box(scene,rid+'-'+wall+'-window-glazing-'+str(n),wc,wd,(75,112,132,120))
     else:section(a,b,min(h,2.15),h,'lintel-'+str(n))
     cursor=b
    section(cursor,length,0,h,'end');parts+=1
-  architectural_details(scene,box,r)
+  # Decoration includes the generated openings; the source room object is not changed.
+  decorated=dict(r,openings=opens)
+  architectural_details(scene,box,decorated)
  facade_stats=build_exterior_facade(scene,box,floor)
- scene.export(str(outfile));return parts
+ scene.export(str(outfile));return {"roomWallGroups":parts,"windowEnhancements":plans}
 
 def make_roof(data,outfile):
  sc=trimesh.Scene()
@@ -178,17 +192,20 @@ def main(src,dest):
  warnings.extend('Integrity inspection: '+w['kind'] for w in integrity['warnings'])
  warnings.extend(f"Forge repair: {r['type']}" for r in magic['repairs'])
  (out/'navigation'/'magic.json').write_text(json.dumps(magic,ensure_ascii=False,indent=2))
- files=[]
+ files=[];window_plan=[]
  for fi,f in enumerate(floors):
-  stem=f'floor_{fi:02d}';render_floor(f,out/'geometry'/f'{stem}.glb',fi)
+  stem=f'floor_{fi:02d}';floor_result=render_floor(f,out/'geometry'/f'{stem}.glb',fi)
+  window_plan.append({'floor':fi,'floorName':f.get('name',stem),**floor_result['windowEnhancements']})
   files.append({'id':stem,'name':f.get('name',stem),'model':f'geometry/{stem}.glb','roomIds':[r['id'] for r in f.get('rooms',[])]})
+ # Reusable architectural enhancement contract for any compatible .haunt.
+ (out/'navigation'/'forge_window_enhancements.json').write_text(json.dumps({'policy':'stable approximately 50 percent of eligible windowless rooms; authored openings preserved','originalBlueprintModified':False,'generationMode':'actual wall cutouts with inset glazing','floors':window_plan},ensure_ascii=False,indent=2))
  # Removable authored roof geometry, using the Architect's chosen type and rise.
  roof_meta=make_roof(data,out/'geometry'/'roof.glb')
  main_meta=build_special('main-hall',out/'geometry'/'special_main_hall.glb');conservatory_meta=build_special('floor13-conservatory',out/'geometry'/'special_floor13_conservatory.glb')
  entryroom=next(r for r in rooms if r['id']==er)
  navigation={'units':'feet','sourceRoomCount':len(rooms),'rooms':rooms,'elevatorShafts':elevators,'entry':entry,'specialScenes':{'mainHall':{'originalRoomId':er,'scene':'geometry/special_main_hall.glb','mode':'portal-pocket','portalReturnRoom':er,'impossibleElevator':{'positionMeters':[0,5.25,14.0]}},'floor13Conservatory':{'scene':'geometry/special_floor13_conservatory.glb','mode':'separate-dimension'}}}
  (out/'navigation'/'collision.json').write_text(json.dumps(navigation,ensure_ascii=False,indent=2))
- manifest={'format':'black-hollow-house','version':'1.0-prototype','name':data.get('name','Haunted Estate'),'id':slug(data.get('name','haunted-estate')),'sourceSha256':hashlib.sha256(source.read_bytes()).hexdigest(),'entry':entry,'floors':files,'navigation':'navigation/collision.json','magic':'navigation/magic.json','integrity':'navigation/integrity.json','roof':'geometry/roof.glb','specialRooms':{'mainHall':'geometry/special_main_hall.glb','floor13Conservatory':'geometry/special_floor13_conservatory.glb'},'finishPaletteVersion':'forge-pass-2-victorian-envelope','authoredRoof':data.get('roof',{}),'roofBuild':roof_meta,'specialSceneDetails':[main_meta,conservatory_meta],'runtimeStatus':'compiled-geometry-with-finish-proxies; full gameplay and material-texture parity not yet wired'}
+ manifest={'format':'black-hollow-house','version':'1.0-prototype','name':data.get('name','Haunted Estate'),'id':slug(data.get('name','haunted-estate')),'sourceSha256':hashlib.sha256(source.read_bytes()).hexdigest(),'entry':entry,'floors':files,'navigation':'navigation/collision.json','magic':'navigation/magic.json','integrity':'navigation/integrity.json','forgeWindowEnhancements':'navigation/forge_window_enhancements.json','roof':'geometry/roof.glb','specialRooms':{'mainHall':'geometry/special_main_hall.glb','floor13Conservatory':'geometry/special_floor13_conservatory.glb'},'finishPaletteVersion':'forge-architectural-five-pass-opening-v2','authoredRoof':data.get('roof',{}),'roofBuild':roof_meta,'specialSceneDetails':[main_meta,conservatory_meta],'runtimeStatus':'compiled-geometry-with-finish-proxies; full gameplay and material-texture parity not yet wired'}
  (out/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2));shutil.copyfile(source,out/'source.haunt')
  (out/'validation.json').write_text(json.dumps({'status':'passed-with-warnings' if warnings else 'passed','errors':[],'warnings':warnings,'totalRooms':len(rooms),'floors':len(floors),'integrityCounts':integrity['counts'],'magicRepairs':len(magic['repairs']),'allRoomsReachableWithMagic':magic['allRoomsReachable']},indent=2))
  print(f'Built {out}: {len(floors)} floors, {len(rooms)} rooms')

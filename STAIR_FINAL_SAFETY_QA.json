@@ -1,0 +1,119 @@
+{
+  "schema": "black-hollow-stair-safety-gate-1",
+  "sourceBlueprintSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "sourceBlueprintModified": false,
+  "scope": "Conservative compiled-artifact safety gate, NOT a physics simulation",
+  "playerRadiusMeters": 0.28,
+  "routes": 4,
+  "gameplayCertified": 0,
+  "blockedOrUncertified": 4,
+  "results": [
+    {
+      "id": "connection_022",
+      "kind": "switchback",
+      "lowerRoom": "fe-f0-regular",
+      "upperRoom": "fe-f1-regular",
+      "checks": {
+        "shaftFootprint": true,
+        "upperLandingOpeningAligned": true,
+        "bothDoorApproachesCandidate": true,
+        "stairTopVerticalGapWithin5cm": true,
+        "openingExported": true
+      },
+      "verticalGapMeters": 0.0447,
+      "headroom": "NOT_TESTED",
+      "sweptCapsule": "NOT_TESTED",
+      "physicalTraversal": "NOT_TESTED",
+      "status": "NOT_GAMEPLAY_CERTIFIED",
+      "warnings": [],
+      "blockingRequirements": [
+        "Full swept-capsule collision (steps, walls, railings, furniture)",
+        "Headroom along every tread and beneath floor edges",
+        "Actual continuous WASD ascent/descent (no guided path)",
+        "Door swing, landing approach and exit corridor obstruction",
+        "Shared production physics shapes in Black Hollow"
+      ]
+    },
+    {
+      "id": "connection_023",
+      "kind": "switchback",
+      "lowerRoom": "fe-f1-regular",
+      "upperRoom": "fe-f2-regular",
+      "checks": {
+        "shaftFootprint": true,
+        "upperLandingOpeningAligned": true,
+        "bothDoorApproachesCandidate": true,
+        "stairTopVerticalGapWithin5cm": true,
+        "openingExported": true
+      },
+      "verticalGapMeters": 0.0447,
+      "headroom": "NOT_TESTED",
+      "sweptCapsule": "NOT_TESTED",
+      "physicalTraversal": "NOT_TESTED",
+      "status": "NOT_GAMEPLAY_CERTIFIED",
+      "warnings": [],
+      "blockingRequirements": [
+        "Full swept-capsule collision (steps, walls, railings, furniture)",
+        "Headroom along every tread and beneath floor edges",
+        "Actual continuous WASD ascent/descent (no guided path)",
+        "Door swing, landing approach and exit corridor obstruction",
+        "Shared production physics shapes in Black Hollow"
+      ]
+    },
+    {
+      "id": "connection_024",
+      "kind": "spiral",
+      "lowerRoom": "fe-f1-spiral",
+      "upperRoom": "fe-f2-spiral",
+      "checks": {
+        "shaftFootprint": true,
+        "upperLandingOpeningAligned": true,
+        "bothDoorApproachesCandidate": true,
+        "stairTopVerticalGapWithin5cm": false,
+        "openingExported": true
+      },
+      "verticalGapMeters": 0.0793,
+      "headroom": "NOT_TESTED",
+      "sweptCapsule": "NOT_TESTED",
+      "physicalTraversal": "NOT_TESTED",
+      "status": "NOT_GAMEPLAY_CERTIFIED",
+      "warnings": [
+        "Stair top vertical gap 0.079 m exceeds 0.05 m tolerance"
+      ],
+      "blockingRequirements": [
+        "Full swept-capsule collision (steps, walls, railings, furniture)",
+        "Headroom along every tread and beneath floor edges",
+        "Actual continuous WASD ascent/descent (no guided path)",
+        "Door swing, landing approach and exit corridor obstruction",
+        "Shared production physics shapes in Black Hollow"
+      ]
+    },
+    {
+      "id": "connection_025",
+      "kind": "switchback",
+      "lowerRoom": "fe-f2-regular",
+      "upperRoom": "fe-f3-regular",
+      "checks": {
+        "shaftFootprint": true,
+        "upperLandingOpeningAligned": true,
+        "bothDoorApproachesCandidate": true,
+        "stairTopVerticalGapWithin5cm": true,
+        "openingExported": true
+      },
+      "verticalGapMeters": 0.0447,
+      "headroom": "NOT_TESTED",
+      "sweptCapsule": "NOT_TESTED",
+      "physicalTraversal": "NOT_TESTED",
+      "status": "NOT_GAMEPLAY_CERTIFIED",
+      "warnings": [],
+      "blockingRequirements": [
+        "Full swept-capsule collision (steps, walls, railings, furniture)",
+        "Headroom along every tread and beneath floor edges",
+        "Actual continuous WASD ascent/descent (no guided path)",
+        "Door swing, landing approach and exit corridor obstruction",
+        "Shared production physics shapes in Black Hollow"
+      ]
+    }
+  ],
+  "policy": "A route is never classified GAMEPLAY_PASS without headroom, collision and real non-teleporting traversal verification."
+}

@@ -1,0 +1,306 @@
+{
+  "schema": "black-hollow-stair-geometry-contract-0.1",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "sourceModified": false,
+  "units": "meters",
+  "coordinateSpace": "floor-local; runtime applies per-floor elevation",
+  "physicsValidated": false,
+  "gameplayCertified": false,
+  "geometryModels": [
+    "geometry/stair_landings_floor_00.glb",
+    "geometry/stair_landings_floor_01.glb",
+    "geometry/stair_landings_floor_02.glb",
+    "geometry/stair_landings_floor_03.glb"
+  ],
+  "collisionProxies": [
+    {
+      "id": "forge-landing-connection_022-fe-f0-regular",
+      "type": "box",
+      "floorIndex": 0,
+      "roomId": "fe-f0-regular",
+      "centerMeters": [
+        5.281,
+        0.085,
+        12.192
+      ],
+      "sizeMeters": [
+        0.95,
+        0.12,
+        1.2
+      ],
+      "isSurface": true,
+      "isWalkableCandidate": true,
+      "physicsValidated": false
+    },
+    {
+      "id": "forge-landing-connection_022-fe-f1-regular",
+      "type": "box",
+      "floorIndex": 1,
+      "roomId": "fe-f1-regular",
+      "centerMeters": [
+        5.281,
+        0.085,
+        12.192
+      ],
+      "sizeMeters": [
+        0.95,
+        0.12,
+        1.2
+      ],
+      "isSurface": true,
+      "isWalkableCandidate": true,
+      "physicsValidated": false
+    },
+    {
+      "id": "forge-landing-connection_023-fe-f1-regular",
+      "type": "box",
+      "floorIndex": 1,
+      "roomId": "fe-f1-regular",
+      "centerMeters": [
+        5.281,
+        0.085,
+        12.192
+      ],
+      "sizeMeters": [
+        0.95,
+        0.12,
+        1.2
+      ],
+      "isSurface": true,
+      "isWalkableCandidate": true,
+      "physicsValidated": false
+    },
+    {
+      "id": "forge-landing-connection_023-fe-f2-regular",
+      "type": "box",
+      "floorIndex": 2,
+      "roomId": "fe-f2-regular",
+      "centerMeters": [
+        5.281,
+        0.085,
+        12.192
+      ],
+      "sizeMeters": [
+        0.95,
+        0.12,
+        1.2
+      ],
+      "isSurface": true,
+      "isWalkableCandidate": true,
+      "physicsValidated": false
+    },
+    {
+      "id": "forge-landing-connection_024-fe-f1-spiral",
+      "type": "box",
+      "floorIndex": 1,
+      "roomId": "fe-f1-spiral",
+      "centerMeters": [
+        9.3494,
+        0.085,
+        12.192
+      ],
+      "sizeMeters": [
+        0.95,
+        0.12,
+        1.2
+      ],
+      "isSurface": true,
+      "isWalkableCandidate": true,
+      "physicsValidated": false
+    },
+    {
+      "id": "forge-landing-connection_024-fe-f2-spiral",
+      "type": "box",
+      "floorIndex": 2,
+      "roomId": "fe-f2-spiral",
+      "centerMeters": [
+        9.3494,
+        0.085,
+        12.192
+      ],
+      "sizeMeters": [
+        0.95,
+        0.12,
+        1.2
+      ],
+      "isSurface": true,
+      "isWalkableCandidate": true,
+      "physicsValidated": false
+    },
+    {
+      "id": "forge-landing-connection_025-fe-f2-regular",
+      "type": "box",
+      "floorIndex": 2,
+      "roomId": "fe-f2-regular",
+      "centerMeters": [
+        5.281,
+        0.085,
+        12.192
+      ],
+      "sizeMeters": [
+        0.95,
+        0.12,
+        1.2
+      ],
+      "isSurface": true,
+      "isWalkableCandidate": true,
+      "physicsValidated": false
+    },
+    {
+      "id": "forge-landing-connection_025-fe-f3-regular",
+      "type": "box",
+      "floorIndex": 3,
+      "roomId": "fe-f3-regular",
+      "centerMeters": [
+        5.281,
+        0.085,
+        12.192
+      ],
+      "sizeMeters": [
+        0.95,
+        0.12,
+        1.2
+      ],
+      "isSurface": true,
+      "isWalkableCandidate": true,
+      "physicsValidated": false
+    }
+  ],
+  "links": [
+    {
+      "linkId": "connection_022",
+      "lowerRoomId": "fe-f0-regular",
+      "upperRoomId": "fe-f1-regular",
+      "floorIndices": [
+        0,
+        1
+      ],
+      "sourcePlanStatus": "REPOSITION_LANDING_IN_AUTHORED_FOOTPRINT",
+      "generatedLandings": [
+        {
+          "geometryNode": "forge-landing-connection_022-fe-f0-regular",
+          "colliderId": "forge-landing-connection_022-fe-f0-regular",
+          "floorIndex": 0,
+          "roomId": "fe-f0-regular"
+        },
+        {
+          "geometryNode": "forge-landing-connection_022-fe-f1-regular",
+          "colliderId": "forge-landing-connection_022-fe-f1-regular",
+          "floorIndex": 1,
+          "roomId": "fe-f1-regular"
+        }
+      ],
+      "stairFlightStatus": "REQUIRES_STAIR_LAYOUT_SOLVER",
+      "gameplayCertified": false,
+      "minimumEstimatedStairRunMeters": 4.0,
+      "availableSharedFootprintMeters": {
+        "width": 0.95,
+        "depth": 1.2
+      },
+      "blockedReason": "Landing pads exported; no verified 3D stair flight and cut floor opening; a switchback/spiral layout requires explicit clearance proof"
+    },
+    {
+      "linkId": "connection_023",
+      "lowerRoomId": "fe-f1-regular",
+      "upperRoomId": "fe-f2-regular",
+      "floorIndices": [
+        1,
+        2
+      ],
+      "sourcePlanStatus": "REPOSITION_LANDING_IN_AUTHORED_FOOTPRINT",
+      "generatedLandings": [
+        {
+          "geometryNode": "forge-landing-connection_023-fe-f1-regular",
+          "colliderId": "forge-landing-connection_023-fe-f1-regular",
+          "floorIndex": 1,
+          "roomId": "fe-f1-regular"
+        },
+        {
+          "geometryNode": "forge-landing-connection_023-fe-f2-regular",
+          "colliderId": "forge-landing-connection_023-fe-f2-regular",
+          "floorIndex": 2,
+          "roomId": "fe-f2-regular"
+        }
+      ],
+      "stairFlightStatus": "REQUIRES_STAIR_LAYOUT_SOLVER",
+      "gameplayCertified": false,
+      "minimumEstimatedStairRunMeters": 4.0,
+      "availableSharedFootprintMeters": {
+        "width": 0.95,
+        "depth": 1.2
+      },
+      "blockedReason": "Landing pads exported; no verified 3D stair flight and cut floor opening; a switchback/spiral layout requires explicit clearance proof"
+    },
+    {
+      "linkId": "connection_024",
+      "lowerRoomId": "fe-f1-spiral",
+      "upperRoomId": "fe-f2-spiral",
+      "floorIndices": [
+        1,
+        2
+      ],
+      "sourcePlanStatus": "REPOSITION_LANDING_IN_AUTHORED_FOOTPRINT",
+      "generatedLandings": [
+        {
+          "geometryNode": "forge-landing-connection_024-fe-f1-spiral",
+          "colliderId": "forge-landing-connection_024-fe-f1-spiral",
+          "floorIndex": 1,
+          "roomId": "fe-f1-spiral"
+        },
+        {
+          "geometryNode": "forge-landing-connection_024-fe-f2-spiral",
+          "colliderId": "forge-landing-connection_024-fe-f2-spiral",
+          "floorIndex": 2,
+          "roomId": "fe-f2-spiral"
+        }
+      ],
+      "stairFlightStatus": "REQUIRES_STAIR_LAYOUT_SOLVER",
+      "gameplayCertified": false,
+      "minimumEstimatedStairRunMeters": 4.0,
+      "availableSharedFootprintMeters": {
+        "width": 0.95,
+        "depth": 1.2
+      },
+      "blockedReason": "Landing pads exported; no verified 3D stair flight and cut floor opening; a switchback/spiral layout requires explicit clearance proof"
+    },
+    {
+      "linkId": "connection_025",
+      "lowerRoomId": "fe-f2-regular",
+      "upperRoomId": "fe-f3-regular",
+      "floorIndices": [
+        2,
+        3
+      ],
+      "sourcePlanStatus": "REPOSITION_LANDING_IN_AUTHORED_FOOTPRINT",
+      "generatedLandings": [
+        {
+          "geometryNode": "forge-landing-connection_025-fe-f2-regular",
+          "colliderId": "forge-landing-connection_025-fe-f2-regular",
+          "floorIndex": 2,
+          "roomId": "fe-f2-regular"
+        },
+        {
+          "geometryNode": "forge-landing-connection_025-fe-f3-regular",
+          "colliderId": "forge-landing-connection_025-fe-f3-regular",
+          "floorIndex": 3,
+          "roomId": "fe-f3-regular"
+        }
+      ],
+      "stairFlightStatus": "REQUIRES_STAIR_LAYOUT_SOLVER",
+      "gameplayCertified": false,
+      "minimumEstimatedStairRunMeters": 4.0,
+      "availableSharedFootprintMeters": {
+        "width": 0.95,
+        "depth": 1.2
+      },
+      "blockedReason": "Landing pads exported; no verified 3D stair flight and cut floor opening; a switchback/spiral layout requires explicit clearance proof"
+    }
+  ],
+  "remainingWork": [
+    "Solve stair footprint and headroom for switchback or spiral",
+    "Cut permanent slab openings in floor GLBs",
+    "Test continuous swept capsule travel from authored door through both landings",
+    "Validate door swing, furnishing and guardrails",
+    "Unify with runtime player navigation"
+  ]
+}

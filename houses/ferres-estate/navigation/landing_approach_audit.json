@@ -1,0 +1,270 @@
+{
+  "schema": "black-hollow-forge-landing-approach-audit-0.1",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "gameplayValidated": false,
+  "method": "Conservative straight-line approach in convex authored room bounds with capsule radius and door width; not full navigation/collision",
+  "playerRadiusMeters": 0.28,
+  "links": [
+    {
+      "linkId": "connection_022",
+      "lowerRoomId": "fe-f0-regular",
+      "upperRoomId": "fe-f1-regular",
+      "status": "APPROACH_CANDIDATE_BOTH_ENDS",
+      "endpoints": [
+        {
+          "roomId": "fe-f0-regular",
+          "status": "APPROACH_CANDIDATE",
+          "selectedDoorId": "fe-f0-regular-entry-b",
+          "doorApproaches": [
+            {
+              "doorId": "fe-f0-regular-entry-b",
+              "roomId": "fe-f0-regular",
+              "distanceMeters": 0.819,
+              "doorWidthMeters": 0.914,
+              "capsuleClearanceRadiusMeters": 0.28,
+              "doorApproachMeters": {
+                "x": 5.696,
+                "z": 12.192
+              },
+              "landingCenterMeters": {
+                "x": 4.8768,
+                "z": 12.192
+              },
+              "status": "CLEAR_FOOTPRINT_CANDIDATE",
+              "findings": []
+            }
+          ]
+        },
+        {
+          "roomId": "fe-f1-regular",
+          "status": "APPROACH_CANDIDATE",
+          "selectedDoorId": "fe-f1-regular-entry-b",
+          "doorApproaches": [
+            {
+              "doorId": "fe-f1-regular-entry-b",
+              "roomId": "fe-f1-regular",
+              "distanceMeters": 0.819,
+              "doorWidthMeters": 0.914,
+              "capsuleClearanceRadiusMeters": 0.28,
+              "doorApproachMeters": {
+                "x": 5.696,
+                "z": 12.192
+              },
+              "landingCenterMeters": {
+                "x": 4.8768,
+                "z": 12.192
+              },
+              "status": "CLEAR_FOOTPRINT_CANDIDATE",
+              "findings": []
+            }
+          ]
+        }
+      ],
+      "notVerified": [
+        "door hinge sweep",
+        "interior furniture collision",
+        "stair rise/run and tread collision",
+        "headroom",
+        "exported mesh cutouts",
+        "continuous path to rest of house"
+      ]
+    },
+    {
+      "linkId": "connection_023",
+      "lowerRoomId": "fe-f1-regular",
+      "upperRoomId": "fe-f2-regular",
+      "status": "APPROACH_CANDIDATE_BOTH_ENDS",
+      "endpoints": [
+        {
+          "roomId": "fe-f1-regular",
+          "status": "APPROACH_CANDIDATE",
+          "selectedDoorId": "fe-f1-regular-entry-b",
+          "doorApproaches": [
+            {
+              "doorId": "fe-f1-regular-entry-b",
+              "roomId": "fe-f1-regular",
+              "distanceMeters": 0.819,
+              "doorWidthMeters": 0.914,
+              "capsuleClearanceRadiusMeters": 0.28,
+              "doorApproachMeters": {
+                "x": 5.696,
+                "z": 12.192
+              },
+              "landingCenterMeters": {
+                "x": 4.8768,
+                "z": 12.192
+              },
+              "status": "CLEAR_FOOTPRINT_CANDIDATE",
+              "findings": []
+            }
+          ]
+        },
+        {
+          "roomId": "fe-f2-regular",
+          "status": "APPROACH_CANDIDATE",
+          "selectedDoorId": "fe-f2-regular-entry-b",
+          "doorApproaches": [
+            {
+              "doorId": "fe-f2-regular-entry-b",
+              "roomId": "fe-f2-regular",
+              "distanceMeters": 0.819,
+              "doorWidthMeters": 0.914,
+              "capsuleClearanceRadiusMeters": 0.28,
+              "doorApproachMeters": {
+                "x": 5.696,
+                "z": 12.192
+              },
+              "landingCenterMeters": {
+                "x": 4.8768,
+                "z": 12.192
+              },
+              "status": "CLEAR_FOOTPRINT_CANDIDATE",
+              "findings": []
+            }
+          ]
+        }
+      ],
+      "notVerified": [
+        "door hinge sweep",
+        "interior furniture collision",
+        "stair rise/run and tread collision",
+        "headroom",
+        "exported mesh cutouts",
+        "continuous path to rest of house"
+      ]
+    },
+    {
+      "linkId": "connection_024",
+      "lowerRoomId": "fe-f1-spiral",
+      "upperRoomId": "fe-f2-spiral",
+      "status": "APPROACH_CANDIDATE_BOTH_ENDS",
+      "endpoints": [
+        {
+          "roomId": "fe-f1-spiral",
+          "status": "APPROACH_CANDIDATE",
+          "selectedDoorId": "fe-f1-spiral-entry-b",
+          "doorApproaches": [
+            {
+              "doorId": "fe-f1-spiral-entry-b",
+              "roomId": "fe-f1-spiral",
+              "distanceMeters": 1.429,
+              "doorWidthMeters": 0.914,
+              "capsuleClearanceRadiusMeters": 0.28,
+              "doorApproachMeters": {
+                "x": 8.934,
+                "z": 12.192
+              },
+              "landingCenterMeters": {
+                "x": 10.3632,
+                "z": 12.192
+              },
+              "status": "CLEAR_FOOTPRINT_CANDIDATE",
+              "findings": []
+            }
+          ]
+        },
+        {
+          "roomId": "fe-f2-spiral",
+          "status": "APPROACH_CANDIDATE",
+          "selectedDoorId": "fe-f2-spiral-entry-b",
+          "doorApproaches": [
+            {
+              "doorId": "fe-f2-spiral-entry-b",
+              "roomId": "fe-f2-spiral",
+              "distanceMeters": 1.429,
+              "doorWidthMeters": 0.914,
+              "capsuleClearanceRadiusMeters": 0.28,
+              "doorApproachMeters": {
+                "x": 8.934,
+                "z": 12.192
+              },
+              "landingCenterMeters": {
+                "x": 10.3632,
+                "z": 12.192
+              },
+              "status": "CLEAR_FOOTPRINT_CANDIDATE",
+              "findings": []
+            }
+          ]
+        }
+      ],
+      "notVerified": [
+        "door hinge sweep",
+        "interior furniture collision",
+        "stair rise/run and tread collision",
+        "headroom",
+        "exported mesh cutouts",
+        "continuous path to rest of house"
+      ]
+    },
+    {
+      "linkId": "connection_025",
+      "lowerRoomId": "fe-f2-regular",
+      "upperRoomId": "fe-f3-regular",
+      "status": "APPROACH_CANDIDATE_BOTH_ENDS",
+      "endpoints": [
+        {
+          "roomId": "fe-f2-regular",
+          "status": "APPROACH_CANDIDATE",
+          "selectedDoorId": "fe-f2-regular-entry-b",
+          "doorApproaches": [
+            {
+              "doorId": "fe-f2-regular-entry-b",
+              "roomId": "fe-f2-regular",
+              "distanceMeters": 0.819,
+              "doorWidthMeters": 0.914,
+              "capsuleClearanceRadiusMeters": 0.28,
+              "doorApproachMeters": {
+                "x": 5.696,
+                "z": 12.192
+              },
+              "landingCenterMeters": {
+                "x": 4.8768,
+                "z": 12.192
+              },
+              "status": "CLEAR_FOOTPRINT_CANDIDATE",
+              "findings": []
+            }
+          ]
+        },
+        {
+          "roomId": "fe-f3-regular",
+          "status": "APPROACH_CANDIDATE",
+          "selectedDoorId": "fe-f3-regular-entry-b",
+          "doorApproaches": [
+            {
+              "doorId": "fe-f3-regular-entry-b",
+              "roomId": "fe-f3-regular",
+              "distanceMeters": 0.819,
+              "doorWidthMeters": 0.914,
+              "capsuleClearanceRadiusMeters": 0.28,
+              "doorApproachMeters": {
+                "x": 5.696,
+                "z": 12.192
+              },
+              "landingCenterMeters": {
+                "x": 4.8768,
+                "z": 12.192
+              },
+              "status": "CLEAR_FOOTPRINT_CANDIDATE",
+              "findings": []
+            }
+          ]
+        }
+      ],
+      "notVerified": [
+        "door hinge sweep",
+        "interior furniture collision",
+        "stair rise/run and tread collision",
+        "headroom",
+        "exported mesh cutouts",
+        "continuous path to rest of house"
+      ]
+    }
+  ],
+  "summary": {
+    "verticalLinks": 4,
+    "bothEndsCandidate": 4,
+    "blocked": 0
+  }
+}

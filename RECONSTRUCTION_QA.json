@@ -1,0 +1,11 @@
+{
+  "room_records": 26,
+  "door_records": 45,
+  "stairs": 6,
+  "vertical_links": 4,
+  "source_sha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "reachable_records": 26,
+  "all_topologically_reachable": true,
+  "physical_stair_climbing_verified": false,
+  "real_glb_derived_collision_verified": false
+}

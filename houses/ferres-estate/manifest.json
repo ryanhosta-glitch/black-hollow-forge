@@ -72,7 +72,7 @@
     "mainHall": "geometry/special_main_hall.glb",
     "floor13Conservatory": "geometry/special_floor13_conservatory.glb"
   },
-  "finishPaletteVersion": "forge-pass-2-victorian-envelope",
+  "finishPaletteVersion": "forge-architectural-five-pass-opening-v2",
   "authoredRoof": {
     "type": "mansard",
     "rise": 5
@@ -85,6 +85,13 @@
     "perimeterMeters": 81.69,
     "facadeEdges": 19,
     "triangles": 1056,
+    "ornamentation": "Gothic Revival: iron cresting, lancet dormer silhouettes and stone finials",
+    "gothicDetails": {
+      "ironCrestSections": 30,
+      "lancetDormers": 7,
+      "carvedFinials": 10,
+      "slateBands": 0
+    },
     "limits": "Roof follows nonrectangular footprint but dormers, vertical roof valleys and watertight joints require further modeling."
   },
   "specialSceneDetails": [
@@ -265,5 +272,37 @@
     }
   ],
   "runtimeStatus": "playtest-bridge-ready; not integrated with v8.5.19 player controller",
-  "runtimeBridge": "navigation/runtime_bridge.json"
+  "runtimeBridge": "navigation/runtime_bridge.json",
+  "stairGeometryContract": "navigation/stair_geometry_contract.json",
+  "stairLandingModels": [
+    "geometry/stair_landings_floor_00.glb",
+    "geometry/stair_landings_floor_01.glb",
+    "geometry/stair_landings_floor_02.glb",
+    "geometry/stair_landings_floor_03.glb"
+  ],
+  "stairPlayability": "NOT_CERTIFIED_COMPOSITE_ASSEMBLED",
+  "stairIntegrationGate": "navigation/stair_integration_gate.json",
+  "stairCollisionCandidates": "navigation/stair_tread_collision_candidates.json",
+  "stairWorldPlacement": "navigation/stair_world_placement.json",
+  "stairWorldModels": [
+    "geometry/stair_world_connection_022.glb",
+    "geometry/stair_world_connection_023.glb",
+    "geometry/stair_world_connection_024.glb",
+    "geometry/stair_world_connection_025.glb"
+  ],
+  "stairSlabOpenings": "navigation/stair_slab_openings.json",
+  "stairContinuity": "navigation/stair_continuity.json",
+  "stairAssembledReference": "geometry/estate_stairs_assembled.glb",
+  "forgeWindowEnhancements": "navigation/forge_window_enhancements.json",
+  "roofOrnamentationPolicy": "Gothic Revival; preserve authored roof type and rise",
+  "roomIntelligence": "navigation/room_intelligence.json",
+  "roomIntelligenceVersion": "room-intelligence-v1",
+  "furnishingOverlays": {
+    "floor_00": "geometry/furnishings_floor_00.glb",
+    "floor_01": "geometry/furnishings_floor_01.glb",
+    "floor_02": "geometry/furnishings_floor_02.glb",
+    "floor_03": "geometry/furnishings_floor_03.glb"
+  },
+  "furnishingPlan": "navigation/furnishing_plan.json",
+  "furnishingPolicy": "Beautiful but Abandoned; protected circulation; decorative provisional overlays"
 }

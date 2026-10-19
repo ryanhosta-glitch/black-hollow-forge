@@ -1,0 +1,156 @@
+{
+  "schema": "black-hollow-stair-candidates-0.2",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "sourceModified": false,
+  "models": [
+    "geometry/stair_candidate_connection_022.glb",
+    "geometry/stair_candidate_connection_023.glb",
+    "geometry/stair_candidate_connection_024.glb",
+    "geometry/stair_candidate_connection_025.glb"
+  ],
+  "geometryCandidateCount": 4,
+  "gameplayCertifiedCount": 0,
+  "method": "Candidate geometry from student stair footprints; no floor cuts or collision certification",
+  "links": [
+    {
+      "linkId": "connection_022",
+      "type": "switchback",
+      "lower": "fe-f0-regular",
+      "upper": "fe-f1-regular",
+      "status": "GEOMETRIC_CANDIDATE_UNCERTIFIED",
+      "model": "geometry/stair_candidate_connection_022.glb",
+      "design": {
+        "scheme": "two-flight-u-turn",
+        "risers": [
+          9,
+          9
+        ],
+        "treadDepthM": 0.255,
+        "clearWidthM": 0.84,
+        "requiredFootprintMeters": [
+          2.08,
+          3.27
+        ],
+        "availableFootprintMeters": [
+          2.438,
+          3.658
+        ],
+        "landingDepthM": 0.95,
+        "endLandings": "end approaches are on different floors; not both additive to full stair run",
+        "upperFloorCutoutGenerated": false,
+        "collisionCertified": false
+      },
+      "checksOutstanding": [
+        "door swing and landing approach with solid collision",
+        "3D headroom at every tread",
+        "structural floor and ceiling cutouts",
+        "swept player capsule traversal",
+        "railing and fall prevention",
+        "walking transitions in game runtime"
+      ]
+    },
+    {
+      "linkId": "connection_023",
+      "type": "switchback",
+      "lower": "fe-f1-regular",
+      "upper": "fe-f2-regular",
+      "status": "GEOMETRIC_CANDIDATE_UNCERTIFIED",
+      "model": "geometry/stair_candidate_connection_023.glb",
+      "design": {
+        "scheme": "two-flight-u-turn",
+        "risers": [
+          9,
+          9
+        ],
+        "treadDepthM": 0.255,
+        "clearWidthM": 0.84,
+        "requiredFootprintMeters": [
+          2.08,
+          3.27
+        ],
+        "availableFootprintMeters": [
+          2.438,
+          3.658
+        ],
+        "landingDepthM": 0.95,
+        "endLandings": "end approaches are on different floors; not both additive to full stair run",
+        "upperFloorCutoutGenerated": false,
+        "collisionCertified": false
+      },
+      "checksOutstanding": [
+        "door swing and landing approach with solid collision",
+        "3D headroom at every tread",
+        "structural floor and ceiling cutouts",
+        "swept player capsule traversal",
+        "railing and fall prevention",
+        "walking transitions in game runtime"
+      ]
+    },
+    {
+      "linkId": "connection_024",
+      "type": "spiral",
+      "lower": "fe-f1-spiral",
+      "upper": "fe-f2-spiral",
+      "status": "GEOMETRIC_CANDIDATE_UNCERTIFIED",
+      "model": "geometry/stair_candidate_connection_024.glb",
+      "design": {
+        "scheme": "single-turn-spiral",
+        "outerRadiusM": 1.649,
+        "coreRadiusM": 0.2,
+        "walkingLineTreadM": 0.323,
+        "turnHeightM": 3.048,
+        "availableFootprintMeters": [
+          3.658,
+          3.658
+        ],
+        "upperFloorCutoutGenerated": false,
+        "collisionCertified": false
+      },
+      "checksOutstanding": [
+        "door swing and landing approach with solid collision",
+        "3D headroom at every tread",
+        "structural floor and ceiling cutouts",
+        "swept player capsule traversal",
+        "railing and fall prevention",
+        "walking transitions in game runtime"
+      ]
+    },
+    {
+      "linkId": "connection_025",
+      "type": "switchback",
+      "lower": "fe-f2-regular",
+      "upper": "fe-f3-regular",
+      "status": "GEOMETRIC_CANDIDATE_UNCERTIFIED",
+      "model": "geometry/stair_candidate_connection_025.glb",
+      "design": {
+        "scheme": "two-flight-u-turn",
+        "risers": [
+          9,
+          9
+        ],
+        "treadDepthM": 0.255,
+        "clearWidthM": 0.84,
+        "requiredFootprintMeters": [
+          2.08,
+          3.27
+        ],
+        "availableFootprintMeters": [
+          2.438,
+          3.658
+        ],
+        "landingDepthM": 0.95,
+        "endLandings": "end approaches are on different floors; not both additive to full stair run",
+        "upperFloorCutoutGenerated": false,
+        "collisionCertified": false
+      },
+      "checksOutstanding": [
+        "door swing and landing approach with solid collision",
+        "3D headroom at every tread",
+        "structural floor and ceiling cutouts",
+        "swept player capsule traversal",
+        "railing and fall prevention",
+        "walking transitions in game runtime"
+      ]
+    }
+  ]
+}

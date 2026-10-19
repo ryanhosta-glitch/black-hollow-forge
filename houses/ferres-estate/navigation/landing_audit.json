@@ -1,0 +1,102 @@
+{
+  "schema": "black-hollow-forge-landing-audit-0.1",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "minimumLandingClearMeters": {
+    "shortSide": 0.95,
+    "longSide": 1.2,
+    "wallInset": 0.3
+  },
+  "links": [
+    {
+      "linkId": "connection_022",
+      "from": "fe-f0-regular",
+      "to": "fe-f1-regular",
+      "startFloor": 0,
+      "endFloor": 1,
+      "overlapMeters": {
+        "width": 2.438,
+        "depth": 3.658
+      },
+      "minimumLandingClearMeters": [
+        0.95,
+        1.2
+      ],
+      "status": "CANDIDATE_CLEARANCE_ONLY",
+      "centerMeters": {
+        "x": 4.877,
+        "z": 12.192
+      },
+      "caveat": "Does not verify authored door openings, walls, riser run, headroom or GLB collision."
+    },
+    {
+      "linkId": "connection_023",
+      "from": "fe-f1-regular",
+      "to": "fe-f2-regular",
+      "startFloor": 1,
+      "endFloor": 2,
+      "overlapMeters": {
+        "width": 2.438,
+        "depth": 3.658
+      },
+      "minimumLandingClearMeters": [
+        0.95,
+        1.2
+      ],
+      "status": "CANDIDATE_CLEARANCE_ONLY",
+      "centerMeters": {
+        "x": 4.877,
+        "z": 12.192
+      },
+      "caveat": "Does not verify authored door openings, walls, riser run, headroom or GLB collision."
+    },
+    {
+      "linkId": "connection_024",
+      "from": "fe-f1-spiral",
+      "to": "fe-f2-spiral",
+      "startFloor": 1,
+      "endFloor": 2,
+      "overlapMeters": {
+        "width": 3.658,
+        "depth": 3.658
+      },
+      "minimumLandingClearMeters": [
+        0.95,
+        1.2
+      ],
+      "status": "CANDIDATE_CLEARANCE_ONLY",
+      "centerMeters": {
+        "x": 10.363,
+        "z": 12.192
+      },
+      "caveat": "Does not verify authored door openings, walls, riser run, headroom or GLB collision."
+    },
+    {
+      "linkId": "connection_025",
+      "from": "fe-f2-regular",
+      "to": "fe-f3-regular",
+      "startFloor": 2,
+      "endFloor": 3,
+      "overlapMeters": {
+        "width": 2.438,
+        "depth": 3.658
+      },
+      "minimumLandingClearMeters": [
+        0.95,
+        1.2
+      ],
+      "status": "CANDIDATE_CLEARANCE_ONLY",
+      "centerMeters": {
+        "x": 4.877,
+        "z": 12.192
+      },
+      "caveat": "Does not verify authored door openings, walls, riser run, headroom or GLB collision."
+    }
+  ],
+  "summary": {
+    "verticalLinks": 4,
+    "clearanceCandidates": 4,
+    "blocked": 0
+  },
+  "gameplayValidated": false,
+  "policy": "A stair may not be marked physically playable solely by graph reachability; clearance and runtime swept-capsule tests are required."
+}
