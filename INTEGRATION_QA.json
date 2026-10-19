@@ -1,0 +1,60 @@
+{
+  "rooms": 26,
+  "doorRecords": 45,
+  "stairs": 6,
+  "connections": 26,
+  "reachableFromEntry": 26,
+  "unreachable": [],
+  "specialAnchors": 9,
+  "sourceUnmodified": true,
+  "assets": [
+    {
+      "path": "geometry/floor_00.glb",
+      "exists": true,
+      "bytes": 234308,
+      "sha256": "6fe5e0a8d5be0ac4095eee78883d8d50fb4e4a5528bf57808b871b0c9f2b2482"
+    },
+    {
+      "path": "geometry/floor_01.glb",
+      "exists": true,
+      "bytes": 371000,
+      "sha256": "99edd428149ab1c9fa445f199c4190db4c1b512aa040845de0030aaef3fdebfd"
+    },
+    {
+      "path": "geometry/floor_02.glb",
+      "exists": true,
+      "bytes": 356748,
+      "sha256": "88549b5b7d4b372c5bf679d06e968cc99ea273198ba46cead5a5d2bad8bed712"
+    },
+    {
+      "path": "geometry/floor_03.glb",
+      "exists": true,
+      "bytes": 363980,
+      "sha256": "aa34f22bbbafd22acc3f370892802b4357100b47474de7b7348ba0d5ee601330"
+    },
+    {
+      "path": "geometry/roof.glb",
+      "exists": true,
+      "bytes": 50728,
+      "sha256": "93d1df4de48d9b4f020b66afa43278f044da129c198aa262b726f6d5f2352391"
+    },
+    {
+      "path": "geometry/special_main_hall.glb",
+      "exists": true,
+      "bytes": 1183880,
+      "sha256": "221637a9591ae3745f4cf3666582ea2d9e33046f80854cb0b2da5414a7d491fe"
+    },
+    {
+      "path": "geometry/special_floor13_conservatory.glb",
+      "exists": true,
+      "bytes": 1466352,
+      "sha256": "0425298346f80ef7e1f279cf57a0733ccedab3a666e8503dcf64e89f886c117a"
+    }
+  ],
+  "glbBytes": 4026996,
+  "limits": [
+    "No real-time engine playthrough or browser GPU benchmark conducted.",
+    "3D geometry has not been verified for player capsule collision.",
+    "Original v8.5.19 game has not been modified."
+  ]
+}

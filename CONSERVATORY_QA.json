@@ -1,0 +1,20 @@
+{
+  "modelMeshes": 1952,
+  "tenPasses": {
+    "1": 162,
+    "2": 91,
+    "3": 48,
+    "4": 232,
+    "5": 84,
+    "6": 60,
+    "7": 16,
+    "8": 30,
+    "9": 44,
+    "10": 28
+  },
+  "addedMeshes": 795,
+  "anchors": 9,
+  "houseRooms": 26,
+  "blueprintSourceUnmodified": true,
+  "geometryReloaded": true
+}

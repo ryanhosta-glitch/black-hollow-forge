@@ -1,0 +1,106 @@
+{
+  "scene": "floor13-conservatory",
+  "coordinateSystem": "meters",
+  "anchors": [
+    {
+      "id": "pitcher_0",
+      "positionMeters": [
+        -7.4,
+        2.8,
+        10.0
+      ],
+      "kind": "carnivorous-plant",
+      "suggestedAction": "react_to_spectral_lens",
+      "runtimeWired": false
+    },
+    {
+      "id": "pitcher_1",
+      "positionMeters": [
+        8.6,
+        2.8,
+        8.0
+      ],
+      "kind": "carnivorous-plant",
+      "suggestedAction": "react_to_spectral_lens",
+      "runtimeWired": false
+    },
+    {
+      "id": "pitcher_2",
+      "positionMeters": [
+        -9.4,
+        2.8,
+        -9.0
+      ],
+      "kind": "carnivorous-plant",
+      "suggestedAction": "react_to_spectral_lens",
+      "runtimeWired": false
+    },
+    {
+      "id": "black_fountain",
+      "positionMeters": [
+        0.0,
+        0.85,
+        0.0
+      ],
+      "kind": "puzzle",
+      "suggestedAction": "listen_to_water_whispers",
+      "runtimeWired": false
+    },
+    {
+      "id": "botanical_lab",
+      "positionMeters": [
+        7.2,
+        1.8,
+        -12.3
+      ],
+      "kind": "research",
+      "suggestedAction": "examine_botany_codex",
+      "runtimeWired": false
+    },
+    {
+      "id": "catwalk_observation",
+      "positionMeters": [
+        0.0,
+        6.55,
+        14.0
+      ],
+      "kind": "navigation",
+      "suggestedAction": "inspect_from_upper_catwalk",
+      "runtimeWired": false
+    },
+    {
+      "id": "spectral_lens",
+      "positionMeters": [
+        -5.0,
+        2.05,
+        -13.0
+      ],
+      "kind": "quest",
+      "suggestedAction": "collect_spectral_lens",
+      "runtimeWired": false
+    },
+    {
+      "id": "secret_botanical_door",
+      "positionMeters": [
+        -12.8,
+        1.3,
+        -12.0
+      ],
+      "kind": "secret-door",
+      "suggestedAction": "unlock_research_vault",
+      "runtimeWired": false
+    },
+    {
+      "id": "return_portal",
+      "positionMeters": [
+        0.0,
+        1.0,
+        -17.0
+      ],
+      "kind": "floor13-exit",
+      "suggestedAction": "find_impossible_elevator",
+      "runtimeWired": false
+    }
+  ],
+  "runtimeWired": false
+}

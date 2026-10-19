@@ -6,6 +6,13 @@
   ],
   "totalRooms": 26,
   "floors": 4,
+  "integrityCounts": {
+    "doors": 45,
+    "windows": 0,
+    "stairs": 6,
+    "shafts": 0,
+    "warnings": 0
+  },
   "magicRepairs": 0,
   "allRoomsReachableWithMagic": true
 }

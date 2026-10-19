@@ -9,7 +9,9 @@ from pathlib import Path
 import numpy as np
 import trimesh
 from magical import compile_magic
+from integrity import compile_integrity
 from embellish import architectural_details, roof_exterior
+from victorian_architecture import build_exterior_facade
 from special_scenes import build as build_special
 
 def slug(s): return re.sub(r'[^a-z0-9]+','-',s.lower()).strip('-') or 'house'
@@ -111,6 +113,7 @@ def render_floor(floor,outfile,index):
     cursor=b
    section(cursor,length,0,h,'end');parts+=1
   architectural_details(scene,box,r)
+ facade_stats=build_exterior_facade(scene,box,floor)
  scene.export(str(outfile));return parts
 
 def make_roof(data,outfile):
@@ -170,6 +173,9 @@ def main(src,dest):
  if errors:
   (out/'validation.json').write_text(json.dumps({'status':'failed','errors':errors,'warnings':warnings},indent=2));raise ValueError('; '.join(errors))
  magic=compile_magic(data)
+ integrity=compile_integrity(data,magic)
+ (out/'navigation'/'integrity.json').write_text(json.dumps(integrity,ensure_ascii=False,indent=2))
+ warnings.extend('Integrity inspection: '+w['kind'] for w in integrity['warnings'])
  warnings.extend(f"Forge repair: {r['type']}" for r in magic['repairs'])
  (out/'navigation'/'magic.json').write_text(json.dumps(magic,ensure_ascii=False,indent=2))
  files=[]
@@ -182,9 +188,9 @@ def main(src,dest):
  entryroom=next(r for r in rooms if r['id']==er)
  navigation={'units':'feet','sourceRoomCount':len(rooms),'rooms':rooms,'elevatorShafts':elevators,'entry':entry,'specialScenes':{'mainHall':{'originalRoomId':er,'scene':'geometry/special_main_hall.glb','mode':'portal-pocket','portalReturnRoom':er,'impossibleElevator':{'positionMeters':[0,5.25,14.0]}},'floor13Conservatory':{'scene':'geometry/special_floor13_conservatory.glb','mode':'separate-dimension'}}}
  (out/'navigation'/'collision.json').write_text(json.dumps(navigation,ensure_ascii=False,indent=2))
- manifest={'format':'black-hollow-house','version':'1.0-prototype','name':data.get('name','Haunted Estate'),'id':slug(data.get('name','haunted-estate')),'sourceSha256':hashlib.sha256(source.read_bytes()).hexdigest(),'entry':entry,'floors':files,'navigation':'navigation/collision.json','magic':'navigation/magic.json','roof':'geometry/roof.glb','specialRooms':{'mainHall':'geometry/special_main_hall.glb','floor13Conservatory':'geometry/special_floor13_conservatory.glb'},'finishPaletteVersion':'forge-0.6-details','authoredRoof':data.get('roof',{}),'roofBuild':roof_meta,'specialSceneDetails':[main_meta,conservatory_meta],'runtimeStatus':'compiled-geometry-with-finish-proxies; full gameplay and material-texture parity not yet wired'}
+ manifest={'format':'black-hollow-house','version':'1.0-prototype','name':data.get('name','Haunted Estate'),'id':slug(data.get('name','haunted-estate')),'sourceSha256':hashlib.sha256(source.read_bytes()).hexdigest(),'entry':entry,'floors':files,'navigation':'navigation/collision.json','magic':'navigation/magic.json','integrity':'navigation/integrity.json','roof':'geometry/roof.glb','specialRooms':{'mainHall':'geometry/special_main_hall.glb','floor13Conservatory':'geometry/special_floor13_conservatory.glb'},'finishPaletteVersion':'forge-pass-2-victorian-envelope','authoredRoof':data.get('roof',{}),'roofBuild':roof_meta,'specialSceneDetails':[main_meta,conservatory_meta],'runtimeStatus':'compiled-geometry-with-finish-proxies; full gameplay and material-texture parity not yet wired'}
  (out/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2));shutil.copyfile(source,out/'source.haunt')
- (out/'validation.json').write_text(json.dumps({'status':'passed-with-warnings' if warnings else 'passed','errors':[],'warnings':warnings,'totalRooms':len(rooms),'floors':len(floors),'magicRepairs':len(magic['repairs']),'allRoomsReachableWithMagic':magic['allRoomsReachable']},indent=2))
+ (out/'validation.json').write_text(json.dumps({'status':'passed-with-warnings' if warnings else 'passed','errors':[],'warnings':warnings,'totalRooms':len(rooms),'floors':len(floors),'integrityCounts':integrity['counts'],'magicRepairs':len(magic['repairs']),'allRoomsReachableWithMagic':magic['allRoomsReachable']},indent=2))
  print(f'Built {out}: {len(floors)} floors, {len(rooms)} rooms')
 if __name__=='__main__':
  if len(sys.argv)!=3:sys.exit('Usage: python forge.py input.haunt output_directory')

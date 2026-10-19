@@ -1,0 +1,1031 @@
+{
+  "schema": "black-hollow-runtime-bridge-1",
+  "house": "ferre-s-estate",
+  "entryRoomId": "fe-f1-room1",
+  "rooms": [
+    {
+      "id": "fe-f0-room1",
+      "name": "The Forgotten Crypt",
+      "floor": 0,
+      "boundsFeet": {
+        "x": 0,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f0-room2",
+      "name": "Alchemist’s Laboratory",
+      "floor": 0,
+      "boundsFeet": {
+        "x": 28,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f0-room3",
+      "name": "Cursed Wine Cellar",
+      "floor": 0,
+      "boundsFeet": {
+        "x": 0,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f0-room4",
+      "name": "The Whispering Vault",
+      "floor": 0,
+      "boundsFeet": {
+        "x": 28,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f0-hall",
+      "name": "Basement — Central Corridor",
+      "floor": 0,
+      "boundsFeet": {
+        "x": 20,
+        "y": 0,
+        "l": 8,
+        "w": 46,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f0-regular",
+      "name": "The Grand Switchback Stairs",
+      "floor": 0,
+      "boundsFeet": {
+        "x": 12,
+        "y": 34,
+        "l": 8,
+        "w": 12,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f1-room1",
+      "name": "Grand Entrance Hall",
+      "floor": 1,
+      "boundsFeet": {
+        "x": 0,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f1-room2",
+      "name": "The Speaking Portrait Gallery",
+      "floor": 1,
+      "boundsFeet": {
+        "x": 28,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f1-room3",
+      "name": "The Midnight Library",
+      "floor": 1,
+      "boundsFeet": {
+        "x": 0,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f1-room4",
+      "name": "The Phantom Ballroom",
+      "floor": 1,
+      "boundsFeet": {
+        "x": 28,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f1-hall",
+      "name": "Ground Floor — Central Corridor",
+      "floor": 1,
+      "boundsFeet": {
+        "x": 20,
+        "y": 0,
+        "l": 8,
+        "w": 46,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f1-regular",
+      "name": "The Grand Switchback Stairs",
+      "floor": 1,
+      "boundsFeet": {
+        "x": 12,
+        "y": 34,
+        "l": 8,
+        "w": 12,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f1-spiral",
+      "name": "The Serpent Spiral Stair",
+      "floor": 1,
+      "boundsFeet": {
+        "x": 28,
+        "y": 34,
+        "l": 12,
+        "w": 12,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f2-room1",
+      "name": "The Seer’s Chamber",
+      "floor": 2,
+      "boundsFeet": {
+        "x": 0,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f2-room2",
+      "name": "Moonlit Conservatory",
+      "floor": 2,
+      "boundsFeet": {
+        "x": 28,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f2-room3",
+      "name": "The Dollmaker’s Workshop",
+      "floor": 2,
+      "boundsFeet": {
+        "x": 0,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f2-room4",
+      "name": "The Mirror Room",
+      "floor": 2,
+      "boundsFeet": {
+        "x": 28,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f2-hall",
+      "name": "Second Floor — Central Corridor",
+      "floor": 2,
+      "boundsFeet": {
+        "x": 20,
+        "y": 0,
+        "l": 8,
+        "w": 46,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f2-regular",
+      "name": "The Raven Staircase",
+      "floor": 2,
+      "boundsFeet": {
+        "x": 12,
+        "y": 34,
+        "l": 8,
+        "w": 12,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f2-spiral",
+      "name": "The Serpent Spiral Stair",
+      "floor": 2,
+      "boundsFeet": {
+        "x": 28,
+        "y": 34,
+        "l": 12,
+        "w": 12,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f3-room1",
+      "name": "The Founder’s Study",
+      "floor": 3,
+      "boundsFeet": {
+        "x": 0,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f3-room2",
+      "name": "The Raven Observatory",
+      "floor": 3,
+      "boundsFeet": {
+        "x": 28,
+        "y": 0,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f3-room3",
+      "name": "The Spell Archive",
+      "floor": 3,
+      "boundsFeet": {
+        "x": 0,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f3-room4",
+      "name": "The Attic Nursery",
+      "floor": 3,
+      "boundsFeet": {
+        "x": 28,
+        "y": 20,
+        "l": 20,
+        "w": 14,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f3-hall",
+      "name": "Third Floor — Central Corridor",
+      "floor": 3,
+      "boundsFeet": {
+        "x": 20,
+        "y": 0,
+        "l": 8,
+        "w": 46,
+        "h": 10
+      }
+    },
+    {
+      "id": "fe-f3-regular",
+      "name": "The Raven Staircase",
+      "floor": 3,
+      "boundsFeet": {
+        "x": 12,
+        "y": 34,
+        "l": 8,
+        "w": 12,
+        "h": 10
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "connection_000",
+      "from": "fe-f0-room1",
+      "to": "fe-f0-hall",
+      "kind": "architect-door",
+      "shared": "fe-f0-door1",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_001",
+      "from": "fe-f0-room2",
+      "to": "fe-f0-hall",
+      "kind": "architect-door",
+      "shared": "fe-f0-door2",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_002",
+      "from": "fe-f0-room3",
+      "to": "fe-f0-hall",
+      "kind": "architect-door",
+      "shared": "fe-f0-door3",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_003",
+      "from": "fe-f0-room4",
+      "to": "fe-f0-hall",
+      "kind": "architect-door",
+      "shared": "fe-f0-door4",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_004",
+      "from": "fe-f0-hall",
+      "to": "fe-f0-regular",
+      "kind": "architect-door",
+      "shared": "fe-f0-regular-entry",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_005",
+      "from": "fe-f1-room1",
+      "to": "fe-f1-hall",
+      "kind": "architect-door",
+      "shared": "fe-f1-door1",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_006",
+      "from": "fe-f1-room2",
+      "to": "fe-f1-hall",
+      "kind": "architect-door",
+      "shared": "fe-f1-door2",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_007",
+      "from": "fe-f1-room3",
+      "to": "fe-f1-hall",
+      "kind": "architect-door",
+      "shared": "fe-f1-door3",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_008",
+      "from": "fe-f1-room4",
+      "to": "fe-f1-hall",
+      "kind": "architect-door",
+      "shared": "fe-f1-door4",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_009",
+      "from": "fe-f1-hall",
+      "to": "fe-f1-regular",
+      "kind": "architect-door",
+      "shared": "fe-f1-regular-entry",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_010",
+      "from": "fe-f1-hall",
+      "to": "fe-f1-spiral",
+      "kind": "architect-door",
+      "shared": "fe-f1-spiral-entry",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_011",
+      "from": "fe-f2-room1",
+      "to": "fe-f2-hall",
+      "kind": "architect-door",
+      "shared": "fe-f2-door1",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_012",
+      "from": "fe-f2-room2",
+      "to": "fe-f2-hall",
+      "kind": "architect-door",
+      "shared": "fe-f2-door2",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_013",
+      "from": "fe-f2-room3",
+      "to": "fe-f2-hall",
+      "kind": "architect-door",
+      "shared": "fe-f2-door3",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_014",
+      "from": "fe-f2-room4",
+      "to": "fe-f2-hall",
+      "kind": "architect-door",
+      "shared": "fe-f2-door4",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_015",
+      "from": "fe-f2-hall",
+      "to": "fe-f2-regular",
+      "kind": "architect-door",
+      "shared": "fe-f2-regular-entry",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_016",
+      "from": "fe-f2-hall",
+      "to": "fe-f2-spiral",
+      "kind": "architect-door",
+      "shared": "fe-f2-spiral-entry",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_017",
+      "from": "fe-f3-room1",
+      "to": "fe-f3-hall",
+      "kind": "architect-door",
+      "shared": "fe-f3-door1",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_018",
+      "from": "fe-f3-room2",
+      "to": "fe-f3-hall",
+      "kind": "architect-door",
+      "shared": "fe-f3-door2",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_019",
+      "from": "fe-f3-room3",
+      "to": "fe-f3-hall",
+      "kind": "architect-door",
+      "shared": "fe-f3-door3",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_020",
+      "from": "fe-f3-room4",
+      "to": "fe-f3-hall",
+      "kind": "architect-door",
+      "shared": "fe-f3-door4",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_021",
+      "from": "fe-f3-hall",
+      "to": "fe-f3-regular",
+      "kind": "architect-door",
+      "shared": "fe-f3-regular-entry",
+      "bidirectional": true
+    },
+    {
+      "id": "connection_022",
+      "from": "fe-f0-regular",
+      "to": "fe-f1-regular",
+      "kind": "architect-stairs",
+      "shared": null,
+      "bidirectional": true
+    },
+    {
+      "id": "connection_023",
+      "from": "fe-f1-regular",
+      "to": "fe-f2-regular",
+      "kind": "architect-stairs",
+      "shared": null,
+      "bidirectional": true
+    },
+    {
+      "id": "connection_024",
+      "from": "fe-f1-spiral",
+      "to": "fe-f2-spiral",
+      "kind": "architect-stairs",
+      "shared": null,
+      "bidirectional": true
+    },
+    {
+      "id": "connection_025",
+      "from": "fe-f2-regular",
+      "to": "fe-f3-regular",
+      "kind": "architect-stairs",
+      "shared": null,
+      "bidirectional": true
+    }
+  ],
+  "safeCenters": {
+    "fe-f0-room1": {
+      "roomId": "fe-f0-room1",
+      "floor": 0,
+      "xMeters": 3.048,
+      "zMeters": 2.134,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 0,
+        "pointFeet": [
+          10.0,
+          7.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f0-room2": {
+      "roomId": "fe-f0-room2",
+      "floor": 0,
+      "xMeters": 11.582,
+      "zMeters": 2.134,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 0,
+        "pointFeet": [
+          38.0,
+          7.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f0-room3": {
+      "roomId": "fe-f0-room3",
+      "floor": 0,
+      "xMeters": 3.048,
+      "zMeters": 8.23,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 0,
+        "pointFeet": [
+          10.0,
+          27.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f0-room4": {
+      "roomId": "fe-f0-room4",
+      "floor": 0,
+      "xMeters": 11.582,
+      "zMeters": 8.23,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 0,
+        "pointFeet": [
+          38.0,
+          27.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f0-hall": {
+      "roomId": "fe-f0-hall",
+      "floor": 0,
+      "xMeters": 7.315,
+      "zMeters": 7.01,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 0,
+        "pointFeet": [
+          24.0,
+          23.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f0-regular": {
+      "roomId": "fe-f0-regular",
+      "floor": 0,
+      "xMeters": 4.877,
+      "zMeters": 12.192,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 0,
+        "pointFeet": [
+          16.0,
+          40.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f1-room1": {
+      "roomId": "fe-f1-room1",
+      "floor": 1,
+      "xMeters": 3.048,
+      "zMeters": 2.134,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 1,
+        "pointFeet": [
+          10.0,
+          7.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f1-room2": {
+      "roomId": "fe-f1-room2",
+      "floor": 1,
+      "xMeters": 11.582,
+      "zMeters": 2.134,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 1,
+        "pointFeet": [
+          38.0,
+          7.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f1-room3": {
+      "roomId": "fe-f1-room3",
+      "floor": 1,
+      "xMeters": 3.048,
+      "zMeters": 8.23,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 1,
+        "pointFeet": [
+          10.0,
+          27.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f1-room4": {
+      "roomId": "fe-f1-room4",
+      "floor": 1,
+      "xMeters": 11.582,
+      "zMeters": 8.23,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 1,
+        "pointFeet": [
+          38.0,
+          27.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f1-hall": {
+      "roomId": "fe-f1-hall",
+      "floor": 1,
+      "xMeters": 7.315,
+      "zMeters": 7.01,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 1,
+        "pointFeet": [
+          24.0,
+          23.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f1-regular": {
+      "roomId": "fe-f1-regular",
+      "floor": 1,
+      "xMeters": 4.877,
+      "zMeters": 12.192,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 1,
+        "pointFeet": [
+          16.0,
+          40.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f1-spiral": {
+      "roomId": "fe-f1-spiral",
+      "floor": 1,
+      "xMeters": 10.363,
+      "zMeters": 12.192,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 1,
+        "pointFeet": [
+          34.0,
+          40.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f2-room1": {
+      "roomId": "fe-f2-room1",
+      "floor": 2,
+      "xMeters": 3.048,
+      "zMeters": 2.134,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 2,
+        "pointFeet": [
+          10.0,
+          7.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f2-room2": {
+      "roomId": "fe-f2-room2",
+      "floor": 2,
+      "xMeters": 11.582,
+      "zMeters": 2.134,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 2,
+        "pointFeet": [
+          38.0,
+          7.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f2-room3": {
+      "roomId": "fe-f2-room3",
+      "floor": 2,
+      "xMeters": 3.048,
+      "zMeters": 8.23,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 2,
+        "pointFeet": [
+          10.0,
+          27.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f2-room4": {
+      "roomId": "fe-f2-room4",
+      "floor": 2,
+      "xMeters": 11.582,
+      "zMeters": 8.23,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 2,
+        "pointFeet": [
+          38.0,
+          27.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f2-hall": {
+      "roomId": "fe-f2-hall",
+      "floor": 2,
+      "xMeters": 7.315,
+      "zMeters": 7.01,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 2,
+        "pointFeet": [
+          24.0,
+          23.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f2-regular": {
+      "roomId": "fe-f2-regular",
+      "floor": 2,
+      "xMeters": 4.877,
+      "zMeters": 12.192,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 2,
+        "pointFeet": [
+          16.0,
+          40.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f2-spiral": {
+      "roomId": "fe-f2-spiral",
+      "floor": 2,
+      "xMeters": 10.363,
+      "zMeters": 12.192,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 2,
+        "pointFeet": [
+          34.0,
+          40.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f3-room1": {
+      "roomId": "fe-f3-room1",
+      "floor": 3,
+      "xMeters": 3.048,
+      "zMeters": 2.134,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 3,
+        "pointFeet": [
+          10.0,
+          7.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f3-room2": {
+      "roomId": "fe-f3-room2",
+      "floor": 3,
+      "xMeters": 11.582,
+      "zMeters": 2.134,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 3,
+        "pointFeet": [
+          38.0,
+          7.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f3-room3": {
+      "roomId": "fe-f3-room3",
+      "floor": 3,
+      "xMeters": 3.048,
+      "zMeters": 8.23,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 3,
+        "pointFeet": [
+          10.0,
+          27.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f3-room4": {
+      "roomId": "fe-f3-room4",
+      "floor": 3,
+      "xMeters": 11.582,
+      "zMeters": 8.23,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 3,
+        "pointFeet": [
+          38.0,
+          27.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f3-hall": {
+      "roomId": "fe-f3-hall",
+      "floor": 3,
+      "xMeters": 7.315,
+      "zMeters": 7.01,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 3,
+        "pointFeet": [
+          24.0,
+          23.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    },
+    "fe-f3-regular": {
+      "roomId": "fe-f3-regular",
+      "floor": 3,
+      "xMeters": 4.877,
+      "zMeters": 12.192,
+      "clearance": "room-center-fallback",
+      "integrityCandidateFeet": {
+        "floorIndex": 3,
+        "pointFeet": [
+          16.0,
+          40.0
+        ],
+        "status": "candidate-needs-runtime-collision-check"
+      }
+    }
+  },
+  "specialScenes": {
+    "mainHall": "geometry/special_main_hall.glb",
+    "floor13": "geometry/special_floor13_conservatory.glb"
+  },
+  "conservatoryAnchors": [
+    {
+      "id": "pitcher_0",
+      "positionMeters": [
+        -7.4,
+        2.8,
+        10.0
+      ],
+      "kind": "carnivorous-plant",
+      "suggestedAction": "react_to_spectral_lens",
+      "runtimeWired": false
+    },
+    {
+      "id": "pitcher_1",
+      "positionMeters": [
+        8.6,
+        2.8,
+        8.0
+      ],
+      "kind": "carnivorous-plant",
+      "suggestedAction": "react_to_spectral_lens",
+      "runtimeWired": false
+    },
+    {
+      "id": "pitcher_2",
+      "positionMeters": [
+        -9.4,
+        2.8,
+        -9.0
+      ],
+      "kind": "carnivorous-plant",
+      "suggestedAction": "react_to_spectral_lens",
+      "runtimeWired": false
+    },
+    {
+      "id": "black_fountain",
+      "positionMeters": [
+        0.0,
+        0.85,
+        0.0
+      ],
+      "kind": "puzzle",
+      "suggestedAction": "listen_to_water_whispers",
+      "runtimeWired": false
+    },
+    {
+      "id": "botanical_lab",
+      "positionMeters": [
+        7.2,
+        1.8,
+        -12.3
+      ],
+      "kind": "research",
+      "suggestedAction": "examine_botany_codex",
+      "runtimeWired": false
+    },
+    {
+      "id": "catwalk_observation",
+      "positionMeters": [
+        0.0,
+        6.55,
+        14.0
+      ],
+      "kind": "navigation",
+      "suggestedAction": "inspect_from_upper_catwalk",
+      "runtimeWired": false
+    },
+    {
+      "id": "spectral_lens",
+      "positionMeters": [
+        -5.0,
+        2.05,
+        -13.0
+      ],
+      "kind": "quest",
+      "suggestedAction": "collect_spectral_lens",
+      "runtimeWired": false
+    },
+    {
+      "id": "secret_botanical_door",
+      "positionMeters": [
+        -12.8,
+        1.3,
+        -12.0
+      ],
+      "kind": "secret-door",
+      "suggestedAction": "unlock_research_vault",
+      "runtimeWired": false
+    },
+    {
+      "id": "return_portal",
+      "positionMeters": [
+        0.0,
+        1.0,
+        -17.0
+      ],
+      "kind": "floor13-exit",
+      "suggestedAction": "find_impossible_elevator",
+      "runtimeWired": false
+    }
+  ],
+  "limitations": [
+    "Room-center navigation prototype: not a physical collision/navmesh solver.",
+    "No gameplay modification to v8.5.19; separate playtest and bridge specification.",
+    "No physical player capsule, animated doors, stair traversal meshes, or elevator platform physics."
+  ]
+}

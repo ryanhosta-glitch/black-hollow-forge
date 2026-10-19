@@ -28,6 +28,15 @@ def build(name,out):
     box(f'wall-torch-{side}-{z}',(side*(W/2-.58),4.7,z),(.29,.6,.4),amber)
   for side in (-1,1):box('rear-front-stone-'+str(side),(0,H/2,side*D/2),(W,H,.37),(86,69,73,255))
   box('ceiling-cornice',(0,H-.2,0),(W,.4,D),(79,62,70,255))
+  # Deep coffer ribs give scale and contrasting recessed panels under inspection light.
+  for xx in range(-12,13,4):box(f'gold-ceiling-coffer-cross-{xx}',(xx,H-.47,0),(.14,.18,D-1),gold)
+  for zz in range(-16,17,4):box(f'gold-ceiling-coffer-long-{zz}',(0,H-.47,zz),(W-1,.18,.14),gold)
+  for side in (-1,1):
+   for zz in range(-16,18,3):
+    box(f'marble-wall-recess-{side}-{zz}',(side*(W/2-.18),8.7,zz),(.10,10,2),(104,67,75,255))
+    box(f'ornate-wall-toprail-{side}-{zz}',(side*(W/2-.32),14.2,zz),(.16,.11,2.2),gold)
+  for zz in (-16,16):
+   for xx in range(-12,13,3):box(f'gold-crown-frieze-{zz}-{xx}',(xx,H-1.0,zz),(.23,.33,.17),gold)
   # Massive single central stair, camera can turn and look down from upper platform.
   steps=28;run=17;rise=8.7
   for n in range(steps):
@@ -38,6 +47,13 @@ def build(name,out):
     box(f'stair-rod-{n}-{side}',(side*3,(n+1)*rise/steps+.06,depth-.5),(.07,.07,run/steps),gold)
     if n%2==0:box(f'gilded-stair-post-{n}-{side}',(side*5.3,(n+1)*rise/steps+.75,depth-.5),(.11,1.5,.11),gold)
   box('great-upper-gallery',(0,rise,16),(17,.34,9),marble)
+  for side in (-1,1):
+   for n in range(21):
+    x=side*(5.45+n%3*.04);z=n*17/21-.5
+    box(f'upper-baluster-{side}-{n}',(x,rise+1.16,z),(.14,2.12,.14),gold)
+   box(f'upper-balcony-handrail-{side}',(side*5.45,rise+2.21,7.9),(.22,.18,17.9),gold)
+  # Deep red and brass frieze to signal the gateway from the ground floor.
+  box('great-stair-stage-plinth',(0,.12,-1),(14,.24,2),marble)
   box('upper-gallery-carpet',(0,rise+.19,15.8),(6,.03,8),red)
   for side in (-1,1):
    box(f'gallery-balustrade-{side}',(side*8.4,rise+1.05,16),(.16,1.8,8),gold)
@@ -45,6 +61,7 @@ def build(name,out):
   box('elevator-dark-gate',(0,rise+2.9,18.87),(3.8,4.9,.12),dark)
   for i in range(-5,6):box(f'elevator-brass-bars-{i}',(i*.30,rise+2.8,18.76),(.035,4.6,.035),gold)
   box('wall-map-parchment',(6.2,rise+3,18.7),(2.7,2,.12),(167,135,90,255))
+  box('map-label-plate',(6.2,rise+1.65,18.62),(2.3,.28,.10),gold)
   box('map-frame',(6.2,rise+3,18.57),(3,.11,.23),gold)
   # Iconic lions each guarding a globe at the foot of the stairs: sculptural proxies.
   for side in (-1,1):
@@ -75,6 +92,18 @@ def build(name,out):
   W,D,H=30,37,19
   box('greenhouse-marble-floor',(0,-.15,0),(W,.3,D),(90,94,83,255))
   box('central-conservatory-walk',(0,.04,0),(4.2,.08,D-1),(149,143,124,255))
+  # Glassless Gothic lantern structure keeps roof transparent without sorting artifacts.
+  for zz in range(-17,19,2):
+   for side in (-1,1):
+    for n in range(7):
+     t=n/6;x=side*(13.8-t*13.8);y=H+5*math.sin(t*math.pi/2)
+     box(f'cast-iron-vault-arch-{zz}-{side}-{n}',(x,y,zz),(.14,.13,.13),(139,125,91,255))
+  for side in (-1,1):
+   for zz in range(-16,18,4):
+    box(f'gothic-glass-frame-transom-{side}-{zz}',(side*14,13,zz),(.19,.17,3.4),(165,137,91,255))
+  for xx in (-10,10):
+   for zz in (-13,13):
+    box(f'gargoyle-fern-pedestal-{xx}-{zz}',(xx,.48,zz),(1.4,.96,1.4),(124,121,105,255))
   for side in (-1,1):
    for z in range(-17,19,4):
     box(f'glasshouse-iron-column-{side}-{z}',(side*14,H/2,z),(.20,H,.20),(60,69,70,255))
@@ -106,7 +135,13 @@ def build(name,out):
   sphere('carnivorous-core',(-8,2,10),1.5,(58,111,59,255),2,(1.15,.45,1.3))
   for s in (-1,1):sphere('carnivorous-mouth-'+str(s),(-8+s*.7,2.8,10),1.2,(97,117,69,255),1,(.9,.2,1.1))
  else:raise ValueError(name)
+ if name=='floor13-conservatory':
+  from living_conservatory import build as upgrade_conservatory
+  conservatory_upgrade=upgrade_conservatory(sc)
+ if name=='main-hall':
+  from grand_hall_masterpiece import build as upgrade_hall
+  hall_upgrade=upgrade_hall(sc)
  from visual07 import add_visuals
  add_visuals(sc,box,sphere,name)
  sc.export(str(out))
- return {'scene':name,'meshes':len(sc.geometry),'status':'enhanced static proxy; animations, cinematic texturing and gameplay not yet integrated'}
+ return {'scene':name,'meshes':len(sc.geometry),'grandHallPasses':hall_upgrade if name=='main-hall' else None,'livingConservatory':conservatory_upgrade if name=='floor13-conservatory' else None,'status':'enhanced static proxy; animations, cinematic texturing and gameplay not yet integrated'}

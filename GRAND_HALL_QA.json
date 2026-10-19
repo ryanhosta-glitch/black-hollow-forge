@@ -1,0 +1,50 @@
+{
+  "passes": [
+    {
+      "pass": 1,
+      "addedMeshes": 108
+    },
+    {
+      "pass": 2,
+      "addedMeshes": 86
+    },
+    {
+      "pass": 3,
+      "addedMeshes": 60
+    },
+    {
+      "pass": 4,
+      "addedMeshes": 34
+    },
+    {
+      "pass": 5,
+      "addedMeshes": 29
+    },
+    {
+      "pass": 6,
+      "addedMeshes": 84
+    },
+    {
+      "pass": 7,
+      "addedMeshes": 16
+    },
+    {
+      "pass": 8,
+      "addedMeshes": 176
+    },
+    {
+      "pass": 9,
+      "addedMeshes": 48
+    },
+    {
+      "pass": 10,
+      "addedMeshes": 9
+    }
+  ],
+  "addedMeshes": 650,
+  "totalHallGeometry": 1608,
+  "hallSizeBytes": 1183880,
+  "rooms": 26,
+  "floors": 4,
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d"
+}

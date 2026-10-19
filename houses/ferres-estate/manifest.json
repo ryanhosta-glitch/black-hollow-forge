@@ -66,12 +66,13 @@
   ],
   "navigation": "navigation/collision.json",
   "magic": "navigation/magic.json",
+  "integrity": "navigation/integrity.json",
   "roof": "geometry/roof.glb",
   "specialRooms": {
     "mainHall": "geometry/special_main_hall.glb",
     "floor13Conservatory": "geometry/special_floor13_conservatory.glb"
   },
-  "finishPaletteVersion": "forge-0.6-details",
+  "finishPaletteVersion": "forge-pass-2-victorian-envelope",
   "authoredRoof": {
     "type": "mansard",
     "rise": 5
@@ -79,19 +80,190 @@
   "roofBuild": {
     "style": "mansard",
     "riseFeet": 5.0,
-    "limits": "Bounding-rectangle envelope. Recessed wings and roof valleys not yet resolved."
+    "method": "actual-room-union-perimeter-heightfield",
+    "footprintAreaSqMeters": 147.16,
+    "perimeterMeters": 81.69,
+    "facadeEdges": 19,
+    "triangles": 1056,
+    "limits": "Roof follows nonrectangular footprint but dormers, vertical roof valleys and watertight joints require further modeling."
   },
   "specialSceneDetails": [
     {
       "scene": "main-hall",
-      "meshes": 830,
+      "meshes": 1608,
+      "grandHallPasses": {
+        "passes": [
+          {
+            "pass": 1,
+            "addedMeshes": 108
+          },
+          {
+            "pass": 2,
+            "addedMeshes": 86
+          },
+          {
+            "pass": 3,
+            "addedMeshes": 60
+          },
+          {
+            "pass": 4,
+            "addedMeshes": 34
+          },
+          {
+            "pass": 5,
+            "addedMeshes": 29
+          },
+          {
+            "pass": 6,
+            "addedMeshes": 84
+          },
+          {
+            "pass": 7,
+            "addedMeshes": 16
+          },
+          {
+            "pass": 8,
+            "addedMeshes": 176
+          },
+          {
+            "pass": 9,
+            "addedMeshes": 48
+          },
+          {
+            "pass": 10,
+            "addedMeshes": 9
+          }
+        ],
+        "addedMeshes": 650,
+        "notes": "Static decorative detail with named geometry anchors; not an animated/rigged asset and not collision navigation."
+      },
+      "livingConservatory": null,
       "status": "enhanced static proxy; animations, cinematic texturing and gameplay not yet integrated"
     },
     {
       "scene": "floor13-conservatory",
-      "meshes": 883,
+      "meshes": 1952,
+      "grandHallPasses": null,
+      "livingConservatory": {
+        "passCounts": {
+          "1": 162,
+          "2": 91,
+          "3": 48,
+          "4": 232,
+          "5": 84,
+          "6": 60,
+          "7": 16,
+          "8": 30,
+          "9": 44,
+          "10": 28
+        },
+        "interactionAnchors": [
+          {
+            "id": "pitcher_0",
+            "positionMeters": [
+              -7.4,
+              2.8,
+              10.0
+            ],
+            "kind": "carnivorous-plant",
+            "suggestedAction": "react_to_spectral_lens",
+            "runtimeWired": false
+          },
+          {
+            "id": "pitcher_1",
+            "positionMeters": [
+              8.6,
+              2.8,
+              8.0
+            ],
+            "kind": "carnivorous-plant",
+            "suggestedAction": "react_to_spectral_lens",
+            "runtimeWired": false
+          },
+          {
+            "id": "pitcher_2",
+            "positionMeters": [
+              -9.4,
+              2.8,
+              -9.0
+            ],
+            "kind": "carnivorous-plant",
+            "suggestedAction": "react_to_spectral_lens",
+            "runtimeWired": false
+          },
+          {
+            "id": "black_fountain",
+            "positionMeters": [
+              0.0,
+              0.85,
+              0.0
+            ],
+            "kind": "puzzle",
+            "suggestedAction": "listen_to_water_whispers",
+            "runtimeWired": false
+          },
+          {
+            "id": "botanical_lab",
+            "positionMeters": [
+              7.2,
+              1.8,
+              -12.3
+            ],
+            "kind": "research",
+            "suggestedAction": "examine_botany_codex",
+            "runtimeWired": false
+          },
+          {
+            "id": "catwalk_observation",
+            "positionMeters": [
+              0.0,
+              6.55,
+              14.0
+            ],
+            "kind": "navigation",
+            "suggestedAction": "inspect_from_upper_catwalk",
+            "runtimeWired": false
+          },
+          {
+            "id": "spectral_lens",
+            "positionMeters": [
+              -5.0,
+              2.05,
+              -13.0
+            ],
+            "kind": "quest",
+            "suggestedAction": "collect_spectral_lens",
+            "runtimeWired": false
+          },
+          {
+            "id": "secret_botanical_door",
+            "positionMeters": [
+              -12.8,
+              1.3,
+              -12.0
+            ],
+            "kind": "secret-door",
+            "suggestedAction": "unlock_research_vault",
+            "runtimeWired": false
+          },
+          {
+            "id": "return_portal",
+            "positionMeters": [
+              0.0,
+              1.0,
+              -17.0
+            ],
+            "kind": "floor13-exit",
+            "suggestedAction": "find_impossible_elevator",
+            "runtimeWired": false
+          }
+        ],
+        "totalAddedMeshes": 795,
+        "status": "static geometric detail; interactions and navigation not yet connected to game runtime"
+      },
       "status": "enhanced static proxy; animations, cinematic texturing and gameplay not yet integrated"
     }
   ],
-  "runtimeStatus": "compiled-geometry-with-finish-proxies; full gameplay and material-texture parity not yet wired"
+  "runtimeStatus": "playtest-bridge-ready; not integrated with v8.5.19 player controller",
+  "runtimeBridge": "navigation/runtime_bridge.json"
 }

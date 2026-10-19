@@ -61,6 +61,8 @@ def architectural_details(scene,add,r):
             piece('hinge',width/2,.45,.10,.12,BRASS)
         else:
             piece('arch-pediment',0,top+.08,width+.12,.12,BRASS)
+    # Exterior façade is handled once per FLOOR UNION by victorian_architecture.py.
+    # Do not decorate every room wall as if it were an exterior wall.
     # Upper cornice and ceiling rosette ornaments: visual only.
     style=r.get('style','stonewall')
     cornice=GOLD if style in ('wainscot','damask') else OAK if style=='darkwood' else STONE
@@ -83,77 +85,6 @@ def architectural_details(scene,add,r):
                 f=n/steps;zz=z+(f if ascending else 1-f)*d
                 add(scene,rid+f'-stair-baluster-{direction}-{n}',(xx,f*(h-.3)+.55,zz),(.045,1.05,.045),BRASS)
 
-def roof_exterior(scene,add,source):
-    """Single building-envelope roof; overhangs the top-floor bounding footprint.
-    Simplicity is intentional: nonrectangular roof union needs a polygon solver.
-    """
-    floors=source.get('floors',[])
-    top=next((f for f in reversed(floors) if f.get('rooms')),None)
-    if top is None:return {'style':'none','limits':'no floors'}
-    k=.3048
-    roof=source.get('roof') or {};typ=str(roof.get('type','hip') or 'hip')
-    rise=max(1.,float(roof.get('rise',5)))*k
-    rooms=[r for r in top.get('rooms',[]) if r.get('type') not in ('porch',)]
-    if not rooms:return {'style':'none','limits':'empty top floor'}
-    x0=min(r['x'] for r in rooms)*k-.4
-    x1=max(r['x']+r['l'] for r in rooms)*k+.4
-    z0=min(r['y'] for r in rooms)*k-.4
-    z1=max(r['y']+r['w'] for r in rooms)*k+.4
-    h=max(float(r.get('h',10)) for r in rooms)*k
-    # All floor GLBs are local to each floor. Roof is a roof-local GLB.
-    y=h+.08
-    if typ=='flat':
-        add(scene,'unified-flat-roof',((x0+x1)/2,y+.12,(z0+z1)/2),(x1-x0,.24,z1-z0),SLATE)
-    else:
-        W=x1-x0;D=z1-z0
-        inset=min(W,D)*(.18 if typ=='mansard' else .42)
-        if typ=='gable':
-            if W>D:
-                coords=[[(x0,y,z0),(x1,y,z0),(x1,y+rise,(z0+z1)/2),(x0,y+rise,(z0+z1)/2)],[(x0,y+rise,(z0+z1)/2),(x1,y+rise,(z0+z1)/2),(x1,y,z1),(x0,y,z1)]]
-            else:
-                coords=[[(x0,y,z0),(x0,y,z1),((x0+x1)/2,y+rise,z1),((x0+x1)/2,y+rise,z0)],[((x0+x1)/2,y+rise,z0),((x0+x1)/2,y+rise,z1),(x1,y,z1),(x1,y,z0)]]
-        else:
-            xa=x0+inset;xb=x1-inset;za=z0+inset;zb=z1-inset
-            coords=[[(x0,y,z0),(x1,y,z0),(xb,y+rise,za),(xa,y+rise,za)],[(x1,y,z0),(x1,y,z1),(xb,y+rise,zb),(xb,y+rise,za)],[(x1,y,z1),(x0,y,z1),(xa,y+rise,zb),(xb,y+rise,zb)],[(x0,y,z1),(x0,y,z0),(xa,y+rise,za),(xa,y+rise,zb)]]
-            if typ=='mansard':coords.append([(xa,y+rise,za),(xb,y+rise,za),(xb,y+rise,zb),(xa,y+rise,zb)])
-        import numpy as np
-        import trimesh
-        for j,quad in enumerate(coords):
-            v=np.array(quad,dtype=float);faces=np.array([[0,1,2],[0,2,3],[2,1,0],[3,2,0]])
-            m=trimesh.Trimesh(vertices=v,faces=faces,process=False)
-            m.visual.face_colors=np.tile(np.array(SLATE,dtype=np.uint8),(len(faces),1))
-            scene.add_geometry(m,node_name=f'unified-{typ}-roof-{j}')
-        if typ=='mansard':
-            # ornamental seam atop four sloped planes
-            add(scene,'roof-iron-crest',((xa+xb)/2,y+rise+.11,za),(.06,.22,.06),BRASS)
-    # Visual-only slate courses, ornamental crest, corner finials and dormer silhouettes.
-    if typ=='mansard':
-        W=x1-x0; D=z1-z0; inset=min(W,D)*.18
-        xa=x0+inset;xb=x1-inset;za=z0+inset;zb=z1-inset
-        # At each height the rectangular contour contracts with the roof slope.
-        for course in range(1,8):
-            frac=course/8
-            yy=y+frac*rise+.035
-            lx=x0+frac*inset;rx=x1-frac*inset
-            nz=z0+frac*inset;fz=z1-frac*inset
-            add(scene,f'slate-front-course-{course}',((lx+rx)/2,yy,nz),(max(.1,rx-lx),.035,.055),(95,101,116,255))
-            add(scene,f'slate-back-course-{course}',((lx+rx)/2,yy,fz),(max(.1,rx-lx),.035,.055),(95,101,116,255))
-            add(scene,f'slate-left-course-{course}',(lx,yy,(nz+fz)/2),(.055,.035,max(.1,fz-nz)),(95,101,116,255))
-            add(scene,f'slate-right-course-{course}',(rx,yy,(nz+fz)/2),(.055,.035,max(.1,fz-nz)),(95,101,116,255))
-        for i,(xx,zz) in enumerate(((xa,za),(xa,zb),(xb,za),(xb,zb))):
-            add(scene,f'gothic-roof-finial-{i}',(xx,y+rise+.43,zz),(.13,.86,.13),BRASS)
-            add(scene,f'roof-finial-base-{i}',(xx,y+rise+.12,zz),(.34,.18,.34),GOLD)
-        # Three dormer frames along the longest slope; proxies rather than cuts into roof planes.
-        if W>5:
-            for i in range(3):
-                xx=x0+W*(i+1)/4;zz=z0+inset*.36; yy=y+rise*.36
-                add(scene,f'mansard-dormer-side-{i}',(xx,yy+.46,zz),(.9,.92,.33),STONE)
-                add(scene,f'mansard-dormer-glazing-{i}',(xx,yy+.46,zz-.2),(.6,.7,.03),(64,97,123,255))
-                add(scene,f'mansard-dormer-cap-{i}',(xx,yy+1.0,zz), (1.14,.16,.48),SLATE)
-        # Embellishments do not solve the bounding-rectangle roof limitations.
-    # Gothic chimney silhouettes; placed on visual roof only.
-    if len(rooms)>2:
-        for j,(cx,cz) in enumerate([(x0+2,z0+2),(x1-2,z1-2)]):
-            add(scene,f'chimney-{j}',(cx,y+rise*.75,cz),(.68,rise*1.5,.68),(113,82,83,255))
-            add(scene,f'chimney-cap-{j}',(cx,y+rise*1.5+.08,cz),(.92,.16,.92),STONE)
-    return {'style':typ,'riseFeet':round(rise/k,2),'limits':'Bounding-rectangle envelope. Recessed wings and roof valleys not yet resolved.'}
+def roof_exterior(scene, add, source):
+    from victorian_architecture import build_roof
+    return build_roof(scene, add, source)
