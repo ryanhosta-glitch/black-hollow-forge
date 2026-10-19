@@ -9,46 +9,115 @@ from pathlib import Path
 import numpy as np
 import trimesh
 from magical import compile_magic
+from embellish import architectural_details, roof_exterior
+from special_scenes import build as build_special
 
 def slug(s): return re.sub(r'[^a-z0-9]+','-',s.lower()).strip('-') or 'house'
 def box(scene,name,center,dims,color):
  if min(dims)<=0.001:return
  m=trimesh.creation.box(extents=dims);m.apply_translation(center);m.visual.face_colors=np.asarray(color,dtype=np.uint8);scene.add_geometry(m,node_name=name,geom_name=name)
+# Compile Architect finish tokens into visible geometry.  These are authored
+# palettes inspired by Black Hollow 8.5.19, not extracted proprietary textures.
+WALL_COLORS={'stonewall':(93,97,111,255),'wainscot':(115,91,80,255),
+             'damask':(85,59,83,255),'darkwood':(61,45,41,255)}
+FLOOR_COLORS={'stone':(84,83,90,255),'marble':(192,176,159,255),
+              'wood':(115,72,50,255),'herringbone':(109,72,53,255)}
+def wall_section(scene,rid,wall,x,z,w,d,t,bottom,top,a,b,color,label,detail=True):
+ if b-a<.025 or top-bottom<.025:return
+ horizontal=wall in ('top','bottom')
+ if horizontal: center=(x+(a+b)/2,(bottom+top)/2,z+(d if wall=='top' else 0));size=(b-a,top-bottom,t)
+ else:center=(x+(w if wall=='right' else 0),(bottom+top)/2,z+(a+b)/2);size=(t,top-bottom,b-a)
+ box(scene,rid+'-'+wall+'-'+label,center,size,color)
+
 def render_floor(floor,outfile,index):
  scene=trimesh.Scene();parts=0
  for r in floor.get('rooms',[]):
   x,z,w,d=(float(r[k]) for k in ('x','y','l','w'));h=max(4,float(r.get('h',10)))
-  # Architect coordinates represent feet; all GLB dimensions exported in meters.
-  k=.3048; x*=k;z*=k;w*=k;d*=k;h*=k;t=.15;rid=str(r.get('id','unknown'))
-  finish=(88,78,98,255) if r.get('style')!='stonewall' else (88,91,102,255)
-  box(scene,rid+'-floor',(x+w/2,-.09,z+d/2),(w,.18,d),(88,75,69,255));parts+=1
-  box(scene,rid+'-ceiling',(x+w/2,h+.04,z+d/2),(w,.08,d),(65,60,72,255));parts+=1
+  k=.3048;x*=k;z*=k;w*=k;d*=k;h*=k;t=.15;rid=str(r.get('id','unknown'))
+  style=r.get('style','stonewall');finish=WALL_COLORS.get(style,WALL_COLORS['stonewall'])
+  flooring=r.get('flooring','stone');floorcolor=FLOOR_COLORS.get(flooring,FLOOR_COLORS['stone'])
+  box(scene,rid+'-floor',(x+w/2,-.09,z+d/2),(w,.18,d),floorcolor)
+  # patterned marble, plank, and herringbone flooring
+  if flooring=='marble':
+   for j in range(1,min(32,int(w/.75))):
+    xx=x+j*.75
+    if xx<x+w:box(scene,rid+f'-marble-seam-x{j}',(xx,.003,z+d/2),(.012,.008,d),(106,101,102,255))
+   for j in range(1,min(32,int(d/.75))):
+    zz=z+j*.75
+    if zz<z+d:box(scene,rid+f'-marble-seam-z{j}',(x+w/2,.003,zz),(w,.008,.012),(106,101,102,255))
+  elif flooring in ('wood','herringbone'):
+   count=min(28,int(w/.27))
+   for j in range(1,count):
+    xx=x+j*w/count
+    box(scene,rid+f'-plank-seam-{j}',(xx,.002,z+d/2),(.011,.006,d),(48,32,30,255))
+   if flooring=='herringbone':
+    for j in range(1,min(36,int(d/.34))):
+     zz=z+j*.34
+     box(scene,rid+f'-herringbone-end-{j}',(x+w/2,.003,zz),(w,.006,.012),(63,41,34,255))
+  box(scene,rid+'-ceiling',(x+w/2,h+.04,z+d/2),(w,.08,d),(83,73,76,255));parts+=2
   opens=r.get('openings') or []
   for wall in ('top','bottom','left','right'):
-   horizontal=wall in ('top','bottom'); length=w if horizontal else d
+   horizontal=wall in ('top','bottom');length=w if horizontal else d
    holes=[]
    for op in opens:
     if op.get('wall')!=wall or op.get('type') not in ('door','window','arch','archway','open','passage'):continue
-    p=float(op.get('pos',.5));p=max(0,min(1,p)); ow=min(length*.75,float(op.get('width',3))*k)
-    center=p*length; a=max(0,center-ow/2);b=min(length,center+ow/2)
+    p=float(op.get('pos',.5));p=max(0,min(1,p));ow=min(length*.75,float(op.get('width',3))*k)
+    center=p*length;a=max(0,center-ow/2);b=min(length,center+ow/2)
     if b-a>.1:holes.append((a,b,op.get('type')))
-   holes.sort()
-   # Wall segmentation along openings; top surfaces above doors, window sills below windows
-   cursor=0
+   holes.sort();cursor=0
+   def decorate(a,b,bottom,top,label):
+    if b-a<.12 or top-bottom<.25:return
+    # Decoration remains strictly inside solid wall segment; never spans a door/window.
+    def band(y0,y1,col,tag,depth=.035):
+     if y1<=y0:return
+     if horizontal:
+      pos=(x+(a+b)/2,(y0+y1)/2,z+(d if wall=='top' else 0)+(.11 if wall=='top' else -.11))
+      dims=(b-a,y1-y0,depth)
+     else:
+      pos=(x+(w if wall=='right' else 0)+(.11 if wall=='right' else -.11),(y0+y1)/2,z+(a+b)/2)
+      dims=(depth,y1-y0,b-a)
+     box(scene,rid+'-'+wall+'-finish-'+label+'-'+tag,pos,dims,col)
+    if style=='wainscot':
+     band(.18,min(1.12,top-.07),(102,64,49,255),'lower')
+     band(min(1.12,top-.07),min(1.19,top),(195,154,100,255),'chair-rail')
+     band(.06,.16,(180,144,93,255),'skirting')
+     if top>1.55:band(top-.13,top-.06,(194,154,104,255),'crown')
+    elif style=='damask':
+     band(.06,.16,(143,116,90,255),'skirting')
+     if top>1.55:band(top-.13,top-.06,(182,142,102,255),'crown')
+     for q in range(1,min(13,int((b-a)/.65))):
+      p=a+q*(b-a)/max(1,int((b-a)/.65)); width=.025
+      if horizontal:pos=(x+p, min(top-.25,1.53), z+(d if wall=='top' else 0)+(.125 if wall=='top' else -.125)); dims=(width,.32,.014)
+      else:pos=(x+(w if wall=='right' else 0)+(.125 if wall=='right' else -.125),min(top-.25,1.53),z+p);dims=(.014,.32,width)
+      box(scene,rid+'-damask-motif-'+wall+'-'+label+str(q),pos,dims,(146,113,113,255))
+    elif style=='darkwood':
+     band(.06,.15,(153,102,63,255),'skirting');band(top-.13,top-.06,(143,100,66,255),'crown')
+     for q in range(1,min(14,int((b-a)/.9)+1)):
+      p=a+q*(b-a)/(int((b-a)/.9)+1)
+      if horizontal:pos=(x+p,top*.52,z+(d if wall=='top' else 0)+(.11 if wall=='top' else -.11));dims=(.035,top*.78,.03)
+      else:pos=(x+(w if wall=='right' else 0)+(.11 if wall=='right' else -.11),top*.52,z+p);dims=(.03,top*.78,.035)
+      box(scene,rid+'-wood-panel-stile-'+wall+'-'+label+str(q),pos,dims,(139,89,60,255))
+    else:
+     band(.08,.15,(118,110,109,255),'stone-base')
    def section(a,b,bottom,top,label):
-    if b-a<.025 or top-bottom<.025:return
-    if horizontal: center=(x+(a+b)/2,(bottom+top)/2,z+(d if wall=='top' else 0));size=(b-a,top-bottom,t)
-    else:center=(x+(w if wall=='right' else 0),(bottom+top)/2,z+(a+b)/2);size=(t,top-bottom,b-a)
-    box(scene,rid+'-'+wall+'-'+label,center,size,finish)
+    wall_section(scene,rid,wall,x,z,w,d,t,bottom,top,a,b,finish,label)
+    if bottom==0:decorate(a,b,bottom,top,label)
    for n,(a,b,typ) in enumerate(holes):
-    if a<cursor: a=cursor
+    if a<cursor:a=cursor
     if b<=a:continue
     section(cursor,a,0,h,str(n)+'-solid')
-    if typ=='window':section(a,b,0,.9,'sill-'+str(n));section(a,b,min(h,2.1),h,'lintel-'+str(n))
+    if typ=='window':section(a,b,0,min(h,.90),'sill-'+str(n));section(a,b,min(h,2.1),h,'lintel-'+str(n))
     else:section(a,b,min(h,2.15),h,'lintel-'+str(n))
     cursor=b
    section(cursor,length,0,h,'end');parts+=1
+  architectural_details(scene,box,r)
  scene.export(str(outfile));return parts
+
+def make_roof(data,outfile):
+ sc=trimesh.Scene()
+ meta=roof_exterior(sc,box,data)
+ sc.export(str(outfile))
+ return meta
 
 def special(name,outfile):
  # Purpose-built modular scene with its own coordinates; never replaces or resizes blueprint volume.
@@ -107,19 +176,13 @@ def main(src,dest):
  for fi,f in enumerate(floors):
   stem=f'floor_{fi:02d}';render_floor(f,out/'geometry'/f'{stem}.glb',fi)
   files.append({'id':stem,'name':f.get('name',stem),'model':f'geometry/{stem}.glb','roomIds':[r['id'] for r in f.get('rooms',[])]})
- # A separate removable roof skin, fitted to the top-floor room footprint and derived from existing dimensions.
- top=next((f for f in reversed(floors) if f.get('rooms')),None)
- if top:
-  sc=trimesh.Scene();k=.3048
-  for r in top['rooms']:
-   x,z,w,d=(float(r[q])*k for q in ('x','y','l','w'));h=max(4,float(r.get('h',10)))*k
-   box(sc,str(r['id'])+'-roof-skin',(x+w/2,h+.24,z+d/2),(w+.25,.4,d+.25),(52,51,60,255))
-  sc.export(str(out/'geometry'/'roof.glb'))
- special('main-hall',out/'geometry'/'special_main_hall.glb');special('floor13-conservatory',out/'geometry'/'special_floor13_conservatory.glb')
+ # Removable authored roof geometry, using the Architect's chosen type and rise.
+ roof_meta=make_roof(data,out/'geometry'/'roof.glb')
+ main_meta=build_special('main-hall',out/'geometry'/'special_main_hall.glb');conservatory_meta=build_special('floor13-conservatory',out/'geometry'/'special_floor13_conservatory.glb')
  entryroom=next(r for r in rooms if r['id']==er)
  navigation={'units':'feet','sourceRoomCount':len(rooms),'rooms':rooms,'elevatorShafts':elevators,'entry':entry,'specialScenes':{'mainHall':{'originalRoomId':er,'scene':'geometry/special_main_hall.glb','mode':'portal-pocket','portalReturnRoom':er,'impossibleElevator':{'positionMeters':[0,5.25,14.0]}},'floor13Conservatory':{'scene':'geometry/special_floor13_conservatory.glb','mode':'separate-dimension'}}}
  (out/'navigation'/'collision.json').write_text(json.dumps(navigation,ensure_ascii=False,indent=2))
- manifest={'format':'black-hollow-house','version':'1.0-prototype','name':data.get('name','Haunted Estate'),'id':slug(data.get('name','haunted-estate')),'sourceSha256':hashlib.sha256(source.read_bytes()).hexdigest(),'entry':entry,'floors':files,'navigation':'navigation/collision.json','magic':'navigation/magic.json','roof':'geometry/roof.glb','specialRooms':{'mainHall':'geometry/special_main_hall.glb','floor13Conservatory':'geometry/special_floor13_conservatory.glb'},'runtimeStatus':'compiled-geometry-only; gameplay bridge and magical traversal not yet wired'}
+ manifest={'format':'black-hollow-house','version':'1.0-prototype','name':data.get('name','Haunted Estate'),'id':slug(data.get('name','haunted-estate')),'sourceSha256':hashlib.sha256(source.read_bytes()).hexdigest(),'entry':entry,'floors':files,'navigation':'navigation/collision.json','magic':'navigation/magic.json','roof':'geometry/roof.glb','specialRooms':{'mainHall':'geometry/special_main_hall.glb','floor13Conservatory':'geometry/special_floor13_conservatory.glb'},'finishPaletteVersion':'forge-0.6-details','authoredRoof':data.get('roof',{}),'roofBuild':roof_meta,'specialSceneDetails':[main_meta,conservatory_meta],'runtimeStatus':'compiled-geometry-with-finish-proxies; full gameplay and material-texture parity not yet wired'}
  (out/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2));shutil.copyfile(source,out/'source.haunt')
  (out/'validation.json').write_text(json.dumps({'status':'passed-with-warnings' if warnings else 'passed','errors':[],'warnings':warnings,'totalRooms':len(rooms),'floors':len(floors),'magicRepairs':len(magic['repairs']),'allRoomsReachableWithMagic':magic['allRoomsReachable']},indent=2))
  print(f'Built {out}: {len(floors)} floors, {len(rooms)} rooms')

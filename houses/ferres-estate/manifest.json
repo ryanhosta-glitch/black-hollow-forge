@@ -71,5 +71,27 @@
     "mainHall": "geometry/special_main_hall.glb",
     "floor13Conservatory": "geometry/special_floor13_conservatory.glb"
   },
-  "runtimeStatus": "compiled-geometry-only; gameplay bridge and magical traversal not yet wired"
+  "finishPaletteVersion": "forge-0.6-details",
+  "authoredRoof": {
+    "type": "mansard",
+    "rise": 5
+  },
+  "roofBuild": {
+    "style": "mansard",
+    "riseFeet": 5.0,
+    "limits": "Bounding-rectangle envelope. Recessed wings and roof valleys not yet resolved."
+  },
+  "specialSceneDetails": [
+    {
+      "scene": "main-hall",
+      "meshes": 830,
+      "status": "enhanced static proxy; animations, cinematic texturing and gameplay not yet integrated"
+    },
+    {
+      "scene": "floor13-conservatory",
+      "meshes": 883,
+      "status": "enhanced static proxy; animations, cinematic texturing and gameplay not yet integrated"
+    }
+  ],
+  "runtimeStatus": "compiled-geometry-with-finish-proxies; full gameplay and material-texture parity not yet wired"
 }

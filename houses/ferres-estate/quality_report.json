@@ -1,0 +1,148 @@
+{
+  "version": "forge-0.6",
+  "status": "pass",
+  "estate": "Ferre's Estate",
+  "rooms": 26,
+  "floors": 4,
+  "routes": 26,
+  "spectralRepairs": 0,
+  "reachableRooms": 26,
+  "unreachableRoomIds": [],
+  "models": {
+    "Basement": {
+      "sizeKB": 124.2,
+      "meshes": 238,
+      "triangles": 2856,
+      "bounds": [
+        [
+          -0.1274999976158142,
+          -0.18000000715255737,
+          -0.1274999976158142
+        ],
+        [
+          14.75790023803711,
+          3.6116154193878174,
+          14.148300170898438
+        ]
+      ]
+    },
+    "Ground Floor": {
+      "sizeKB": 253.0,
+      "meshes": 465,
+      "triangles": 5580,
+      "bounds": [
+        [
+          -0.13199999928474426,
+          -0.18000000715255737,
+          -0.13199999928474426
+        ],
+        [
+          14.762399673461914,
+          3.6116154193878174,
+          14.148300170898438
+        ]
+      ]
+    },
+    "Second Floor": {
+      "sizeKB": 240.9,
+      "meshes": 446,
+      "triangles": 5352,
+      "bounds": [
+        [
+          -0.1274999976158142,
+          -0.18000000715255737,
+          -0.1274999976158142
+        ],
+        [
+          14.75790023803711,
+          3.6116154193878174,
+          14.148300170898438
+        ]
+      ]
+    },
+    "Third Floor": {
+      "sizeKB": 250.8,
+      "meshes": 458,
+      "triangles": 5496,
+      "bounds": [
+        [
+          -0.1274999976158142,
+          -0.18000000715255737,
+          -0.1274999976158142
+        ],
+        [
+          14.75790023803711,
+          3.6116154193878174,
+          14.148300170898438
+        ]
+      ]
+    },
+    "roof": {
+      "sizeKB": 32.1,
+      "meshes": 55,
+      "triangles": 620,
+      "bounds": [
+        [
+          -0.4000000059604645,
+          3.128000020980835,
+          -0.4000000059604645
+        ],
+        [
+          15.030400276184082,
+          5.573999881744385,
+          14.42080020904541
+        ]
+      ]
+    },
+    "mainHall": {
+      "sizeKB": 557.9,
+      "meshes": 830,
+      "triangles": 25688,
+      "bounds": [
+        [
+          -14.1850004196167,
+          -0.4000000059604645,
+          -19.184999465942383
+        ],
+        [
+          14.1850004196167,
+          18.0,
+          20.5
+        ]
+      ]
+    },
+    "floor13Conservatory": {
+      "sizeKB": 638.8,
+      "meshes": 883,
+      "triangles": 36136,
+      "bounds": [
+        [
+          -15.0,
+          -0.30000001192092896,
+          -18.56999969482422
+        ],
+        [
+          15.0,
+          24.0090389251709,
+          18.56999969482422
+        ]
+      ]
+    }
+  },
+  "issues": [
+    {
+      "severity": "warning",
+      "description": "Bounding-rectangle envelope. Recessed wings and roof valleys not yet resolved."
+    },
+    {
+      "severity": "warning",
+      "description": "Special models are static blockouts; not wired into v8.5.19 gameplay or collisions."
+    }
+  ],
+  "limitations": [
+    "Static prototype GLBs, not screenshot-verified in browser",
+    "Blueprint finishes are geometry/color approximations, not exact game materials",
+    "Normal doors remain open for navigation; player physics integration pending",
+    "Actual roof valleys/recessed wings not yet modeled"
+  ]
+}

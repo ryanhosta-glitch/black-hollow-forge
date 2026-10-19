@@ -1,19 +1,22 @@
-# Black Hollow Forge 0.3 — house viewer and navigation bridge
+# Black Hollow Forge 0.7 — Victorian Visual Pass
 
-This is a **separate playable navigation/GLB viewer**, not the final Black Hollow v8.5.19 gameplay integration. It loads compiled floor GLBs, roof, special rooms, and the architect/magical connection graph. Select doors/stairs/spectral connections using the explicit destination controls. There is no avatar physics or mission engine in this prototype.
+**Static GLB inspection build for screenshot review, not the production game.**
 
-## Start
-Extract the ZIP. Serve the folder with `python -m http.server 8000` and open `http://localhost:8000/` in Chrome/Edge. Internet is needed for Three.js modules. **Do not double-click index.html**, since browsers restrict local JSON/GLB loading.
+## New visual changes from 0.6
+- Main Hall: coffered ceiling details, layered gilded panels, expanded balustrades, more elaborate lion mane and globe engraving, raven eyes, ornate estate map, triple-tier chandeliers.
+- Floor 13 Conservatory: tile seams, additional greenhouse mullions, planted fern fronds, fountain rim, specimen cabinet, catwalk railing details, flytrap teeth, spectral orchid sculptures.
+- Mansion roof: slate shingle courses, Victorian dormer proxies, finials and decorative cornices on a mansard model; retains the authored mansard roof choice.
+- Existing 0.6 floor geometry, architectural finishes, entry logic, and navigation metadata preserved.
 
-## Tested source
-`houses/ferres-estate/source.haunt`; all 26 rooms preserved. Five rendered estate meshes: four floors + roof. Two additional special-room structural GLBs.
+## To deploy
+Extract this ZIP and upload its **contents**, preserving the directory hierarchy, to the same `black-hollow-forge` GitHub repository. Replace the existing files, commit, and wait for Pages deployment.
 
-## Architecture
-- `manifest.json`: single game-load contract.
-- `navigation/collision.json`: room bounds / metadata, not a finished physics mesh.
-- `navigation/magic.json`: explicit architect door/stair/elevator links and magical repair links.
-- `geometry/*.glb`: baked display meshes; room visuals loaded per selected floor.
-- Original `.haunt` never mutated.
+## Photo checklist
+Capture Whole House + roof, Dollhouse Cutaway, Main Hall from stair foot, Main Hall top landing, and Floor 13 conservatory. Show strange geometry and clipping as well as successful views.
 
-## Remaining for 1.0
-Connect the verified bridge to game v8.5.19 while retaining story, real first-person motion, audio, triggers, and Floor 13. Build production roof shapes and fully styled custom rooms. Conduct browser testing on target devices. This prototype must not be described as having completed those tasks.
+## Limitations and honesty
+- These are **static procedural proxy meshes**; not photorealistic sculptures, foliage, layered textured wallpaper, or final haunted animations.
+- Existing 8.5.19 procedural textures have not yet been baked/reused into these GLBs.
+- Source `.haunt` is never modified; roof bounding envelope still covers recessed sections and courtyards.
+- No first-person movement, gameplay, player collision, elevator transport, or dynamic map in this viewer.
+- GitHub Pages serves files; the Python compiler must run separately.
