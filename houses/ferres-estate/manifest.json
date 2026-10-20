@@ -307,7 +307,6 @@
   "furnishingPolicy": "Beautiful but Abandoned; protected circulation; decorative provisional overlays",
   "doorWindowWorkshop": "navigation/door_window_workshop.json",
   "roofReconstruction": "contour-supported-gothic-dimensional-dormers-v2",
-<<<<<<< HEAD
   "realStairExportAudit": "navigation/real_stair_export_audit.json",
   "casa": {
     "spec": "black-hollow-casa",
@@ -329,7 +328,3 @@
     ]
   }
 }
-=======
-  "realStairExportAudit": "navigation/real_stair_export_audit.json"
-}
->>>>>>> 169ab6fe210928339005c4e7586d72870c578ac0
