@@ -110,7 +110,7 @@ function applyMaterialMode(){[...levelModels,...furnishingModels,...newFurniture
 let autoRotate=false;const specialCache=new Map();const cutPlane=new THREE.Plane(new THREE.Vector3(1,0,0),-6.5);
 // First-person visual inspection does not alter the blueprint or game navigation graph.
 const cinematicWalkthrough=createCinematicWalkthrough(THREE,{
- camera,controls,canvas:renderer.domElement,
+ scene,camera,controls,canvas:renderer.domElement,
  getRoom:()=>getRoom(roomId),levelY:i=>vertical(i),
  selectRoom:id=>selectRoom(id,true),
  getConnections:id=>(magic?.connections||[]).filter(c=>c.a===id||c.b===id).map(c=>c.a===id?c.b:c.a).filter(id=>getRoom(id)),
