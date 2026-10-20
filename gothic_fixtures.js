@@ -26,7 +26,7 @@ export function createVictorianFixtures(THREE,scene,{mobile=false}={}){
  const floor=Number(r.floor)||0,ox=b.x*.3048,oz=b.y*.3048,fy=levels[floor]??floor*3.048;
  const name=String(r.name||'').toLowerCase(),type=String(r.roomType||r.type||'').toLowerCase(),s=name+' '+type;
  if(/stair|elevator|shaft|corridor|hallway|passage|landing/.test(s)&&!/grand.*hall|entrance.*hall/.test(s))continue;
- const wrapper=new THREE.Group();wrapper.name='forge_fixture_'+r.id;group.add(wrapper);
+ const wrapper=new THREE.Group();wrapper.name='forge_fixture_'+r.id;wrapper.userData.floor=floor;wrapper.userData.roomId=r.id;group.add(wrapper);
  const grand=/ballroom|grand|entrance|parlor|gallery|dining|banquet|chapel/.test(s);
  const haunted=/crypt|vault|dungeon|laboratory|alchem|cellar|archive/.test(s);
  if(grand||w*d>35)chandelier(wrapper,ox+w/2,oz+d/2,fy+h-.12,grand?.65:.43);
