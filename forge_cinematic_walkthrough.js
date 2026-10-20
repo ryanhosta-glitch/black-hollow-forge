@@ -40,13 +40,48 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  const p=findPassage(nx,nz);if(p){S.room=p.room;S.x=clamp(nx,p.box.minX+margin,p.box.maxX-margin);S.z=clamp(nz,p.box.minZ+margin,p.box.maxZ-margin);sync();selectRoom(p.room.id);status('Automatically entered '+p.room.name);continue;}
  S.x=clamp(nx,b.minX+margin,b.maxX-margin);S.z=clamp(nz,b.minZ+margin,b.maxZ-margin);
  }}
- function follow(dt,instant=false){const b=bnd(S.room);if(!b)return;let floor=b.y;avatar.position.set(S.x,floor,S.z);avatar.rotation.y=S.yaw;const face=orient(),cameraY=floor+eye;
- if(S.mode==='first'){camera.position.set(S.x,cameraY,S.z);camera.lookAt(S.x+face.x*5,cameraY+Math.tan(S.pitch)*5,S.z+face.z*5);avatar.visible=false;return;}
- avatar.visible=true;const dist=S.mode==='cinematic'?5.4:3.3,raise=S.mode==='cinematic'?3.0:2.4;
- const look=new THREE.Vector3(S.x,floor+1.40,S.z),desired=new THREE.Vector3(S.x-face.x*dist,floor+raise,S.z-face.z*dist);
- // Avoid blindly clamping a camera to a small room and rendering a wall directly in its face.
- desired.x=clamp(desired.x,b.minX+.15,b.maxX-.15);desired.z=clamp(desired.z,b.minZ+.15,b.maxZ-.15);
- if(instant)camera.position.copy(desired);else camera.position.lerp(desired,Math.min(1,dt*6));camera.lookAt(look.x+face.x*1.4,look.y+S.pitch,look.z+face.z*1.4);
+ function follow(dt,instant=false){
+  const b=bnd(S.room);if(!b)return;
+  const floor=b.y;
+  avatar.position.set(S.x,floor,S.z);
+  avatar.rotation.y=S.yaw;
+  const face=orient();
+  // Height comes from the authored room, never from a fixed "cinematic" offset.
+  const authoredHeight=Math.max(2.15,(Number(S.room?.boundsFeet?.h)||9)*K);
+  const ceiling=floor+authoredHeight;
+  const headY=Math.min(floor+1.42,ceiling-.68);
+  if(S.mode==='first'){
+   camera.position.set(S.x,Math.min(floor+eye,ceiling-.38),S.z);
+   camera.lookAt(S.x+face.x*5,camera.position.y+Math.tan(S.pitch)*5,S.z+face.z*5);
+   avatar.visible=false;return;
+  }
+  avatar.visible=true;
+  // Third-person camera looks AT the character, not over a nearby ceiling beam.
+  // Keep it inside the actual ceiling, and use a short chase distance in hallways.
+  const long=S.mode==='cinematic';
+  const distance=long?3.15:2.25;
+  const height=Math.min(floor+(long?2.00:1.85),ceiling-.42);
+  const aim=new THREE.Vector3(S.x,headY,S.z);
+  const cx=clamp(S.x-face.x*distance,b.minX+.34,b.maxX-.34);
+  const cz=clamp(S.z-face.z*distance,b.minZ+.34,b.maxZ-.34);
+  let desired=new THREE.Vector3(cx,height,cz);
+  // A shoulder-offset helps keep the character visible down narrow corridors.
+  // Stop short of any opaque geometry between avatar and chase camera.
+  const direction=desired.clone().sub(aim);
+  const rayLength=direction.length();
+  if(rayLength>.3){
+   const ray=new THREE.Raycaster(aim,direction.clone().normalize(),.15,rayLength);
+   const models=(scene?.children||[]).filter(o=>o!==avatar&&o.visible&&o.type==='Group'&&!String(o.name||'').startsWith('forge_'));
+   const hits=ray.intersectObjects(models,true).filter(h=>h.object?.isMesh&&h.object.visible&&h.object.material?.transparent!==true);
+   if(hits.length){
+    const near=Math.max(.38,hits[0].distance-.22);
+    desired=aim.clone().addScaledVector(direction.normalize(),near);
+   }
+  }
+  if(instant||camera.position.distanceTo(desired)>7)camera.position.copy(desired);
+  else camera.position.lerp(desired,Math.min(1,dt*9));
+  camera.near=.035;camera.updateProjectionMatrix();
+  camera.lookAt(aim.x+face.x*.25,aim.y+S.pitch*.25,aim.z+face.z*.25);
  }
  let stride=0;
  function update(t){let dt=Math.min(.05,Math.max(0,(t-S.clock)/1000));S.clock=t;if(!S.active)return;let turn=(Number(S.moving.has('turnright'))-Number(S.moving.has('turnleft')));S.yaw+=turn*dt*1.8;
