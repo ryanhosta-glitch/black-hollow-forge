@@ -1,0 +1,461 @@
+{
+  "spec": "black-hollow-casa",
+  "version": "1.0",
+  "fileIntegrity": "PASS",
+  "gameReady": false,
+  "packagingStatus": "QA_PACKAGE",
+  "architecturalRooms": 26,
+  "floors": 4,
+  "files": 109,
+  "previewBytes": 740812,
+  "issues": [
+    {
+      "severity": "BLOCK_GAME_READY",
+      "code": "STAIR_TRAVERSAL_NOT_CERTIFIED",
+      "detail": "Existing stair audits do not certify all stair transitions for Black Hollow controller."
+    },
+    {
+      "severity": "BLOCK_GAME_READY",
+      "code": "GAME_RUNTIME_NOT_INTEGRATED",
+      "detail": "Black Hollow game does not yet load CASA architectural assets as its primary world."
+    }
+  ],
+  "entries": {
+    "INTEGRATION_GATE_QA.json": {
+      "bytes": 424,
+      "sha256": "a06b008ef8556679999c9dabd62f3a63341ade656550b50ce00f3377fd2632b0"
+    },
+    "blueprint_repair_report.json": {
+      "bytes": 1202,
+      "sha256": "3fbcb6d728f3b0b58dd3823918d217a2f3c9e9487950ed0677c953a8b81262bd"
+    },
+    "casa_identity.json": {
+      "bytes": 335,
+      "sha256": "761a2e7deaff2894a2f076a7c3124f669812dd55a3b1ba209a3de26da0dac458"
+    },
+    "exterior/street_preview.glb": {
+      "bytes": 740812,
+      "sha256": "bf6be1896c0edc56eaa06bef0902a7b03cd2e535022a2427fbbc9ca69c4cb9cb"
+    },
+    "geometry/door_window_floor_00.glb": {
+      "bytes": 42004,
+      "sha256": "d63aeb2d2b8189a21c6488aa9755166c03e76f77f928da2aa82cade1bfff0938"
+    },
+    "geometry/door_window_floor_01.glb": {
+      "bytes": 80032,
+      "sha256": "3b491b591541e709ade4770fd31941ce519508c230c591e150e1e02575e61dc3"
+    },
+    "geometry/door_window_floor_02.glb": {
+      "bytes": 74276,
+      "sha256": "0d03641d3c2a7fb51673cdb2aa3248b771f2c89f0794a0cc224627ae3e96520b"
+    },
+    "geometry/door_window_floor_03.glb": {
+      "bytes": 66144,
+      "sha256": "e10226f70178da31a17b361261232fdb3da55301b057297f46a00ab20ac74d8d"
+    },
+    "geometry/estate_stairs_assembled.glb": {
+      "bytes": 1532408,
+      "sha256": "9d5dfb63fe05b7201cc41e8f1af5d9417af4917814d67159de1c045cd9b9a621"
+    },
+    "geometry/exterior_facade_floor_00.glb": {
+      "bytes": 296636,
+      "sha256": "7019e9a045b9bcc6c85e05a7ca9cb7994ad59b35f64afeb98ef448bed8d35556"
+    },
+    "geometry/exterior_facade_floor_01.glb": {
+      "bytes": 300688,
+      "sha256": "a30bc8f868d050702e3f780d5e2ea46f09e9715b5872aae3903272dee027c7fd"
+    },
+    "geometry/exterior_facade_floor_02.glb": {
+      "bytes": 305764,
+      "sha256": "13d6fd5b8400a06db9635fdda83eb411ed369522d0c726892692f444003290d9"
+    },
+    "geometry/exterior_facade_floor_03.glb": {
+      "bytes": 296636,
+      "sha256": "2efe797fb1ffdb7eff94463601d7055728ced21d33a5c25cd166b6ad77d7abf8"
+    },
+    "geometry/floor_00.glb": {
+      "bytes": 646640,
+      "sha256": "02a61a787bce603184558eb516c5ffa7d29067e01dc20d634c46661a327a9593"
+    },
+    "geometry/floor_01.glb": {
+      "bytes": 2609364,
+      "sha256": "fefc846e7fe8d2f3ad448907c8eba729b2184d1d848b750d20e2ec509caa8376"
+    },
+    "geometry/floor_02.glb": {
+      "bytes": 943948,
+      "sha256": "531381ad9e1aa0354bae2042145fb631e51b3e1765df1446cdc1f731e76c1715"
+    },
+    "geometry/floor_03.glb": {
+      "bytes": 947392,
+      "sha256": "b9d36f2eaae263776c43e010afd0a19073baf72e6113ca1342d804f0cb05a4ad"
+    },
+    "geometry/furnishings_floor_00.glb": {
+      "bytes": 13656,
+      "sha256": "df7bea9bdbb83814a74512c356e1b64aff5fd496bb42a5939dd335f8a7611603"
+    },
+    "geometry/furnishings_floor_01.glb": {
+      "bytes": 7132,
+      "sha256": "e9315d29c4f1162e643a7567f321428cbc586a591b8f4c08ae1f01fc90fbb9e9"
+    },
+    "geometry/furnishings_floor_02.glb": {
+      "bytes": 12468,
+      "sha256": "152aa7f64939d0b1961a13c200a1e9e92d3a7766445f42170327d995b5f62708"
+    },
+    "geometry/furnishings_floor_03.glb": {
+      "bytes": 10084,
+      "sha256": "8087d1eb27f675846aa059d5cee3c8b6998a045339ca7e34f0c6d604fa0c4107"
+    },
+    "geometry/roof.glb": {
+      "bytes": 188116,
+      "sha256": "be9b14c40c708a02c76de3cf807398442be0de4e704c4572a1600947f66ea5d9"
+    },
+    "geometry/roof_dormers.glb": {
+      "bytes": 42704,
+      "sha256": "9424d5ada8a7a74e1627a1f2ab30a447904cef4e23cb050befeff2ffc318e27f"
+    },
+    "geometry/special_floor13_conservatory.glb": {
+      "bytes": 1466352,
+      "sha256": "0425298346f80ef7e1f279cf57a0733ccedab3a666e8503dcf64e89f886c117a"
+    },
+    "geometry/special_main_hall.glb": {
+      "bytes": 1183880,
+      "sha256": "221637a9591ae3745f4cf3666582ea2d9e33046f80854cb0b2da5414a7d491fe"
+    },
+    "geometry/stair_candidate_connection_022.glb": {
+      "bytes": 11556,
+      "sha256": "71e70003c6d49331f3ed9284d3841dc6867f2a884f5897821cc1d41b0fa52aa1"
+    },
+    "geometry/stair_candidate_connection_023.glb": {
+      "bytes": 11556,
+      "sha256": "1e41c8ed84db4e87f1b76118a6a9e802e35c135c1bd6a98eb6524502899fdc2e"
+    },
+    "geometry/stair_candidate_connection_024.glb": {
+      "bytes": 10008,
+      "sha256": "5bf18df56a66a8424ad05a4f98d4c6c72308eabf0738408363aaedbd997d9a24"
+    },
+    "geometry/stair_candidate_connection_025.glb": {
+      "bytes": 11556,
+      "sha256": "b5c3ef6e55c8380459467684e8c9abafea07210ca4a462dd6bb656a8608491f9"
+    },
+    "geometry/stair_collision_candidate_connection_022.glb": {
+      "bytes": 9396,
+      "sha256": "97a57948d8abcf9c9b327ebf44cdff241491cc8250827848b1e85fdc22b92a03"
+    },
+    "geometry/stair_collision_candidate_connection_023.glb": {
+      "bytes": 9368,
+      "sha256": "fdebe3734f3049b09e0f3036cc9008772069637976b6ee7a37e048d2fe033b8a"
+    },
+    "geometry/stair_collision_candidate_connection_024.glb": {
+      "bytes": 8880,
+      "sha256": "5b2b2c119765078946c524cd024ce7606dd8a8bb915a5753991eb5d5287a0417"
+    },
+    "geometry/stair_collision_candidate_connection_025.glb": {
+      "bytes": 9356,
+      "sha256": "d33c417e1b91ee624b694f9c9f8025ea607cffc4b22c8aa7b5c654e5c1b1e795"
+    },
+    "geometry/stair_landings_floor_00.glb": {
+      "bytes": 1340,
+      "sha256": "d8d14243f8fc197168e2da70b2967b986c09d82ad8858d7b2c5592f569d97816"
+    },
+    "geometry/stair_landings_floor_01.glb": {
+      "bytes": 2184,
+      "sha256": "3c18c681d01f16be2bc3ef599d5f47e5c88e2c87a78903930eb0267953757285"
+    },
+    "geometry/stair_landings_floor_02.glb": {
+      "bytes": 2184,
+      "sha256": "f07629ee3c56666248d4c1828dfd3faedb4951650383a6cdbdabd72454001a1f"
+    },
+    "geometry/stair_landings_floor_03.glb": {
+      "bytes": 1340,
+      "sha256": "b8288e8b7795438c57ff720145ecaed8a1d2edd57a5f95553033f303820f8627"
+    },
+    "geometry/stair_prototypes/connection_022.glb": {
+      "bytes": 24320,
+      "sha256": "2213682732a405626017ebe3ee9581362e4bc2e28a1d00843838588ac63ae021"
+    },
+    "geometry/stair_prototypes/connection_023.glb": {
+      "bytes": 24320,
+      "sha256": "479d7f62472a6e378c16801c6c9f1b4984aff09f1335fe359e17db798d703117"
+    },
+    "geometry/stair_prototypes/connection_024.glb": {
+      "bytes": 24320,
+      "sha256": "e5e5c50586f4967b20f317fbb8d128042d7396d94d6f766cee673dc32a016eef"
+    },
+    "geometry/stair_prototypes/connection_025.glb": {
+      "bytes": 24320,
+      "sha256": "da5baf41e7bcc4155c465f951c83755bd0738c3005133b7dbdd62aa211f88ecd"
+    },
+    "geometry/stair_repair_candidates/connection_024_aligned_spiral.glb": {
+      "bytes": 30068,
+      "sha256": "af58f39c01f0d20c0e1d24d34afaee1ccc7c38dc1e5e10e82cbb3fce2f22ecf4"
+    },
+    "geometry/stair_repair_candidates/connection_024_approach_platforms.glb": {
+      "bytes": 5588,
+      "sha256": "dc0b0f4860801b63dd96ba8fd2deaf2f3104883d7be69cb1bd51f2f6e7df2a46"
+    },
+    "geometry/stair_repair_candidates/connection_024_landing_markers.glb": {
+      "bytes": 3196,
+      "sha256": "735ee50ed8aa85aeb312847f0ec8695de0b6a566240def79f042fa85e3bb05dd"
+    },
+    "geometry/stair_stage4_preview_connection_022.glb": {
+      "bytes": 1116,
+      "sha256": "34c3697a9fb331dd6f738b2f0d6c995a72437e12aa3d15c14983922fa40125f7"
+    },
+    "geometry/stair_stage4_preview_connection_023.glb": {
+      "bytes": 1112,
+      "sha256": "71dbc3b55b36bd9b08c30d64be46e3c2c8472e728aefaa9eebc2d645cbf9ade0"
+    },
+    "geometry/stair_stage4_preview_connection_024.glb": {
+      "bytes": 1116,
+      "sha256": "1dea8cc40a6f61c32b3e1737115c04892b45cb7a30fc0560d8bc4ba38d67a2e5"
+    },
+    "geometry/stair_stage4_preview_connection_025.glb": {
+      "bytes": 1112,
+      "sha256": "7693bbda5ca436b02e64e8d017ecb3620be695bce3735d82f6f1e301a2206307"
+    },
+    "geometry/stair_stage6_preview_connection_024.glb": {
+      "bytes": 1128,
+      "sha256": "c4165f47ece3d1f5198600f9d4801973e200fe9355d75b531cff436db289de16"
+    },
+    "geometry/stair_turn_path_preview_connection_022.glb": {
+      "bytes": 16908,
+      "sha256": "6a0120d761f5162db5dda73552f3b0017485678e242ea83a6d684e93e57813a6"
+    },
+    "geometry/stair_turn_path_preview_connection_023.glb": {
+      "bytes": 16904,
+      "sha256": "1ac2249ec5415451dc3a396236e0c9d31fe6879bf90f0dcf57094109f58daad8"
+    },
+    "geometry/stair_turn_path_preview_connection_024.glb": {
+      "bytes": 12200,
+      "sha256": "00ccd9b2e28b46bb8f0c975b667c46db732fdc5bf26ae57d197dc55f327b21a6"
+    },
+    "geometry/stair_turn_path_preview_connection_025.glb": {
+      "bytes": 16904,
+      "sha256": "b90f2b252feae92fa0d80d3be7d79647e813898d35ccf2ee45c748b45f425638"
+    },
+    "geometry/stair_world_connection_022.glb": {
+      "bytes": 13948,
+      "sha256": "7c0de25daf08668d541a2dfdd5419a070e0153e85fa38c6e7604936f9f2ea18a"
+    },
+    "geometry/stair_world_connection_023.glb": {
+      "bytes": 13988,
+      "sha256": "cd404eafe9f3ccf05217dc508c9b33f86b6faf9052b635c0d825c521b071fd7f"
+    },
+    "geometry/stair_world_connection_024.glb": {
+      "bytes": 12312,
+      "sha256": "1db2a660938033a917084830f7b8255f32b8927ba75aeb88fe3ff5eb14f2737c"
+    },
+    "geometry/stair_world_connection_025.glb": {
+      "bytes": 13988,
+      "sha256": "f8dc1c639af52f1b815f0f8022e66d07d2af3ec12e1a26bd3f442fdf097b67c0"
+    },
+    "manifest.forge36.json": {
+      "bytes": 9018,
+      "sha256": "b6b8c92cc3f5facbc044e5ec16344404172cc47804c73390a50ac5790ba46989"
+    },
+    "manifest.json": {
+      "bytes": 9569,
+      "sha256": "48cf499e7663608053c1119553ed008f20df776e3c359451cdce1abc681a4fdb"
+    },
+    "navigation/century_of_decay.json": {
+      "bytes": 48000,
+      "sha256": "37152146b037026e86e9386d8d6e364edc4695062d9ea0c1802cf8de438111d4"
+    },
+    "navigation/collision.json": {
+      "bytes": 18575,
+      "sha256": "edaecf9d5a51aa24daada4175f677a506c5bf37e155bbf35b2c4ecc8bd444c21"
+    },
+    "navigation/conservatory_anchors.json": {
+      "bytes": 2150,
+      "sha256": "805e49956570b9a0bdef93902e192b21aa6f6d8c657f76a87e32d6e21a3a4371"
+    },
+    "navigation/door_window_workshop.json": {
+      "bytes": 26189,
+      "sha256": "9e5adb4a863aae3b5d9804b4a3e8c4e376fb4142aef62d3180b34507706b3165"
+    },
+    "navigation/exterior_visual_audit.json": {
+      "bytes": 1792,
+      "sha256": "81fd54c7d907640a03688849a4e3ca1f684390b2b7560731c67acd2c09f6c300"
+    },
+    "navigation/forge_secrets.json": {
+      "bytes": 11306,
+      "sha256": "36439ab82ae5097d1f119bae942fb77a7de47d924a598973b1c0fefb76e00b04"
+    },
+    "navigation/forge_window_enhancements.json": {
+      "bytes": 5816,
+      "sha256": "160aa9f21261bc064f9876984603b0a6c91528f71da0fd48c838dc19591482b6"
+    },
+    "navigation/furnishing_plan.json": {
+      "bytes": 13366,
+      "sha256": "bdd1415d137f8686f2581eadd1ee2f88b8cb8fd1b01cf18c55ee37c976076431"
+    },
+    "navigation/furniture_interaction_proposals.json": {
+      "bytes": 9680,
+      "sha256": "606462d8911582eb91fb290cfa2df3e82e668713e1a14fb36bb4bb7f0da6fada"
+    },
+    "navigation/furniture_library.json": {
+      "bytes": 19768,
+      "sha256": "1ad9dd7efd05b29b4e0282be037486f034cce9fd2d67990779f69dd0b8287f76"
+    },
+    "navigation/grand_hall_visual_benchmark.json": {
+      "bytes": 838,
+      "sha256": "c11ea5024aaa2e979ef2790ede4ffaf688a4a263f356c96a33e22ab8238f6576"
+    },
+    "navigation/integrity.json": {
+      "bytes": 34133,
+      "sha256": "f06f6d1306813258eee46ec77654be3d1427a0aca1979b60a160123f65f9d2da"
+    },
+    "navigation/interaction_foundations.json": {
+      "bytes": 24004,
+      "sha256": "6e28d221dfb4cb5ac09bf8582c7cde50f510080e310531154725712aa58dd4da"
+    },
+    "navigation/interactive_placement_audit.json": {
+      "bytes": 35719,
+      "sha256": "25f021d2743ff424d66b7a45e30febd54770abaf8572d23453ec986bd7ecfc3b"
+    },
+    "navigation/landing_approach_audit.json": {
+      "bytes": 8219,
+      "sha256": "8999749b3dab2d1cb7b78ffc028c91557f1e4f6fe368a706b3de1073a7f7a72d"
+    },
+    "navigation/landing_audit.json": {
+      "bytes": 2624,
+      "sha256": "4d4f45914f84b93471761481fce48f46111f55afda41854b5206221c7c1d9b4c"
+    },
+    "navigation/landing_construction.json": {
+      "bytes": 6793,
+      "sha256": "dfe579f07003336de3ef66967e78ef2aea8cb4d2ca4ca612207e6a1624ff4d35"
+    },
+    "navigation/landing_repair_plan.json": {
+      "bytes": 3542,
+      "sha256": "98cedcf587454733ea4a693719027b5a49cfc1b5945b75f09bfa48541cd3e1d6"
+    },
+    "navigation/magic.json": {
+      "bytes": 3425,
+      "sha256": "2bc1f77b00ae70df596bbf56c7ca4a9e30e0dd713e0aef673147411ee81c94de"
+    },
+    "navigation/mansion_quality_report.json": {
+      "bytes": 974,
+      "sha256": "f866ce1399bf3e4f08cdbf236945e34b74c229dc62b3fefba170ef72d968dcd5"
+    },
+    "navigation/placement_review_1_7.json": {
+      "bytes": 312,
+      "sha256": "419806dc7ef9c38776087a88b6600e3933be6e48d172691fd3599742e1b6c40e"
+    },
+    "navigation/playability_route_gate.json": {
+      "bytes": 24045,
+      "sha256": "626e90b8a748fb2739febabe15d0a32a6adbb587bfda99ad3d511385ca7cb329"
+    },
+    "navigation/real_stair_export_audit.json": {
+      "bytes": 6354,
+      "sha256": "1be41e25eda21185530ca369194b6284a56c934f06665ba2f2337279fa98e4b1"
+    },
+    "navigation/room_identity_v2.json": {
+      "bytes": 31466,
+      "sha256": "027abc8e05fcbe65a5b3c632c4c740bcc4ff53d34ff3493c294db6b37f83ed2e"
+    },
+    "navigation/room_intelligence.json": {
+      "bytes": 27644,
+      "sha256": "15d6ecca60dda9c667d9e8a9df973bf4635fd28fef8d66dc763034cd249a086a"
+    },
+    "navigation/runtime_bridge.json": {
+      "bytes": 22505,
+      "sha256": "87ad733ccf6a2df6095d3e87801681f030b0c66b962d40b3fbfd4f4622b2d9bf"
+    },
+    "navigation/searchable_discoveries.json": {
+      "bytes": 25763,
+      "sha256": "213173e087c62a22735a32be318fc2e6e4193095afc10a63d16b7288183df963"
+    },
+    "navigation/serpent_aligned_traversal.json": {
+      "bytes": 3106,
+      "sha256": "b7913c93e880d42dccaf58e0a1471b0f6de6563d551c1d638825c9c3a07d7309"
+    },
+    "navigation/serpent_approach_repair.json": {
+      "bytes": 1576,
+      "sha256": "43cbc4c4bea079719be7a78b1430a046c9ddfe2ec2810f4f4862eb4adac22faf"
+    },
+    "navigation/serpent_mansion_probe.json": {
+      "bytes": 3598,
+      "sha256": "e7163a0f1ebbd78b2e99eff9ef110551aeaceedd850bb5864b3c83ee20fbda68"
+    },
+    "navigation/spiral_geometry_prototypes.json": {
+      "bytes": 4109,
+      "sha256": "117317fa945d94b05b7db5908e1d7f74886dc6d2a12a0b53d9c36bee97d8eb19"
+    },
+    "navigation/stair_candidate_layouts.json": {
+      "bytes": 4848,
+      "sha256": "2bd35075543033ce98106df02708b9dbed589e06b4495904e43611ad26eee93e"
+    },
+    "navigation/stair_connection_repair.json": {
+      "bytes": 4796,
+      "sha256": "d1b5709eebcb1920467bef157095fcb1357ce3fad3f9de8190e2aefcd038fea6"
+    },
+    "navigation/stair_continuity.json": {
+      "bytes": 2736,
+      "sha256": "43ec2804ccc5ef0978ce392404c4d55034cecaf15633f1f101bd4043b1b92949"
+    },
+    "navigation/stair_feasibility.json": {
+      "bytes": 2319,
+      "sha256": "a6584e7d7da6eb36497fd2a5eca90aa998b6a345ee552b53a9487d1afc379a2e"
+    },
+    "navigation/stair_final_safety_gate.json": {
+      "bytes": 4385,
+      "sha256": "12dd03f386e4be2787d2c6c42d09c60097452dae1a9b5e14b6429064cf1be753"
+    },
+    "navigation/stair_geometry_contract.json": {
+      "bytes": 8513,
+      "sha256": "2e59c1301738bceb6a1b771a23eca3a143adbcaef352f91440779bb2f9dc6237"
+    },
+    "navigation/stair_integration_gate.json": {
+      "bytes": 5505,
+      "sha256": "f61ee9324c8187b69fc8281ac1f85b689174e4886e77c97c362dd44755154b6b"
+    },
+    "navigation/stair_layout_solver.json": {
+      "bytes": 5671,
+      "sha256": "ef033ba5b0b831151bdf99be8a250e03662c043770b235040e7605b5ed435d68"
+    },
+    "navigation/stair_multi_layout_solver.json": {
+      "bytes": 18077,
+      "sha256": "5ed197f3b82b526d8302a3ee2c5684a4db05938bfa880ce353074505c8b66283"
+    },
+    "navigation/stair_physics_engine_plan.json": {
+      "bytes": 4362,
+      "sha256": "7b3567d3039cb2e4a3ee6d599ec669a428b6a4d42898efb9a3313ca5d9265ae5"
+    },
+    "navigation/stair_rapier_route_candidates.json": {
+      "bytes": 9861,
+      "sha256": "65ee3c78dd22dce52e9f26edd4551c4b67ad356d76169b614eadbf3c69b18987"
+    },
+    "navigation/stair_slab_openings.json": {
+      "bytes": 3349,
+      "sha256": "a3db33ab260f06259b12bad2befe5df64b2dd097a45792c5261a330dd0798778"
+    },
+    "navigation/stair_transition_stage3.json": {
+      "bytes": 2855,
+      "sha256": "b2e37087f2b10d7e12d5051fb59bf23d691e82f335e9cb9a177c7f4828b3d664"
+    },
+    "navigation/stair_tread_collision_candidates.json": {
+      "bytes": 43515,
+      "sha256": "4f03075962df3c4839eb2f0e759fb5fc8b9e276eca2ffbef83c3b1916ec5df2c"
+    },
+    "navigation/stair_turn_path_candidates.json": {
+      "bytes": 10020,
+      "sha256": "74335337d8cb6627eb08ea31cf9e6476dc51a74899cc32c87945a0d4d026aa75"
+    },
+    "navigation/stair_turn_path_qa.json": {
+      "bytes": 356,
+      "sha256": "ec5b6bce6c54aab8624927af111e536e86bb38f4c7df071f18f331174e08aa4c"
+    },
+    "navigation/stair_world_placement.json": {
+      "bytes": 7667,
+      "sha256": "71895e8adf6f25789322d62a8cf5f2058ec967f0330a846d3ca710d1bd21b46d"
+    },
+    "source.haunt": {
+      "bytes": 23768,
+      "sha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d"
+    },
+    "validation.json": {
+      "bytes": 377,
+      "sha256": "9b35d2fff971f44b75333e8b883c938ad8498ac6e7953942142e8d5c56beae6d"
+    }
+  }
+}

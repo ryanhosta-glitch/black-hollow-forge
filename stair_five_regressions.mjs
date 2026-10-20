@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {calibrationCourse,validateStairCourse,stepMotion,clearanceAt,supportAt} from './forge_stair_physics.mjs';
+const cases=[];const test=(name,fn)=>{try{fn();cases.push({name,passed:true});}catch(e){cases.push({name,passed:false,error:e.message});}};
+test('1. No sinking: every descending tread snaps feet exactly to its surface',()=>{let c=calibrationCourse(),v=validateStairCourse(c);assert.equal(v.certified,true);});
+test('2. No floating: support height exactly matches the tread, not its adjacent step',()=>{const c=calibrationCourse();for(let i=0;i<12;i++)assert.ok(Math.abs(supportAt((i+.5)*c.run,0,c).y-(i+1)*c.rise)<1e-8)});
+test('3. No impossible step/landing: reject unsafe rise and preserve last valid position',()=>{const c=calibrationCourse();c.steps[0].y=.40;const r=stepMotion({x:-.2,z:0,y:0},.6,0,c);assert.equal(r.blocked,true);assert.ok(r.reasons.includes('STEP_TOO_HIGH'));assert.ok(r.x<=0.001)});
+test('4. Low ceiling: full player height must fit below beam',()=>{const c=calibrationCourse();c.headroomBeams=[{x0:1,x1:2,z0:-1,z1:1,bottom:2.10}];assert.equal(clearanceAt(1.5,0,1.08,c).clear,false);const s={x:.9,z:0,y:.54},r=stepMotion(s,.7,0,c);assert.ok(r.reasons.includes('LOW_HEADROOM'))});
+test('5. Real continuity: missing tread is not treated as traversable bridge',()=>{const c=calibrationCourse();c.steps=c.steps.filter(x=>x.id!=='tread-6');const r=validateStairCourse(c);assert.equal(r.certified,false);});
+const report={suite:'Black Hollow stair five fixes',level:'CALIBRATION_ONLY',certifiesExportedStairs:false,checks:cases,passed:cases.filter(c=>c.passed).length,total:cases.length};
+console.log(JSON.stringify(report,null,2));if(report.passed!==report.total)process.exitCode=1;

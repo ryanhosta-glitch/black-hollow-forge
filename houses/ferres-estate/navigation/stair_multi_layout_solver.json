@@ -1,0 +1,563 @@
+{
+  "schema": "black-hollow-multi-layout-solver-1.0",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "originalBlueprintModified": false,
+  "method": "Conservative parametric rectangle screen over authored stairwell bounds. No geometry modification.",
+  "physicalTraversalCertified": false,
+  "limits": [
+    "Blueprint stair connection records are inherited from previous link discovery",
+    "No actual stair meshes are generated in this pass",
+    "No collision, headroom, floor-opening or building-code certification"
+  ],
+  "summary": {
+    "links": 4,
+    "withFootprintCandidates": 4,
+    "withoutFootprintCandidates": 0,
+    "physicallyCertified": 0
+  },
+  "links": [
+    {
+      "linkId": "connection_022",
+      "authoredType": "switchback",
+      "lowerRoomId": "fe-f0-regular",
+      "upperRoomId": "fe-f1-regular",
+      "floorIndices": [
+        0,
+        1
+      ],
+      "availableFootprintM": [
+        2.438,
+        3.658
+      ],
+      "riseM": 3.048,
+      "candidates": [
+        {
+          "kind": "straight",
+          "footprintRequiredM": [
+            0.84,
+            5.985
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Single continuous flight; landing zones assumed inside footprint",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "l_shaped",
+          "footprintRequiredM": [
+            3.69,
+            3.69
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Right-angle level landing; access directions must be checked",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "u_shaped",
+          "footprintRequiredM": [
+            1.84,
+            3.69
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Two parallel runs and a level turn; end access and headroom not verified",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "three_flight",
+          "footprintRequiredM": [
+            3.065,
+            3.065
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Three runs with two level landings; path topology/headroom not verified",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "spiral",
+          "footprintRequiredM": [
+            2.1,
+            2.1
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": true,
+          "fittingOrientations": [
+            {
+              "orientation": "standard",
+              "widthMarginM": 0.338,
+              "depthMarginM": 1.558
+            },
+            {
+              "orientation": "rotated",
+              "widthMarginM": 0.338,
+              "depthMarginM": 1.558
+            }
+          ],
+          "stage": "FOOTPRINT_PLAUSIBLE_UNCERTIFIED",
+          "limitations": [
+            "Spiral envelope only; inner tread width/turning headroom not verified",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        }
+      ],
+      "fittingCandidateCount": 1,
+      "preferredFootprintCandidate": "spiral",
+      "assessment": "CANDIDATE_REQUIRES_GEOMETRY_AND_COLLISION_VALIDATION",
+      "physicalTraversalCertified": false,
+      "sourceBlueprintModified": false
+    },
+    {
+      "linkId": "connection_023",
+      "authoredType": "switchback",
+      "lowerRoomId": "fe-f1-regular",
+      "upperRoomId": "fe-f2-regular",
+      "floorIndices": [
+        1,
+        2
+      ],
+      "availableFootprintM": [
+        2.438,
+        3.658
+      ],
+      "riseM": 3.048,
+      "candidates": [
+        {
+          "kind": "straight",
+          "footprintRequiredM": [
+            0.84,
+            5.985
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Single continuous flight; landing zones assumed inside footprint",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "l_shaped",
+          "footprintRequiredM": [
+            3.69,
+            3.69
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Right-angle level landing; access directions must be checked",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "u_shaped",
+          "footprintRequiredM": [
+            1.84,
+            3.69
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Two parallel runs and a level turn; end access and headroom not verified",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "three_flight",
+          "footprintRequiredM": [
+            3.065,
+            3.065
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Three runs with two level landings; path topology/headroom not verified",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "spiral",
+          "footprintRequiredM": [
+            2.1,
+            2.1
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": true,
+          "fittingOrientations": [
+            {
+              "orientation": "standard",
+              "widthMarginM": 0.338,
+              "depthMarginM": 1.558
+            },
+            {
+              "orientation": "rotated",
+              "widthMarginM": 0.338,
+              "depthMarginM": 1.558
+            }
+          ],
+          "stage": "FOOTPRINT_PLAUSIBLE_UNCERTIFIED",
+          "limitations": [
+            "Spiral envelope only; inner tread width/turning headroom not verified",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        }
+      ],
+      "fittingCandidateCount": 1,
+      "preferredFootprintCandidate": "spiral",
+      "assessment": "CANDIDATE_REQUIRES_GEOMETRY_AND_COLLISION_VALIDATION",
+      "physicalTraversalCertified": false,
+      "sourceBlueprintModified": false
+    },
+    {
+      "linkId": "connection_024",
+      "authoredType": "spiral",
+      "lowerRoomId": "fe-f1-spiral",
+      "upperRoomId": "fe-f2-spiral",
+      "floorIndices": [
+        1,
+        2
+      ],
+      "availableFootprintM": [
+        3.658,
+        3.658
+      ],
+      "riseM": 3.048,
+      "candidates": [
+        {
+          "kind": "straight",
+          "footprintRequiredM": [
+            0.84,
+            5.985
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Single continuous flight; landing zones assumed inside footprint",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "l_shaped",
+          "footprintRequiredM": [
+            3.69,
+            3.69
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Right-angle level landing; access directions must be checked",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "u_shaped",
+          "footprintRequiredM": [
+            1.84,
+            3.69
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Two parallel runs and a level turn; end access and headroom not verified",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "three_flight",
+          "footprintRequiredM": [
+            3.065,
+            3.065
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": true,
+          "fittingOrientations": [
+            {
+              "orientation": "standard",
+              "widthMarginM": 0.593,
+              "depthMarginM": 0.593
+            },
+            {
+              "orientation": "rotated",
+              "widthMarginM": 0.593,
+              "depthMarginM": 0.593
+            }
+          ],
+          "stage": "FOOTPRINT_PLAUSIBLE_UNCERTIFIED",
+          "limitations": [
+            "Three runs with two level landings; path topology/headroom not verified",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "spiral",
+          "footprintRequiredM": [
+            2.1,
+            2.1
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": true,
+          "fittingOrientations": [
+            {
+              "orientation": "standard",
+              "widthMarginM": 1.558,
+              "depthMarginM": 1.558
+            },
+            {
+              "orientation": "rotated",
+              "widthMarginM": 1.558,
+              "depthMarginM": 1.558
+            }
+          ],
+          "stage": "FOOTPRINT_PLAUSIBLE_UNCERTIFIED",
+          "limitations": [
+            "Spiral envelope only; inner tread width/turning headroom not verified",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        }
+      ],
+      "fittingCandidateCount": 2,
+      "preferredFootprintCandidate": "spiral",
+      "assessment": "CANDIDATE_REQUIRES_GEOMETRY_AND_COLLISION_VALIDATION",
+      "physicalTraversalCertified": false,
+      "sourceBlueprintModified": false
+    },
+    {
+      "linkId": "connection_025",
+      "authoredType": "switchback",
+      "lowerRoomId": "fe-f2-regular",
+      "upperRoomId": "fe-f3-regular",
+      "floorIndices": [
+        2,
+        3
+      ],
+      "availableFootprintM": [
+        2.438,
+        3.658
+      ],
+      "riseM": 3.048,
+      "candidates": [
+        {
+          "kind": "straight",
+          "footprintRequiredM": [
+            0.84,
+            5.985
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Single continuous flight; landing zones assumed inside footprint",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "l_shaped",
+          "footprintRequiredM": [
+            3.69,
+            3.69
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Right-angle level landing; access directions must be checked",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "u_shaped",
+          "footprintRequiredM": [
+            1.84,
+            3.69
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Two parallel runs and a level turn; end access and headroom not verified",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "three_flight",
+          "footprintRequiredM": [
+            3.065,
+            3.065
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": false,
+          "fittingOrientations": [],
+          "stage": "REJECTED_FOOTPRINT",
+          "limitations": [
+            "Three runs with two level landings; path topology/headroom not verified",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        },
+        {
+          "kind": "spiral",
+          "footprintRequiredM": [
+            2.1,
+            2.1
+          ],
+          "riserCount": 18,
+          "riserHeightM": 0.1693,
+          "treadDepthM": 0.255,
+          "flightClearWidthM": 0.84,
+          "turnLandingDepthM": 0.95,
+          "entryBufferM": 0.7,
+          "fitsBoundingRectangle": true,
+          "fittingOrientations": [
+            {
+              "orientation": "standard",
+              "widthMarginM": 0.338,
+              "depthMarginM": 1.558
+            },
+            {
+              "orientation": "rotated",
+              "widthMarginM": 0.338,
+              "depthMarginM": 1.558
+            }
+          ],
+          "stage": "FOOTPRINT_PLAUSIBLE_UNCERTIFIED",
+          "limitations": [
+            "Spiral envelope only; inner tread width/turning headroom not verified",
+            "Doors, walkable collision, overhead slabs, railings and both floor connections untested"
+          ]
+        }
+      ],
+      "fittingCandidateCount": 1,
+      "preferredFootprintCandidate": "spiral",
+      "assessment": "CANDIDATE_REQUIRES_GEOMETRY_AND_COLLISION_VALIDATION",
+      "physicalTraversalCertified": false,
+      "sourceBlueprintModified": false
+    }
+  ]
+}

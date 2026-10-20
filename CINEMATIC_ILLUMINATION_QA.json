@@ -1,0 +1,13 @@
+{
+  "status": "implementation_complete_browser_unverified",
+  "rig": "grand_hall_illumination.js",
+  "roomId": "fe-f1-room1",
+  "pointLights": 3,
+  "spotLights": 1,
+  "noStudentBlueprintChanges": true,
+  "knownLimits": [
+    "not measured window position",
+    "no cast shadows",
+    "browser performance not verified"
+  ]
+}

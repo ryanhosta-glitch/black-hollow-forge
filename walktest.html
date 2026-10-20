@@ -1,16 +1,28 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Black Hollow Forge | First-Person Architectural Inspection</title><style>
 *{box-sizing:border-box}body{margin:0;background:#080a0d;color:#e9dfd3;font:14px system-ui}canvas{display:block;width:100vw;height:100vh}.hud{position:fixed;top:12px;left:12px;z-index:2;width:min(350px,calc(100vw - 24px));max-height:90vh;overflow:auto;background:#10141cee;border:1px solid #856b50;border-radius:13px;padding:14px;box-shadow:0 12px 40px #000a}.hud h1{font:25px Georgia,serif;margin:0;color:#e6c796}.muted{color:#b1b4c5;font-size:12px}.data{background:#20232b;border-radius:8px;padding:8px;margin:10px 0;line-height:1.6}button,select{font:inherit;color:#eee;background:#352e39;border:1px solid #8b7591;border-radius:7px;padding:8px;cursor:pointer;margin:4px 4px 4px 0}button:hover,button:focus{background:#5a485c}.key{border:1px solid #888;padding:1px 5px;border-radius:4px}#screenMessage{color:#f2d59c}.center{position:fixed;inset:0;pointer-events:none;display:grid;place-items:center;font-size:23px;color:#ffe4bb;text-shadow:0 0 5px #000}.bottom{position:fixed;bottom:12px;right:12px;background:#10141cbb;padding:10px;border-radius:9px;max-width:370px}.active{border-color:#e9bb7d;background:#614731}#overlay{display:none;position:fixed;inset:0;background:#06070cc9;z-index:5;align-items:center;justify-content:center;padding:20px}#overlay.show{display:flex}#overlay>div{width:min(600px,95vw);background:#1a1b24;border:1px solid #ad8b60;border-radius:12px;padding:22px;max-height:85vh;overflow:auto}#map{width:100%;max-height:350px;background:#131923;border-radius:8px}#map rect{cursor:pointer}details{margin-top:8px}@media(max-width:600px){.hud{max-width:260px}.bottom{display:none}}
+
+/* First-person touch controls. These appear only on touch-capable devices. */
+#mobileWalk{display:none;position:fixed;inset:0;z-index:3;pointer-events:none;touch-action:none}
+#touchLook{position:absolute;left:40%;right:0;top:0;bottom:0;pointer-events:auto;touch-action:none}
+#touchStick{position:absolute;left:18px;bottom:22px;width:132px;height:132px;border:2px solid #cfb48699;background:#141a2399;border-radius:50%;pointer-events:auto;touch-action:none;box-shadow:0 0 22px #0008}
+#touchKnob{position:absolute;left:43px;top:43px;width:42px;height:42px;background:#d4b681dd;border:2px solid #ffe4ad;border-radius:50%;box-shadow:0 0 14px #0009;pointer-events:none}
+#touchInteract{position:absolute;right:16px;bottom:24px;min-width:76px;min-height:66px;pointer-events:auto;touch-action:manipulation;background:#634d35ee;border:2px solid #f0d09b;color:#fff4dc;font-weight:800;border-radius:20px}
+#touchMap{position:absolute;right:16px;bottom:102px;min-width:76px;min-height:48px;pointer-events:auto;touch-action:manipulation;background:#242b3add}
+#touchBack{position:absolute;right:102px;bottom:30px;min-width:70px;min-height:48px;pointer-events:auto;touch-action:manipulation;background:#242b3add}
+#touchHint{position:absolute;left:12px;right:12px;bottom:166px;text-align:center;font-size:12px;color:#ffe8c6;text-shadow:0 2px 5px #000;pointer-events:none}
+@media(pointer:coarse){#mobileWalk{display:block}.hud{top:8px;left:8px;max-width:min(260px,65vw);max-height:38vh;padding:9px;font-size:12px}.hud h1{font-size:18px}.hud .muted{font-size:11px}.hud>button{padding:7px}.bottom{display:none}#reticle{font-size:18px}#start{display:none}}
 </style>
 <link rel="stylesheet" href="./forge_pages.css">
 <script defer src="./forge_pages.js"></script>
 </head><body><canvas id="scene"></canvas><div class="hud"><h1>BLACK HOLLOW</h1><div class="muted">Forge · architectural reconstruction · preview</div><div class="data"><strong id="room">Loading architecture…</strong><br><span class="muted" id="floor"></span><br><span id="status">Loading blueprint and connection records…</span></div><button id="start">Enter / resume walking</button><button id="mapBtn">Blueprint map</button><button id="reset">Reset position</button><div id="stairControls" class="data" style="display:none"><strong>Stair traversal</strong><div class="muted">Choose a connected landing. The route builds visible matching treads. Hold W to traverse, S to reverse. Top and bottom pads are visible. Landing positions are selected by the repair planner; door-to-landing footprint approach is audited; furniture, hinge swing, true collision, headroom, and exported mesh openings remain unverified.</div><div id="stairDestinations"></div></div><button id="light">Daylight</button><div class="data" id="nearby">Move toward a door to inspect it.</div><div class="muted">W A S D: walk through OPEN doorways · Mouse: look · E: door fallback · Stair destinations: buttons · Shift: move faster · Esc: release cursor. Open the map to jump to any room for QA.</div><details><summary>Inspection diagnostics</summary><div class="muted" id="debug"></div></details></div><div class="center" id="reticle">+</div><div class="bottom">Blueprint collision preview. Stair path and visible treads share coordinates; decorated GLBs are viewed in Estate.</div><div id="overlay"><div><h2>Blueprint Floor Inspector</h2><p class="muted">Click a room to visit its safe center. This is a QA teleport, not gameplay travel.</p><div id="mapList"></div><button id="closeMap">Close map</button></div></div>
+<div id="mobileWalk" aria-label="Touch movement controls"><div id="touchLook" aria-label="Drag to look around"></div><div id="touchStick" aria-label="Drag to walk"><div id="touchKnob"></div></div><button id="touchMap" type="button">Map</button><button id="touchBack" type="button">Reverse</button><button id="touchInteract" type="button">E · Use</button><div id="touchHint">Left thumb: walk · Right side: look · E: use</div></div>
 <script type="module">
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js';
 const $=id=>document.getElementById(id),base='./houses/ferres-estate/';
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x141a25);scene.fog=new THREE.Fog(0x141a25,18,54);
 const camera=new THREE.PerspectiveCamera(73,innerWidth/innerHeight,.06,160);const renderer=new THREE.WebGLRenderer({canvas:$('scene'),antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;
 scene.add(new THREE.HemisphereLight(0xd6e3ff,0x282027,2.1));const sunlight=new THREE.DirectionalLight(0xffe1af,2.5);sunlight.position.set(8,19,4);scene.add(sunlight);
-const meters=.3048,playerRadius=.28,playerHeight=1.62,walkSpeed=2.6;let landingConstruction=null,landingAudit=null,approachAudit=null,repairPlan=null,bridge,integrity,manifest,rooms=[],doors=[],selected,world=new THREE.Group(),solid=[],portals=[],links=[],lastTime=performance.now(),yaw=0,pitch=0,day=false,nearest=null,transitionCooldown=0,stairTravel=null,routeGroup=null;scene.add(world);const pressed=new Set();const floorY=[-3.048,0,3.048,6.096];let pos=new THREE.Vector3(0,playerHeight,0);const byId=new Map(),doorMaterial=new THREE.MeshStandardMaterial({color:0x895c35,metalness:.2,roughness:.55});
+const meters=.3048,playerRadius=.28,playerHeight=1.62,walkSpeed=2.6;let landingConstruction=null,landingAudit=null,approachAudit=null,repairPlan=null,bridge,integrity,manifest,rooms=[],doors=[],selected,world=new THREE.Group(),solid=[],portals=[],links=[],lastTime=performance.now(),yaw=0,pitch=0,day=false,nearest=null,transitionCooldown=0,stairTravel=null,routeGroup=null;scene.add(world);const pressed=new Set();let touchMove={x:0,y:0};const isTouch=matchMedia('(pointer:coarse)').matches;const floorY=[-3.048,0,3.048,6.096];let pos=new THREE.Vector3(0,playerHeight,0);const byId=new Map(),doorMaterial=new THREE.MeshStandardMaterial({color:0x895c35,metalness:.2,roughness:.55});
 const matWall=new THREE.MeshStandardMaterial({color:0x554a56,roughness:.91,side:THREE.DoubleSide}),matFloor=new THREE.MeshStandardMaterial({color:0x524a43,roughness:.9}),matTrim=new THREE.MeshStandardMaterial({color:0xb69158,metalness:.5,roughness:.42});
 const material=(r)=>new THREE.MeshStandardMaterial({color:r.floor===0?0x554f4f:r.floor===1?0x665865:0x60626b,roughness:.88});
 function msg(s){$('status').textContent=s}function roomOf(id){return byId.get(id)}function rect(r){const b=r.boundsFeet;return {x:b.x*meters,z:b.y*meters,w:b.l*meters,h:b.w*meters}}function roomLabel(r){return `${r.name} · ${manifest.floors[r.floor].name}`}
@@ -85,12 +97,40 @@ function updateStairControls(){const panel=$('stairControls'),buttons=$('stairDe
 // This is a test stair ramp; collisions on individual risers and ceiling cutouts remain future work.
 const stairWood=new THREE.MeshStandardMaterial({color:0x8f6641,roughness:.66}),stairGold=new THREE.MeshStandardMaterial({color:0xc09c60,metalness:.55,roughness:.36});
 function disposeRoute(group){group.traverse(o=>{if(o.isMesh)o.geometry.dispose()})}
-function sampleRoute(points,t){const u=Math.min(points.length-1-1e-7,Math.max(0,t*(points.length-1))),i=Math.floor(u),f=u-i;return {x:points[i].x+(points[i+1].x-points[i].x)*f,z:points[i].z+(points[i+1].z-points[i].z)*f}}
+function routeLengths(points){const lengths=[0];for(let i=1;i<points.length;i++)lengths.push(lengths[i-1]+Math.hypot(points[i].x-points[i-1].x,points[i].z-points[i-1].z));return lengths}
+function sampleRoute(points,t){const lengths=routeLengths(points),total=lengths.at(-1);if(total<.001)return {x:points[0].x,z:points[0].z};const distance=Math.max(0,Math.min(1,t))*total;let i=0;while(i<lengths.length-2&&lengths[i+1]<distance)i++;const f=(distance-lengths[i])/Math.max(.00001,lengths[i+1]-lengths[i]);return {x:points[i].x+(points[i+1].x-points[i].x)*f,z:points[i].z+(points[i+1].z-points[i].z)*f}}
+function stairFeasibility(length,rise,width){const maxRiser=.19,minTread=.25,maxRisePerRun=.76;const steps=Math.max(1,Math.ceil(Math.abs(rise)/maxRiser));const requiredRun=steps*minTread;const riser=Math.abs(rise)/steps;const tread=length/steps;const reasons=[];if(width<.8)reasons.push('CLEAR_WIDTH_BELOW_0.8M');if(tread<minTread)reasons.push('TREAD_RUN_BELOW_0.25M');if(length<Math.abs(rise)/maxRisePerRun)reasons.push('OVER_STEEP_RUN');return {steps,riser,tread,requiredRun,availableRun:length,width,reasons,passed:reasons.length===0,notCertified:['No 3D headroom raycast','No triangle-mesh collision','No flight-by-flight code review']}}
+
+// Geometry gate: sample the whole guided route, including the capsule radius and corner sweeps.
+// A passing result is only a 2D clearance candidate, NOT collision or headroom certification.
+function inspectGuidedStairRoute(points, fromRoom, toRoom, width){
+ const issues=[];const samples=[];const radius=Math.max(playerRadius, width/2)+.12;
+ const a=rect(fromRoom),b=rect(toRoom);
+ const inRect=(r,x,z)=>x>=r.x+radius&&x<=r.x+r.w-radius&&z>=r.z+radius&&z<=r.z+r.h-radius;
+ const lengths=routeLengths(points),total=lengths.at(-1);
+ if(total<1)issues.push('RUN_TOO_SHORT');
+ if(!inRect(a,points[0].x,points[0].z)||!inRect(b,points.at(-1).x,points.at(-1).z))issues.push('LANDING_ENDPOINT_CLEARANCE');
+ for(let k=0;k<=Math.max(2,Math.ceil(total/.08));k++){
+  const q=sampleRoute(points,k/Math.max(2,Math.ceil(total/.08)));
+  if(!inRect(a,q.x,q.z)||!inRect(b,q.x,q.z)){issues.push('PATH_OUTSIDE_SHARED_STAIRWELL');break;}
+ }
+ // An angled reversal requires an actual level turn platform, not continuously rising steps.
+ // Until the route can explicitly construct such a platform, reject turns over 30 degrees.
+ for(let i=1;i<points.length-1;i++){
+  const u={x:points[i].x-points[i-1].x,z:points[i].z-points[i-1].z};
+  const v={x:points[i+1].x-points[i].x,z:points[i+1].z-points[i].z};
+  const lu=Math.hypot(u.x,u.z),lv=Math.hypot(v.x,v.z);
+  if(lu<.04||lv<.04){issues.push('DEGENERATE_PATH_SEGMENT');continue;}
+  const cosine=Math.max(-1,Math.min(1,(u.x*v.x+u.z*v.z)/(lu*lv)));
+  if(Math.acos(cosine)>Math.PI/6){issues.push('TURN_REQUIRES_LEVEL_LANDING');break;}
+ }
+ return {passed:issues.length===0,issues:[...new Set(issues)],sampleSpacingMeters:.08,clearanceRadiusMeters:radius,runMeters:total,scope:'footprint and turn clearance only; no triangle collision or 3D headroom'};
+}
 function renderStairRoute(st){
  if(routeGroup){world.remove(routeGroup);disposeRoute(routeGroup)}
  routeGroup=new THREE.Group();routeGroup.name='GUIDED_STAIR_ROUTE';world.add(routeGroup);
  const length=st.points.slice(1).reduce((sum,b,i)=>sum+Math.hypot(b.x-st.points[i].x,b.z-st.points[i].z),0);
- const count=Math.max(14,Math.ceil(length/.27));const footprint=rect(st.from);
+ const count=st.feasibility.steps;const footprint=rect(st.from);
  const width=Math.min(.85,Math.max(.40,Math.min(footprint.w,footprint.h)*.31));
  for(let i=0;i<count;i++){
   const t=(i+.5)/count,a=sampleRoute(st.points,i/count),b=sampleRoute(st.points,(i+1)/count),mid=sampleRoute(st.points,t);
@@ -131,13 +171,12 @@ function beginStairTravel(dest){if(!selected||!dest||Math.abs(dest.floor-selecte
  if(q.w<2*inset+.35||q.h<2*inset+.35){msg('LANDING BLOCKED: stair room too narrow for an inset landing and railings.');return;}
  const points=[{x:cx,z:cz},{x:Math.max(q.x+inset,Math.min(q.x+q.w-inset,cx-.4)),z:cz},
  {x:left,z:front},{x:left,z:back},{x:right,z:back},{x:right,z:front},{x:cx,z:cz}];
- stairTravel={from:start,dest,points,progress:0,fromY,toY};renderStairRoute(stairTravel);pos.set(points[0].x,fromY,points[0].z);
+ const availableRun=routeLengths(points).at(-1),width=Math.min(.85,Math.max(.40,Math.min(q.w,q.h)*.31));const feasibility=stairFeasibility(availableRun,toY-fromY,width);const routeGate=inspectGuidedStairRoute(points,start,dest,width);if(!routeGate.passed){msg('STAIR ROUTE BLOCKED: '+routeGate.issues.join(', ')+'. A level turning landing or safer geometry must be constructed first.');$('nearby').textContent='Route geometry rejected; stairs not gameplay-certified.';return;}if(!feasibility.passed){msg('STAIR FEASIBILITY BLOCKED: '+feasibility.reasons.join(', ')+'. This route would be too steep or narrow to present as a physical stair.');$('nearby').textContent='Measured stair route rejected; view the stair feasibility report.';return;}stairTravel={from:start,dest,points,progress:0,fromY,toY,feasibility};renderStairRoute(stairTravel);pos.set(points[0].x,fromY,points[0].z);
  $('stairControls').style.display='none';msg(`Stair walk started toward ${manifest.floors[dest.floor].name}. Hold W to continue, S to reverse.`);}
-function updateStairTravel(dt){if(!stairTravel)return;const v=Number(pressed.has('KeyW'))-Number(pressed.has('KeyS'));if(!v)return;
- const st=stairTravel;st.progress=Math.max(0,Math.min(1,st.progress+v*dt*.17));
- let cursor=st.progress*(st.points.length-1),i=Math.min(st.points.length-2,Math.floor(cursor)),f=cursor-i;
- const a=st.points[i],b=st.points[i+1];pos.x=a.x+(b.x-a.x)*f;pos.z=a.z+(b.z-a.z)*f;
- const steps=st.treadCount||28;const snapped=Math.floor(st.progress*steps)/steps;pos.y=st.fromY+(st.toY-st.fromY)*snapped;
+function updateStairTravel(dt){if(!stairTravel)return;const v=Number(pressed.has('KeyW'))-Number(pressed.has('KeyS'))-touchMove.y;if(!v)return;
+ const st=stairTravel;st.progress=Math.max(0,Math.min(1,st.progress+v*dt*walkSpeed/Math.max(.001,st.lengthMeters)));
+ const location=sampleRoute(st.points,st.progress);pos.x=location.x;pos.z=location.z;
+ const steps=st.treadCount||28;const snapped=Math.min(1,Math.floor(st.progress*steps)/steps);pos.y=st.fromY+(st.toY-st.fromY)*snapped;
  $('nearby').textContent=`Guided stair travel: ${Math.round(st.progress*100)}% · W forward / S back`;
  if(st.progress>=1){const dest=st.dest;selectRoom(dest.id,{x:pos.x,z:pos.z});msg(`Walked the stair route to ${manifest.floors[dest.floor].name}. This is guided test movement, not finished stair collision.`);}
  else if(st.progress<=0&&v<0){const back=st.from;stairTravel=null;if(routeGroup){world.remove(routeGroup);disposeRoute(routeGroup);routeGroup=null}pos.y=floorY[back.floor]+playerHeight;updateStairControls();msg('Returned to original stair landing.');}}
@@ -168,8 +207,27 @@ function nearestAction(){if(!selected)return null;let best=null;for(const p of p
 for(const l of bridge.links){if(l.kind.includes('door')||!selected.name.toLowerCase().includes('stair'))continue;const dest=l.from===selected.id?roomOf(l.to):l.to===selected.id?roomOf(l.from):null;if(dest&&(!best||best.type!=='door'))best={type:'vertical',dest,kind:l.kind,dist:0}}
 return best}
 function act(){const a=nearestAction();if(!a){msg('No architectural connection is nearby.');return}if(a.type==='door'){const t=a.p.target,s=bridge.safeCenters[t.id];selectRoom(t.id,{x:s?.xMeters,z:s?.zMeters});msg(`Passed through ${a.p.door.shared||a.p.door.id} to ${t.name}.`)}else{beginStairTravel(a.dest)}}
-function tick(t){requestAnimationFrame(tick);const dt=Math.min((t-lastTime)/1000,.05);lastTime=t;if(selected){if(stairTravel){updateStairTravel(dt)}else if(document.pointerLockElement===renderer.domElement){let f=Number(pressed.has('KeyW'))-Number(pressed.has('KeyS')),s=Number(pressed.has('KeyD'))-Number(pressed.has('KeyA'));if(f||s){const norm=Math.hypot(f,s),v=(pressed.has('ShiftLeft')?walkSpeed*1.55:walkSpeed)*dt/norm;const dx=(-Math.sin(yaw)*f+Math.cos(yaw)*s)*v,dz=(-Math.cos(yaw)*f-Math.sin(yaw)*s)*v;if(canMove(pos.x+dx,pos.z))pos.x+=dx;if(canMove(pos.x,pos.z+dz))pos.z+=dz;}}camera.position.copy(pos);camera.rotation.set(pitch,yaw,0,'YXZ');const action=stairTravel?null:nearestAction();if(stairTravel){}else if(action?.type==='door')$('nearby').textContent=`Press E: ${action.p.target.name} · ${action.p.door.id}`;else if(action?.type==='vertical')$('nearby').textContent=`Press E: ${action.kind} to ${action.dest.name}`;else $('nearby').textContent='Explore the room; door thresholds are marked gold.';}renderer.render(scene,camera)}
+function tick(t){requestAnimationFrame(tick);const dt=Math.min((t-lastTime)/1000,.05);lastTime=t;if(selected){if(stairTravel){updateStairTravel(dt)}else if(document.pointerLockElement===renderer.domElement||isTouch){let f=Number(pressed.has('KeyW'))-Number(pressed.has('KeyS'))-touchMove.y,s=Number(pressed.has('KeyD'))-Number(pressed.has('KeyA'))+touchMove.x;if(f||s){const norm=Math.hypot(f,s),v=(pressed.has('ShiftLeft')?walkSpeed*1.55:walkSpeed)*dt/norm;const dx=(-Math.sin(yaw)*f+Math.cos(yaw)*s)*v,dz=(-Math.cos(yaw)*f-Math.sin(yaw)*s)*v;if(canMove(pos.x+dx,pos.z))pos.x+=dx;if(canMove(pos.x,pos.z+dz))pos.z+=dz;}}camera.position.copy(pos);camera.rotation.set(pitch,yaw,0,'YXZ');const action=stairTravel?null:nearestAction();if(stairTravel){}else if(action?.type==='door')$('nearby').textContent=`Press E: ${action.p.target.name} · ${action.p.door.id}`;else if(action?.type==='vertical')$('nearby').textContent=`Press E: ${action.kind} to ${action.dest.name}`;else $('nearby').textContent='Explore the room; door thresholds are marked gold.';}renderer.render(scene,camera)}
 window.addEventListener('keydown',e=>{if(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','KeyE'].includes(e.code))e.preventDefault();pressed.add(e.code);if(e.code==='KeyE'&&!e.repeat&&document.pointerLockElement===renderer.domElement)act()});window.addEventListener('keyup',e=>pressed.delete(e.code));document.addEventListener('mousemove',e=>{if(document.pointerLockElement===renderer.domElement){yaw-=e.movementX*.0025;pitch=Math.max(-1.48,Math.min(1.48,pitch-e.movementY*.0025))}});$('start').onclick=()=>renderer.domElement.requestPointerLock();$('reset').onclick=()=>selected&&selectRoom(stairTravel?.from?.id||selected.id);$('light').onclick=()=>{day=!day;scene.background.set(day?0x7e9cad:0x141a25);scene.fog.color.set(day?0x7e9cad:0x141a25);$('light').textContent=day?'Haunted Night':'Daylight'};
+
+// Coarse-pointer mobile controls; keyboard and mouse behavior is unchanged.
+if(isTouch){
+  const stick=$('touchStick'),knob=$('touchKnob'),look=$('touchLook');let sid=null,lid=null,lastX=0,lastY=0;
+  const centerStick=()=>{touchMove.x=0;touchMove.y=0;knob.style.transform='translate(0px,0px)';sid=null};
+  stick.addEventListener('pointerdown',e=>{if(sid!==null)return;sid=e.pointerId;stick.setPointerCapture(e.pointerId);e.preventDefault()});
+  stick.addEventListener('pointermove',e=>{if(e.pointerId!==sid)return;const b=stick.getBoundingClientRect(),dx=e.clientX-(b.left+b.width/2),dy=e.clientY-(b.top+b.height/2),r=45,mag=Math.max(1,Math.hypot(dx,dy)/r),x=dx/mag,y=dy/mag;touchMove.x=x/r;touchMove.y=y/r;knob.style.transform=`translate(${x}px,${y}px)`;e.preventDefault()});
+  for(const ev of ['pointerup','pointercancel','lostpointercapture'])stick.addEventListener(ev,e=>{if(e.pointerId===sid)centerStick()});
+  look.addEventListener('pointerdown',e=>{if(lid!==null)return;lid=e.pointerId;lastX=e.clientX;lastY=e.clientY;look.setPointerCapture(e.pointerId);e.preventDefault()});
+  look.addEventListener('pointermove',e=>{if(e.pointerId!==lid)return;const dx=e.clientX-lastX,dy=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;yaw-=dx*.0045;pitch=Math.max(-1.48,Math.min(1.48,pitch-dy*.0045));e.preventDefault()});
+  for(const ev of ['pointerup','pointercancel','lostpointercapture'])look.addEventListener(ev,e=>{if(e.pointerId===lid)lid=null});
+  $('touchInteract').addEventListener('click',()=>act());
+  $('touchMap').addEventListener('click',()=>$('mapBtn').click());
+  const back=$('touchBack');back.addEventListener('pointerdown',e=>{pressed.add('KeyS');back.setPointerCapture(e.pointerId)});for(const ev of ['pointerup','pointercancel','lostpointercapture'])back.addEventListener(ev,()=>pressed.delete('KeyS'));
+  $('start').textContent='Touch controls active';
+  window.addEventListener('blur',()=>{centerStick();pressed.delete('KeyS')});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){centerStick();pressed.delete('KeyS')}});
+}
+
 $('mapBtn').onclick=()=>{document.exitPointerLock();const root=$('mapList');root.replaceChildren();for(const f of manifest.floors){const h=document.createElement('h3');h.textContent=f.name;root.append(h);for(const r of rooms.filter(x=>x.floor===manifest.floors.indexOf(f))){const b=document.createElement('button');b.textContent=r.name;b.onclick=()=>{selectRoom(r.id);$('overlay').classList.remove('show')};root.append(b)}}$('overlay').classList.add('show')};$('closeMap').onclick=()=>$('overlay').classList.remove('show');window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
-async function init(){try{const read=async p=>{const r=await fetch(base+p);if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json()};[bridge,integrity,manifest,landingAudit,landingConstruction,approachAudit,repairPlan]=await Promise.all([read('navigation/runtime_bridge.json'),read('navigation/integrity.json'),read('manifest.json'),read('navigation/landing_audit.json'),read('navigation/landing_construction.json'),read('navigation/landing_approach_audit.json'),read('navigation/landing_repair_plan.json')]);rooms=bridge.rooms;for(const r of rooms)byId.set(r.id,r);selectRoom(bridge.entryRoomId);msg('Ready. Click Enter / resume walking to capture mouse.')}catch(e){msg('Could not load building data: '+e.message+' — serve from GitHub Pages or a local HTTP server.');console.error(e)}}init();requestAnimationFrame(tick);
+async function init(){try{const read=async p=>{const r=await fetch(base+p);if(!r.ok)throw Error(p+' HTTP '+r.status);return r.json()};[bridge,integrity,manifest,landingAudit,landingConstruction,approachAudit,repairPlan]=await Promise.all([read('navigation/runtime_bridge.json'),read('navigation/integrity.json'),read('manifest.json'),read('navigation/landing_audit.json'),read('navigation/landing_construction.json'),read('navigation/landing_approach_audit.json'),read('navigation/landing_repair_plan.json')]);rooms=bridge.rooms;for(const r of rooms)byId.set(r.id,r);selectRoom(bridge.entryRoomId);msg(isTouch?'Ready. Use the left joystick to walk and drag on the right to look.':'Ready. Click Enter / resume walking to capture mouse.')}catch(e){msg('Could not load building data: '+e.message+' — serve from GitHub Pages or a local HTTP server.');console.error(e)}}init();requestAnimationFrame(tick);
 </script></body></html>

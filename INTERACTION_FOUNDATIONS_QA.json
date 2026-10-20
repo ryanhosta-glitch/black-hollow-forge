@@ -1,0 +1,9 @@
+{
+  "rooms": 26,
+  "doors": 23,
+  "furniture": 30,
+  "stateMachineImplemented": true,
+  "mansionReadiness": "NOT_GAMEPLAY_CERTIFIED",
+  "browserTested": false,
+  "blueprintUnchanged": true
+}

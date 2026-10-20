@@ -13,6 +13,9 @@ from integrity import compile_integrity
 from embellish import architectural_details, roof_exterior
 from victorian_architecture import build_exterior_facade, forge_window_plan
 from special_scenes import build as build_special
+from grand_interior import apply as apply_interior
+from historic_interior_pass import apply as apply_historic_interior
+from door_window_workshop import build as build_door_window_workshop
 
 def slug(s): return re.sub(r'[^a-z0-9]+','-',s.lower()).strip('-') or 'house'
 def box(scene,name,center,dims,color):
@@ -127,6 +130,8 @@ def render_floor(floor,outfile,index):
   # Decoration includes the generated openings; the source room object is not changed.
   decorated=dict(r,openings=opens)
   architectural_details(scene,box,decorated)
+  apply_interior(scene,box,decorated,index)
+  apply_historic_interior(scene,box,decorated,index)
  facade_stats=build_exterior_facade(scene,box,floor)
  scene.export(str(outfile));return {"roomWallGroups":parts,"windowEnhancements":plans}
 
@@ -199,13 +204,14 @@ def main(src,dest):
   files.append({'id':stem,'name':f.get('name',stem),'model':f'geometry/{stem}.glb','roomIds':[r['id'] for r in f.get('rooms',[])]})
  # Reusable architectural enhancement contract for any compatible .haunt.
  (out/'navigation'/'forge_window_enhancements.json').write_text(json.dumps({'policy':'stable approximately 50 percent of eligible windowless rooms; authored openings preserved','originalBlueprintModified':False,'generationMode':'actual wall cutouts with inset glazing','floors':window_plan},ensure_ascii=False,indent=2))
+ door_workshop=build_door_window_workshop(floors,out,window_plan)
  # Removable authored roof geometry, using the Architect's chosen type and rise.
  roof_meta=make_roof(data,out/'geometry'/'roof.glb')
  main_meta=build_special('main-hall',out/'geometry'/'special_main_hall.glb');conservatory_meta=build_special('floor13-conservatory',out/'geometry'/'special_floor13_conservatory.glb')
  entryroom=next(r for r in rooms if r['id']==er)
  navigation={'units':'feet','sourceRoomCount':len(rooms),'rooms':rooms,'elevatorShafts':elevators,'entry':entry,'specialScenes':{'mainHall':{'originalRoomId':er,'scene':'geometry/special_main_hall.glb','mode':'portal-pocket','portalReturnRoom':er,'impossibleElevator':{'positionMeters':[0,5.25,14.0]}},'floor13Conservatory':{'scene':'geometry/special_floor13_conservatory.glb','mode':'separate-dimension'}}}
  (out/'navigation'/'collision.json').write_text(json.dumps(navigation,ensure_ascii=False,indent=2))
- manifest={'format':'black-hollow-house','version':'1.0-prototype','name':data.get('name','Haunted Estate'),'id':slug(data.get('name','haunted-estate')),'sourceSha256':hashlib.sha256(source.read_bytes()).hexdigest(),'entry':entry,'floors':files,'navigation':'navigation/collision.json','magic':'navigation/magic.json','integrity':'navigation/integrity.json','forgeWindowEnhancements':'navigation/forge_window_enhancements.json','roof':'geometry/roof.glb','specialRooms':{'mainHall':'geometry/special_main_hall.glb','floor13Conservatory':'geometry/special_floor13_conservatory.glb'},'finishPaletteVersion':'forge-architectural-five-pass-opening-v2','authoredRoof':data.get('roof',{}),'roofBuild':roof_meta,'specialSceneDetails':[main_meta,conservatory_meta],'runtimeStatus':'compiled-geometry-with-finish-proxies; full gameplay and material-texture parity not yet wired'}
+ manifest={'format':'black-hollow-house','version':'1.0-prototype','name':data.get('name','Haunted Estate'),'id':slug(data.get('name','haunted-estate')),'sourceSha256':hashlib.sha256(source.read_bytes()).hexdigest(),'entry':entry,'floors':files,'navigation':'navigation/collision.json','magic':'navigation/magic.json','integrity':'navigation/integrity.json','forgeWindowEnhancements':'navigation/forge_window_enhancements.json','doorWindowWorkshop':'navigation/door_window_workshop.json','roof':'geometry/roof.glb','specialRooms':{'mainHall':'geometry/special_main_hall.glb','floor13Conservatory':'geometry/special_floor13_conservatory.glb'},'finishPaletteVersion':'forge-architectural-five-pass-opening-v2','authoredRoof':data.get('roof',{}),'roofBuild':roof_meta,'specialSceneDetails':[main_meta,conservatory_meta],'runtimeStatus':'compiled-geometry-with-finish-proxies; full gameplay and material-texture parity not yet wired'}
  (out/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2));shutil.copyfile(source,out/'source.haunt')
  (out/'validation.json').write_text(json.dumps({'status':'passed-with-warnings' if warnings else 'passed','errors':[],'warnings':warnings,'totalRooms':len(rooms),'floors':len(floors),'integrityCounts':integrity['counts'],'magicRepairs':len(magic['repairs']),'allRoomsReachableWithMagic':magic['allRoomsReachable']},indent=2))
  print(f'Built {out}: {len(floors)} floors, {len(rooms)} rooms')

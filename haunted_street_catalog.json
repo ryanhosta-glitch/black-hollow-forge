@@ -1,0 +1,16 @@
+{
+  "catalogVersion": "1.0",
+  "status": "DEVELOPMENT_ONLY",
+  "houses": [
+    {
+      "houseId": "ferre-s-estate",
+      "name": "Ferre's Estate",
+      "creator": "The Ferre Institute",
+      "description": "Enter a Gothic estate where every corridor holds another mystery.",
+      "address": 13,
+      "preview": "houses/ferres-estate/exterior/street_preview.glb",
+      "casa": "houses/ferres-estate/ferres_estate_QA.casa",
+      "gameReady": false
+    }
+  ]
+}

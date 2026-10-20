@@ -1,0 +1,1133 @@
+{
+  "version": 1,
+  "units": "meters",
+  "studentBlueprintModified": false,
+  "rendering": "separate optional GLB overlays, not installed into collision mesh",
+  "models": [
+    {
+      "floor": 0,
+      "model": "geometry/door_window_floor_00.glb",
+      "components": 10
+    },
+    {
+      "floor": 1,
+      "model": "geometry/door_window_floor_01.glb",
+      "components": 17
+    },
+    {
+      "floor": 2,
+      "model": "geometry/door_window_floor_02.glb",
+      "components": 16
+    },
+    {
+      "floor": 3,
+      "model": "geometry/door_window_floor_03.glb",
+      "components": 14
+    }
+  ],
+  "interactiveComponents": [
+    {
+      "id": "fe-f0-room1-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f0-room1",
+      "floor": 0,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        2.1336
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        1.7113999999999998
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f0-room2-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f0-room2",
+      "floor": 0,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        2.1336
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        1.7113999999999998
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f0-room3-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f0-room3",
+      "floor": 0,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        8.2296
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        7.8073999999999995
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f0-room4-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f0-room4",
+      "floor": 0,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        8.2296
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        7.8073999999999995
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f0-hall-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f0-hall",
+      "floor": 0,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        2.1336000000000004
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        1.7114000000000003
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f0-hall-door-1",
+      "kind": "hinged-door",
+      "roomId": "fe-f0-hall",
+      "floor": 0,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        2.1336000000000004
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        1.7114000000000003
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f0-hall-door-2",
+      "kind": "hinged-door",
+      "roomId": "fe-f0-hall",
+      "floor": 0,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        8.229600000000001
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        7.807400000000001
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f0-hall-door-3",
+      "kind": "hinged-door",
+      "roomId": "fe-f0-hall",
+      "floor": 0,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        8.229600000000001
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        7.807400000000001
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f0-hall-door-4",
+      "kind": "hinged-door",
+      "roomId": "fe-f0-hall",
+      "floor": 0,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        12.192
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        11.7698
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f0-regular-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f0-regular",
+      "floor": 0,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        12.192
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        11.7698
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-room1-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f1-room1",
+      "floor": 1,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        2.1336
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        1.7113999999999998
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-room1-door-1",
+      "kind": "hinged-door",
+      "roomId": "fe-f1-room1",
+      "floor": 1,
+      "source": "student",
+      "closedCenterMeters": [
+        3.048,
+        1.075,
+        4.2672
+      ],
+      "hingeMeters": [
+        2.6258,
+        0,
+        4.2672
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-room2-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f1-room2",
+      "floor": 1,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        2.1336
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        1.7113999999999998
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-room3-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f1-room3",
+      "floor": 1,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        8.2296
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        7.8073999999999995
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-room3-window-1",
+      "kind": "tracery-window",
+      "roomId": "fe-f1-room3",
+      "floor": 1,
+      "source": "forge",
+      "widthMeters": 0.78,
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-room3-window-2",
+      "kind": "tracery-window",
+      "roomId": "fe-f1-room3",
+      "floor": 1,
+      "source": "forge",
+      "widthMeters": 0.78,
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-room4-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f1-room4",
+      "floor": 1,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        8.2296
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        7.8073999999999995
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-room4-window-1",
+      "kind": "tracery-window",
+      "roomId": "fe-f1-room4",
+      "floor": 1,
+      "source": "forge",
+      "widthMeters": 0.78,
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-room4-window-2",
+      "kind": "tracery-window",
+      "roomId": "fe-f1-room4",
+      "floor": 1,
+      "source": "forge",
+      "widthMeters": 0.78,
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-hall-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f1-hall",
+      "floor": 1,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        2.1336000000000004
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        1.7114000000000003
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-hall-door-1",
+      "kind": "hinged-door",
+      "roomId": "fe-f1-hall",
+      "floor": 1,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        2.1336000000000004
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        1.7114000000000003
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-hall-door-2",
+      "kind": "hinged-door",
+      "roomId": "fe-f1-hall",
+      "floor": 1,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        8.229600000000001
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        7.807400000000001
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-hall-door-3",
+      "kind": "hinged-door",
+      "roomId": "fe-f1-hall",
+      "floor": 1,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        8.229600000000001
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        7.807400000000001
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-hall-door-4",
+      "kind": "hinged-door",
+      "roomId": "fe-f1-hall",
+      "floor": 1,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        12.192
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        11.7698
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-hall-door-5",
+      "kind": "hinged-door",
+      "roomId": "fe-f1-hall",
+      "floor": 1,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        12.192
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        11.7698
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-regular-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f1-regular",
+      "floor": 1,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        12.192
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        11.7698
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f1-spiral-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f1-spiral",
+      "floor": 1,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        12.192
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        11.7698
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-room1-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f2-room1",
+      "floor": 2,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        2.1336
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        1.7113999999999998
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-room2-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f2-room2",
+      "floor": 2,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        2.1336
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        1.7113999999999998
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-room2-window-1",
+      "kind": "tracery-window",
+      "roomId": "fe-f2-room2",
+      "floor": 2,
+      "source": "forge",
+      "widthMeters": 0.78,
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-room2-window-2",
+      "kind": "tracery-window",
+      "roomId": "fe-f2-room2",
+      "floor": 2,
+      "source": "forge",
+      "widthMeters": 0.78,
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-room3-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f2-room3",
+      "floor": 2,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        8.2296
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        7.8073999999999995
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-room4-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f2-room4",
+      "floor": 2,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        8.2296
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        7.8073999999999995
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-room4-window-1",
+      "kind": "tracery-window",
+      "roomId": "fe-f2-room4",
+      "floor": 2,
+      "source": "forge",
+      "widthMeters": 0.78,
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-room4-window-2",
+      "kind": "tracery-window",
+      "roomId": "fe-f2-room4",
+      "floor": 2,
+      "source": "forge",
+      "widthMeters": 0.78,
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-hall-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f2-hall",
+      "floor": 2,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        2.1336000000000004
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        1.7114000000000003
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-hall-door-1",
+      "kind": "hinged-door",
+      "roomId": "fe-f2-hall",
+      "floor": 2,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        2.1336000000000004
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        1.7114000000000003
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-hall-door-2",
+      "kind": "hinged-door",
+      "roomId": "fe-f2-hall",
+      "floor": 2,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        8.229600000000001
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        7.807400000000001
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-hall-door-3",
+      "kind": "hinged-door",
+      "roomId": "fe-f2-hall",
+      "floor": 2,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        8.229600000000001
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        7.807400000000001
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-hall-door-4",
+      "kind": "hinged-door",
+      "roomId": "fe-f2-hall",
+      "floor": 2,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        12.192
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        11.7698
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-hall-door-5",
+      "kind": "hinged-door",
+      "roomId": "fe-f2-hall",
+      "floor": 2,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        12.192
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        11.7698
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-regular-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f2-regular",
+      "floor": 2,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        12.192
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        11.7698
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f2-spiral-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f2-spiral",
+      "floor": 2,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        12.192
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        11.7698
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f3-room1-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f3-room1",
+      "floor": 3,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        2.1336
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        1.7113999999999998
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f3-room1-window-1",
+      "kind": "tracery-window",
+      "roomId": "fe-f3-room1",
+      "floor": 3,
+      "source": "forge",
+      "widthMeters": 0.78,
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f3-room1-window-2",
+      "kind": "tracery-window",
+      "roomId": "fe-f3-room1",
+      "floor": 3,
+      "source": "forge",
+      "widthMeters": 0.78,
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f3-room2-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f3-room2",
+      "floor": 3,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        2.1336
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        1.7113999999999998
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f3-room2-window-1",
+      "kind": "tracery-window",
+      "roomId": "fe-f3-room2",
+      "floor": 3,
+      "source": "forge",
+      "widthMeters": 0.78,
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f3-room2-window-2",
+      "kind": "tracery-window",
+      "roomId": "fe-f3-room2",
+      "floor": 3,
+      "source": "forge",
+      "widthMeters": 0.78,
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f3-room3-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f3-room3",
+      "floor": 3,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        8.2296
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        7.8073999999999995
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f3-room4-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f3-room4",
+      "floor": 3,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        8.2296
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        7.8073999999999995
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f3-hall-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f3-hall",
+      "floor": 3,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        2.1336000000000004
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        1.7114000000000003
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f3-hall-door-1",
+      "kind": "hinged-door",
+      "roomId": "fe-f3-hall",
+      "floor": 3,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        2.1336000000000004
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        1.7114000000000003
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f3-hall-door-2",
+      "kind": "hinged-door",
+      "roomId": "fe-f3-hall",
+      "floor": 3,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        8.229600000000001
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        7.807400000000001
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f3-hall-door-3",
+      "kind": "hinged-door",
+      "roomId": "fe-f3-hall",
+      "floor": 3,
+      "source": "student",
+      "closedCenterMeters": [
+        8.5344,
+        1.075,
+        8.229600000000001
+      ],
+      "hingeMeters": [
+        8.5344,
+        0,
+        7.807400000000001
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f3-hall-door-4",
+      "kind": "hinged-door",
+      "roomId": "fe-f3-hall",
+      "floor": 3,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        12.192
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        11.7698
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    },
+    {
+      "id": "fe-f3-regular-door-0",
+      "kind": "hinged-door",
+      "roomId": "fe-f3-regular",
+      "floor": 3,
+      "source": "student",
+      "closedCenterMeters": [
+        6.096,
+        1.075,
+        12.192
+      ],
+      "hingeMeters": [
+        6.096,
+        0,
+        11.7698
+      ],
+      "leafWidthMeters": 0.839,
+      "heightMeters": 2.15,
+      "openingAngleDegrees": 85,
+      "swingClearance": "UNVERIFIED; door leaf preview only",
+      "gameplayReady": false
+    }
+  ],
+  "limitations": [
+    "hinge pivots declared but door leaves are currently static mesh previews",
+    "swing volumes, neighboring-room conflicts and furnishing clearance not certified",
+    "do not treat any door or window as gameplay-ready"
+  ]
+}

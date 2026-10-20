@@ -80,11 +80,11 @@
   "roofBuild": {
     "style": "mansard",
     "riseFeet": 5.0,
-    "method": "actual-room-union-perimeter-heightfield",
+    "method": "contour-supported-roof-planes-v2",
     "footprintAreaSqMeters": 147.16,
     "perimeterMeters": 81.69,
     "facadeEdges": 19,
-    "triangles": 1056,
+    "triangles": 3064,
     "ornamentation": "Gothic Revival: iron cresting, lancet dormer silhouettes and stone finials",
     "gothicDetails": {
       "ironCrestSections": 30,
@@ -92,7 +92,7 @@
       "carvedFinials": 10,
       "slateBands": 0
     },
-    "limits": "Roof follows nonrectangular footprint but dormers, vertical roof valleys and watertight joints require further modeling."
+    "limits": "Contour roof and dimensional decorative dormers; dormers are not structural openings, watertight roof seams and precise valleys still require validation."
   },
   "specialSceneDetails": [
     {
@@ -280,7 +280,7 @@
     "geometry/stair_landings_floor_02.glb",
     "geometry/stair_landings_floor_03.glb"
   ],
-  "stairPlayability": "NOT_CERTIFIED_COMPOSITE_ASSEMBLED",
+  "stairPlayability": "BLOCKED_REAL_GEOMETRY_GATE",
   "stairIntegrationGate": "navigation/stair_integration_gate.json",
   "stairCollisionCandidates": "navigation/stair_tread_collision_candidates.json",
   "stairWorldPlacement": "navigation/stair_world_placement.json",
@@ -304,5 +304,32 @@
     "floor_03": "geometry/furnishings_floor_03.glb"
   },
   "furnishingPlan": "navigation/furnishing_plan.json",
-  "furnishingPolicy": "Beautiful but Abandoned; protected circulation; decorative provisional overlays"
+  "furnishingPolicy": "Beautiful but Abandoned; protected circulation; decorative provisional overlays",
+  "doorWindowWorkshop": "navigation/door_window_workshop.json",
+  "roofReconstruction": "contour-supported-gothic-dimensional-dormers-v2",
+<<<<<<< HEAD
+  "realStairExportAudit": "navigation/real_stair_export_audit.json",
+  "casa": {
+    "spec": "black-hollow-casa",
+    "specVersion": "1.0",
+    "houseId": "ferre-s-estate",
+    "slug": "ferre-s-estate",
+    "creator": "The Ferre Institute",
+    "description": "Enter a Gothic estate where every corridor holds another mystery.",
+    "streetPreview": "exterior/street_preview.glb",
+    "source": "source.haunt",
+    "gameplayCertified": false,
+    "requiresCertifiedTraversal": true,
+    "gameOwned": [
+      "missions",
+      "ghosts",
+      "Impossible Elevator",
+      "Floor 13 story",
+      "save games"
+    ]
+  }
 }
+=======
+  "realStairExportAudit": "navigation/real_stair_export_audit.json"
+}
+>>>>>>> 169ab6fe210928339005c4e7586d72870c578ac0

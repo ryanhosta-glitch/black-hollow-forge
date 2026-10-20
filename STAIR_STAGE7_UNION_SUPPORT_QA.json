@@ -1,0 +1,655 @@
+{
+  "schema": "black-hollow-forge-stage7-projected-union-v1",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "sourceUnchanged": true,
+  "modelUsed": "stair_stage6_preview_connection_024.glb",
+  "candidateWorldBounds": [
+    [
+      9.739399909973145,
+      6.031000137329102,
+      11.592000007629395
+    ],
+    [
+      10.636099815368652,
+      6.0960001945495605,
+      12.312000274658203
+    ]
+  ],
+  "geometryMethod": "Projected union of Stage6 measured AABB surface footprints. Does not yet use tread triangles or actual world transforms; not a 3D capsule simulation.",
+  "playerRadiusMeters": 0.32,
+  "centerlineZ": 12.192,
+  "supportCoverageMinimum": 0.5,
+  "centerlineUnsupportedSamples": 0,
+  "narrowTreadAloneFullDiameterPass": false,
+  "unionSupportBetterThanSingleTread": true,
+  "samples": [
+    {
+      "x": 11.0895,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 11.081,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 11.0724,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 11.0639,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 11.0553,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 11.0467,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 11.0382,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 11.0296,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 11.021,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 11.0125,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 11.0039,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 10.9954,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 10.9868,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 10.9782,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 10.9697,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 10.9611,
+      "z": 12.192,
+      "supportFraction": 0.5,
+      "centerSupported": true
+    },
+    {
+      "x": 10.9525,
+      "z": 12.192,
+      "supportFraction": 0.5003,
+      "centerSupported": true
+    },
+    {
+      "x": 10.944,
+      "z": 12.192,
+      "supportFraction": 0.5022,
+      "centerSupported": true
+    },
+    {
+      "x": 10.9354,
+      "z": 12.192,
+      "supportFraction": 0.5049,
+      "centerSupported": true
+    },
+    {
+      "x": 10.9268,
+      "z": 12.192,
+      "supportFraction": 0.508,
+      "centerSupported": true
+    },
+    {
+      "x": 10.9183,
+      "z": 12.192,
+      "supportFraction": 0.5112,
+      "centerSupported": true
+    },
+    {
+      "x": 10.9097,
+      "z": 12.192,
+      "supportFraction": 0.5144,
+      "centerSupported": true
+    },
+    {
+      "x": 10.9012,
+      "z": 12.192,
+      "supportFraction": 0.5176,
+      "centerSupported": true
+    },
+    {
+      "x": 10.8926,
+      "z": 12.192,
+      "supportFraction": 0.5208,
+      "centerSupported": true
+    },
+    {
+      "x": 10.884,
+      "z": 12.192,
+      "supportFraction": 0.524,
+      "centerSupported": true
+    },
+    {
+      "x": 10.8755,
+      "z": 12.192,
+      "supportFraction": 0.5272,
+      "centerSupported": true
+    },
+    {
+      "x": 10.8669,
+      "z": 12.192,
+      "supportFraction": 0.5304,
+      "centerSupported": true
+    },
+    {
+      "x": 10.8583,
+      "z": 12.192,
+      "supportFraction": 0.5336,
+      "centerSupported": true
+    },
+    {
+      "x": 10.8498,
+      "z": 12.192,
+      "supportFraction": 0.5368,
+      "centerSupported": true
+    },
+    {
+      "x": 10.8412,
+      "z": 12.192,
+      "supportFraction": 0.54,
+      "centerSupported": true
+    },
+    {
+      "x": 10.8326,
+      "z": 12.192,
+      "supportFraction": 0.5432,
+      "centerSupported": true
+    },
+    {
+      "x": 10.8241,
+      "z": 12.192,
+      "supportFraction": 0.5464,
+      "centerSupported": true
+    },
+    {
+      "x": 10.8155,
+      "z": 12.192,
+      "supportFraction": 0.5496,
+      "centerSupported": true
+    },
+    {
+      "x": 10.807,
+      "z": 12.192,
+      "supportFraction": 0.5528,
+      "centerSupported": true
+    },
+    {
+      "x": 10.7984,
+      "z": 12.192,
+      "supportFraction": 0.556,
+      "centerSupported": true
+    },
+    {
+      "x": 10.7898,
+      "z": 12.192,
+      "supportFraction": 0.5592,
+      "centerSupported": true
+    },
+    {
+      "x": 10.7813,
+      "z": 12.192,
+      "supportFraction": 0.5624,
+      "centerSupported": true
+    },
+    {
+      "x": 10.7727,
+      "z": 12.192,
+      "supportFraction": 0.5656,
+      "centerSupported": true
+    },
+    {
+      "x": 10.7641,
+      "z": 12.192,
+      "supportFraction": 0.5687,
+      "centerSupported": true
+    },
+    {
+      "x": 10.7556,
+      "z": 12.192,
+      "supportFraction": 0.5719,
+      "centerSupported": true
+    },
+    {
+      "x": 10.747,
+      "z": 12.192,
+      "supportFraction": 0.5751,
+      "centerSupported": true
+    },
+    {
+      "x": 10.7384,
+      "z": 12.192,
+      "supportFraction": 0.5783,
+      "centerSupported": true
+    },
+    {
+      "x": 10.7299,
+      "z": 12.192,
+      "supportFraction": 0.5815,
+      "centerSupported": true
+    },
+    {
+      "x": 10.7213,
+      "z": 12.192,
+      "supportFraction": 0.5847,
+      "centerSupported": true
+    },
+    {
+      "x": 10.7128,
+      "z": 12.192,
+      "supportFraction": 0.5879,
+      "centerSupported": true
+    },
+    {
+      "x": 10.7042,
+      "z": 12.192,
+      "supportFraction": 0.5911,
+      "centerSupported": true
+    },
+    {
+      "x": 10.6956,
+      "z": 12.192,
+      "supportFraction": 0.5943,
+      "centerSupported": true
+    },
+    {
+      "x": 10.6871,
+      "z": 12.192,
+      "supportFraction": 0.5975,
+      "centerSupported": true
+    },
+    {
+      "x": 10.6785,
+      "z": 12.192,
+      "supportFraction": 0.6007,
+      "centerSupported": true
+    },
+    {
+      "x": 10.6699,
+      "z": 12.192,
+      "supportFraction": 0.6039,
+      "centerSupported": true
+    },
+    {
+      "x": 10.6614,
+      "z": 12.192,
+      "supportFraction": 0.6071,
+      "centerSupported": true
+    },
+    {
+      "x": 10.6528,
+      "z": 12.192,
+      "supportFraction": 0.6103,
+      "centerSupported": true
+    },
+    {
+      "x": 10.6442,
+      "z": 12.192,
+      "supportFraction": 0.6135,
+      "centerSupported": true
+    },
+    {
+      "x": 10.6357,
+      "z": 12.192,
+      "supportFraction": 0.6167,
+      "centerSupported": true
+    },
+    {
+      "x": 10.6271,
+      "z": 12.192,
+      "supportFraction": 0.6199,
+      "centerSupported": true
+    },
+    {
+      "x": 10.6186,
+      "z": 12.192,
+      "supportFraction": 0.6231,
+      "centerSupported": true
+    },
+    {
+      "x": 10.61,
+      "z": 12.192,
+      "supportFraction": 0.6263,
+      "centerSupported": true
+    },
+    {
+      "x": 10.6014,
+      "z": 12.192,
+      "supportFraction": 0.6295,
+      "centerSupported": true
+    },
+    {
+      "x": 10.5929,
+      "z": 12.192,
+      "supportFraction": 0.6327,
+      "centerSupported": true
+    },
+    {
+      "x": 10.5843,
+      "z": 12.192,
+      "supportFraction": 0.6359,
+      "centerSupported": true
+    },
+    {
+      "x": 10.5757,
+      "z": 12.192,
+      "supportFraction": 0.6391,
+      "centerSupported": true
+    },
+    {
+      "x": 10.5672,
+      "z": 12.192,
+      "supportFraction": 0.6422,
+      "centerSupported": true
+    },
+    {
+      "x": 10.5586,
+      "z": 12.192,
+      "supportFraction": 0.6454,
+      "centerSupported": true
+    },
+    {
+      "x": 10.55,
+      "z": 12.192,
+      "supportFraction": 0.6486,
+      "centerSupported": true
+    },
+    {
+      "x": 10.5415,
+      "z": 12.192,
+      "supportFraction": 0.6518,
+      "centerSupported": true
+    },
+    {
+      "x": 10.5329,
+      "z": 12.192,
+      "supportFraction": 0.655,
+      "centerSupported": true
+    },
+    {
+      "x": 10.5244,
+      "z": 12.192,
+      "supportFraction": 0.6582,
+      "centerSupported": true
+    },
+    {
+      "x": 10.5158,
+      "z": 12.192,
+      "supportFraction": 0.6614,
+      "centerSupported": true
+    },
+    {
+      "x": 10.5072,
+      "z": 12.192,
+      "supportFraction": 0.6646,
+      "centerSupported": true
+    },
+    {
+      "x": 10.4987,
+      "z": 12.192,
+      "supportFraction": 0.6678,
+      "centerSupported": true
+    },
+    {
+      "x": 10.4901,
+      "z": 12.192,
+      "supportFraction": 0.671,
+      "centerSupported": true
+    },
+    {
+      "x": 10.4815,
+      "z": 12.192,
+      "supportFraction": 0.6742,
+      "centerSupported": true
+    },
+    {
+      "x": 10.473,
+      "z": 12.192,
+      "supportFraction": 0.6774,
+      "centerSupported": true
+    },
+    {
+      "x": 10.4644,
+      "z": 12.192,
+      "supportFraction": 0.6806,
+      "centerSupported": true
+    },
+    {
+      "x": 10.4559,
+      "z": 12.192,
+      "supportFraction": 0.6838,
+      "centerSupported": true
+    },
+    {
+      "x": 10.4473,
+      "z": 12.192,
+      "supportFraction": 0.687,
+      "centerSupported": true
+    },
+    {
+      "x": 10.4387,
+      "z": 12.192,
+      "supportFraction": 0.6902,
+      "centerSupported": true
+    },
+    {
+      "x": 10.4302,
+      "z": 12.192,
+      "supportFraction": 0.6934,
+      "centerSupported": true
+    },
+    {
+      "x": 10.4216,
+      "z": 12.192,
+      "supportFraction": 0.6966,
+      "centerSupported": true
+    },
+    {
+      "x": 10.413,
+      "z": 12.192,
+      "supportFraction": 0.6998,
+      "centerSupported": true
+    },
+    {
+      "x": 10.4045,
+      "z": 12.192,
+      "supportFraction": 0.703,
+      "centerSupported": true
+    },
+    {
+      "x": 10.3959,
+      "z": 12.192,
+      "supportFraction": 0.7062,
+      "centerSupported": true
+    },
+    {
+      "x": 10.3873,
+      "z": 12.192,
+      "supportFraction": 0.7094,
+      "centerSupported": true
+    },
+    {
+      "x": 10.3788,
+      "z": 12.192,
+      "supportFraction": 0.7126,
+      "centerSupported": true
+    },
+    {
+      "x": 10.3702,
+      "z": 12.192,
+      "supportFraction": 0.7157,
+      "centerSupported": true
+    },
+    {
+      "x": 10.3617,
+      "z": 12.192,
+      "supportFraction": 0.7189,
+      "centerSupported": true
+    },
+    {
+      "x": 10.3531,
+      "z": 12.192,
+      "supportFraction": 0.7221,
+      "centerSupported": true
+    },
+    {
+      "x": 10.3445,
+      "z": 12.192,
+      "supportFraction": 0.7253,
+      "centerSupported": true
+    },
+    {
+      "x": 10.336,
+      "z": 12.192,
+      "supportFraction": 0.7285,
+      "centerSupported": true
+    },
+    {
+      "x": 10.3274,
+      "z": 12.192,
+      "supportFraction": 0.7311,
+      "centerSupported": true
+    },
+    {
+      "x": 10.3188,
+      "z": 12.192,
+      "supportFraction": 0.7328,
+      "centerSupported": true
+    },
+    {
+      "x": 10.3103,
+      "z": 12.192,
+      "supportFraction": 0.7331,
+      "centerSupported": true
+    },
+    {
+      "x": 10.3017,
+      "z": 12.192,
+      "supportFraction": 0.7331,
+      "centerSupported": true
+    },
+    {
+      "x": 10.2931,
+      "z": 12.192,
+      "supportFraction": 0.7331,
+      "centerSupported": true
+    },
+    {
+      "x": 10.2846,
+      "z": 12.192,
+      "supportFraction": 0.7331,
+      "centerSupported": true
+    },
+    {
+      "x": 10.276,
+      "z": 12.192,
+      "supportFraction": 0.7331,
+      "centerSupported": true
+    },
+    {
+      "x": 10.2675,
+      "z": 12.192,
+      "supportFraction": 0.7331,
+      "centerSupported": true
+    },
+    {
+      "x": 10.2589,
+      "z": 12.192,
+      "supportFraction": 0.7331,
+      "centerSupported": true
+    },
+    {
+      "x": 10.2503,
+      "z": 12.192,
+      "supportFraction": 0.7331,
+      "centerSupported": true
+    },
+    {
+      "x": 10.2418,
+      "z": 12.192,
+      "supportFraction": 0.7331,
+      "centerSupported": true
+    },
+    {
+      "x": 10.2332,
+      "z": 12.192,
+      "supportFraction": 0.7331,
+      "centerSupported": true
+    }
+  ],
+  "negativeTests": [
+    {
+      "case": "remove_connector",
+      "centerUnsupportedSamples": 38,
+      "flagged": true
+    },
+    {
+      "case": "truncate_tread_overlap",
+      "centerUnsupportedSamples": 12,
+      "flagged": true
+    },
+    {
+      "case": "truncate_landing_overlap",
+      "centerUnsupportedSamples": 38,
+      "flagged": true
+    }
+  ],
+  "actualTreadTriangleSupportVerified": false,
+  "worldTransformVerified": false,
+  "headroomVerified": false,
+  "gameplayCertified": false,
+  "next": "Actual exported tread triangles and world model transforms are required before player-capsule collision validation."
+}

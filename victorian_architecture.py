@@ -129,6 +129,70 @@ def build_exterior_facade(sc,add,floor):
                     beam(f'ornate-opening-{j}-glass',along,(top+bottom)/2,ow,top-bottom,.115,GLASS)
                     beam(f'ornate-opening-{j}-mullion',along,(top+bottom)/2,.055,top-bottom,.17,BRASS)
                     beam(f'ornate-opening-{j}-sill',along,bottom-.09,ow+.35,.15,.16,STONE)
+            # Architectural Gothic Revival enrichments: exterior-only, individually
+            # named, source-faithful static meshes; no new room or passage created.
+            # Brackets and lancet forms are backed by the compiled exterior openings.
+            for j,(xy,ow,typ) in enumerate(openings):
+                along=(xy[0]-xc)*tx+(xy[1]-zc)*tz
+                perp=abs((xy[0]-xc)*nx+(xy[1]-zc)*nz)
+                if perp>.045 or abs(along)>length/2-.02:continue
+                iswin=typ in ('window','forge-window')
+                top=min(h-.35,2.35 if iswin else 2.45)
+                bottom=.76 if iswin else .05
+                # Sculptural segmented lancet head, with real triangular cheeks.
+                # Mounted forward of the original rectangular opening; no wall edits.
+                crest_y=min(h-.12,top+.33)
+                half=ow/2+.115
+                if crest_y>top+.08:
+                    for sign in (-1,1):
+                        xstart=along+sign*half
+                        xend=along
+                        pieces=max(3,min(8,int(ow*5)))
+                        for k in range(pieces):
+                            f0=k/pieces;f1=(k+1)/pieces
+                            a0=xstart+(xend-xstart)*f0
+                            a1=xstart+(xend-xstart)*f1
+                            y0=top+(crest_y-top)*f0
+                            y1=top+(crest_y-top)*f1
+                            av=(a0+a1)/2;ay=(y0+y1)/2
+                            seg=math.hypot(a1-a0,y1-y0)
+                            # custom angled rectangular stone tracery, aligned along wall
+                            if horizontal:
+                                mesh=trimesh.creation.box(extents=(seg+.015,.060,.095))
+                                angle=math.atan2(y1-y0,a1-a0)
+                                mesh.apply_transform(trimesh.transformations.rotation_matrix(angle,[0,0,1]))
+                                mesh.apply_translation((xc+tx*av+nx*.21,ay,zc+tz*av+nz*.21))
+                            else:
+                                mesh=trimesh.creation.box(extents=(.095,.060,seg+.015))
+                                angle=math.atan2(y1-y0,a1-a0)
+                                mesh.apply_transform(trimesh.transformations.rotation_matrix(-angle,[1,0,0]))
+                                mesh.apply_translation((xc+tx*av+nx*.21,ay,zc+tz*av+nz*.21))
+                            mesh.visual.face_colors=np.asarray(STONE,dtype=np.uint8)
+                            sc.add_geometry(mesh,node_name=f'facade-{segment_no}-gothic-lancet-{j}-{sign}-{k}')
+                # Miniature trefoil tracery bars and iron saddle tie in the window.
+                if iswin and top-bottom>.8:
+                    beam(f'gothic-window-{j}-tracery-high',along,top-.29,ow*.91,.055,.205,BRASS)
+                    for side in (-.24,.24):
+                        beam(f'gothic-window-{j}-tracery-light-{side}',along+side*ow,(top+bottom)/2,.038,top-bottom-.32,.21,BRASS)
+                    for side in (-1,1):
+                        beam(f'gothic-window-{j}-stone-cap-{side}',along+side*(ow/2+.11),top-.05,.12,.20,.205,STONE)
+                else:
+                    beam(f'gothic-door-{j}-keystone',along,crest_y-.02,.18,.21,.215,STONE)
+            # Projecting stone piers only where clear of authored and forged openings.
+            # These add real depth to long uninterrupted wall spans.
+            if length>=2.5:
+                for i in range(1,min(14,math.floor(length/1.65))):
+                    along=-length/2+i*length/max(1,math.floor(length/1.65))
+                    if any(abs(along-((xy[0]-xc)*tx+(xy[1]-zc)*tz))<ow/2+.42 and abs((xy[0]-xc)*nx+(xy[1]-zc)*nz)<.045 for xy,ow,_ in openings):continue
+                    beam(f'gothic-pier-{i}',along,min(h*.5,1.55),.20,min(h*.83,2.8),.24,STONE)
+                    beam(f'gothic-pier-cap-{i}',along,min(h-.22,2.95),.36,.20,.28,GOLD)
+                    beam(f'gothic-pier-plinth-{i}',along,.19,.40,.38,.31,STONE)
+            # Layered carved frieze blocks beneath cornice; dense but capped.
+            if length>1.5:
+                count=min(22,max(2,int(length/.42)))
+                for i in range(count):
+                    along=-length/2+(i+.5)*length/count
+                    beam(f'gothic-dentil-{i}',along,h-.38,.15,.18,.15,STONE)
             # avoid count explosion: a small number of repeating masonry accent courses
             if length>2:
                 n=min(30,math.floor(length/.8))
@@ -144,39 +208,43 @@ def build_roof(sc, add, source):
     if geometry.is_empty:return {'style':'none','limits':'empty footprint'}
     roof=source.get('roof') or {}; kind=str(roof.get('type','hip') or 'hip').lower()
     rise=max(.6,float(roof.get('rise',5))*K); y=roof_height(source)+.10
-    # Rounded set of mesh support sites: exact polygon perimeter vertices, periodic boundary
-    # points and some interior grid points. Each tile is clipped to the real footprint.
+    # Roof reconstruction: build constrained contour support sites, not an
+    # arbitrary rectangular interior height grid. The inset contours produce
+    # consistent pitches, clear mansard breaklines and a broad upper roof plane.
     exterior=geometry.boundary
     inset=max(.6,min(2.2,math.sqrt(geometry.area)*.12))
+    contours=[0.0]
+    if kind=='mansard':contours += [inset*.50,inset,inset*1.45]
+    elif kind=='flat':contours += [.18]
+    else:contours += [inset*.55,inset*1.1,inset*2.2]
     sites=[]
-    for poly in polygons(geometry):
-        for ring in [poly.exterior,*poly.interiors]:
-            n=max(24,min(450,math.ceil(ring.length/.48)))
-            sites.extend([ring.interpolate(ring.length*i/n).coords[0] for i in range(n)])
-    minx,minz,maxx,maxz=geometry.bounds
-    sample_step=max(.65,min(1.5,math.sqrt(geometry.area)/13))
-    for xx in np.arange(minx+sample_step/2,maxx,sample_step):
-        for zz in np.arange(minz+sample_step/2,maxz,sample_step):
-            p=Point(float(xx),float(zz))
-            if geometry.covers(p):sites.append((float(xx),float(zz)))
+    for offset in contours:
+        strip=geometry if offset==0 else geometry.buffer(-offset,join_style=2)
+        for poly in polygons(strip):
+            for ring in [poly.exterior,*poly.interiors]:
+                n=max(12,min(480,math.ceil(ring.length/.30)))
+                sites.extend([ring.interpolate(ring.length*i/n).coords[0] for i in range(n)])
+            if offset>0 and poly.area>.01:
+                pt=poly.representative_point();sites.append((pt.x,pt.y))
+    if len(sites)<3:raise ValueError('Roof support contours generated no points')
     tessellation=triangulate(MultiPoint(sites))
     vertices=[];faces=[]
     def roof_y(x,z):
         if kind=='flat':return y+.18
         dist=Point(x,z).distance(exterior)
-        if kind=='mansard':
-            # strong steep lower slope then upper plateau
-            return y+rise*min(1,dist/inset)
+        if kind=='mansard':return y+rise*min(1,dist/inset)
         return y+rise*min(1,dist/max(inset*2,math.sqrt(geometry.area)*.22))
     for tri in tessellation:
         cut=tri.intersection(geometry)
         for poly in polygons(cut):
             if poly.area<.0001:continue
-            # cut polygons are mostly triangles; fan triangulation exact for convex cuts.
-            ring=list(poly.exterior.coords)[:-1]
-            if len(ring)<3:continue
-            for j in range(1,len(ring)-1):
-                xyz=[(x,roof_y(x,z),z) for x,z in (ring[0],ring[j],ring[j+1])]
+            # Recursively triangulate any polygon with more than three vertices
+            # to avoid concave fan cuts along irregular student roof footprints.
+            for cell in triangulate(poly):
+                if cell.area<.00001 or not poly.covers(cell.representative_point()):continue
+                ring=list(cell.exterior.coords)[:-1]
+                if len(ring)!=3:continue
+                xyz=[(x,roof_y(x,z),z) for x,z in ring]
                 idx=len(vertices);vertices.extend(xyz);faces.extend([(idx,idx+1,idx+2),(idx+2,idx+1,idx)])
     if not faces:raise ValueError('Roof triangulation generated no faces')
     mesh=trimesh.Trimesh(vertices=np.asarray(vertices),faces=np.asarray(faces),process=False)
@@ -240,11 +308,31 @@ def build_roof(sc, add, source):
                     m=trimesh.Trimesh(vertices=np.asarray([a,apex,center]),faces=np.asarray([[0,1,2],[2,1,0]]),process=False)
                     m.visual.face_colors=np.asarray((49,51,62,255),dtype=np.uint8)
                     sc.add_geometry(m,node_name=f'gothic-lancet-dormer-{poly_index}-{j}-{sign}')
-                add(sc,f'gothic-dormer-sill-{poly_index}-{j}',(cx,base+.14,cz),(.11,.13,.11),BRASS)
+                # Shallow *solid* dormer housing (not merely a pair of triangles):
+                # vertical face, side cheeks, pitched gable and glazing aligned to
+                # the true exterior wall. This remains decorative, not a usable
+                # roof opening or additional student-designed space.
+                def dormer_box(tag,along,up,depth,wid,ht,thick,col):
+                    m=trimesh.creation.box(extents=(wid,ht,thick))
+                    # local horizontal axis follows the exterior edge; local
+                    # depth axis points into the roof.
+                    theta=math.atan2(uz,ux)
+                    m.apply_transform(trimesh.transformations.rotation_matrix(-theta,[0,1,0]))
+                    m.apply_translation((cx+ux*along+nx*depth,up,cz+uz*along+nz*depth))
+                    m.visual.face_colors=np.asarray(col,dtype=np.uint8)
+                    sc.add_geometry(m,node_name=f'dormer-{poly_index}-{j}-{tag}',geom_name=f'dormer-{tag}')
+                dormer_box('front-wall',0,base+.50,-.14,width*.84,.90,.11,STONE)
+                dormer_box('dark-window',0,base+.51,-.235,width*.51,.56,.035,GLASS)
+                dormer_box('vertical-mullion',0,base+.51,-.26,.042,.60,.055,BRASS)
+                dormer_box('horizontal-transom',0,base+.55,-.26,width*.54,.043,.055,BRASS)
+                for side in (-1,1):
+                    dormer_box(f'side-jamb-{side}',side*width*.43,base+.53,-.26,.085,.96,.08,STONE)
+                dormer_box('sill',0,base+.14,-.25,width+.25,.10,.22,STONE)
+                dormer_box('ridge-cap',0,base+1.18,.10,.11,.13,.53,DARK)
                 gothic_counts['lancetDormers']+=1
         # More expressive sculpted-but-stylized corner spires.
         for vertex,(xx,zz) in enumerate(ring[:min(28,len(ring))]):
             if vertex%2:continue
             gothic_cone(f'gothic-corner-spire-{poly_index}-{vertex}',(xx,y+.06,zz),.75,.16,STONE)
             gothic_counts['carvedFinials']+=1
-    return {'style':kind,'riseFeet':round(rise/K,2),'method':'actual-room-union-perimeter-heightfield','footprintAreaSqMeters':round(geometry.area,2),'perimeterMeters':round(geometry.length,2),'facadeEdges':segments,'triangles':len(faces),'ornamentation':'Gothic Revival: iron cresting, lancet dormer silhouettes and stone finials', 'gothicDetails':gothic_counts,'limits':'Roof follows nonrectangular footprint but dormers, vertical roof valleys and watertight joints require further modeling.'}
+    return {'style':kind,'riseFeet':round(rise/K,2),'method':'contour-supported-roof-planes-v2','footprintAreaSqMeters':round(geometry.area,2),'perimeterMeters':round(geometry.length,2),'facadeEdges':segments,'triangles':len(faces),'ornamentation':'Gothic Revival: iron cresting, lancet dormer silhouettes and stone finials', 'gothicDetails':gothic_counts,'limits':'Contour roof and dimensional decorative dormers; dormers are not structural openings, watertight roof seams and precise valleys still require validation.'}

@@ -1,0 +1,132 @@
+{
+  "schema": "bh-forge-stair-stage4-v1",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "originalSourcePreserved": true,
+  "purpose": "Separate candidate decks joining last exported stair tread to existing proposed landing. NOT merged into floor or active collider.",
+  "deckStatus": "preview_only",
+  "routes": [
+    {
+      "connectionId": "connection_022",
+      "authoredUpperStairRoom": "fe-f1-regular",
+      "roomBoundsXZ": [
+        3.6576000000000004,
+        6.096,
+        10.3632,
+        14.020800000000001
+      ],
+      "direction": "z",
+      "candidateXZBounds": [
+        4.9668,
+        5.726,
+        10.543,
+        11.677000000000001
+      ],
+      "sizeMeters": {
+        "width": 0.7592,
+        "depth": 1.134
+      },
+      "upperFloorElevationWorldY": 3.048,
+      "lastTreadRiseMeters": 0.0447,
+      "insideAuthoredStairwell": true,
+      "candidateGeometricallyFeasible": true,
+      "playerCollisionCertified": false,
+      "status": "PREVIEW_ONLY_NOT_GAMEPLAY_APPROVED",
+      "previewModel": "houses/ferres-estate/geometry/stair_stage4_preview_connection_022.glb",
+      "previewOverlapAtEachEndMeters": 0.085
+    },
+    {
+      "connectionId": "connection_023",
+      "authoredUpperStairRoom": "fe-f2-regular",
+      "roomBoundsXZ": [
+        3.6576000000000004,
+        6.096,
+        10.3632,
+        14.020800000000001
+      ],
+      "direction": "z",
+      "candidateXZBounds": [
+        4.9668,
+        5.726,
+        10.543,
+        11.677000000000001
+      ],
+      "sizeMeters": {
+        "width": 0.7592,
+        "depth": 1.134
+      },
+      "upperFloorElevationWorldY": 6.096,
+      "lastTreadRiseMeters": 0.0447,
+      "insideAuthoredStairwell": true,
+      "candidateGeometricallyFeasible": true,
+      "playerCollisionCertified": false,
+      "status": "PREVIEW_ONLY_NOT_GAMEPLAY_APPROVED",
+      "previewModel": "houses/ferres-estate/geometry/stair_stage4_preview_connection_023.glb",
+      "previewOverlapAtEachEndMeters": 0.085
+    },
+    {
+      "connectionId": "connection_024",
+      "authoredUpperStairRoom": "fe-f2-spiral",
+      "roomBoundsXZ": [
+        8.5344,
+        12.192,
+        10.3632,
+        14.020800000000001
+      ],
+      "direction": "x",
+      "candidateXZBounds": [
+        9.7394,
+        10.6361,
+        11.658,
+        12.162
+      ],
+      "sizeMeters": {
+        "width": 0.8967,
+        "depth": 0.504
+      },
+      "upperFloorElevationWorldY": 6.096,
+      "lastTreadRiseMeters": 0.0793,
+      "insideAuthoredStairwell": true,
+      "candidateGeometricallyFeasible": true,
+      "playerCollisionCertified": false,
+      "status": "PREVIEW_ONLY_NOT_GAMEPLAY_APPROVED",
+      "previewModel": "houses/ferres-estate/geometry/stair_stage4_preview_connection_024.glb",
+      "previewOverlapAtEachEndMeters": 0.085
+    },
+    {
+      "connectionId": "connection_025",
+      "authoredUpperStairRoom": "fe-f3-regular",
+      "roomBoundsXZ": [
+        3.6576000000000004,
+        6.096,
+        10.3632,
+        14.020800000000001
+      ],
+      "direction": "z",
+      "candidateXZBounds": [
+        4.9668,
+        5.726,
+        10.543,
+        11.677000000000001
+      ],
+      "sizeMeters": {
+        "width": 0.7592,
+        "depth": 1.134
+      },
+      "upperFloorElevationWorldY": 9.144,
+      "lastTreadRiseMeters": 0.0447,
+      "insideAuthoredStairwell": true,
+      "candidateGeometricallyFeasible": true,
+      "playerCollisionCertified": false,
+      "status": "PREVIEW_ONLY_NOT_GAMEPLAY_APPROVED",
+      "previewModel": "houses/ferres-estate/geometry/stair_stage4_preview_connection_025.glb",
+      "previewOverlapAtEachEndMeters": 0.085
+    }
+  ],
+  "mandatoryUnresolved": [
+    "continuous capsule collision and route simulation",
+    "support under entire bridge and receiving floor",
+    "door swing and player approach space",
+    "headroom and landing-guard fall protection",
+    "real-game GLB collision integration"
+  ]
+}

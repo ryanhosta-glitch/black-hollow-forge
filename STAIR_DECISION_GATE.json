@@ -1,0 +1,158 @@
+{
+  "schema": "black-hollow-stair-decision-gate-1.0",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "nonDestructive": true,
+  "canAutoApprove": false,
+  "allPhysicallyCertified": false,
+  "requiresManualReview": true,
+  "links": [
+    {
+      "linkId": "connection_022",
+      "type": "switchback",
+      "floors": [
+        0,
+        1
+      ],
+      "lower": "fe-f0-regular",
+      "upper": "fe-f1-regular",
+      "availableM": [
+        2.438,
+        3.658
+      ],
+      "requiredM": [
+        2.06,
+        4.18
+      ],
+      "status": "UNRESOLVED_REQUIRES_MAGICAL_REPAIR_OR_REDRAW",
+      "issue": "The current proposed flight-and-landing rectangle does not fit this authored footprint.",
+      "certified": false,
+      "preferredAction": "needs_author_choice",
+      "choices": [
+        {
+          "kind": "redraw",
+          "label": "Author redesign",
+          "detail": "Ask the student to choose a compliant stair footprint or a different stair type; never silently resize their rooms."
+        },
+        {
+          "kind": "alternate",
+          "label": "Test an alternate layout",
+          "detail": "Try other engineered variants, such as offset/quarter-turn flights, only after landing, headroom, and swept-capsule checks."
+        },
+        {
+          "kind": "supernatural",
+          "label": "Explicit supernatural connection",
+          "detail": "Offer an opt-in in-world portal or impossible staircase with an auditable narrative explanation; do not label it physically continuous."
+        }
+      ]
+    },
+    {
+      "linkId": "connection_023",
+      "type": "switchback",
+      "floors": [
+        1,
+        2
+      ],
+      "lower": "fe-f1-regular",
+      "upper": "fe-f2-regular",
+      "availableM": [
+        2.438,
+        3.658
+      ],
+      "requiredM": [
+        2.06,
+        4.18
+      ],
+      "status": "UNRESOLVED_REQUIRES_MAGICAL_REPAIR_OR_REDRAW",
+      "issue": "The current proposed flight-and-landing rectangle does not fit this authored footprint.",
+      "certified": false,
+      "preferredAction": "needs_author_choice",
+      "choices": [
+        {
+          "kind": "redraw",
+          "label": "Author redesign",
+          "detail": "Ask the student to choose a compliant stair footprint or a different stair type; never silently resize their rooms."
+        },
+        {
+          "kind": "alternate",
+          "label": "Test an alternate layout",
+          "detail": "Try other engineered variants, such as offset/quarter-turn flights, only after landing, headroom, and swept-capsule checks."
+        },
+        {
+          "kind": "supernatural",
+          "label": "Explicit supernatural connection",
+          "detail": "Offer an opt-in in-world portal or impossible staircase with an auditable narrative explanation; do not label it physically continuous."
+        }
+      ]
+    },
+    {
+      "linkId": "connection_024",
+      "type": "spiral",
+      "floors": [
+        1,
+        2
+      ],
+      "lower": "fe-f1-spiral",
+      "upper": "fe-f2-spiral",
+      "availableM": [
+        3.658,
+        3.658
+      ],
+      "requiredM": null,
+      "status": "FOOTPRINT_CANDIDATE_NOT_CERTIFIED",
+      "issue": "Preliminary footprint can fit; headroom, collisions and landings are not certified.",
+      "certified": false,
+      "preferredAction": "needs_physical_verification",
+      "choices": [
+        {
+          "kind": "redraw",
+          "label": "Author redesign",
+          "detail": "Ask the student to choose a compliant stair footprint or a different stair type; never silently resize their rooms."
+        },
+        {
+          "kind": "supernatural",
+          "label": "Explicit supernatural connection",
+          "detail": "Offer an opt-in in-world portal or impossible staircase with an auditable narrative explanation; do not label it physically continuous."
+        }
+      ]
+    },
+    {
+      "linkId": "connection_025",
+      "type": "switchback",
+      "floors": [
+        2,
+        3
+      ],
+      "lower": "fe-f2-regular",
+      "upper": "fe-f3-regular",
+      "availableM": [
+        2.438,
+        3.658
+      ],
+      "requiredM": [
+        2.06,
+        4.18
+      ],
+      "status": "UNRESOLVED_REQUIRES_MAGICAL_REPAIR_OR_REDRAW",
+      "issue": "The current proposed flight-and-landing rectangle does not fit this authored footprint.",
+      "certified": false,
+      "preferredAction": "needs_author_choice",
+      "choices": [
+        {
+          "kind": "redraw",
+          "label": "Author redesign",
+          "detail": "Ask the student to choose a compliant stair footprint or a different stair type; never silently resize their rooms."
+        },
+        {
+          "kind": "alternate",
+          "label": "Test an alternate layout",
+          "detail": "Try other engineered variants, such as offset/quarter-turn flights, only after landing, headroom, and swept-capsule checks."
+        },
+        {
+          "kind": "supernatural",
+          "label": "Explicit supernatural connection",
+          "detail": "Offer an opt-in in-world portal or impossible staircase with an auditable narrative explanation; do not label it physically continuous."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "spec": "black-hollow-casa",
+  "version": "1.0",
+  "fileIntegrity": "PASS",
+  "gameReady": false,
+  "packagingStatus": "QA_PACKAGE",
+  "architecturalRooms": 26,
+  "floors": 4,
+  "files": 109,
+  "previewBytes": 740812,
+  "issues": [
+    {
+      "severity": "BLOCK_GAME_READY",
+      "code": "STAIR_TRAVERSAL_NOT_CERTIFIED",
+      "detail": "Existing stair audits do not certify all stair transitions for Black Hollow controller."
+    },
+    {
+      "severity": "BLOCK_GAME_READY",
+      "code": "GAME_RUNTIME_NOT_INTEGRATED",
+      "detail": "Black Hollow game does not yet load CASA architectural assets as its primary world."
+    }
+  ]
+}

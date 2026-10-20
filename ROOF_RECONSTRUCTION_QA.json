@@ -1,0 +1,25 @@
+{
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "roofBuild": {
+    "style": "mansard",
+    "riseFeet": 5.0,
+    "method": "contour-supported-roof-planes-v2",
+    "footprintAreaSqMeters": 147.16,
+    "perimeterMeters": 81.69,
+    "facadeEdges": 19,
+    "triangles": 3064,
+    "ornamentation": "Gothic Revival: iron cresting, lancet dormer silhouettes and stone finials",
+    "gothicDetails": {
+      "ironCrestSections": 30,
+      "lancetDormers": 7,
+      "carvedFinials": 10,
+      "slateBands": 0
+    },
+    "limits": "Contour roof and dimensional decorative dormers; dormers are not structural openings, watertight roof seams and precise valleys still require validation."
+  },
+  "dimensionalDormerParts": 70,
+  "meshNodes": 131,
+  "actualCompiledRoof": true,
+  "visualBrowserCertified": false,
+  "physicalRoofOpeningCertified": false
+}

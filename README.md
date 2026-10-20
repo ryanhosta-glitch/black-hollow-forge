@@ -97,3 +97,7 @@ See ARCHITECTURAL_UPGRADE.md and ARCHITECTURAL_FIVE_PASS_QA.json. Real Forge-gen
 
 ## Gothic Revival roof pass
 The Forge compiler now applies Gothic Revival roof ornaments universally while preserving all authored roof type/rise/footprint data. Ferre Estate roof GLB and its manifest are regenerated. See GOTHIC_ROOF_PASS.md for limitations.
+
+
+## New: 3D Stair Prototypes
+Open `spiral_geometry_inspector.html` to view physically modeled candidate staircases; see `SPIRAL_GEOMETRY_README.md`. These are not yet physically certified for gameplay.

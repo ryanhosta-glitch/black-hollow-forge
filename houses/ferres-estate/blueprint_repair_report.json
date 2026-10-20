@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "analysis": "non-mutating-static",
+  "roomCount": 26,
+  "floorCount": 4,
+  "issueCount": 1,
+  "issues": [
+    {
+      "id": "0c6d13386444",
+      "code": "STAIR_PLAYABILITY_UNCERTIFIED",
+      "severity": "advisory",
+      "title": "Stair routes require physical certification",
+      "details": "6 stair-related room(s) found. The room/door graph cannot certify tread collision, safe landings or vertical transitions.",
+      "roomIds": [
+        "fe-f0-regular",
+        "fe-f1-regular",
+        "fe-f1-spiral",
+        "fe-f2-regular",
+        "fe-f2-spiral",
+        "fe-f3-regular"
+      ],
+      "proposals": [
+        {
+          "rank": 1,
+          "action": "Run the stair-route safety and free-walk tests on exported geometry; leave original stairs untouched",
+          "requiresApproval": true
+        }
+      ],
+      "autoApplied": false
+    }
+  ],
+  "limitations": [
+    "Door graph ignores freeform removed-wall/openPlanWith paths",
+    "No collision mesh or headroom certification",
+    "No automatic repair is applied",
+    "No cross-floor staircase certification"
+  ],
+  "sourceSHA256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d"
+}

@@ -1,0 +1,15 @@
+{
+  "status": "passed-with-warnings",
+  "checks": {
+    "rooms": 26,
+    "floors": 4,
+    "originalBlueprintHashMatches": true,
+    "geometryFilesPresent": true
+  },
+  "gameplayCertified": false,
+  "failures": [],
+  "warnings": [
+    "Stair gate exists, but geometrical and physical certification must be verified in live game",
+    "True staircase collision and end-to-end Black Hollow game integration NOT certified"
+  ]
+}

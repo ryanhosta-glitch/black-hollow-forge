@@ -1,0 +1,37 @@
+{
+  "floorGeometry": {
+    "floor_00.glb": {
+      "panelRails": 284,
+      "cornices": 58,
+      "doorReveals": 27,
+      "medallionPieces": 3,
+      "totalMeshes": 1074
+    },
+    "floor_01.glb": {
+      "panelRails": 272,
+      "cornices": 70,
+      "doorReveals": 33,
+      "medallionPieces": 12,
+      "totalMeshes": 1445
+    },
+    "floor_02.glb": {
+      "panelRails": 272,
+      "cornices": 68,
+      "doorReveals": 30,
+      "medallionPieces": 12,
+      "totalMeshes": 1434
+    },
+    "floor_03.glb": {
+      "panelRails": 276,
+      "cornices": 66,
+      "doorReveals": 27,
+      "medallionPieces": 12,
+      "totalMeshes": 1427
+    }
+  },
+  "sourceBlueprintUnchanged": true,
+  "sourceSHA256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "browserVisualQA": "NOT_PERFORMED",
+  "collisionCertified": false,
+  "sourceRoomDimensionsChanged": false
+}

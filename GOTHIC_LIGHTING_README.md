@@ -1,0 +1,3 @@
+# Gothic Lighting Studio — viewer checkpoint
+
+New main-estate viewer lighting moods: Daylight, Gaslit Twilight, Haunted Night, Spectral Moonlight. A fixed pool of 3 lights on touch devices or 7 on desktop follows nearby room centers, with cooler colors for some crypt/laboratory rooms. This avoids placing an active dynamic light in every room. Original .haunt files, model geometry and gameplay code are unchanged. Existing atmospheric weather and material effects remain. No cast-shadow maps are enabled for dynamic lights; this is not volumetric lighting or GLB-baked lightmaps. Requires real-browser visual/performance validation.

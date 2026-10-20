@@ -1,0 +1,11 @@
+{
+  "newTest": "inspectGuidedStairRoute",
+  "footprintSamplesMeters": 0.08,
+  "turnLimitDegrees": 30,
+  "capsuleClearanceAddedMeters": 0.12,
+  "protectsBothFloorFootprints": true,
+  "previousUturnWillBeRejected": true,
+  "gameplayCertified": false,
+  "browserVerified": false,
+  "hauntSourceModified": false
+}

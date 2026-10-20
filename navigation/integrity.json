@@ -1,0 +1,1643 @@
+{
+  "schema": "black-hollow-integrity-1",
+  "doors": [
+    {
+      "id": "fe-f0-door1-a",
+      "roomId": "fe-f0-room1",
+      "floorIndex": 0,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        19.25,
+        7.0
+      ],
+      "shared": "fe-f0-door1",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f0-hall"
+    },
+    {
+      "id": "fe-f0-door2-a",
+      "roomId": "fe-f0-room2",
+      "floorIndex": 0,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        28.75,
+        7.0
+      ],
+      "shared": "fe-f0-door2",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f0-hall"
+    },
+    {
+      "id": "fe-f0-door3-a",
+      "roomId": "fe-f0-room3",
+      "floorIndex": 0,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        19.25,
+        27.0
+      ],
+      "shared": "fe-f0-door3",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f0-hall"
+    },
+    {
+      "id": "fe-f0-door4-a",
+      "roomId": "fe-f0-room4",
+      "floorIndex": 0,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        28.75,
+        27.0
+      ],
+      "shared": "fe-f0-door4",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f0-hall"
+    },
+    {
+      "id": "fe-f0-door1-b",
+      "roomId": "fe-f0-hall",
+      "floorIndex": 0,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.15217391304347827,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        20.75,
+        7.0
+      ],
+      "shared": "fe-f0-door1",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f0-room1"
+    },
+    {
+      "id": "fe-f0-door2-b",
+      "roomId": "fe-f0-hall",
+      "floorIndex": 0,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.15217391304347827,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        27.25,
+        7.0
+      ],
+      "shared": "fe-f0-door2",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f0-room2"
+    },
+    {
+      "id": "fe-f0-door3-b",
+      "roomId": "fe-f0-hall",
+      "floorIndex": 0,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.5869565217391305,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        25.5,
+        28.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        20.75,
+        27.0
+      ],
+      "shared": "fe-f0-door3",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f0-room3"
+    },
+    {
+      "id": "fe-f0-door4-b",
+      "roomId": "fe-f0-hall",
+      "floorIndex": 0,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5869565217391305,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        25.5,
+        28.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        27.25,
+        27.0
+      ],
+      "shared": "fe-f0-door4",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f0-room4"
+    },
+    {
+      "id": "fe-f0-regular-entry-a",
+      "roomId": "fe-f0-hall",
+      "floorIndex": 0,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.8695652173913043,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        38.5,
+        41.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        40.0
+      ],
+      "interiorApproachFeet": [
+        20.75,
+        40.0
+      ],
+      "shared": "fe-f0-regular-entry",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f0-regular"
+    },
+    {
+      "id": "fe-f0-regular-entry-b",
+      "roomId": "fe-f0-regular",
+      "floorIndex": 0,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        4.5,
+        7.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        40.0
+      ],
+      "interiorApproachFeet": [
+        19.25,
+        40.0
+      ],
+      "shared": "fe-f0-regular-entry",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f0-hall"
+    },
+    {
+      "id": "fe-f1-door1-a",
+      "roomId": "fe-f1-room1",
+      "floorIndex": 1,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        19.25,
+        7.0
+      ],
+      "shared": "fe-f1-door1",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f1-hall"
+    },
+    {
+      "id": "fe-main-outside-entrance",
+      "roomId": "fe-f1-room1",
+      "floorIndex": 1,
+      "type": "door",
+      "style": "wood",
+      "wall": "top",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        8.5,
+        11.5
+      ],
+      "wallCenterFeet": [
+        10.0,
+        14.0
+      ],
+      "interiorApproachFeet": [
+        10.0,
+        13.25
+      ],
+      "shared": null,
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true
+    },
+    {
+      "id": "fe-f1-door2-a",
+      "roomId": "fe-f1-room2",
+      "floorIndex": 1,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        28.75,
+        7.0
+      ],
+      "shared": "fe-f1-door2",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f1-hall"
+    },
+    {
+      "id": "fe-f1-door3-a",
+      "roomId": "fe-f1-room3",
+      "floorIndex": 1,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        19.25,
+        27.0
+      ],
+      "shared": "fe-f1-door3",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f1-hall"
+    },
+    {
+      "id": "fe-f1-door4-a",
+      "roomId": "fe-f1-room4",
+      "floorIndex": 1,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        28.75,
+        27.0
+      ],
+      "shared": "fe-f1-door4",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f1-hall"
+    },
+    {
+      "id": "fe-f1-door1-b",
+      "roomId": "fe-f1-hall",
+      "floorIndex": 1,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.15217391304347827,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        20.75,
+        7.0
+      ],
+      "shared": "fe-f1-door1",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f1-room1"
+    },
+    {
+      "id": "fe-f1-door2-b",
+      "roomId": "fe-f1-hall",
+      "floorIndex": 1,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.15217391304347827,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        27.25,
+        7.0
+      ],
+      "shared": "fe-f1-door2",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f1-room2"
+    },
+    {
+      "id": "fe-f1-door3-b",
+      "roomId": "fe-f1-hall",
+      "floorIndex": 1,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.5869565217391305,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        25.5,
+        28.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        20.75,
+        27.0
+      ],
+      "shared": "fe-f1-door3",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f1-room3"
+    },
+    {
+      "id": "fe-f1-door4-b",
+      "roomId": "fe-f1-hall",
+      "floorIndex": 1,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5869565217391305,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        25.5,
+        28.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        27.25,
+        27.0
+      ],
+      "shared": "fe-f1-door4",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f1-room4"
+    },
+    {
+      "id": "fe-f1-regular-entry-a",
+      "roomId": "fe-f1-hall",
+      "floorIndex": 1,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.8695652173913043,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        38.5,
+        41.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        40.0
+      ],
+      "interiorApproachFeet": [
+        20.75,
+        40.0
+      ],
+      "shared": "fe-f1-regular-entry",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f1-regular"
+    },
+    {
+      "id": "fe-f1-spiral-entry-a",
+      "roomId": "fe-f1-hall",
+      "floorIndex": 1,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.8695652173913043,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        38.5,
+        41.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        40.0
+      ],
+      "interiorApproachFeet": [
+        27.25,
+        40.0
+      ],
+      "shared": "fe-f1-spiral-entry",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f1-spiral"
+    },
+    {
+      "id": "fe-f1-regular-entry-b",
+      "roomId": "fe-f1-regular",
+      "floorIndex": 1,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        4.5,
+        7.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        40.0
+      ],
+      "interiorApproachFeet": [
+        19.25,
+        40.0
+      ],
+      "shared": "fe-f1-regular-entry",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f1-hall"
+    },
+    {
+      "id": "fe-f1-spiral-entry-b",
+      "roomId": "fe-f1-spiral",
+      "floorIndex": 1,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        4.5,
+        7.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        40.0
+      ],
+      "interiorApproachFeet": [
+        28.75,
+        40.0
+      ],
+      "shared": "fe-f1-spiral-entry",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f1-hall"
+    },
+    {
+      "id": "fe-f2-door1-a",
+      "roomId": "fe-f2-room1",
+      "floorIndex": 2,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        19.25,
+        7.0
+      ],
+      "shared": "fe-f2-door1",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f2-hall"
+    },
+    {
+      "id": "fe-f2-door2-a",
+      "roomId": "fe-f2-room2",
+      "floorIndex": 2,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        28.75,
+        7.0
+      ],
+      "shared": "fe-f2-door2",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f2-hall"
+    },
+    {
+      "id": "fe-f2-door3-a",
+      "roomId": "fe-f2-room3",
+      "floorIndex": 2,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        19.25,
+        27.0
+      ],
+      "shared": "fe-f2-door3",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f2-hall"
+    },
+    {
+      "id": "fe-f2-door4-a",
+      "roomId": "fe-f2-room4",
+      "floorIndex": 2,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        28.75,
+        27.0
+      ],
+      "shared": "fe-f2-door4",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f2-hall"
+    },
+    {
+      "id": "fe-f2-door1-b",
+      "roomId": "fe-f2-hall",
+      "floorIndex": 2,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.15217391304347827,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        20.75,
+        7.0
+      ],
+      "shared": "fe-f2-door1",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f2-room1"
+    },
+    {
+      "id": "fe-f2-door2-b",
+      "roomId": "fe-f2-hall",
+      "floorIndex": 2,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.15217391304347827,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        27.25,
+        7.0
+      ],
+      "shared": "fe-f2-door2",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f2-room2"
+    },
+    {
+      "id": "fe-f2-door3-b",
+      "roomId": "fe-f2-hall",
+      "floorIndex": 2,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.5869565217391305,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        25.5,
+        28.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        20.75,
+        27.0
+      ],
+      "shared": "fe-f2-door3",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f2-room3"
+    },
+    {
+      "id": "fe-f2-door4-b",
+      "roomId": "fe-f2-hall",
+      "floorIndex": 2,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5869565217391305,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        25.5,
+        28.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        27.25,
+        27.0
+      ],
+      "shared": "fe-f2-door4",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f2-room4"
+    },
+    {
+      "id": "fe-f2-regular-entry-a",
+      "roomId": "fe-f2-hall",
+      "floorIndex": 2,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.8695652173913043,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        38.5,
+        41.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        40.0
+      ],
+      "interiorApproachFeet": [
+        20.75,
+        40.0
+      ],
+      "shared": "fe-f2-regular-entry",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f2-regular"
+    },
+    {
+      "id": "fe-f2-spiral-entry-a",
+      "roomId": "fe-f2-hall",
+      "floorIndex": 2,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.8695652173913043,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        38.5,
+        41.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        40.0
+      ],
+      "interiorApproachFeet": [
+        27.25,
+        40.0
+      ],
+      "shared": "fe-f2-spiral-entry",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f2-spiral"
+    },
+    {
+      "id": "fe-f2-regular-entry-b",
+      "roomId": "fe-f2-regular",
+      "floorIndex": 2,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        4.5,
+        7.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        40.0
+      ],
+      "interiorApproachFeet": [
+        19.25,
+        40.0
+      ],
+      "shared": "fe-f2-regular-entry",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f2-hall"
+    },
+    {
+      "id": "fe-f2-spiral-entry-b",
+      "roomId": "fe-f2-spiral",
+      "floorIndex": 2,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        4.5,
+        7.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        40.0
+      ],
+      "interiorApproachFeet": [
+        28.75,
+        40.0
+      ],
+      "shared": "fe-f2-spiral-entry",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f2-hall"
+    },
+    {
+      "id": "fe-f3-door1-a",
+      "roomId": "fe-f3-room1",
+      "floorIndex": 3,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        19.25,
+        7.0
+      ],
+      "shared": "fe-f3-door1",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f3-hall"
+    },
+    {
+      "id": "fe-f3-door2-a",
+      "roomId": "fe-f3-room2",
+      "floorIndex": 3,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        28.75,
+        7.0
+      ],
+      "shared": "fe-f3-door2",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f3-hall"
+    },
+    {
+      "id": "fe-f3-door3-a",
+      "roomId": "fe-f3-room3",
+      "floorIndex": 3,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        19.25,
+        27.0
+      ],
+      "shared": "fe-f3-door3",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f3-hall"
+    },
+    {
+      "id": "fe-f3-door4-a",
+      "roomId": "fe-f3-room4",
+      "floorIndex": 3,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        28.75,
+        27.0
+      ],
+      "shared": "fe-f3-door4",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f3-hall"
+    },
+    {
+      "id": "fe-f3-door1-b",
+      "roomId": "fe-f3-hall",
+      "floorIndex": 3,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.15217391304347827,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        20.75,
+        7.0
+      ],
+      "shared": "fe-f3-door1",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f3-room1"
+    },
+    {
+      "id": "fe-f3-door2-b",
+      "roomId": "fe-f3-hall",
+      "floorIndex": 3,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.15217391304347827,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        5.5,
+        8.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        7.0
+      ],
+      "interiorApproachFeet": [
+        27.25,
+        7.0
+      ],
+      "shared": "fe-f3-door2",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f3-room2"
+    },
+    {
+      "id": "fe-f3-door3-b",
+      "roomId": "fe-f3-hall",
+      "floorIndex": 3,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.5869565217391305,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        25.5,
+        28.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        20.75,
+        27.0
+      ],
+      "shared": "fe-f3-door3",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f3-room3"
+    },
+    {
+      "id": "fe-f3-door4-b",
+      "roomId": "fe-f3-hall",
+      "floorIndex": 3,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5869565217391305,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        25.5,
+        28.5
+      ],
+      "wallCenterFeet": [
+        28.0,
+        27.0
+      ],
+      "interiorApproachFeet": [
+        27.25,
+        27.0
+      ],
+      "shared": "fe-f3-door4",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f3-room4"
+    },
+    {
+      "id": "fe-f3-regular-entry-a",
+      "roomId": "fe-f3-hall",
+      "floorIndex": 3,
+      "type": "door",
+      "style": "wood",
+      "wall": "left",
+      "relativePosition": 0.8695652173913043,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        38.5,
+        41.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        40.0
+      ],
+      "interiorApproachFeet": [
+        20.75,
+        40.0
+      ],
+      "shared": "fe-f3-regular-entry",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f3-regular"
+    },
+    {
+      "id": "fe-f3-regular-entry-b",
+      "roomId": "fe-f3-regular",
+      "floorIndex": 3,
+      "type": "door",
+      "style": "wood",
+      "wall": "right",
+      "relativePosition": 0.5,
+      "widthFeet": 3.0,
+      "spanFeet": [
+        4.5,
+        7.5
+      ],
+      "wallCenterFeet": [
+        20.0,
+        40.0
+      ],
+      "interiorApproachFeet": [
+        19.25,
+        40.0
+      ],
+      "shared": "fe-f3-regular-entry",
+      "animation": {
+        "kind": "hinge",
+        "state": "open",
+        "pivot": "generated-at-runtime"
+      },
+      "traversable": true,
+      "targetRoomId": "fe-f3-hall"
+    }
+  ],
+  "windows": [],
+  "stairs": [
+    {
+      "roomId": "fe-f0-regular",
+      "floorIndex": 0,
+      "embedded": false,
+      "layout": "u",
+      "arrivalFeet": [
+        16.0,
+        40.0
+      ]
+    },
+    {
+      "roomId": "fe-f1-regular",
+      "floorIndex": 1,
+      "embedded": false,
+      "layout": "u",
+      "arrivalFeet": [
+        16.0,
+        40.0
+      ]
+    },
+    {
+      "roomId": "fe-f1-spiral",
+      "floorIndex": 1,
+      "embedded": false,
+      "layout": "spiral",
+      "arrivalFeet": [
+        34.0,
+        40.0
+      ]
+    },
+    {
+      "roomId": "fe-f2-regular",
+      "floorIndex": 2,
+      "embedded": false,
+      "layout": "u",
+      "arrivalFeet": [
+        16.0,
+        40.0
+      ]
+    },
+    {
+      "roomId": "fe-f2-spiral",
+      "floorIndex": 2,
+      "embedded": false,
+      "layout": "spiral",
+      "arrivalFeet": [
+        34.0,
+        40.0
+      ]
+    },
+    {
+      "roomId": "fe-f3-regular",
+      "floorIndex": 3,
+      "embedded": false,
+      "layout": "u",
+      "arrivalFeet": [
+        16.0,
+        40.0
+      ]
+    }
+  ],
+  "elevatorShafts": [],
+  "floorOpenings": [],
+  "safeRoomPoints": {
+    "fe-f0-room1": {
+      "floorIndex": 0,
+      "pointFeet": [
+        10.0,
+        7.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f0-room2": {
+      "floorIndex": 0,
+      "pointFeet": [
+        38.0,
+        7.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f0-room3": {
+      "floorIndex": 0,
+      "pointFeet": [
+        10.0,
+        27.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f0-room4": {
+      "floorIndex": 0,
+      "pointFeet": [
+        38.0,
+        27.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f0-hall": {
+      "floorIndex": 0,
+      "pointFeet": [
+        24.0,
+        23.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f0-regular": {
+      "floorIndex": 0,
+      "pointFeet": [
+        16.0,
+        40.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f1-room1": {
+      "floorIndex": 1,
+      "pointFeet": [
+        10.0,
+        7.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f1-room2": {
+      "floorIndex": 1,
+      "pointFeet": [
+        38.0,
+        7.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f1-room3": {
+      "floorIndex": 1,
+      "pointFeet": [
+        10.0,
+        27.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f1-room4": {
+      "floorIndex": 1,
+      "pointFeet": [
+        38.0,
+        27.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f1-hall": {
+      "floorIndex": 1,
+      "pointFeet": [
+        24.0,
+        23.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f1-regular": {
+      "floorIndex": 1,
+      "pointFeet": [
+        16.0,
+        40.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f1-spiral": {
+      "floorIndex": 1,
+      "pointFeet": [
+        34.0,
+        40.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f2-room1": {
+      "floorIndex": 2,
+      "pointFeet": [
+        10.0,
+        7.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f2-room2": {
+      "floorIndex": 2,
+      "pointFeet": [
+        38.0,
+        7.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f2-room3": {
+      "floorIndex": 2,
+      "pointFeet": [
+        10.0,
+        27.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f2-room4": {
+      "floorIndex": 2,
+      "pointFeet": [
+        38.0,
+        27.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f2-hall": {
+      "floorIndex": 2,
+      "pointFeet": [
+        24.0,
+        23.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f2-regular": {
+      "floorIndex": 2,
+      "pointFeet": [
+        16.0,
+        40.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f2-spiral": {
+      "floorIndex": 2,
+      "pointFeet": [
+        34.0,
+        40.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f3-room1": {
+      "floorIndex": 3,
+      "pointFeet": [
+        10.0,
+        7.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f3-room2": {
+      "floorIndex": 3,
+      "pointFeet": [
+        38.0,
+        7.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f3-room3": {
+      "floorIndex": 3,
+      "pointFeet": [
+        10.0,
+        27.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f3-room4": {
+      "floorIndex": 3,
+      "pointFeet": [
+        38.0,
+        27.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f3-hall": {
+      "floorIndex": 3,
+      "pointFeet": [
+        24.0,
+        23.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    },
+    "fe-f3-regular": {
+      "floorIndex": 3,
+      "pointFeet": [
+        16.0,
+        40.0
+      ],
+      "status": "candidate-needs-runtime-collision-check"
+    }
+  },
+  "warnings": [],
+  "runtimeRequirements": [
+    "verify player capsule clearance",
+    "validate door hinges and furniture collision",
+    "create slab cutouts for stairwells and shafts",
+    "do not instantiate closed solid doors across passages"
+  ],
+  "counts": {
+    "doors": 45,
+    "windows": 0,
+    "stairs": 6,
+    "shafts": 0,
+    "warnings": 0
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "black-hollow-forge-stage6-v1",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "sourceUnchanged": true,
+  "connectionId": "connection_024",
+  "previewModel": "houses/ferres-estate/geometry/stair_stage6_preview_connection_024.glb",
+  "priorStage5Failure": "intersection of tread/connector/landing lateral bounds too narrow for strict 0.32 m capsule-radius footprint",
+  "authoredRoomXZ": [
+    8.5344,
+    12.192,
+    10.3632,
+    14.020800000000001
+  ],
+  "authoredLastTreadXZ": [
+    10.5511,
+    12.0122,
+    11.628,
+    12.192
+  ],
+  "landingXZ": [
+    8.8744,
+    9.8244,
+    11.592,
+    12.792
+  ],
+  "newConnectorXZ": [
+    9.7394,
+    10.6361,
+    11.592,
+    12.312
+  ],
+  "playerRadiusMeters": 0.32,
+  "lateralWidthsMeters": {
+    "tread": 0.564,
+    "connector": 0.72,
+    "landing": 1.2
+  },
+  "checks": {
+    "connectorWithinAuthoredStairwell": true,
+    "axialOverlapTreadAndLanding": true,
+    "connectorLateralWidthAtLeastCapsuleDiameter": true,
+    "connectorLandingCommonCenterExists": true,
+    "authoredTreadLateralWidthAtLeastCapsuleDiameter": false,
+    "fullCapsuleSweepValidated": false,
+    "headroomAndGuardsValidated": false,
+    "worldTransformValidated": false,
+    "gameRuntimeIntegrated": false
+  },
+  "negativeTests": {
+    "undersizedConnectorRejected": true,
+    "offStairwellConnectorRejected": true,
+    "badLandingOverlapRejected": true,
+    "shortTreadDetected": true
+  },
+  "candidateValidForPreview": true,
+  "fullySupportedFromLastTread": false,
+  "playableCertified": false,
+  "blockingReason": "Authored final tread lateral dimension is smaller than full capsule diameter under conservative three-surface-footprint rule; 3D support and swept collisions not yet established.",
+  "nextRequiredTests": [
+    "Evaluate capsule support using true triangle geometry and union of lower and upper walking surfaces instead of AABB intersection",
+    "Check last-tread centerline support during transfer",
+    "Resolve stair-to-floor model local/world transform",
+    "Verify 1.74m capsule headroom and stair rails",
+    "Test in original Black Hollow physics runtime"
+  ]
+}

@@ -1,0 +1,19 @@
+/** Forge 2.7-2.8: reusable furniture finish and cinematic director.
+ * Non-destructive scene overlays; authored architecture stays byte-identical.
+ */
+export function createFurniturePhotorealism(THREE,{mobile=false}={}){
+ const shadows=new THREE.Group();shadows.name='forge-furniture-contact-shadows';
+ const cache=new Map();
+ function shadowTexture(){if(cache.has('shadow'))return cache.get('shadow');const canvas=document.createElement('canvas');canvas.width=canvas.height=128;const ctx=canvas.getContext('2d');const g=ctx.createRadialGradient(64,64,9,64,64,64);g.addColorStop(0,'rgba(10,8,8,.58)');g.addColorStop(.34,'rgba(15,12,12,.38)');g.addColorStop(1,'rgba(10,8,8,0)');ctx.fillStyle=g;ctx.fillRect(0,0,128,128);const t=new THREE.CanvasTexture(canvas);cache.set('shadow',t);return t}
+ function enrich(group){let meshes=0;group.traverse(m=>{if(!m.isMesh||!m.material)return;const name=m.name.toLowerCase();const mats=Array.isArray(m.material)?m.material:[m.material];const prepared=mats.map(src=>{if(src.userData?.forgePbrEnhanced)return src;const mat=src.clone();mat.userData={...src.userData,forgePbrEnhanced:true};const velvet=/velvet|tuft|padded|seat|cushion|piping/.test(name);const wood=/leg|carcass|wood|cornice|molding|drawer|shelf|back|rail|apron|table|desk|cabinet|wardrobe|bookcase/.test(name);const metal=/brass|handle|knob|gilt|keyhole|inlay/.test(name);if(velvet){mat.roughness=Math.max(.82,mat.roughness??.8);mat.metalness=0;if(mat.map&&!mobile){mat.bumpMap=mat.map;mat.bumpScale=.011}}else if(metal){mat.metalness=Math.min(.86,Math.max(.55,mat.metalness??.6));mat.roughness=Math.max(.32,mat.roughness??.4)}else if(wood){mat.roughness=Math.min(.8,Math.max(.4,mat.roughness??.55));if(mat.map&&!mobile){mat.bumpMap=mat.map;mat.bumpScale=.014}}return mat});m.material=Array.isArray(m.material)?prepared:prepared[0];m.castShadow=!mobile;m.receiveShadow=true;meshes++});return meshes}
+ function ground(floorGroup){if(!floorGroup)return 0;let added=0;for(const item of floorGroup.children){if(!item.name?.startsWith('forge-furniture-'))continue;let bb=new THREE.Box3().setFromObject(item);if(bb.isEmpty())continue;const size=bb.getSize(new THREE.Vector3()),p=bb.getCenter(new THREE.Vector3());const plane=new THREE.Mesh(new THREE.PlaneGeometry(Math.max(.45,size.x*1.2),Math.max(.45,size.z*1.2)),new THREE.MeshBasicMaterial({map:shadowTexture(),transparent:true,depthWrite:false,opacity:mobile?.25:.40,polygonOffset:true,polygonOffsetFactor:-1}));plane.rotation.x=-Math.PI/2;plane.position.set(p.x,bb.min.y+.008,p.z);plane.name='forge-contact-'+item.name;plane.renderOrder=2;floorGroup.add(plane);added++}return added}
+ return {enrich,ground};
+}
+export function createWowzaDirector(THREE,scene,renderer,{mobile=false}={}){
+ const warm=new THREE.SpotLight(0xf8c78d,mobile?0:36,72,Math.PI/5,.8,1.7);warm.name='wowza-warm-edge';warm.position.set(14,18,-12);warm.target.position.set(8,0,7);scene.add(warm,warm.target);
+ const rim=new THREE.DirectionalLight(0x9caee7,mobile?.15:.72);rim.position.set(-19,30,-15);rim.name='wowza-moon-rim';scene.add(rim);
+ const prior={toneMapping:renderer.toneMapping,toneMappingExposure:renderer.toneMappingExposure};let active=true;
+ function setEnabled(on){active=!!on;warm.visible=active&&!mobile;rim.visible=active;renderer.toneMapping=active?THREE.ACESFilmicToneMapping:prior.toneMapping;renderer.toneMappingExposure=active?1.05:prior.toneMappingExposure}
+ setEnabled(true);
+ return {setEnabled,get enabled(){return active},updateBounds(box){if(box?.isEmpty?.())return;const c=box.getCenter(new THREE.Vector3()),s=box.getSize(new THREE.Vector3());warm.position.set(c.x-s.x*.48,c.y+s.y*.68+3,c.z+s.z*.5);warm.target.position.copy(c);rim.position.set(c.x+s.x*.65,c.y+s.y+10,c.z-s.z*.65);warm.target.updateMatrixWorld();},dispose(){scene.remove(warm,warm.target,rim);renderer.toneMapping=prior.toneMapping;renderer.toneMappingExposure=prior.toneMappingExposure}};
+}

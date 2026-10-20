@@ -1,0 +1,8 @@
+{
+  "schema": "blackhollow.placement-review.v1",
+  "authoredBlueprintModified": false,
+  "checks": [],
+  "scannedRooms": 26,
+  "scannedFurnishings": 30,
+  "limitations": "Static 2D bounds plus approximate fixture headroom, not mesh collision or gameplay certification; camera anchors need live visual testing."
+}

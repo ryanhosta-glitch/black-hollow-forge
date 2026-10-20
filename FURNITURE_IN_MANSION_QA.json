@@ -1,0 +1,8 @@
+{
+  "schema": "black-hollow.furniture-in-mansion-qa.v1",
+  "assets": 30,
+  "pages": "furniture_in_mansion.html",
+  "glbFloors": 4,
+  "navigationCertified": false,
+  "visualBrowserTested": false
+}

@@ -1,0 +1,558 @@
+{
+  "schema": "bh-switchback-turn-path-v2",
+  "units": "meters",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "sourceModified": false,
+  "scope": "diagnostic landing-aware centerline and collider preview; NOT active Rapier physics",
+  "playerRadiusMeters": 0.28,
+  "routes": [
+    {
+      "id": "connection_022",
+      "kind": "switchback",
+      "originalVertices": 19,
+      "sampledVertices": 25,
+      "originalMaxHorizontalStepMeters": 0.6753,
+      "candidateMaxHorizontalStepMeters": 0.255,
+      "centerlineInsideShaftWithPlayerRadius": false,
+      "outOfShaftSamples": 2,
+      "centerline": [
+        [
+          4.3968,
+          0.12467,
+          10.503
+        ],
+        [
+          4.3968,
+          0.294,
+          10.758
+        ],
+        [
+          4.3968,
+          0.46333,
+          11.013
+        ],
+        [
+          4.3968,
+          0.63267,
+          11.268
+        ],
+        [
+          4.3968,
+          0.802,
+          11.523
+        ],
+        [
+          4.3968,
+          0.97133,
+          11.778
+        ],
+        [
+          4.3968,
+          1.14067,
+          12.033
+        ],
+        [
+          4.3968,
+          1.31,
+          12.288
+        ],
+        [
+          4.3968,
+          1.47933,
+          12.543
+        ],
+        [
+          4.5168,
+          1.5055,
+          12.66175
+        ],
+        [
+          4.6368,
+          1.53166,
+          12.7805
+        ],
+        [
+          4.7568,
+          1.55783,
+          12.89925
+        ],
+        [
+          4.8768,
+          1.584,
+          13.018
+        ],
+        [
+          4.9968,
+          1.60017,
+          12.89925
+        ],
+        [
+          5.1168,
+          1.61634,
+          12.7805
+        ],
+        [
+          5.2368,
+          1.6325,
+          12.66175
+        ],
+        [
+          5.3568,
+          1.64867,
+          12.543
+        ],
+        [
+          5.3568,
+          1.818,
+          12.288
+        ],
+        [
+          5.3568,
+          1.98733,
+          12.033
+        ],
+        [
+          5.3568,
+          2.15667,
+          11.778
+        ],
+        [
+          5.3568,
+          2.326,
+          11.523
+        ],
+        [
+          5.3568,
+          2.49533,
+          11.268
+        ],
+        [
+          5.3568,
+          2.66467,
+          11.013
+        ],
+        [
+          5.3568,
+          2.834,
+          10.758
+        ],
+        [
+          5.3568,
+          3.00333,
+          10.503
+        ]
+      ],
+      "previewModel": "geometry/stair_turn_path_preview_connection_022.glb",
+      "blockingRequirements": [
+        "CAPSULE_CENTERLINE_SHAFT_BOUNDARY",
+        "TURN_SUPPORT_UNVERIFIED_ON_EXPORTED_LANDING",
+        "HEADROOM_UNTESTED",
+        "LIVE_RAPIER_TRAVERSAL_UNTESTED"
+      ],
+      "livePhysicsPass": false,
+      "gameplayCertified": false
+    },
+    {
+      "id": "connection_023",
+      "kind": "switchback",
+      "originalVertices": 19,
+      "sampledVertices": 25,
+      "originalMaxHorizontalStepMeters": 0.6753,
+      "candidateMaxHorizontalStepMeters": 0.255,
+      "centerlineInsideShaftWithPlayerRadius": false,
+      "outOfShaftSamples": 2,
+      "centerline": [
+        [
+          4.3968,
+          3.17267,
+          10.503
+        ],
+        [
+          4.3968,
+          3.342,
+          10.758
+        ],
+        [
+          4.3968,
+          3.51133,
+          11.013
+        ],
+        [
+          4.3968,
+          3.68067,
+          11.268
+        ],
+        [
+          4.3968,
+          3.85,
+          11.523
+        ],
+        [
+          4.3968,
+          4.01933,
+          11.778
+        ],
+        [
+          4.3968,
+          4.18867,
+          12.033
+        ],
+        [
+          4.3968,
+          4.358,
+          12.288
+        ],
+        [
+          4.3968,
+          4.52733,
+          12.543
+        ],
+        [
+          4.5168,
+          4.5535,
+          12.66175
+        ],
+        [
+          4.6368,
+          4.57967,
+          12.7805
+        ],
+        [
+          4.7568,
+          4.60583,
+          12.89925
+        ],
+        [
+          4.8768,
+          4.632,
+          13.018
+        ],
+        [
+          4.9968,
+          4.64817,
+          12.89925
+        ],
+        [
+          5.1168,
+          4.66433,
+          12.7805
+        ],
+        [
+          5.2368,
+          4.6805,
+          12.66175
+        ],
+        [
+          5.3568,
+          4.69667,
+          12.543
+        ],
+        [
+          5.3568,
+          4.866,
+          12.288
+        ],
+        [
+          5.3568,
+          5.03533,
+          12.033
+        ],
+        [
+          5.3568,
+          5.20467,
+          11.778
+        ],
+        [
+          5.3568,
+          5.374,
+          11.523
+        ],
+        [
+          5.3568,
+          5.54333,
+          11.268
+        ],
+        [
+          5.3568,
+          5.71267,
+          11.013
+        ],
+        [
+          5.3568,
+          5.882,
+          10.758
+        ],
+        [
+          5.3568,
+          6.05133,
+          10.503
+        ]
+      ],
+      "previewModel": "geometry/stair_turn_path_preview_connection_023.glb",
+      "blockingRequirements": [
+        "CAPSULE_CENTERLINE_SHAFT_BOUNDARY",
+        "TURN_SUPPORT_UNVERIFIED_ON_EXPORTED_LANDING",
+        "HEADROOM_UNTESTED",
+        "LIVE_RAPIER_TRAVERSAL_UNTESTED"
+      ],
+      "livePhysicsPass": false,
+      "gameplayCertified": false
+    },
+    {
+      "id": "connection_024",
+      "kind": "spiral",
+      "originalVertices": 18,
+      "sampledVertices": 18,
+      "originalMaxHorizontalStepMeters": 0.564,
+      "candidateMaxHorizontalStepMeters": 0.564,
+      "centerlineInsideShaftWithPlayerRadius": true,
+      "outOfShaftSamples": 0,
+      "centerline": [
+        [
+          11.28167,
+          3.138,
+          12.474
+        ],
+        [
+          11.21458,
+          3.30733,
+          12.75618
+        ],
+        [
+          11.0448,
+          3.47667,
+          12.97032
+        ],
+        [
+          10.79281,
+          3.646,
+          13.09058
+        ],
+        [
+          10.3632,
+          3.81533,
+          13.10245
+        ],
+        [
+          9.93359,
+          3.98467,
+          13.09058
+        ],
+        [
+          9.6816,
+          4.154,
+          12.97032
+        ],
+        [
+          9.51182,
+          4.32333,
+          12.75618
+        ],
+        [
+          9.44473,
+          4.49267,
+          12.474
+        ],
+        [
+          9.44473,
+          4.662,
+          11.91
+        ],
+        [
+          9.51182,
+          4.83133,
+          11.62782
+        ],
+        [
+          9.6816,
+          5.00067,
+          11.41368
+        ],
+        [
+          9.93359,
+          5.17,
+          11.29342
+        ],
+        [
+          10.3632,
+          5.33933,
+          11.28155
+        ],
+        [
+          10.79281,
+          5.50867,
+          11.29342
+        ],
+        [
+          11.0448,
+          5.678,
+          11.41368
+        ],
+        [
+          11.21458,
+          5.84733,
+          11.62782
+        ],
+        [
+          11.28167,
+          6.01667,
+          11.91
+        ]
+      ],
+      "previewModel": "geometry/stair_turn_path_preview_connection_024.glb",
+      "blockingRequirements": [
+        "CENTERLINE_UNDERSAMPLED",
+        "HEADROOM_UNTESTED",
+        "LIVE_RAPIER_TRAVERSAL_UNTESTED"
+      ],
+      "livePhysicsPass": false,
+      "gameplayCertified": false
+    },
+    {
+      "id": "connection_025",
+      "kind": "switchback",
+      "originalVertices": 19,
+      "sampledVertices": 25,
+      "originalMaxHorizontalStepMeters": 0.6753,
+      "candidateMaxHorizontalStepMeters": 0.255,
+      "centerlineInsideShaftWithPlayerRadius": false,
+      "outOfShaftSamples": 2,
+      "centerline": [
+        [
+          4.3968,
+          6.22067,
+          10.503
+        ],
+        [
+          4.3968,
+          6.39,
+          10.758
+        ],
+        [
+          4.3968,
+          6.55933,
+          11.013
+        ],
+        [
+          4.3968,
+          6.72867,
+          11.268
+        ],
+        [
+          4.3968,
+          6.898,
+          11.523
+        ],
+        [
+          4.3968,
+          7.06733,
+          11.778
+        ],
+        [
+          4.3968,
+          7.23667,
+          12.033
+        ],
+        [
+          4.3968,
+          7.406,
+          12.288
+        ],
+        [
+          4.3968,
+          7.57533,
+          12.543
+        ],
+        [
+          4.5168,
+          7.6015,
+          12.66175
+        ],
+        [
+          4.6368,
+          7.62766,
+          12.7805
+        ],
+        [
+          4.7568,
+          7.65383,
+          12.89925
+        ],
+        [
+          4.8768,
+          7.68,
+          13.018
+        ],
+        [
+          4.9968,
+          7.69617,
+          12.89925
+        ],
+        [
+          5.1168,
+          7.71234,
+          12.7805
+        ],
+        [
+          5.2368,
+          7.7285,
+          12.66175
+        ],
+        [
+          5.3568,
+          7.74467,
+          12.543
+        ],
+        [
+          5.3568,
+          7.914,
+          12.288
+        ],
+        [
+          5.3568,
+          8.08333,
+          12.033
+        ],
+        [
+          5.3568,
+          8.25267,
+          11.778
+        ],
+        [
+          5.3568,
+          8.422,
+          11.523
+        ],
+        [
+          5.3568,
+          8.59133,
+          11.268
+        ],
+        [
+          5.3568,
+          8.76067,
+          11.013
+        ],
+        [
+          5.3568,
+          8.93,
+          10.758
+        ],
+        [
+          5.3568,
+          9.09933,
+          10.503
+        ]
+      ],
+      "previewModel": "geometry/stair_turn_path_preview_connection_025.glb",
+      "blockingRequirements": [
+        "CAPSULE_CENTERLINE_SHAFT_BOUNDARY",
+        "TURN_SUPPORT_UNVERIFIED_ON_EXPORTED_LANDING",
+        "HEADROOM_UNTESTED",
+        "LIVE_RAPIER_TRAVERSAL_UNTESTED"
+      ],
+      "livePhysicsPass": false,
+      "gameplayCertified": false
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "ferres": {
+    "rooms": 26,
+    "floors": 4,
+    "bytes": 27846,
+    "sha256": "29187009b39a6e9cde5e5455f23fba0c1141c0bde4956c82873323ecda3c5700",
+    "package_integrity": "PASS",
+    "gameplayCertified": false
+  },
+  "one_room": {
+    "rooms": 1,
+    "floors": 1,
+    "bytes": 5102,
+    "sha256": "6a0bc969f42309d6a17975e3f03786571ce9341b86be465713e26384b542e2b0",
+    "package_integrity": "PASS",
+    "gameplayCertified": false
+  },
+  "student_multi": {
+    "rooms": 2,
+    "floors": 1,
+    "bytes": 6295,
+    "sha256": "499198479b1296495583c6577d452603f4843c9fc5437c6855ed76e4c6048032",
+    "package_integrity": "PASS",
+    "gameplayCertified": false
+  }
+}

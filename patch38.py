@@ -1,0 +1,10 @@
+from pathlib import Path
+p=Path(__file__).parent/'casa_publisher.html'
+s=p.read_text()
+s=s.replace("$('export').disabled=!files.length||!n;","$('export').disabled=!files.length||!n;")
+s=s.replace("const m=structuredClone(manifest);m.name=name;m.casa={...m.casa,creator:id.architect,description:id.description,slug:id.slug};const overrides={'manifest.json':enc.encode(JSON.stringify(m,null,2)+'\\n'),'casa_identity.json':enc.encode(JSON.stringify(id,null,2)+'\\n')};const entries=[];", "const m=structuredClone(manifest);m.name=name;id.street={...(id.street||{}),mailboxName:name,preview:'exterior/street_preview.glb'};m.casa={...m.casa,houseId:id.houseId,creator:id.architect,description:id.description,slug:id.slug,gameplayCertified:false};const overrides={'manifest.json':enc.encode(JSON.stringify(m,null,2)+'\\n'),'casa_identity.json':enc.encode(JSON.stringify(id,null,2)+'\\n')};const entries=[];")
+s=s.replace("entries.push([file,bytes]);$('prog')", "entries.push([file,bytes]);$('prog')")
+s=s.replace("const blob=zipStore(entries),url=URL.createObjectURL(blob)", "const v=structuredClone(report);v.gameReady=false;v.packagingStatus='QA_PACKAGE';v.files=entries.length;v.entries={};for(const [path,bytes] of entries){if(['manifest.json','casa_identity.json','casa_validation.json'].includes(path))continue;const hash=await crypto.subtle.digest('SHA-256',bytes);v.entries[path]={bytes:bytes.length,sha256:Array.from(new Uint8Array(hash),b=>b.toString(16).padStart(2,'0')).join('')};}const vi=entries.findIndex(([path])=>path==='casa_validation.json');if(vi<0)throw Error('CASA QA report missing');entries[vi][1]=enc.encode(JSON.stringify(v,null,2)+'\\n');const blob=zipStore(entries),url=URL.createObjectURL(blob)")
+s=s.replace('CASA 1.0 · Mansion Publisher','CASA 1.0 · Mansion Publisher (3.8)')
+s=s.replace('and customized name/creator in the CASA manifest.', 'and synchronized identity metadata with fresh SHA-256 checksums for packaged assets. The house ID remains stable when a mailbox name changes.')
+p.write_text(s)

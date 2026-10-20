@@ -1,0 +1,194 @@
+{
+  "schema": "black-hollow-forge-stair-stage5-v1",
+  "inputCheckpoint": "Stage4",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "originalSourceUnchanged": true,
+  "capsuleHeightMeters": 1.74,
+  "capsuleRadiusMeters": 0.32,
+  "maximumStepUpMeters": 0.23,
+  "methods": "Analytic surface AABBs from exported preview GLBs and Stage3 measured top-tread/landing bounds; 1 cm axial point-sampling. Not a full triangle-mesh capsule simulation.",
+  "connections": [
+    {
+      "connectionId": "connection_022",
+      "previewModel": "houses/ferres-estate/geometry/stair_stage4_preview_connection_022.glb",
+      "geometryBoundsWorld": [
+        [
+          4.9668,
+          2.983,
+          10.543
+        ],
+        [
+          5.726,
+          3.048,
+          11.677
+        ]
+      ],
+      "axialOverlapTopMeters": 0.085,
+      "axialOverlapLandingMeters": 0.085,
+      "capsuleRadiusMeters": 0.32,
+      "lateralPlayerCenterWindowMeters": 0.1192,
+      "verticalStepRiseMeters": 0.0447,
+      "planarSupportGaps": 0,
+      "excessiveSteps": [],
+      "checks": {
+        "previewModelLoads": true,
+        "previewBoundsMatchMetadata": true,
+        "axialSurfaceOverlapBothEnds": true,
+        "capsuleCenterHasLateralSpace": true,
+        "continuousPlanarSupport": true,
+        "riseWithinStepLimit": true,
+        "floorWorldCoordinateTransformKnown": false,
+        "full3DCapsuleHeadroomValidated": false,
+        "realGameCollisionIntegrated": false
+      },
+      "geometryPreviewPassed": true,
+      "playableCertified": false,
+      "status": "PREVIEW_ONLY_BLOCKED_PENDING_WORLD_ALIGNMENT_AND_3D_COLLISION"
+    },
+    {
+      "connectionId": "connection_023",
+      "previewModel": "houses/ferres-estate/geometry/stair_stage4_preview_connection_023.glb",
+      "geometryBoundsWorld": [
+        [
+          4.9668,
+          6.031,
+          10.543
+        ],
+        [
+          5.726,
+          6.096,
+          11.677
+        ]
+      ],
+      "axialOverlapTopMeters": 0.085,
+      "axialOverlapLandingMeters": 0.085,
+      "capsuleRadiusMeters": 0.32,
+      "lateralPlayerCenterWindowMeters": 0.1192,
+      "verticalStepRiseMeters": 0.0447,
+      "planarSupportGaps": 0,
+      "excessiveSteps": [],
+      "checks": {
+        "previewModelLoads": true,
+        "previewBoundsMatchMetadata": true,
+        "axialSurfaceOverlapBothEnds": true,
+        "capsuleCenterHasLateralSpace": true,
+        "continuousPlanarSupport": true,
+        "riseWithinStepLimit": true,
+        "floorWorldCoordinateTransformKnown": false,
+        "full3DCapsuleHeadroomValidated": false,
+        "realGameCollisionIntegrated": false
+      },
+      "geometryPreviewPassed": true,
+      "playableCertified": false,
+      "status": "PREVIEW_ONLY_BLOCKED_PENDING_WORLD_ALIGNMENT_AND_3D_COLLISION"
+    },
+    {
+      "connectionId": "connection_024",
+      "previewModel": "houses/ferres-estate/geometry/stair_stage4_preview_connection_024.glb",
+      "geometryBoundsWorld": [
+        [
+          9.7394,
+          6.031,
+          11.658
+        ],
+        [
+          10.6361,
+          6.096,
+          12.162
+        ]
+      ],
+      "axialOverlapTopMeters": 0.085,
+      "axialOverlapLandingMeters": 0.085,
+      "capsuleRadiusMeters": 0.32,
+      "lateralPlayerCenterWindowMeters": 0,
+      "verticalStepRiseMeters": 0.0793,
+      "planarSupportGaps": 0,
+      "excessiveSteps": [],
+      "checks": {
+        "previewModelLoads": true,
+        "previewBoundsMatchMetadata": true,
+        "axialSurfaceOverlapBothEnds": true,
+        "capsuleCenterHasLateralSpace": false,
+        "continuousPlanarSupport": true,
+        "riseWithinStepLimit": true,
+        "floorWorldCoordinateTransformKnown": false,
+        "full3DCapsuleHeadroomValidated": false,
+        "realGameCollisionIntegrated": false
+      },
+      "geometryPreviewPassed": false,
+      "playableCertified": false,
+      "status": "PREVIEW_ONLY_BLOCKED_PENDING_WORLD_ALIGNMENT_AND_3D_COLLISION"
+    },
+    {
+      "connectionId": "connection_025",
+      "previewModel": "houses/ferres-estate/geometry/stair_stage4_preview_connection_025.glb",
+      "geometryBoundsWorld": [
+        [
+          4.9668,
+          9.079,
+          10.543
+        ],
+        [
+          5.726,
+          9.144,
+          11.677
+        ]
+      ],
+      "axialOverlapTopMeters": 0.085,
+      "axialOverlapLandingMeters": 0.085,
+      "capsuleRadiusMeters": 0.32,
+      "lateralPlayerCenterWindowMeters": 0.1192,
+      "verticalStepRiseMeters": 0.0447,
+      "planarSupportGaps": 0,
+      "excessiveSteps": [],
+      "checks": {
+        "previewModelLoads": true,
+        "previewBoundsMatchMetadata": true,
+        "axialSurfaceOverlapBothEnds": true,
+        "capsuleCenterHasLateralSpace": true,
+        "continuousPlanarSupport": true,
+        "riseWithinStepLimit": true,
+        "floorWorldCoordinateTransformKnown": false,
+        "full3DCapsuleHeadroomValidated": false,
+        "realGameCollisionIntegrated": false
+      },
+      "geometryPreviewPassed": true,
+      "playableCertified": false,
+      "status": "PREVIEW_ONLY_BLOCKED_PENDING_WORLD_ALIGNMENT_AND_3D_COLLISION"
+    }
+  ],
+  "negativeTests": [
+    {
+      "test": "missing_connector",
+      "detected": true,
+      "method": "remove middle segment from axial support coverage"
+    },
+    {
+      "test": "player_too_wide",
+      "detected": true,
+      "method": "width<2*radius"
+    },
+    {
+      "test": "too_tall_step",
+      "detected": true,
+      "method": "rise>stepUp 0.23m"
+    },
+    {
+      "test": "low_beam",
+      "detected": true,
+      "method": "unverified headroom must block certification"
+    },
+    {
+      "test": "unresolved_world_transform",
+      "detected": true,
+      "method": "unverified local-to-world landing transform blocks certification"
+    }
+  ],
+  "certifiedRoutes": 0,
+  "mandatoryRemaining": [
+    "confirm world transform of landing GLBs against export coordinate systems",
+    "triangle-mesh capsule sweep against compiled floors and stair steps",
+    "ceiling clearance and stair guards",
+    "in-browser physics walkthrough integrated into Black Hollow"
+  ]
+}

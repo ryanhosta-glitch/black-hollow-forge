@@ -1,0 +1,163 @@
+{
+  "entryRoomId": "fe-f1-room1",
+  "connections": [
+    {
+      "a": "fe-f0-room1",
+      "b": "fe-f0-hall",
+      "type": "architect-door",
+      "shared": "fe-f0-door1"
+    },
+    {
+      "a": "fe-f0-room2",
+      "b": "fe-f0-hall",
+      "type": "architect-door",
+      "shared": "fe-f0-door2"
+    },
+    {
+      "a": "fe-f0-room3",
+      "b": "fe-f0-hall",
+      "type": "architect-door",
+      "shared": "fe-f0-door3"
+    },
+    {
+      "a": "fe-f0-room4",
+      "b": "fe-f0-hall",
+      "type": "architect-door",
+      "shared": "fe-f0-door4"
+    },
+    {
+      "a": "fe-f0-hall",
+      "b": "fe-f0-regular",
+      "type": "architect-door",
+      "shared": "fe-f0-regular-entry"
+    },
+    {
+      "a": "fe-f1-room1",
+      "b": "fe-f1-hall",
+      "type": "architect-door",
+      "shared": "fe-f1-door1"
+    },
+    {
+      "a": "fe-f1-room2",
+      "b": "fe-f1-hall",
+      "type": "architect-door",
+      "shared": "fe-f1-door2"
+    },
+    {
+      "a": "fe-f1-room3",
+      "b": "fe-f1-hall",
+      "type": "architect-door",
+      "shared": "fe-f1-door3"
+    },
+    {
+      "a": "fe-f1-room4",
+      "b": "fe-f1-hall",
+      "type": "architect-door",
+      "shared": "fe-f1-door4"
+    },
+    {
+      "a": "fe-f1-hall",
+      "b": "fe-f1-regular",
+      "type": "architect-door",
+      "shared": "fe-f1-regular-entry"
+    },
+    {
+      "a": "fe-f1-hall",
+      "b": "fe-f1-spiral",
+      "type": "architect-door",
+      "shared": "fe-f1-spiral-entry"
+    },
+    {
+      "a": "fe-f2-room1",
+      "b": "fe-f2-hall",
+      "type": "architect-door",
+      "shared": "fe-f2-door1"
+    },
+    {
+      "a": "fe-f2-room2",
+      "b": "fe-f2-hall",
+      "type": "architect-door",
+      "shared": "fe-f2-door2"
+    },
+    {
+      "a": "fe-f2-room3",
+      "b": "fe-f2-hall",
+      "type": "architect-door",
+      "shared": "fe-f2-door3"
+    },
+    {
+      "a": "fe-f2-room4",
+      "b": "fe-f2-hall",
+      "type": "architect-door",
+      "shared": "fe-f2-door4"
+    },
+    {
+      "a": "fe-f2-hall",
+      "b": "fe-f2-regular",
+      "type": "architect-door",
+      "shared": "fe-f2-regular-entry"
+    },
+    {
+      "a": "fe-f2-hall",
+      "b": "fe-f2-spiral",
+      "type": "architect-door",
+      "shared": "fe-f2-spiral-entry"
+    },
+    {
+      "a": "fe-f3-room1",
+      "b": "fe-f3-hall",
+      "type": "architect-door",
+      "shared": "fe-f3-door1"
+    },
+    {
+      "a": "fe-f3-room2",
+      "b": "fe-f3-hall",
+      "type": "architect-door",
+      "shared": "fe-f3-door2"
+    },
+    {
+      "a": "fe-f3-room3",
+      "b": "fe-f3-hall",
+      "type": "architect-door",
+      "shared": "fe-f3-door3"
+    },
+    {
+      "a": "fe-f3-room4",
+      "b": "fe-f3-hall",
+      "type": "architect-door",
+      "shared": "fe-f3-door4"
+    },
+    {
+      "a": "fe-f3-hall",
+      "b": "fe-f3-regular",
+      "type": "architect-door",
+      "shared": "fe-f3-regular-entry"
+    },
+    {
+      "a": "fe-f0-regular",
+      "b": "fe-f1-regular",
+      "type": "architect-stairs"
+    },
+    {
+      "a": "fe-f1-regular",
+      "b": "fe-f2-regular",
+      "type": "architect-stairs"
+    },
+    {
+      "a": "fe-f1-spiral",
+      "b": "fe-f2-spiral",
+      "type": "architect-stairs"
+    },
+    {
+      "a": "fe-f2-regular",
+      "b": "fe-f3-regular",
+      "type": "architect-stairs"
+    }
+  ],
+  "repairs": [],
+  "issues": [],
+  "allRoomsReachable": true,
+  "rooms": 26,
+  "architectConnections": 26,
+  "magicalConnections": 0
+}

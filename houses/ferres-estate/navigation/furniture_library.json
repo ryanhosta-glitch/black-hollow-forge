@@ -1,0 +1,789 @@
+{
+  "schema": "black-hollow.furniture-library.v1",
+  "source": "furnishing_plan-derived, additive",
+  "roomCount": 15,
+  "assetCount": 30,
+  "note": "Room placements are proposed, not certified; original .haunt untouched. Actions are demonstrated in inspector, not in main game.",
+  "assets": [
+    {
+      "id": "fe-f0-room1-furn-0",
+      "roomId": "fe-f0-room1",
+      "roomName": "The Forgotten Crypt",
+      "floor": 0,
+      "archetype": "stone_sarcophagus",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 2.073,
+        "z": 1.025
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f0-room1-furn-1",
+      "roomId": "fe-f0-room1",
+      "roomName": "The Forgotten Crypt",
+      "floor": 0,
+      "archetype": "memorial_stone",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 4.145,
+        "z": 3.492
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f0-room2-furn-0",
+      "roomId": "fe-f0-room2",
+      "roomName": "Alchemist\u2019s Laboratory",
+      "floor": 0,
+      "archetype": "experiment_bench",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 10.607,
+        "z": 0.925
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f0-room2-furn-1",
+      "roomId": "fe-f0-room2",
+      "roomName": "Alchemist\u2019s Laboratory",
+      "floor": 0,
+      "archetype": "apparatus_shelf",
+      "behavior": "cabinet",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 12.68,
+        "z": 3.492
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f0-room3-furn-0",
+      "roomId": "fe-f0-room3",
+      "roomName": "Cursed Wine Cellar",
+      "floor": 0,
+      "archetype": "barrel_rack",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 2.073,
+        "z": 6.946
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f0-room3-furn-1",
+      "roomId": "fe-f0-room3",
+      "roomName": "Cursed Wine Cellar",
+      "floor": 0,
+      "archetype": "wine_cabinet",
+      "behavior": "cabinet",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 4.145,
+        "z": 9.563
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f0-room4-furn-0",
+      "roomId": "fe-f0-room4",
+      "roomName": "The Whispering Vault",
+      "floor": 0,
+      "archetype": "reinforced_cabinet",
+      "behavior": "cabinet",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 10.607,
+        "z": 6.936
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f0-room4-furn-1",
+      "roomId": "fe-f0-room4",
+      "roomName": "The Whispering Vault",
+      "floor": 0,
+      "archetype": "ledger_table",
+      "behavior": "drawer",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 12.68,
+        "z": 9.453
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f1-room2-furn-0",
+      "roomId": "fe-f1-room2",
+      "roomName": "The Speaking Portrait Gallery",
+      "floor": 1,
+      "archetype": "portrait_stand",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 10.607,
+        "z": 0.77
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f1-room2-furn-1",
+      "roomId": "fe-f1-room2",
+      "roomName": "The Speaking Portrait Gallery",
+      "floor": 1,
+      "archetype": "velvet_bench",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 12.68,
+        "z": 3.367
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f1-room3-furn-0",
+      "roomId": "fe-f1-room3",
+      "roomName": "The Midnight Library",
+      "floor": 1,
+      "archetype": "bookcase",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 2.073,
+        "z": 6.906
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f1-room3-furn-1",
+      "roomId": "fe-f1-room3",
+      "roomName": "The Midnight Library",
+      "floor": 1,
+      "archetype": "reading_desk",
+      "behavior": "drawer",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 4.145,
+        "z": 9.443
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f1-room4-furn-0",
+      "roomId": "fe-f1-room4",
+      "roomName": "The Phantom Ballroom",
+      "floor": 1,
+      "archetype": "velvet_settee",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 10.607,
+        "z": 7.036
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f1-room4-furn-1",
+      "roomId": "fe-f1-room4",
+      "roomName": "The Phantom Ballroom",
+      "floor": 1,
+      "archetype": "gilded_cabinet",
+      "behavior": "cabinet",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 12.68,
+        "z": 9.538
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f2-room1-furn-0",
+      "roomId": "fe-f2-room1",
+      "roomName": "The Seer\u2019s Chamber",
+      "floor": 2,
+      "archetype": "seer_table",
+      "behavior": "drawer",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 2.073,
+        "z": 0.96
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f2-room1-furn-1",
+      "roomId": "fe-f2-room1",
+      "roomName": "The Seer\u2019s Chamber",
+      "floor": 2,
+      "archetype": "reliquary",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 4.145,
+        "z": 3.447
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f2-room2-furn-0",
+      "roomId": "fe-f2-room2",
+      "roomName": "Moonlit Conservatory",
+      "floor": 2,
+      "archetype": "botanical_workbench",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 10.607,
+        "z": 0.9
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f2-room2-furn-1",
+      "roomId": "fe-f2-room2",
+      "roomName": "Moonlit Conservatory",
+      "floor": 2,
+      "archetype": "planter",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 12.68,
+        "z": 3.292
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f2-room3-furn-0",
+      "roomId": "fe-f2-room3",
+      "roomName": "The Dollmaker\u2019s Workshop",
+      "floor": 2,
+      "archetype": "craft_workbench",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 2.073,
+        "z": 7.021
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f2-room3-furn-1",
+      "roomId": "fe-f2-room3",
+      "roomName": "The Dollmaker\u2019s Workshop",
+      "floor": 2,
+      "archetype": "parts_cabinet",
+      "behavior": "cabinet",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 4.145,
+        "z": 9.538
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f2-room4-furn-0",
+      "roomId": "fe-f2-room4",
+      "roomName": "The Mirror Room",
+      "floor": 2,
+      "archetype": "standing_mirror",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 10.607,
+        "z": 6.856
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f2-room4-furn-1",
+      "roomId": "fe-f2-room4",
+      "roomName": "The Mirror Room",
+      "floor": 2,
+      "archetype": "draped_table",
+      "behavior": "drawer",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 12.68,
+        "z": 9.503
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f3-room1-furn-0",
+      "roomId": "fe-f3-room1",
+      "roomName": "The Founder\u2019s Study",
+      "floor": 3,
+      "archetype": "writing_desk",
+      "behavior": "drawer",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 2.073,
+        "z": 0.96
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f3-room1-furn-1",
+      "roomId": "fe-f3-room1",
+      "roomName": "The Founder\u2019s Study",
+      "floor": 3,
+      "archetype": "filing_cabinet",
+      "behavior": "cabinet",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 4.145,
+        "z": 3.442
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f3-room2-furn-0",
+      "roomId": "fe-f3-room2",
+      "roomName": "The Raven Observatory",
+      "floor": 3,
+      "archetype": "chart_cabinet",
+      "behavior": "cabinet",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 10.607,
+        "z": 0.83
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f3-room2-furn-1",
+      "roomId": "fe-f3-room2",
+      "roomName": "The Raven Observatory",
+      "floor": 3,
+      "archetype": "instrument_desk",
+      "behavior": "drawer",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 12.68,
+        "z": 3.342
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f3-room3-furn-0",
+      "roomId": "fe-f3-room3",
+      "roomName": "The Spell Archive",
+      "floor": 3,
+      "archetype": "bookcase",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 2.073,
+        "z": 6.906
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f3-room3-furn-1",
+      "roomId": "fe-f3-room3",
+      "roomName": "The Spell Archive",
+      "floor": 3,
+      "archetype": "reading_desk",
+      "behavior": "drawer",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 4.145,
+        "z": 9.443
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f3-room4-furn-0",
+      "roomId": "fe-f3-room4",
+      "roomName": "The Attic Nursery",
+      "floor": 3,
+      "archetype": "antique_crib",
+      "behavior": "inspect",
+      "actions": [
+        "inspect"
+      ],
+      "positionMeters": {
+        "x": 10.607,
+        "z": 7.096
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    },
+    {
+      "id": "fe-f3-room4-furn-1",
+      "roomId": "fe-f3-room4",
+      "roomName": "The Attic Nursery",
+      "floor": 3,
+      "archetype": "old_wardrobe",
+      "behavior": "cabinet",
+      "actions": [
+        "open",
+        "close",
+        "toggle"
+      ],
+      "positionMeters": {
+        "x": 12.68,
+        "z": 9.523
+      },
+      "sittable": false,
+      "modelStatus": "visual-prototype",
+      "placementStatus": "requires-clearance-verification",
+      "collisionCertified": false,
+      "gameplayIntegrated": false,
+      "authoredSourceModified": false,
+      "state": {
+        "open": false,
+        "occupied": false
+      }
+    }
+  ]
+}

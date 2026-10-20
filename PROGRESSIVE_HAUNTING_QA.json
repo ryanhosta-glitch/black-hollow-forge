@@ -1,0 +1,16 @@
+{
+  "schema": "black-hollow-forge-secrets-v2",
+  "rooms": 26,
+  "eligible": 16,
+  "secrets": 6,
+  "tiers": {
+    "concealed_history": 3,
+    "supernatural_disturbance": 2,
+    "impossible_architecture": 1
+  },
+  "sourcePreserved": true,
+  "noNewPhysicalOpenings": true,
+  "returnsDefinedForImpossible": true,
+  "browserVisualTesting": "not_performed",
+  "runtimeIntegration": "not_implemented"
+}

@@ -1,0 +1,185 @@
+{
+  "schema": "forge-serpent-mansion-probe-1.0",
+  "linkId": "connection_024",
+  "lowerFloorModel": "geometry/floor_01.glb",
+  "upperFloorModel": "geometry/floor_02.glb",
+  "stairCandidateModel": "geometry/stair_repair_candidates/connection_024_aligned_spiral.glb",
+  "lowerFloorElevation": 3.048,
+  "upperFloorElevation": 6.096,
+  "worldCenter": {
+    "x": 10.3632,
+    "z": 12.192
+  },
+  "routeLocalMeters": [
+    {
+      "x": -1.829,
+      "y": 0,
+      "z": 0,
+      "phase": "lower-door"
+    },
+    {
+      "x": -0.93,
+      "y": 0,
+      "z": 0,
+      "phase": "lower-approach"
+    },
+    {
+      "x": -0.8075,
+      "y": 0.1693,
+      "z": -0.1424,
+      "phase": "tread-01"
+    },
+    {
+      "x": -0.7101,
+      "y": 0.3387,
+      "z": -0.41,
+      "phase": "tread-02"
+    },
+    {
+      "x": -0.5271,
+      "y": 0.508,
+      "z": -0.6282,
+      "phase": "tread-03"
+    },
+    {
+      "x": -0.2805,
+      "y": 0.6773,
+      "z": -0.7705,
+      "phase": "tread-04"
+    },
+    {
+      "x": -0.0,
+      "y": 0.8467,
+      "z": -0.82,
+      "phase": "tread-05"
+    },
+    {
+      "x": 0.2805,
+      "y": 1.016,
+      "z": -0.7705,
+      "phase": "tread-06"
+    },
+    {
+      "x": 0.5271,
+      "y": 1.1853,
+      "z": -0.6282,
+      "phase": "tread-07"
+    },
+    {
+      "x": 0.7101,
+      "y": 1.3547,
+      "z": -0.41,
+      "phase": "tread-08"
+    },
+    {
+      "x": 0.8075,
+      "y": 1.524,
+      "z": -0.1424,
+      "phase": "tread-09"
+    },
+    {
+      "x": 0.8075,
+      "y": 1.6933,
+      "z": 0.1424,
+      "phase": "tread-10"
+    },
+    {
+      "x": 0.7101,
+      "y": 1.8627,
+      "z": 0.41,
+      "phase": "tread-11"
+    },
+    {
+      "x": 0.5271,
+      "y": 2.032,
+      "z": 0.6282,
+      "phase": "tread-12"
+    },
+    {
+      "x": 0.2805,
+      "y": 2.2013,
+      "z": 0.7705,
+      "phase": "tread-13"
+    },
+    {
+      "x": 0.0,
+      "y": 2.3707,
+      "z": 0.82,
+      "phase": "tread-14"
+    },
+    {
+      "x": -0.2805,
+      "y": 2.54,
+      "z": 0.7705,
+      "phase": "tread-15"
+    },
+    {
+      "x": -0.5271,
+      "y": 2.7093,
+      "z": 0.6282,
+      "phase": "tread-16"
+    },
+    {
+      "x": -0.7101,
+      "y": 2.8787,
+      "z": 0.41,
+      "phase": "tread-17"
+    },
+    {
+      "x": -0.8075,
+      "y": 3.048,
+      "z": 0.1424,
+      "phase": "tread-18"
+    },
+    {
+      "x": -0.93,
+      "y": 3.048,
+      "z": 0,
+      "phase": "upper-approach"
+    },
+    {
+      "x": -1.829,
+      "y": 3.048,
+      "z": 0,
+      "phase": "upper-door"
+    }
+  ],
+  "slabRecords": [
+    {
+      "floorIndex": 2,
+      "shaftRoomId": "fe-f2-spiral",
+      "connectionId": "connection_024",
+      "rectMeters": [
+        8.654399999999999,
+        10.4881,
+        12.072000000000001,
+        13.8959
+      ],
+      "shaftFootprint": {
+        "minX": 8.5344,
+        "maxX": 12.192,
+        "minZ": 10.3632,
+        "maxZ": 14.0208
+      },
+      "certified": false,
+      "floorMesh": "floor_02.glb",
+      "slabFragments": 4,
+      "removedGeometryNames": 1,
+      "cutoutAreaSqMeters": 11.646497280000007,
+      "remainingSlabAreaSqMeters": 1.7315404799999965,
+      "playerCollisionStatus": "UNTESTED",
+      "headroomStatus": "UNTESTED"
+    }
+  ],
+  "originalSourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "studentSourceUnmodified": true,
+  "isVisualCandidate": true,
+  "gameplayCertified": false,
+  "notYetProven": [
+    "exact floor-GLB transform and geometry collisions",
+    "player capsule swept intersection",
+    "full helix headroom",
+    "door threshold physics",
+    "staircases beyond Serpent Spiral"
+  ]
+}

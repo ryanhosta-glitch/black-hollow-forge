@@ -1,0 +1,18 @@
+{
+  "status": "QA_VALIDATED_NOT_GAME_READY",
+  "checks": {
+    "javascript_syntax": "PASS node --check",
+    "browser_compiler_logic": "PASS scripted DOM / Node VM, two different .haunt samples",
+    "casa_zip_integrity": "PASS Python zipfile",
+    "casa_sha256_inventory": "PASS for each sample",
+    "glb_magic": "PASS for both samples",
+    "interactive_browser_playwright": "BLOCKED_BY_ENVIRONMENT_BROWSER_POLICY",
+    "actual_black_hollow_gameplay": "NOT_TESTED"
+  },
+  "known_gaps": [
+    "Simplified geometry, not full Forge renderer",
+    "Stairs and physical collisions not certified",
+    "No CASA game loader integration",
+    "Browser UI needs human or permitted browser test"
+  ]
+}

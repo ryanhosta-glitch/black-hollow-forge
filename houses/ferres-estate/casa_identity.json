@@ -1,0 +1,12 @@
+{
+  "name": "Ferre's Estate",
+  "architect": "The Ferre Institute",
+  "description": "Enter a Gothic estate where every corridor holds another mystery.",
+  "houseId": "ferre-s-estate",
+  "slug": "ferre-s-estate",
+  "version": "1.0",
+  "street": {
+    "mailboxName": "Ferre's Estate",
+    "preview": "exterior/street_preview.glb"
+  }
+}

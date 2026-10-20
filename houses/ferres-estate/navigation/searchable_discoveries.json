@@ -1,0 +1,849 @@
+{
+  "schema": "black-hollow.searchable-discoveries.v1",
+  "sourceHauntSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "generatedFrom": "furniture_library.json + room_identity_v2.json",
+  "seedPolicy": "deterministic SHA256-derived per stable object id",
+  "gameplayCertified": false,
+  "missionBindings": "unassigned; safe to integrate later",
+  "objects": [
+    {
+      "objectId": "fe-f0-room1-furn-0",
+      "roomId": "fe-f0-room1",
+      "roomName": "The Forgotten Crypt",
+      "floor": 0,
+      "archetype": "stone_sarcophagus",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": false,
+      "contents": [],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f0-room1-furn-1",
+      "roomId": "fe-f0-room1",
+      "roomName": "The Forgotten Crypt",
+      "floor": 0,
+      "archetype": "memorial_stone",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": false,
+      "contents": [
+        {
+          "id": "fe-f0-room1-furn-1-find-0",
+          "slot": 0,
+          "kind": "crypt_key",
+          "description": "An iron key wrapped in mourning cloth",
+          "action": "take",
+          "requiresOpen": false,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f0-room2-furn-0",
+      "roomId": "fe-f0-room2",
+      "roomName": "Alchemist’s Laboratory",
+      "floor": 0,
+      "archetype": "experiment_bench",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": false,
+      "contents": [],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f0-room2-furn-1",
+      "roomId": "fe-f0-room2",
+      "roomName": "Alchemist’s Laboratory",
+      "floor": 0,
+      "archetype": "apparatus_shelf",
+      "furnitureBehavior": "cabinet",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f0-room3-furn-0",
+      "roomId": "fe-f0-room3",
+      "roomName": "Cursed Wine Cellar",
+      "floor": 0,
+      "archetype": "barrel_rack",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": false,
+      "contents": [
+        {
+          "id": "fe-f0-room3-furn-0-find-0",
+          "slot": 0,
+          "kind": "ledger",
+          "description": "A cellar inventory with one name crossed out",
+          "action": "read",
+          "requiresOpen": false,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f0-room3-furn-1",
+      "roomId": "fe-f0-room3",
+      "roomName": "Cursed Wine Cellar",
+      "floor": 0,
+      "archetype": "wine_cabinet",
+      "furnitureBehavior": "cabinet",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f0-room3-furn-1-find-0",
+          "slot": 0,
+          "kind": "ledger",
+          "description": "A cellar inventory with one name crossed out",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        },
+        {
+          "id": "fe-f0-room3-furn-1-find-1",
+          "slot": 1,
+          "kind": "ledger",
+          "description": "A cellar inventory with one name crossed out",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f0-room4-furn-0",
+      "roomId": "fe-f0-room4",
+      "roomName": "The Whispering Vault",
+      "floor": 0,
+      "archetype": "reinforced_cabinet",
+      "furnitureBehavior": "cabinet",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f0-room4-furn-0-find-0",
+          "slot": 0,
+          "kind": "sealed_letter",
+          "description": "A letter with an unbroken black seal",
+          "action": "take",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        },
+        {
+          "id": "fe-f0-room4-furn-0-find-1",
+          "slot": 1,
+          "kind": "sealed_letter",
+          "description": "A letter with an unbroken black seal",
+          "action": "take",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f0-room4-furn-1",
+      "roomId": "fe-f0-room4",
+      "roomName": "The Whispering Vault",
+      "floor": 0,
+      "archetype": "ledger_table",
+      "furnitureBehavior": "drawer",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f0-room4-furn-1-find-0",
+          "slot": 0,
+          "kind": "sealed_letter",
+          "description": "A letter with an unbroken black seal",
+          "action": "take",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        },
+        {
+          "id": "fe-f0-room4-furn-1-find-1",
+          "slot": 1,
+          "kind": "sealed_letter",
+          "description": "A letter with an unbroken black seal",
+          "action": "take",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f1-room2-furn-0",
+      "roomId": "fe-f1-room2",
+      "roomName": "The Speaking Portrait Gallery",
+      "floor": 1,
+      "archetype": "portrait_stand",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": false,
+      "contents": [
+        {
+          "id": "fe-f1-room2-furn-0-find-0",
+          "slot": 0,
+          "kind": "dusty_clue",
+          "description": "A fragment of local history",
+          "action": "read",
+          "requiresOpen": false,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f1-room2-furn-1",
+      "roomId": "fe-f1-room2",
+      "roomName": "The Speaking Portrait Gallery",
+      "floor": 1,
+      "archetype": "velvet_bench",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": false,
+      "contents": [],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f1-room3-furn-0",
+      "roomId": "fe-f1-room3",
+      "roomName": "The Midnight Library",
+      "floor": 1,
+      "archetype": "bookcase",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f1-room3-furn-0-find-0",
+          "slot": 0,
+          "kind": "annotated_book",
+          "description": "A handwritten warning in a book margin",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        },
+        {
+          "id": "fe-f1-room3-furn-0-find-1",
+          "slot": 1,
+          "kind": "archive_key",
+          "description": "A small key bound to a ribbon",
+          "action": "take",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f1-room3-furn-1",
+      "roomId": "fe-f1-room3",
+      "roomName": "The Midnight Library",
+      "floor": 1,
+      "archetype": "reading_desk",
+      "furnitureBehavior": "drawer",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f1-room3-furn-1-find-0",
+          "slot": 0,
+          "kind": "annotated_book",
+          "description": "A handwritten warning in a book margin",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        },
+        {
+          "id": "fe-f1-room3-furn-1-find-1",
+          "slot": 1,
+          "kind": "archive_key",
+          "description": "A small key bound to a ribbon",
+          "action": "take",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f1-room4-furn-0",
+      "roomId": "fe-f1-room4",
+      "roomName": "The Phantom Ballroom",
+      "floor": 1,
+      "archetype": "velvet_settee",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": false,
+      "contents": [
+        {
+          "id": "fe-f1-room4-furn-0-find-0",
+          "slot": 0,
+          "kind": "dusty_clue",
+          "description": "A fragment of local history",
+          "action": "read",
+          "requiresOpen": false,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f1-room4-furn-1",
+      "roomId": "fe-f1-room4",
+      "roomName": "The Phantom Ballroom",
+      "floor": 1,
+      "archetype": "gilded_cabinet",
+      "furnitureBehavior": "cabinet",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f1-room4-furn-1-find-0",
+          "slot": 0,
+          "kind": "dusty_clue",
+          "description": "A fragment of local history",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        },
+        {
+          "id": "fe-f1-room4-furn-1-find-1",
+          "slot": 1,
+          "kind": "dusty_clue",
+          "description": "A fragment of local history",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f2-room1-furn-0",
+      "roomId": "fe-f2-room1",
+      "roomName": "The Seer’s Chamber",
+      "floor": 2,
+      "archetype": "seer_table",
+      "furnitureBehavior": "drawer",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f2-room1-furn-0-find-0",
+          "slot": 0,
+          "kind": "ritual_fragment",
+          "description": "A page torn from a book of spells",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        },
+        {
+          "id": "fe-f2-room1-furn-0-find-1",
+          "slot": 1,
+          "kind": "ritual_fragment",
+          "description": "A page torn from a book of spells",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f2-room1-furn-1",
+      "roomId": "fe-f2-room1",
+      "roomName": "The Seer’s Chamber",
+      "floor": 2,
+      "archetype": "reliquary",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": false,
+      "contents": [
+        {
+          "id": "fe-f2-room1-furn-1-find-0",
+          "slot": 0,
+          "kind": "ritual_fragment",
+          "description": "A page torn from a book of spells",
+          "action": "read",
+          "requiresOpen": false,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f2-room2-furn-0",
+      "roomId": "fe-f2-room2",
+      "roomName": "Moonlit Conservatory",
+      "floor": 2,
+      "archetype": "botanical_workbench",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": false,
+      "contents": [
+        {
+          "id": "fe-f2-room2-furn-0-find-0",
+          "slot": 0,
+          "kind": "specimen_tag",
+          "description": "A label naming an impossible species",
+          "action": "read",
+          "requiresOpen": false,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f2-room2-furn-1",
+      "roomId": "fe-f2-room2",
+      "roomName": "Moonlit Conservatory",
+      "floor": 2,
+      "archetype": "planter",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": false,
+      "contents": [
+        {
+          "id": "fe-f2-room2-furn-1-find-0",
+          "slot": 0,
+          "kind": "glowing_seed",
+          "description": "A faintly luminous seed",
+          "action": "take",
+          "requiresOpen": false,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f2-room3-furn-0",
+      "roomId": "fe-f2-room3",
+      "roomName": "The Dollmaker’s Workshop",
+      "floor": 2,
+      "archetype": "craft_workbench",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": false,
+      "contents": [
+        {
+          "id": "fe-f2-room3-furn-0-find-0",
+          "slot": 0,
+          "kind": "dusty_clue",
+          "description": "A fragment of local history",
+          "action": "read",
+          "requiresOpen": false,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f2-room3-furn-1",
+      "roomId": "fe-f2-room3",
+      "roomName": "The Dollmaker’s Workshop",
+      "floor": 2,
+      "archetype": "parts_cabinet",
+      "furnitureBehavior": "cabinet",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f2-room3-furn-1-find-0",
+          "slot": 0,
+          "kind": "dusty_clue",
+          "description": "A fragment of local history",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f2-room4-furn-0",
+      "roomId": "fe-f2-room4",
+      "roomName": "The Mirror Room",
+      "floor": 2,
+      "archetype": "standing_mirror",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": false,
+      "contents": [
+        {
+          "id": "fe-f2-room4-furn-0-find-0",
+          "slot": 0,
+          "kind": "dusty_clue",
+          "description": "A fragment of local history",
+          "action": "read",
+          "requiresOpen": false,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f2-room4-furn-1",
+      "roomId": "fe-f2-room4",
+      "roomName": "The Mirror Room",
+      "floor": 2,
+      "archetype": "draped_table",
+      "furnitureBehavior": "drawer",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f2-room4-furn-1-find-1",
+          "slot": 1,
+          "kind": "dusty_clue",
+          "description": "A fragment of local history",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f3-room1-furn-0",
+      "roomId": "fe-f3-room1",
+      "roomName": "The Founder’s Study",
+      "floor": 3,
+      "archetype": "writing_desk",
+      "furnitureBehavior": "drawer",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f3-room1-furn-0-find-0",
+          "slot": 0,
+          "kind": "family_letter",
+          "description": "A letter addressed to the Founder",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        },
+        {
+          "id": "fe-f3-room1-furn-0-find-1",
+          "slot": 1,
+          "kind": "family_letter",
+          "description": "A letter addressed to the Founder",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f3-room1-furn-1",
+      "roomId": "fe-f3-room1",
+      "roomName": "The Founder’s Study",
+      "floor": 3,
+      "archetype": "filing_cabinet",
+      "furnitureBehavior": "cabinet",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f3-room1-furn-1-find-0",
+          "slot": 0,
+          "kind": "family_letter",
+          "description": "A letter addressed to the Founder",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f3-room2-furn-0",
+      "roomId": "fe-f3-room2",
+      "roomName": "The Raven Observatory",
+      "floor": 3,
+      "archetype": "chart_cabinet",
+      "furnitureBehavior": "cabinet",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f3-room2-furn-0-find-0",
+          "slot": 0,
+          "kind": "dusty_clue",
+          "description": "A fragment of local history",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        },
+        {
+          "id": "fe-f3-room2-furn-0-find-1",
+          "slot": 1,
+          "kind": "dusty_clue",
+          "description": "A fragment of local history",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f3-room2-furn-1",
+      "roomId": "fe-f3-room2",
+      "roomName": "The Raven Observatory",
+      "floor": 3,
+      "archetype": "instrument_desk",
+      "furnitureBehavior": "drawer",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f3-room2-furn-1-find-0",
+          "slot": 0,
+          "kind": "dusty_clue",
+          "description": "A fragment of local history",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        },
+        {
+          "id": "fe-f3-room2-furn-1-find-1",
+          "slot": 1,
+          "kind": "dusty_clue",
+          "description": "A fragment of local history",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f3-room3-furn-0",
+      "roomId": "fe-f3-room3",
+      "roomName": "The Spell Archive",
+      "floor": 3,
+      "archetype": "bookcase",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f3-room3-furn-0-find-1",
+          "slot": 1,
+          "kind": "archive_key",
+          "description": "A small key bound to a ribbon",
+          "action": "take",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f3-room3-furn-1",
+      "roomId": "fe-f3-room3",
+      "roomName": "The Spell Archive",
+      "floor": 3,
+      "archetype": "reading_desk",
+      "furnitureBehavior": "drawer",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f3-room3-furn-1-find-0",
+          "slot": 0,
+          "kind": "archive_key",
+          "description": "A small key bound to a ribbon",
+          "action": "take",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        },
+        {
+          "id": "fe-f3-room3-furn-1-find-1",
+          "slot": 1,
+          "kind": "annotated_book",
+          "description": "A handwritten warning in a book margin",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f3-room4-furn-0",
+      "roomId": "fe-f3-room4",
+      "roomName": "The Attic Nursery",
+      "floor": 3,
+      "archetype": "antique_crib",
+      "furnitureBehavior": "inspect",
+      "searchable": true,
+      "openRequired": false,
+      "contents": [
+        {
+          "id": "fe-f3-room4-furn-0-find-0",
+          "slot": 0,
+          "kind": "doll_note",
+          "description": "A note folded into a doll dress",
+          "action": "read",
+          "requiresOpen": false,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    },
+    {
+      "objectId": "fe-f3-room4-furn-1",
+      "roomId": "fe-f3-room4",
+      "roomName": "The Attic Nursery",
+      "floor": 3,
+      "archetype": "old_wardrobe",
+      "furnitureBehavior": "cabinet",
+      "searchable": true,
+      "openRequired": true,
+      "contents": [
+        {
+          "id": "fe-f3-room4-furn-1-find-0",
+          "slot": 0,
+          "kind": "doll_note",
+          "description": "A note folded into a doll dress",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        },
+        {
+          "id": "fe-f3-room4-furn-1-find-1",
+          "slot": 1,
+          "kind": "doll_note",
+          "description": "A note folded into a doll dress",
+          "action": "read",
+          "requiresOpen": true,
+          "state": "undiscovered",
+          "missionTag": null,
+          "canonicalMissionBinding": false
+        }
+      ],
+      "placementStatus": "requires-clearance-verification",
+      "gameplayIntegrated": false
+    }
+  ],
+  "limitations": [
+    "Discovery data and browser inspector are playable prototypes, not wired into Black Hollow game runtime",
+    "Object interactions do not certify player reach, collision, or quest dependency",
+    "Inspect and take are inspector-only until integration"
+  ]
+}
