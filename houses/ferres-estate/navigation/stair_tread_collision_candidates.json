@@ -1,0 +1,2109 @@
+{
+  "schema": "black-hollow-stair-collision-prototype-0.1",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "sourceModified": false,
+  "notForProductionPhysics": true,
+  "coordinateSpace": "stair-candidate-model-local; do NOT use without validated placement in floor coordinate system",
+  "proxies": [
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_0",
+      "meshName": "geometry_0",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.08467,
+        -1.689
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.04466666653752327,
+          -1.8139499425888062
+        ],
+        [
+          -0.05999999865889549,
+          0.12466666847467422,
+          -1.5640499591827393
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_1",
+      "meshName": "geometry_1",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.254,
+        -1.434
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.21400000154972076,
+          -1.5589499473571777
+        ],
+        [
+          -0.05999999865889549,
+          0.2939999997615814,
+          -1.3090499639511108
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_2",
+      "meshName": "geometry_2",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.42333,
+        -1.179
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.38333332538604736,
+          -1.3039499521255493
+        ],
+        [
+          -0.05999999865889549,
+          0.4633333384990692,
+          -1.0540499687194824
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_3",
+      "meshName": "geometry_3",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.59267,
+        -0.924
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.5526666641235352,
+          -1.048949956893921
+        ],
+        [
+          -0.05999999865889549,
+          0.6326666474342346,
+          -0.799049973487854
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_4",
+      "meshName": "geometry_4",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.762,
+        -0.669
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.722000002861023,
+          -0.7939500212669373
+        ],
+        [
+          -0.05999999865889549,
+          0.8019999861717224,
+          -0.5440499782562256
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_5",
+      "meshName": "geometry_5",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.93133,
+        -0.414
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.8913333415985107,
+          -0.5389500260353088
+        ],
+        [
+          -0.05999999865889549,
+          0.9713333249092102,
+          -0.28905001282691956
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_6",
+      "meshName": "geometry_6",
+      "boxCenterLocalMeters": [
+        -0.48,
+        1.10067,
+        -0.159
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          1.0606666803359985,
+          -0.28395000100135803
+        ],
+        [
+          -0.05999999865889549,
+          1.1406667232513428,
+          -0.034049998968839645
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_7",
+      "meshName": "geometry_7",
+      "boxCenterLocalMeters": [
+        -0.48,
+        1.27,
+        0.096
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          1.2300000190734863,
+          -0.028950000181794167
+        ],
+        [
+          -0.05999999865889549,
+          1.309999942779541,
+          0.22095000743865967
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_8",
+      "meshName": "geometry_8",
+      "boxCenterLocalMeters": [
+        -0.48,
+        1.43933,
+        0.351
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          1.3993333578109741,
+          0.22605000436306
+        ],
+        [
+          -0.05999999865889549,
+          1.4793332815170288,
+          0.4759500026702881
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_9",
+      "meshName": "geometry_9",
+      "boxCenterLocalMeters": [
+        0.0,
+        1.524,
+        0.826
+      ],
+      "boxSizeMeters": [
+        1.8,
+        0.12,
+        0.95
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          1.4639999866485596,
+          0.35100001096725464
+        ],
+        [
+          0.8999999761581421,
+          1.5839999914169312,
+          1.3009999990463257
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_10",
+      "meshName": "geometry_10",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.96333,
+        -1.689
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.9233334064483643,
+          -1.8139499425888062
+        ],
+        [
+          0.8999999761581421,
+          3.003333330154419,
+          -1.5640499591827393
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_11",
+      "meshName": "geometry_11",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.794,
+        -1.434
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.753999948501587,
+          -1.5589499473571777
+        ],
+        [
+          0.8999999761581421,
+          2.8340001106262207,
+          -1.3090499639511108
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_12",
+      "meshName": "geometry_12",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.62467,
+        -1.179
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.5846667289733887,
+          -1.3039499521255493
+        ],
+        [
+          0.8999999761581421,
+          2.6646666526794434,
+          -1.0540499687194824
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_13",
+      "meshName": "geometry_13",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.45533,
+        -0.924
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.4153332710266113,
+          -1.048949956893921
+        ],
+        [
+          0.8999999761581421,
+          2.495333433151245,
+          -0.799049973487854
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_14",
+      "meshName": "geometry_14",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.286,
+        -0.669
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.246000051498413,
+          -0.7939500212669373
+        ],
+        [
+          0.8999999761581421,
+          2.3259999752044678,
+          -0.5440499782562256
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_15",
+      "meshName": "geometry_15",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.11667,
+        -0.414
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.0766665935516357,
+          -0.5389500260353088
+        ],
+        [
+          0.8999999761581421,
+          2.1566667556762695,
+          -0.28905001282691956
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_16",
+      "meshName": "geometry_16",
+      "boxCenterLocalMeters": [
+        0.48,
+        1.94733,
+        -0.159
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          1.9073333740234375,
+          -0.28395000100135803
+        ],
+        [
+          0.8999999761581421,
+          1.9873332977294922,
+          -0.034049998968839645
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_17",
+      "meshName": "geometry_17",
+      "boxCenterLocalMeters": [
+        0.48,
+        1.778,
+        0.096
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          1.7380000352859497,
+          -0.028950000181794167
+        ],
+        [
+          0.8999999761581421,
+          1.8179999589920044,
+          0.22095000743865967
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_022",
+      "id": "connection_022_mesh_18",
+      "meshName": "geometry_18",
+      "boxCenterLocalMeters": [
+        0.48,
+        1.60867,
+        0.351
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          1.568666696548462,
+          0.22605000436306
+        ],
+        [
+          0.8999999761581421,
+          1.6486666202545166,
+          0.4759500026702881
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_0",
+      "meshName": "geometry_0",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.08467,
+        -1.689
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.04466666653752327,
+          -1.8139499425888062
+        ],
+        [
+          -0.05999999865889549,
+          0.12466666847467422,
+          -1.5640499591827393
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_1",
+      "meshName": "geometry_1",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.254,
+        -1.434
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.21400000154972076,
+          -1.5589499473571777
+        ],
+        [
+          -0.05999999865889549,
+          0.2939999997615814,
+          -1.3090499639511108
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_2",
+      "meshName": "geometry_2",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.42333,
+        -1.179
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.38333332538604736,
+          -1.3039499521255493
+        ],
+        [
+          -0.05999999865889549,
+          0.4633333384990692,
+          -1.0540499687194824
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_3",
+      "meshName": "geometry_3",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.59267,
+        -0.924
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.5526666641235352,
+          -1.048949956893921
+        ],
+        [
+          -0.05999999865889549,
+          0.6326666474342346,
+          -0.799049973487854
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_4",
+      "meshName": "geometry_4",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.762,
+        -0.669
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.722000002861023,
+          -0.7939500212669373
+        ],
+        [
+          -0.05999999865889549,
+          0.8019999861717224,
+          -0.5440499782562256
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_5",
+      "meshName": "geometry_5",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.93133,
+        -0.414
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.8913333415985107,
+          -0.5389500260353088
+        ],
+        [
+          -0.05999999865889549,
+          0.9713333249092102,
+          -0.28905001282691956
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_6",
+      "meshName": "geometry_6",
+      "boxCenterLocalMeters": [
+        -0.48,
+        1.10067,
+        -0.159
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          1.0606666803359985,
+          -0.28395000100135803
+        ],
+        [
+          -0.05999999865889549,
+          1.1406667232513428,
+          -0.034049998968839645
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_7",
+      "meshName": "geometry_7",
+      "boxCenterLocalMeters": [
+        -0.48,
+        1.27,
+        0.096
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          1.2300000190734863,
+          -0.028950000181794167
+        ],
+        [
+          -0.05999999865889549,
+          1.309999942779541,
+          0.22095000743865967
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_8",
+      "meshName": "geometry_8",
+      "boxCenterLocalMeters": [
+        -0.48,
+        1.43933,
+        0.351
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          1.3993333578109741,
+          0.22605000436306
+        ],
+        [
+          -0.05999999865889549,
+          1.4793332815170288,
+          0.4759500026702881
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_9",
+      "meshName": "geometry_9",
+      "boxCenterLocalMeters": [
+        0.0,
+        1.524,
+        0.826
+      ],
+      "boxSizeMeters": [
+        1.8,
+        0.12,
+        0.95
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          1.4639999866485596,
+          0.35100001096725464
+        ],
+        [
+          0.8999999761581421,
+          1.5839999914169312,
+          1.3009999990463257
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_10",
+      "meshName": "geometry_10",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.96333,
+        -1.689
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.9233334064483643,
+          -1.8139499425888062
+        ],
+        [
+          0.8999999761581421,
+          3.003333330154419,
+          -1.5640499591827393
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_11",
+      "meshName": "geometry_11",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.794,
+        -1.434
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.753999948501587,
+          -1.5589499473571777
+        ],
+        [
+          0.8999999761581421,
+          2.8340001106262207,
+          -1.3090499639511108
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_12",
+      "meshName": "geometry_12",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.62467,
+        -1.179
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.5846667289733887,
+          -1.3039499521255493
+        ],
+        [
+          0.8999999761581421,
+          2.6646666526794434,
+          -1.0540499687194824
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_13",
+      "meshName": "geometry_13",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.45533,
+        -0.924
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.4153332710266113,
+          -1.048949956893921
+        ],
+        [
+          0.8999999761581421,
+          2.495333433151245,
+          -0.799049973487854
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_14",
+      "meshName": "geometry_14",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.286,
+        -0.669
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.246000051498413,
+          -0.7939500212669373
+        ],
+        [
+          0.8999999761581421,
+          2.3259999752044678,
+          -0.5440499782562256
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_15",
+      "meshName": "geometry_15",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.11667,
+        -0.414
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.0766665935516357,
+          -0.5389500260353088
+        ],
+        [
+          0.8999999761581421,
+          2.1566667556762695,
+          -0.28905001282691956
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_16",
+      "meshName": "geometry_16",
+      "boxCenterLocalMeters": [
+        0.48,
+        1.94733,
+        -0.159
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          1.9073333740234375,
+          -0.28395000100135803
+        ],
+        [
+          0.8999999761581421,
+          1.9873332977294922,
+          -0.034049998968839645
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_17",
+      "meshName": "geometry_17",
+      "boxCenterLocalMeters": [
+        0.48,
+        1.778,
+        0.096
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          1.7380000352859497,
+          -0.028950000181794167
+        ],
+        [
+          0.8999999761581421,
+          1.8179999589920044,
+          0.22095000743865967
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_023",
+      "id": "connection_023_mesh_18",
+      "meshName": "geometry_18",
+      "boxCenterLocalMeters": [
+        0.48,
+        1.60867,
+        0.351
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          1.568666696548462,
+          0.22605000436306
+        ],
+        [
+          0.8999999761581421,
+          1.6486666202545166,
+          0.4759500026702881
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_0",
+      "meshName": "geometry_0",
+      "boxCenterLocalMeters": [
+        0.91847,
+        0.05,
+        0.282
+      ],
+      "boxSizeMeters": [
+        1.46106,
+        0.08,
+        0.56399
+      ],
+      "boundsMeters": [
+        [
+          0.18793852627277374,
+          0.009999999776482582,
+          0.0
+        ],
+        [
+          1.6490000486373901,
+          0.09000000357627869,
+          0.5639911890029907
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_1",
+      "meshName": "geometry_1",
+      "boxCenterLocalMeters": [
+        0.85138,
+        0.21933,
+        0.56418
+      ],
+      "boxSizeMeters": [
+        1.39634,
+        0.08,
+        0.99155
+      ],
+      "boundsMeters": [
+        [
+          0.1532088816165924,
+          0.17933332920074463,
+          0.06840402632951736
+        ],
+        [
+          1.5495531558990479,
+          0.2593333423137665,
+          1.0599567890167236
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_2",
+      "meshName": "geometry_2",
+      "boxCenterLocalMeters": [
+        0.6816,
+        0.38867,
+        0.77832
+      ],
+      "boxSizeMeters": [
+        1.16321,
+        0.08,
+        1.29952
+      ],
+      "boundsMeters": [
+        [
+          0.10000000149011612,
+          0.3486666679382324,
+          0.12855751812458038
+        ],
+        [
+          1.2632073163986206,
+          0.4286666810512543,
+          1.428075909614563
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_3",
+      "meshName": "geometry_3",
+      "boxCenterLocalMeters": [
+        0.42961,
+        0.558,
+        0.89858
+      ],
+      "boxSizeMeters": [
+        0.78977,
+        0.08,
+        1.45074
+      ],
+      "boundsMeters": [
+        [
+          0.03472963720560074,
+          0.5180000066757202,
+          0.17320507764816284
+        ],
+        [
+          0.8245000243186951,
+          0.5979999899864197,
+          1.6239479780197144
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_4",
+      "meshName": "geometry_4",
+      "boxCenterLocalMeters": [
+        0.0,
+        0.72733,
+        0.91045
+      ],
+      "boxSizeMeters": [
+        0.57269,
+        0.08,
+        1.42699
+      ],
+      "boundsMeters": [
+        [
+          -0.28634583950042725,
+          0.687333345413208,
+          0.19696155190467834
+        ],
+        [
+          0.28634583950042725,
+          0.7673333287239075,
+          1.6239479780197144
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_5",
+      "meshName": "geometry_5",
+      "boxCenterLocalMeters": [
+        -0.42961,
+        0.89667,
+        0.89858
+      ],
+      "boxSizeMeters": [
+        0.78977,
+        0.08,
+        1.45074
+      ],
+      "boundsMeters": [
+        [
+          -0.8245000243186951,
+          0.8566666841506958,
+          0.17320507764816284
+        ],
+        [
+          -0.03472963720560074,
+          0.9366666674613953,
+          1.6239479780197144
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_6",
+      "meshName": "geometry_6",
+      "boxCenterLocalMeters": [
+        -0.6816,
+        1.066,
+        0.77832
+      ],
+      "boxSizeMeters": [
+        1.16321,
+        0.08,
+        1.29952
+      ],
+      "boundsMeters": [
+        [
+          -1.2632073163986206,
+          1.0260000228881836,
+          0.12855751812458038
+        ],
+        [
+          -0.10000000149011612,
+          1.1059999465942383,
+          1.428075909614563
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_7",
+      "meshName": "geometry_7",
+      "boxCenterLocalMeters": [
+        -0.85138,
+        1.23533,
+        0.56418
+      ],
+      "boxSizeMeters": [
+        1.39634,
+        0.08,
+        0.99155
+      ],
+      "boundsMeters": [
+        [
+          -1.5495531558990479,
+          1.1953333616256714,
+          0.06840402632951736
+        ],
+        [
+          -0.1532088816165924,
+          1.275333285331726,
+          1.0599567890167236
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_8",
+      "meshName": "geometry_8",
+      "boxCenterLocalMeters": [
+        -0.91847,
+        1.40467,
+        0.282
+      ],
+      "boxSizeMeters": [
+        1.46106,
+        0.08,
+        0.56399
+      ],
+      "boundsMeters": [
+        [
+          -1.6490000486373901,
+          1.3646667003631592,
+          2.4492935397342132e-17
+        ],
+        [
+          -0.18793852627277374,
+          1.4446666240692139,
+          0.5639911890029907
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_9",
+      "meshName": "geometry_9",
+      "boxCenterLocalMeters": [
+        -0.91847,
+        1.574,
+        -0.282
+      ],
+      "boxSizeMeters": [
+        1.46106,
+        0.08,
+        0.56399
+      ],
+      "boundsMeters": [
+        [
+          -1.6490000486373901,
+          1.534000039100647,
+          -0.5639911890029907
+        ],
+        [
+          -0.18793852627277374,
+          1.6139999628067017,
+          2.0194426162378054e-16
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_10",
+      "meshName": "geometry_10",
+      "boxCenterLocalMeters": [
+        -0.85138,
+        1.74333,
+        -0.56418
+      ],
+      "boxSizeMeters": [
+        1.39634,
+        0.08,
+        0.99155
+      ],
+      "boundsMeters": [
+        [
+          -1.5495531558990479,
+          1.7033333778381348,
+          -1.0599567890167236
+        ],
+        [
+          -0.1532088816165924,
+          1.7833333015441895,
+          -0.06840402632951736
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_11",
+      "meshName": "geometry_11",
+      "boxCenterLocalMeters": [
+        -0.6816,
+        1.91267,
+        -0.77832
+      ],
+      "boxSizeMeters": [
+        1.16321,
+        0.08,
+        1.29952
+      ],
+      "boundsMeters": [
+        [
+          -1.2632073163986206,
+          1.8726667165756226,
+          -1.428075909614563
+        ],
+        [
+          -0.10000000149011612,
+          1.9526666402816772,
+          -0.12855751812458038
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_12",
+      "meshName": "geometry_12",
+      "boxCenterLocalMeters": [
+        -0.42961,
+        2.082,
+        -0.89858
+      ],
+      "boxSizeMeters": [
+        0.78977,
+        0.08,
+        1.45074
+      ],
+      "boundsMeters": [
+        [
+          -0.8245000243186951,
+          2.0420000553131104,
+          -1.6239479780197144
+        ],
+        [
+          -0.03472963720560074,
+          2.121999979019165,
+          -0.17320507764816284
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_13",
+      "meshName": "geometry_13",
+      "boxCenterLocalMeters": [
+        0.0,
+        2.25133,
+        -0.91045
+      ],
+      "boxSizeMeters": [
+        0.57269,
+        0.08,
+        1.42699
+      ],
+      "boundsMeters": [
+        [
+          -0.28634583950042725,
+          2.2113332748413086,
+          -1.6239479780197144
+        ],
+        [
+          0.28634583950042725,
+          2.2913334369659424,
+          -0.19696155190467834
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_14",
+      "meshName": "geometry_14",
+      "boxCenterLocalMeters": [
+        0.42961,
+        2.42067,
+        -0.89858
+      ],
+      "boxSizeMeters": [
+        0.78977,
+        0.08,
+        1.45074
+      ],
+      "boundsMeters": [
+        [
+          0.03472963720560074,
+          2.380666732788086,
+          -1.6239479780197144
+        ],
+        [
+          0.8245000243186951,
+          2.4606666564941406,
+          -0.17320507764816284
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_15",
+      "meshName": "geometry_15",
+      "boxCenterLocalMeters": [
+        0.6816,
+        2.59,
+        -0.77832
+      ],
+      "boxSizeMeters": [
+        1.16321,
+        0.08,
+        1.29952
+      ],
+      "boundsMeters": [
+        [
+          0.10000000149011612,
+          2.549999952316284,
+          -1.428075909614563
+        ],
+        [
+          1.2632073163986206,
+          2.630000114440918,
+          -0.12855751812458038
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_16",
+      "meshName": "geometry_16",
+      "boxCenterLocalMeters": [
+        0.85138,
+        2.75933,
+        -0.56418
+      ],
+      "boxSizeMeters": [
+        1.39634,
+        0.08,
+        0.99155
+      ],
+      "boundsMeters": [
+        [
+          0.1532088816165924,
+          2.7193334102630615,
+          -1.0599567890167236
+        ],
+        [
+          1.5495531558990479,
+          2.799333333969116,
+          -0.06840402632951736
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_024",
+      "id": "connection_024_mesh_17",
+      "meshName": "geometry_17",
+      "boxCenterLocalMeters": [
+        0.91847,
+        2.92867,
+        -0.282
+      ],
+      "boxSizeMeters": [
+        1.46106,
+        0.08,
+        0.56399
+      ],
+      "boundsMeters": [
+        [
+          0.18793852627277374,
+          2.8886666297912598,
+          -0.5639911890029907
+        ],
+        [
+          1.6490000486373901,
+          2.9686665534973145,
+          -4.8985870794684264e-17
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_0",
+      "meshName": "geometry_0",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.08467,
+        -1.689
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.04466666653752327,
+          -1.8139499425888062
+        ],
+        [
+          -0.05999999865889549,
+          0.12466666847467422,
+          -1.5640499591827393
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_1",
+      "meshName": "geometry_1",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.254,
+        -1.434
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.21400000154972076,
+          -1.5589499473571777
+        ],
+        [
+          -0.05999999865889549,
+          0.2939999997615814,
+          -1.3090499639511108
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_2",
+      "meshName": "geometry_2",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.42333,
+        -1.179
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.38333332538604736,
+          -1.3039499521255493
+        ],
+        [
+          -0.05999999865889549,
+          0.4633333384990692,
+          -1.0540499687194824
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_3",
+      "meshName": "geometry_3",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.59267,
+        -0.924
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.5526666641235352,
+          -1.048949956893921
+        ],
+        [
+          -0.05999999865889549,
+          0.6326666474342346,
+          -0.799049973487854
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_4",
+      "meshName": "geometry_4",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.762,
+        -0.669
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.722000002861023,
+          -0.7939500212669373
+        ],
+        [
+          -0.05999999865889549,
+          0.8019999861717224,
+          -0.5440499782562256
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_5",
+      "meshName": "geometry_5",
+      "boxCenterLocalMeters": [
+        -0.48,
+        0.93133,
+        -0.414
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          0.8913333415985107,
+          -0.5389500260353088
+        ],
+        [
+          -0.05999999865889549,
+          0.9713333249092102,
+          -0.28905001282691956
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_6",
+      "meshName": "geometry_6",
+      "boxCenterLocalMeters": [
+        -0.48,
+        1.10067,
+        -0.159
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          1.0606666803359985,
+          -0.28395000100135803
+        ],
+        [
+          -0.05999999865889549,
+          1.1406667232513428,
+          -0.034049998968839645
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_7",
+      "meshName": "geometry_7",
+      "boxCenterLocalMeters": [
+        -0.48,
+        1.27,
+        0.096
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          1.2300000190734863,
+          -0.028950000181794167
+        ],
+        [
+          -0.05999999865889549,
+          1.309999942779541,
+          0.22095000743865967
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_8",
+      "meshName": "geometry_8",
+      "boxCenterLocalMeters": [
+        -0.48,
+        1.43933,
+        0.351
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          1.3993333578109741,
+          0.22605000436306
+        ],
+        [
+          -0.05999999865889549,
+          1.4793332815170288,
+          0.4759500026702881
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_9",
+      "meshName": "geometry_9",
+      "boxCenterLocalMeters": [
+        0.0,
+        1.524,
+        0.826
+      ],
+      "boxSizeMeters": [
+        1.8,
+        0.12,
+        0.95
+      ],
+      "boundsMeters": [
+        [
+          -0.8999999761581421,
+          1.4639999866485596,
+          0.35100001096725464
+        ],
+        [
+          0.8999999761581421,
+          1.5839999914169312,
+          1.3009999990463257
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_10",
+      "meshName": "geometry_10",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.96333,
+        -1.689
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.9233334064483643,
+          -1.8139499425888062
+        ],
+        [
+          0.8999999761581421,
+          3.003333330154419,
+          -1.5640499591827393
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_11",
+      "meshName": "geometry_11",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.794,
+        -1.434
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.753999948501587,
+          -1.5589499473571777
+        ],
+        [
+          0.8999999761581421,
+          2.8340001106262207,
+          -1.3090499639511108
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_12",
+      "meshName": "geometry_12",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.62467,
+        -1.179
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.5846667289733887,
+          -1.3039499521255493
+        ],
+        [
+          0.8999999761581421,
+          2.6646666526794434,
+          -1.0540499687194824
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_13",
+      "meshName": "geometry_13",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.45533,
+        -0.924
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.4153332710266113,
+          -1.048949956893921
+        ],
+        [
+          0.8999999761581421,
+          2.495333433151245,
+          -0.799049973487854
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_14",
+      "meshName": "geometry_14",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.286,
+        -0.669
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.246000051498413,
+          -0.7939500212669373
+        ],
+        [
+          0.8999999761581421,
+          2.3259999752044678,
+          -0.5440499782562256
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_15",
+      "meshName": "geometry_15",
+      "boxCenterLocalMeters": [
+        0.48,
+        2.11667,
+        -0.414
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          2.0766665935516357,
+          -0.5389500260353088
+        ],
+        [
+          0.8999999761581421,
+          2.1566667556762695,
+          -0.28905001282691956
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_16",
+      "meshName": "geometry_16",
+      "boxCenterLocalMeters": [
+        0.48,
+        1.94733,
+        -0.159
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          1.9073333740234375,
+          -0.28395000100135803
+        ],
+        [
+          0.8999999761581421,
+          1.9873332977294922,
+          -0.034049998968839645
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_17",
+      "meshName": "geometry_17",
+      "boxCenterLocalMeters": [
+        0.48,
+        1.778,
+        0.096
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          1.7380000352859497,
+          -0.028950000181794167
+        ],
+        [
+          0.8999999761581421,
+          1.8179999589920044,
+          0.22095000743865967
+        ]
+      ],
+      "physicsCertified": false
+    },
+    {
+      "connectionId": "connection_025",
+      "id": "connection_025_mesh_18",
+      "meshName": "geometry_18",
+      "boxCenterLocalMeters": [
+        0.48,
+        1.60867,
+        0.351
+      ],
+      "boxSizeMeters": [
+        0.84,
+        0.08,
+        0.2499
+      ],
+      "boundsMeters": [
+        [
+          0.05999999865889549,
+          1.568666696548462,
+          0.22605000436306
+        ],
+        [
+          0.8999999761581421,
+          1.6486666202545166,
+          0.4759500026702881
+        ]
+      ],
+      "physicsCertified": false
+    }
+  ]
+}

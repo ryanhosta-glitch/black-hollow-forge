@@ -1,0 +1,313 @@
+{
+  "schema": "black-hollow-stair-world-placement-0.1",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "sourceBlueprintModified": false,
+  "units": "meters",
+  "coordinateSpace": "estate-world",
+  "method": "Candidate mesh center at authored shaft midpoint, elevation from cumulative authored floor heights; no fabricated slab cuts",
+  "certifiedRoutes": 0,
+  "records": [
+    {
+      "id": "connection_022",
+      "kind": "switchback",
+      "lowerRoomId": "fe-f0-regular",
+      "upperRoomId": "fe-f1-regular",
+      "shaftRoomCenterWorldMeters": [
+        4.8768,
+        12.192
+      ],
+      "lowerFloorIndex": 0,
+      "upperFloorIndex": 1,
+      "lowerFloorElevationMeters": 0,
+      "upperFloorElevationMeters": 3.048,
+      "transformTranslationMeters": [
+        4.8768,
+        0,
+        12.192
+      ],
+      "geometryModel": "geometry/stair_world_connection_022.glb",
+      "worldBoundsMeters": [
+        [
+          3.9768,
+          0.0447,
+          10.3781
+        ],
+        [
+          5.7768,
+          3.0033,
+          13.493
+        ]
+      ],
+      "shaftFootprintWorldMeters": {
+        "minX": 3.6576,
+        "maxX": 6.096,
+        "minZ": 10.3632,
+        "maxZ": 14.0208
+      },
+      "fitsAuthoredShaftXY": true,
+      "topMeshToFloorHeightGapMeters": 0.0447,
+      "landings": [
+        {
+          "id": "forge-landing-connection_022-fe-f0-regular",
+          "floorIndex": 0,
+          "centerWorldMeters": [
+            5.281,
+            0.085,
+            12.192
+          ],
+          "sizeMeters": [
+            0.95,
+            0.12,
+            1.2
+          ]
+        },
+        {
+          "id": "forge-landing-connection_022-fe-f1-regular",
+          "floorIndex": 1,
+          "centerWorldMeters": [
+            5.281,
+            3.133,
+            12.192
+          ],
+          "sizeMeters": [
+            0.95,
+            0.12,
+            1.2
+          ]
+        }
+      ],
+      "stairwellOpeningRequired": true,
+      "slabOpeningCut": false,
+      "continuousCollisionCertified": false,
+      "gameplayStatus": "BLOCKED_UNTIL_REAL_CUTOUTS_AND_CAPSULE_TEST"
+    },
+    {
+      "id": "connection_023",
+      "kind": "switchback",
+      "lowerRoomId": "fe-f1-regular",
+      "upperRoomId": "fe-f2-regular",
+      "shaftRoomCenterWorldMeters": [
+        4.8768,
+        12.192
+      ],
+      "lowerFloorIndex": 1,
+      "upperFloorIndex": 2,
+      "lowerFloorElevationMeters": 3.048,
+      "upperFloorElevationMeters": 6.096,
+      "transformTranslationMeters": [
+        4.8768,
+        3.048,
+        12.192
+      ],
+      "geometryModel": "geometry/stair_world_connection_023.glb",
+      "worldBoundsMeters": [
+        [
+          3.9768,
+          3.0927,
+          10.3781
+        ],
+        [
+          5.7768,
+          6.0513,
+          13.493
+        ]
+      ],
+      "shaftFootprintWorldMeters": {
+        "minX": 3.6576,
+        "maxX": 6.096,
+        "minZ": 10.3632,
+        "maxZ": 14.0208
+      },
+      "fitsAuthoredShaftXY": true,
+      "topMeshToFloorHeightGapMeters": 0.0447,
+      "landings": [
+        {
+          "id": "forge-landing-connection_023-fe-f1-regular",
+          "floorIndex": 1,
+          "centerWorldMeters": [
+            5.281,
+            3.133,
+            12.192
+          ],
+          "sizeMeters": [
+            0.95,
+            0.12,
+            1.2
+          ]
+        },
+        {
+          "id": "forge-landing-connection_023-fe-f2-regular",
+          "floorIndex": 2,
+          "centerWorldMeters": [
+            5.281,
+            6.181,
+            12.192
+          ],
+          "sizeMeters": [
+            0.95,
+            0.12,
+            1.2
+          ]
+        }
+      ],
+      "stairwellOpeningRequired": true,
+      "slabOpeningCut": false,
+      "continuousCollisionCertified": false,
+      "gameplayStatus": "BLOCKED_UNTIL_REAL_CUTOUTS_AND_CAPSULE_TEST"
+    },
+    {
+      "id": "connection_024",
+      "kind": "spiral",
+      "lowerRoomId": "fe-f1-spiral",
+      "upperRoomId": "fe-f2-spiral",
+      "shaftRoomCenterWorldMeters": [
+        10.3632,
+        12.192
+      ],
+      "lowerFloorIndex": 1,
+      "upperFloorIndex": 2,
+      "lowerFloorElevationMeters": 3.048,
+      "upperFloorElevationMeters": 6.096,
+      "transformTranslationMeters": [
+        10.3632,
+        3.048,
+        12.192
+      ],
+      "geometryModel": "geometry/stair_world_connection_024.glb",
+      "worldBoundsMeters": [
+        [
+          8.7142,
+          3.058,
+          10.5681
+        ],
+        [
+          12.0122,
+          6.0167,
+          13.8159
+        ]
+      ],
+      "shaftFootprintWorldMeters": {
+        "minX": 8.5344,
+        "maxX": 12.192,
+        "minZ": 10.3632,
+        "maxZ": 14.0208
+      },
+      "fitsAuthoredShaftXY": true,
+      "topMeshToFloorHeightGapMeters": 0.0793,
+      "landings": [
+        {
+          "id": "forge-landing-connection_024-fe-f1-spiral",
+          "floorIndex": 1,
+          "centerWorldMeters": [
+            9.3494,
+            3.133,
+            12.192
+          ],
+          "sizeMeters": [
+            0.95,
+            0.12,
+            1.2
+          ]
+        },
+        {
+          "id": "forge-landing-connection_024-fe-f2-spiral",
+          "floorIndex": 2,
+          "centerWorldMeters": [
+            9.3494,
+            6.181,
+            12.192
+          ],
+          "sizeMeters": [
+            0.95,
+            0.12,
+            1.2
+          ]
+        }
+      ],
+      "stairwellOpeningRequired": true,
+      "slabOpeningCut": false,
+      "continuousCollisionCertified": false,
+      "gameplayStatus": "BLOCKED_UNTIL_REAL_CUTOUTS_AND_CAPSULE_TEST"
+    },
+    {
+      "id": "connection_025",
+      "kind": "switchback",
+      "lowerRoomId": "fe-f2-regular",
+      "upperRoomId": "fe-f3-regular",
+      "shaftRoomCenterWorldMeters": [
+        4.8768,
+        12.192
+      ],
+      "lowerFloorIndex": 2,
+      "upperFloorIndex": 3,
+      "lowerFloorElevationMeters": 6.096,
+      "upperFloorElevationMeters": 9.144,
+      "transformTranslationMeters": [
+        4.8768,
+        6.096,
+        12.192
+      ],
+      "geometryModel": "geometry/stair_world_connection_025.glb",
+      "worldBoundsMeters": [
+        [
+          3.9768,
+          6.1407,
+          10.3781
+        ],
+        [
+          5.7768,
+          9.0993,
+          13.493
+        ]
+      ],
+      "shaftFootprintWorldMeters": {
+        "minX": 3.6576,
+        "maxX": 6.096,
+        "minZ": 10.3632,
+        "maxZ": 14.0208
+      },
+      "fitsAuthoredShaftXY": true,
+      "topMeshToFloorHeightGapMeters": 0.0447,
+      "landings": [
+        {
+          "id": "forge-landing-connection_025-fe-f2-regular",
+          "floorIndex": 2,
+          "centerWorldMeters": [
+            5.281,
+            6.181,
+            12.192
+          ],
+          "sizeMeters": [
+            0.95,
+            0.12,
+            1.2
+          ]
+        },
+        {
+          "id": "forge-landing-connection_025-fe-f3-regular",
+          "floorIndex": 3,
+          "centerWorldMeters": [
+            5.281,
+            9.229,
+            12.192
+          ],
+          "sizeMeters": [
+            0.95,
+            0.12,
+            1.2
+          ]
+        }
+      ],
+      "stairwellOpeningRequired": true,
+      "slabOpeningCut": false,
+      "continuousCollisionCertified": false,
+      "gameplayStatus": "BLOCKED_UNTIL_REAL_CUTOUTS_AND_CAPSULE_TEST"
+    }
+  ],
+  "limitations": [
+    "World placement does not cut opaque existing floor GLBs",
+    "Top-landing-to-last-tread alignment not swept-tested",
+    "No physical player capsule traversal",
+    "No door swing/furniture/railing certification"
+  ]
+}

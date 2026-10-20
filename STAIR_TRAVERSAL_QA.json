@@ -1,0 +1,17 @@
+{
+  "checkpoint": "Renaissance stair traversal prototype",
+  "features": {
+    "roomDoorTraversal": "open doorway crossing + E fallback",
+    "stairInteraction": "destination choice from authored vertical stair links",
+    "stairMovement": "W/S guided two-flight walking path with stepped player height",
+    "stairArrival": "arrive at architect-authored linked stair landing",
+    "sourceBlueprintModified": false
+  },
+  "limits": [
+    "Route follows stair-room footprint but is not a calculated switchback/spiral step mesh",
+    "Stair spaces remain isolated per loaded floor; no true continuous cross-floor physics",
+    "Decoration GLBs not used for player collision",
+    "No GLB visual parity improvements in this checkpoint",
+    "Browser interaction testing pending"
+  ]
+}

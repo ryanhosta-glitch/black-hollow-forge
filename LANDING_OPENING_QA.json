@@ -1,0 +1,15 @@
+{
+  "pass": "Ceiling voids and stair shaft alignment",
+  "scope": "walktest.html; blueprint preserved",
+  "new_checks": [
+    "ceiling created for ordinary rooms",
+    "vertical connector rooms reserve ceiling void",
+    "overlapping authored shaft footprints checked and reported in diagnostics"
+  ],
+  "limitations": [
+    "does not cut exported visual GLBs",
+    "not a true physical multi-floor collision mesh",
+    "no browser-rendering proof"
+  ],
+  "source_haunt_changed": false
+}

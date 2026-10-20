@@ -1,0 +1,534 @@
+{
+  "policy": "Beautiful but Abandoned",
+  "generatedBy": "shared room-aware edge-furnishing rules (see furnishing_engine.py)",
+  "sourceBlueprintUnchanged": true,
+  "collisionCertified": false,
+  "visibleIn": "furnishing_inspector.html",
+  "rooms": [
+    {
+      "id": "fe-f0-room1",
+      "room": "The Forgotten Crypt",
+      "floor": 0,
+      "profile": "burial",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "stone_sarcophagus",
+          "x": 2.073,
+          "z": 1.025,
+          "width": 1.8,
+          "depth": 0.85,
+          "height": 0.68,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "memorial_stone",
+          "x": 4.145,
+          "z": 3.492,
+          "width": 0.65,
+          "depth": 0.35,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f0-room2",
+      "room": "Alchemist\u2019s Laboratory",
+      "floor": 0,
+      "profile": "lab",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "experiment_bench",
+          "x": 10.607,
+          "z": 0.925,
+          "width": 1.8,
+          "depth": 0.65,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "apparatus_shelf",
+          "x": 12.68,
+          "z": 3.492,
+          "width": 1.2,
+          "depth": 0.35,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f0-room3",
+      "room": "Cursed Wine Cellar",
+      "floor": 0,
+      "profile": "cellar",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "barrel_rack",
+          "x": 2.073,
+          "z": 6.946,
+          "width": 1.55,
+          "depth": 0.5,
+          "height": 1.45,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "wine_cabinet",
+          "x": 4.145,
+          "z": 9.563,
+          "width": 1.25,
+          "depth": 0.4,
+          "height": 1.45,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f0-room4",
+      "room": "The Whispering Vault",
+      "floor": 0,
+      "profile": "vault",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "reinforced_cabinet",
+          "x": 10.607,
+          "z": 6.936,
+          "width": 1.35,
+          "depth": 0.48,
+          "height": 1.45,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "ledger_table",
+          "x": 12.68,
+          "z": 9.453,
+          "width": 1.25,
+          "depth": 0.62,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f0-hall",
+      "room": "Basement \u2014 Central Corridor",
+      "floor": 0,
+      "profile": "none",
+      "status": "protected-circulation",
+      "objects": 0
+    },
+    {
+      "id": "fe-f0-regular",
+      "room": "The Grand Switchback Stairs",
+      "floor": 0,
+      "profile": "none",
+      "status": "protected-circulation",
+      "objects": 0
+    },
+    {
+      "id": "fe-f1-room1",
+      "room": "Grand Entrance Hall",
+      "floor": 1,
+      "profile": "entry",
+      "style": "Beautiful but Abandoned",
+      "objects": 0,
+      "placements": [],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f1-room2",
+      "room": "The Speaking Portrait Gallery",
+      "floor": 1,
+      "profile": "gallery",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "portrait_stand",
+          "x": 10.607,
+          "z": 0.77,
+          "width": 1.15,
+          "depth": 0.34,
+          "height": 1.65,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "velvet_bench",
+          "x": 12.68,
+          "z": 3.367,
+          "width": 1.7,
+          "depth": 0.6,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f1-room3",
+      "room": "The Midnight Library",
+      "floor": 1,
+      "profile": "library",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "bookcase",
+          "x": 2.073,
+          "z": 6.906,
+          "width": 2.3,
+          "depth": 0.42,
+          "height": 1.45,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "reading_desk",
+          "x": 4.145,
+          "z": 9.443,
+          "width": 1.3,
+          "depth": 0.64,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f1-room4",
+      "room": "The Phantom Ballroom",
+      "floor": 1,
+      "profile": "ballroom",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "velvet_settee",
+          "x": 10.607,
+          "z": 7.036,
+          "width": 1.65,
+          "depth": 0.68,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "gilded_cabinet",
+          "x": 12.68,
+          "z": 9.538,
+          "width": 1.05,
+          "depth": 0.45,
+          "height": 1.45,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f1-hall",
+      "room": "Ground Floor \u2014 Central Corridor",
+      "floor": 1,
+      "profile": "none",
+      "status": "protected-circulation",
+      "objects": 0
+    },
+    {
+      "id": "fe-f1-regular",
+      "room": "The Grand Switchback Stairs",
+      "floor": 1,
+      "profile": "none",
+      "status": "protected-circulation",
+      "objects": 0
+    },
+    {
+      "id": "fe-f1-spiral",
+      "room": "The Serpent Spiral Stair",
+      "floor": 1,
+      "profile": "none",
+      "status": "protected-circulation",
+      "objects": 0
+    },
+    {
+      "id": "fe-f2-room1",
+      "room": "The Seer\u2019s Chamber",
+      "floor": 2,
+      "profile": "occult",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "seer_table",
+          "x": 2.073,
+          "z": 0.96,
+          "width": 1.35,
+          "depth": 0.72,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "reliquary",
+          "x": 4.145,
+          "z": 3.447,
+          "width": 0.95,
+          "depth": 0.44,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f2-room2",
+      "room": "Moonlit Conservatory",
+      "floor": 2,
+      "profile": "botanical",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "botanical_workbench",
+          "x": 10.607,
+          "z": 0.9,
+          "width": 1.5,
+          "depth": 0.6,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "planter",
+          "x": 12.68,
+          "z": 3.292,
+          "width": 0.95,
+          "depth": 0.75,
+          "height": 0.62,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f2-room3",
+      "room": "The Dollmaker\u2019s Workshop",
+      "floor": 2,
+      "profile": "workshop",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "craft_workbench",
+          "x": 2.073,
+          "z": 7.021,
+          "width": 1.65,
+          "depth": 0.65,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "parts_cabinet",
+          "x": 4.145,
+          "z": 9.538,
+          "width": 1.1,
+          "depth": 0.45,
+          "height": 1.45,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f2-room4",
+      "room": "The Mirror Room",
+      "floor": 2,
+      "profile": "mirror",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "standing_mirror",
+          "x": 10.607,
+          "z": 6.856,
+          "width": 1.1,
+          "depth": 0.32,
+          "height": 1.65,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "draped_table",
+          "x": 12.68,
+          "z": 9.503,
+          "width": 1.0,
+          "depth": 0.52,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f2-hall",
+      "room": "Second Floor \u2014 Central Corridor",
+      "floor": 2,
+      "profile": "none",
+      "status": "protected-circulation",
+      "objects": 0
+    },
+    {
+      "id": "fe-f2-regular",
+      "room": "The Raven Staircase",
+      "floor": 2,
+      "profile": "none",
+      "status": "protected-circulation",
+      "objects": 0
+    },
+    {
+      "id": "fe-f2-spiral",
+      "room": "The Serpent Spiral Stair",
+      "floor": 2,
+      "profile": "none",
+      "status": "protected-circulation",
+      "objects": 0
+    },
+    {
+      "id": "fe-f3-room1",
+      "room": "The Founder\u2019s Study",
+      "floor": 3,
+      "profile": "study",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "writing_desk",
+          "x": 2.073,
+          "z": 0.96,
+          "width": 1.55,
+          "depth": 0.72,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "filing_cabinet",
+          "x": 4.145,
+          "z": 3.442,
+          "width": 1.0,
+          "depth": 0.45,
+          "height": 1.45,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f3-room2",
+      "room": "The Raven Observatory",
+      "floor": 3,
+      "profile": "observatory",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "chart_cabinet",
+          "x": 10.607,
+          "z": 0.83,
+          "width": 1.55,
+          "depth": 0.46,
+          "height": 1.45,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "instrument_desk",
+          "x": 12.68,
+          "z": 3.342,
+          "width": 1.15,
+          "depth": 0.65,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f3-room3",
+      "room": "The Spell Archive",
+      "floor": 3,
+      "profile": "library",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "bookcase",
+          "x": 2.073,
+          "z": 6.906,
+          "width": 2.3,
+          "depth": 0.42,
+          "height": 1.45,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "reading_desk",
+          "x": 4.145,
+          "z": 9.443,
+          "width": 1.3,
+          "depth": 0.64,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f3-room4",
+      "room": "The Attic Nursery",
+      "floor": 3,
+      "profile": "nursery",
+      "style": "Beautiful but Abandoned",
+      "objects": 2,
+      "placements": [
+        {
+          "name": "antique_crib",
+          "x": 10.607,
+          "z": 7.096,
+          "width": 1.5,
+          "depth": 0.8,
+          "height": 0.76,
+          "status": "decorative-not-collision-certified"
+        },
+        {
+          "name": "old_wardrobe",
+          "x": 12.68,
+          "z": 9.523,
+          "width": 1.15,
+          "depth": 0.48,
+          "height": 1.45,
+          "status": "decorative-not-collision-certified"
+        }
+      ],
+      "status": "preview-not-gameplay-certified"
+    },
+    {
+      "id": "fe-f3-hall",
+      "room": "Third Floor \u2014 Central Corridor",
+      "floor": 3,
+      "profile": "none",
+      "status": "protected-circulation",
+      "objects": 0
+    },
+    {
+      "id": "fe-f3-regular",
+      "room": "The Raven Staircase",
+      "floor": 3,
+      "profile": "none",
+      "status": "protected-circulation",
+      "objects": 0
+    }
+  ]
+}

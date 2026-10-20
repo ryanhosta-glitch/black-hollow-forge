@@ -1,0 +1,28 @@
+{
+  "game_source": "game_v8_5_19.html",
+  "game_source_sha256": "d695abf6c077d7b1a1f5d5c4627340a196f53e4e3543dc06cccbabbb93e42f4d",
+  "forge_source": "Black_Hollow_Forge_Gothic_Revival_Roof_Pass",
+  "reused_exact_functions": [
+    "hashString",
+    "seeded",
+    "canvasTex",
+    "floorTexture",
+    "wallTexture",
+    "renaissanceWoodTexture"
+  ],
+  "mapped_materials": {
+    "damask": "wallTexture:damask",
+    "wood": "renaissanceWoodTexture:oak",
+    "stone": "wallTexture:stone",
+    "herringbone": "floorTexture:herringbone"
+  },
+  "not_yet_ported": [
+    "marble (Forge fallback)",
+    "roof slate (Forge fallback)",
+    "plants (Forge fallback)",
+    "glass and transparency (Forge fallback)",
+    "original game lighting and postprocessing",
+    "GLB embedded/baked textures"
+  ],
+  "coverage": "viewer runtime bridge only; original game logic copied, not runtime-integrated into Black Hollow"
+}

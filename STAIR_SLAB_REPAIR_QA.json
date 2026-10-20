@@ -1,0 +1,96 @@
+{
+  "schema": "bh-forge-stair-slab-void-v1",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "pass": "exported slab panel removal",
+  "openings": [
+    {
+      "connectionId": "connection_022",
+      "floor": 1,
+      "removedSlabNode": "fe-f1-regular-floor",
+      "removedBoundsMeters": [
+        [
+          3.657599925994873,
+          -0.18000000715255737,
+          10.363200187683105
+        ],
+        [
+          6.0960001945495605,
+          0.0,
+          14.02079963684082
+        ]
+      ],
+      "status": "SHAFT_SLAB_REMOVED_UNCERTIFIED",
+      "upperLanding": "NOT_GENERATED",
+      "transition": "GAP_REMAINS_UNCERTIFIED"
+    },
+    {
+      "connectionId": "connection_023",
+      "floor": 2,
+      "removedSlabNode": "fe-f2-regular-floor",
+      "removedBoundsMeters": [
+        [
+          3.657599925994873,
+          -0.18000000715255737,
+          10.363200187683105
+        ],
+        [
+          6.0960001945495605,
+          0.0,
+          14.02079963684082
+        ]
+      ],
+      "status": "SHAFT_SLAB_REMOVED_UNCERTIFIED",
+      "upperLanding": "NOT_GENERATED",
+      "transition": "GAP_REMAINS_UNCERTIFIED"
+    },
+    {
+      "connectionId": "connection_024",
+      "floor": 2,
+      "removedSlabNode": "fe-f2-spiral-floor",
+      "removedBoundsMeters": [
+        [
+          8.53439998626709,
+          -0.18000000715255737,
+          10.363200187683105
+        ],
+        [
+          12.192000389099121,
+          0.0,
+          14.02079963684082
+        ]
+      ],
+      "status": "SHAFT_SLAB_REMOVED_UNCERTIFIED",
+      "upperLanding": "NOT_GENERATED",
+      "transition": "GAP_REMAINS_UNCERTIFIED"
+    },
+    {
+      "connectionId": "connection_025",
+      "floor": 3,
+      "removedSlabNode": "fe-f3-regular-floor",
+      "removedBoundsMeters": [
+        [
+          3.657599925994873,
+          -0.18000000715255737,
+          10.363200187683105
+        ],
+        [
+          6.0960001945495605,
+          0.0,
+          14.02079963684082
+        ]
+      ],
+      "status": "SHAFT_SLAB_REMOVED_UNCERTIFIED",
+      "upperLanding": "NOT_GENERATED",
+      "transition": "GAP_REMAINS_UNCERTIFIED"
+    }
+  ],
+  "certifiedStairs": 0,
+  "uncertifiedStairs": 4,
+  "limitations": [
+    "Full shaft slab panel removed; no replacement landing automatically generated",
+    "Transition gaps and tread/capsule continuity still unresolved",
+    "No real browser/player movement verified",
+    "Walls, historic inlays and furniture may still obstruct transitions; independent check needed"
+  ],
+  "status": "GEOMETRY_CLEARANCE_PARTIAL_NOT_PLAYABLE"
+}

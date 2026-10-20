@@ -1,0 +1,13 @@
+{
+  "roomCount": 26,
+  "componentCounts": [
+    10,
+    17,
+    16,
+    14
+  ],
+  "interactiveDoors": 45,
+  "windows": 12,
+  "sourceShaMatches": true,
+  "gameplayCertified": false
+}

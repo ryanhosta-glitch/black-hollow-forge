@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Forge | Spiral Geometry Prototypes</title><link rel="stylesheet" href="forge_pages.css"><style>body{margin:0;background:#0e111b;color:#f0e7d8;font:15px system-ui;padding:15px 12px 90px}header{max-width:900px;margin:auto}h1{color:#e4bf86;font-size:1.5rem}#v{height:55vh;min-height:320px;border:1px solid #66533f;border-radius:12px;touch-action:none}section{max-width:900px;margin:12px auto}select{font-size:16px;background:#292535;color:#ffdfb4;padding:12px;border-radius:8px;max-width:100%;min-width:220px}#report{white-space:pre-wrap;line-height:1.6;background:#201f2b;border:1px solid #66533f;padding:14px;border-radius:10px}p{line-height:1.55}small{color:#d8bd93}</style></head><body><header><h1>🦇 Stair Haunting: Real Mesh Prototypes</h1><p>Actual 3D treads and posts, generated separately from the student blueprint. <strong>These are NOT game-certified stairs.</strong> Rotate with touch or mouse; pinch or scroll to zoom.</p><label>Connection: <select id="which"></select></label></header><section><div id="v"></div><div id="report">Loading candidates…</div><p><small>Gold endpoint markers are diagnostic only—not usable landings. Authored switchbacks are unchanged.</small></p></section><script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js';
+import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/loaders/GLTFLoader.js';
+import {OrbitControls} from 'https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/controls/OrbitControls.js';
+const root=document.getElementById('v'),select=document.getElementById('which'),report=document.getElementById('report');
+const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(root.clientWidth,root.clientHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;root.append(renderer.domElement);
+const scene=new THREE.Scene();scene.background=new THREE.Color('#141623');scene.add(new THREE.HemisphereLight(0xbac4e3,0x35251b,2.2));let key=new THREE.DirectionalLight(0xffd4a1,2.8);key.position.set(5,9,4);scene.add(key);
+const camera=new THREE.PerspectiveCamera(49,root.clientWidth/root.clientHeight,.03,100);camera.position.set(5,4.5,5);const orbit=new OrbitControls(camera,renderer.domElement);orbit.enableDamping=true;orbit.target.set(0,1.5,0);
+let active=null;let links=[];const loader=new GLTFLoader();
+async function show(i){let x=links[i];if(!x)return;report.textContent=`${x.linkId} · authored ${x.authoredType}
+Candidate: ${x.prototypeType} · ${x.risers} actual treads
+Footprint: ${x.diameterMeters} m diameter inside ${x.stairwellMeters.join(' × ')} m
+Rise: ${x.riseMeters} m · walking-line going: ${x.goingAtWalkingLineMeters} m
+Estimated per-turn clearance: ${x.estimatedClearancePerTurnMeters} m (NOT verified in house)
+
+NOT CERTIFIED:
+• ${x.unverified.join('\n• ')}`;if(active)scene.remove(active);try{active=await loader.loadAsync('./houses/ferres-estate/'+x.model);scene.add(active.scene);active=active.scene;orbit.target.set(0,x.riseMeters/2,0);camera.position.set(4,x.riseMeters+2,5);orbit.update()}catch(e){report.textContent+='\nMODEL LOAD FAILED: '+e.message}}
+fetch('./houses/ferres-estate/navigation/spiral_geometry_prototypes.json').then(r=>r.json()).then(d=>{links=d.links.filter(l=>l.model);links.forEach((l,i)=>select.add(new Option(l.linkId+' · '+l.authoredType,l.linkId)));select.addEventListener('change',()=>show(select.selectedIndex));show(0)}).catch(e=>report.textContent=e.message);
+function frame(){requestAnimationFrame(frame);orbit.update();renderer.render(scene,camera)}frame();new ResizeObserver(()=>{let w=root.clientWidth,h=root.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix()}).observe(root)
+</script><script src="forge_pages.js" defer></script><p style="padding:12px"><a style="color:#e8c88e" href="serpent_spiral_approaches.html">Inspect the Serpent Spiral approach platforms →</a></p></body></html>

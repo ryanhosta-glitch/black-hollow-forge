@@ -1,0 +1,13 @@
+{
+  "routes": 4,
+  "regularRoutes": 3,
+  "safetyAssertions": {
+    "three_regular_routes": true,
+    "turn_subdivision_reduces_gap": true,
+    "original_route_vertices_retained": true,
+    "all_routes_remain_uncertified": true,
+    "source_fingerprint_unchanged": true,
+    "boundary_negative_test": true
+  },
+  "status": "GEOMETRY_PREVIEW_NOT_CERTIFIED"
+}

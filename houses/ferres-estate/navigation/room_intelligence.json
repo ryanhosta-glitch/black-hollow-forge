@@ -1,0 +1,886 @@
+{
+  "version": "room-intelligence-v1",
+  "purpose": "general Forge room classification and visual material planning",
+  "scope": "apply to any imported compatible .haunt; not fixed to Ferres Estate",
+  "sourceBlueprintImmutable": true,
+  "profileMatching": "use explicit room type when semantically informative, otherwise room name; custom unknown types remain custom",
+  "finishPrecedence": [
+    "explicit student selection",
+    "compatible original-game material",
+    "category suggestion",
+    "neutral fallback"
+  ],
+  "categories": {
+    "crypt": {
+      "family": "burial",
+      "suggestedWall": "carved stone",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "sarcophagus, funerary plaques, subdued lanterns"
+    },
+    "mausoleum": {
+      "family": "burial",
+      "suggestedWall": "carved stone",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "memorial tablets, niches, urns"
+    },
+    "laboratory": {
+      "family": "laboratory",
+      "suggestedWall": "wainscot and tile",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "workbench, instruments, glass vessels"
+    },
+    "alchemist": {
+      "family": "laboratory",
+      "suggestedWall": "darkwood",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "alchemical bench, retorts, specimen jars"
+    },
+    "cellar": {
+      "family": "storage",
+      "suggestedWall": "stone",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "barrels, shelving, storage bins"
+    },
+    "wine": {
+      "family": "storage",
+      "suggestedWall": "stone",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "bottle racks, barrels, cellar lighting"
+    },
+    "vault": {
+      "family": "secured",
+      "suggestedWall": "stone",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "iron cabinets, lockboxes, reinforced doors"
+    },
+    "library": {
+      "family": "library",
+      "suggestedWall": "darkwood",
+      "suggestedFloor": "herringbone",
+      "furnishingIdea": "bookcases, reading desk, ladder"
+    },
+    "study": {
+      "family": "study",
+      "suggestedWall": "damask",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "desk, writing accessories, bookcases"
+    },
+    "office": {
+      "family": "study",
+      "suggestedWall": "wainscot",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "desk, cabinets, lamps"
+    },
+    "ballroom": {
+      "family": "entertainment",
+      "suggestedWall": "damask",
+      "suggestedFloor": "marble",
+      "furnishingIdea": "chandeliers, mirrors, open dance area"
+    },
+    "parlor": {
+      "family": "social",
+      "suggestedWall": "damask",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "sofa, chairs, tables, fireplace"
+    },
+    "salon": {
+      "family": "social",
+      "suggestedWall": "damask",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "chairs, piano, fireplace"
+    },
+    "drawing": {
+      "family": "social",
+      "suggestedWall": "damask",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "seating groups, art, fireplace"
+    },
+    "dining": {
+      "family": "dining",
+      "suggestedWall": "wainscot",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "dining table, sideboard, sconces"
+    },
+    "kitchen": {
+      "family": "service",
+      "suggestedWall": "tile and wood",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "worktables, range, pantry storage"
+    },
+    "pantry": {
+      "family": "service",
+      "suggestedWall": "stone",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "shelves, containers"
+    },
+    "bedroom": {
+      "family": "sleeping",
+      "suggestedWall": "damask",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "bed, dresser, wardrobe"
+    },
+    "nursery": {
+      "family": "sleeping",
+      "suggestedWall": "wainscot",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "crib, rocking chair, toys"
+    },
+    "bath": {
+      "family": "hygiene",
+      "suggestedWall": "tile",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "basin, clawfoot tub, mirror"
+    },
+    "wash": {
+      "family": "hygiene",
+      "suggestedWall": "tile",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "wash basin, cabinets"
+    },
+    "chapel": {
+      "family": "ceremonial",
+      "suggestedWall": "stone",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "pews, altar, candle stands"
+    },
+    "shrine": {
+      "family": "ceremonial",
+      "suggestedWall": "stone",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "altar, ritual fittings"
+    },
+    "observatory": {
+      "family": "scientific",
+      "suggestedWall": "darkwood",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "telescope, maps, star charts"
+    },
+    "conservatory": {
+      "family": "botanical",
+      "suggestedWall": "iron and glass",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "planters, botanical displays, paths"
+    },
+    "greenhouse": {
+      "family": "botanical",
+      "suggestedWall": "iron and glass",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "benches, planters, irrigation"
+    },
+    "garden": {
+      "family": "botanical",
+      "suggestedWall": "stone",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "paths, planters, seating"
+    },
+    "attic": {
+      "family": "storage",
+      "suggestedWall": "aged wood",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "trunks, old furniture, dust"
+    },
+    "tower": {
+      "family": "vertical",
+      "suggestedWall": "stone",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "narrow lighting, architectural railings"
+    },
+    "armory": {
+      "family": "secured",
+      "suggestedWall": "stone",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "display stands, locking cabinets"
+    },
+    "gallery": {
+      "family": "exhibition",
+      "suggestedWall": "damask",
+      "suggestedFloor": "marble",
+      "furnishingIdea": "frames, pedestals, benches"
+    },
+    "museum": {
+      "family": "exhibition",
+      "suggestedWall": "damask",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "cases, plaques, pedestals"
+    },
+    "theater": {
+      "family": "entertainment",
+      "suggestedWall": "darkwood",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "seating, stage, curtains"
+    },
+    "theatre": {
+      "family": "entertainment",
+      "suggestedWall": "darkwood",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "seating, stage, curtains"
+    },
+    "music": {
+      "family": "entertainment",
+      "suggestedWall": "damask",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "piano, music stands"
+    },
+    "corridor": {
+      "family": "circulation",
+      "suggestedWall": "wainscot",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "sconces, occasional framed art"
+    },
+    "hallway": {
+      "family": "circulation",
+      "suggestedWall": "wainscot",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "sconces, occasional framed art"
+    },
+    "entrance": {
+      "family": "circulation",
+      "suggestedWall": "marble and damask",
+      "suggestedFloor": "marble",
+      "furnishingIdea": "entry table, sculptural details"
+    },
+    "foyer": {
+      "family": "circulation",
+      "suggestedWall": "marble and damask",
+      "suggestedFloor": "marble",
+      "furnishingIdea": "entry table, sculptural details"
+    },
+    "stair": {
+      "family": "vertical",
+      "suggestedWall": "wainscot",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "safe railings, no blocking furnishings"
+    },
+    "spiral": {
+      "family": "vertical",
+      "suggestedWall": "stone and iron",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "safe railings, no blocking furnishings"
+    },
+    "elevator": {
+      "family": "vertical",
+      "suggestedWall": "brass and darkwood",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "gate, control panel, clear landing"
+    },
+    "secret": {
+      "family": "hidden",
+      "suggestedWall": "darkwood",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "concealed shelving, unobstructed hidden door"
+    },
+    "dungeon": {
+      "family": "burial",
+      "suggestedWall": "stone",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "ironwork, chains, sparse lanterns"
+    },
+    "prison": {
+      "family": "secured",
+      "suggestedWall": "stone",
+      "suggestedFloor": "stone",
+      "furnishingIdea": "bars, sconces"
+    },
+    "closet": {
+      "family": "storage",
+      "suggestedWall": "wood",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "shelves, hooks"
+    },
+    "hall": {
+      "family": "circulation",
+      "suggestedWall": "wainscot",
+      "suggestedFloor": "wood",
+      "furnishingIdea": "sconces, unobstructed walking route"
+    }
+  },
+  "roomAssignments": [
+    {
+      "roomId": "fe-f0-room1",
+      "name": "The Forgotten Crypt",
+      "floor": 0,
+      "authoredRoomType": "room",
+      "recognizedCategory": "crypt",
+      "functionalFamily": "burial",
+      "suggestedWallFinish": "carved stone",
+      "suggestedFloorFinish": "stone",
+      "furnishingIdeas": [
+        "sarcophagus",
+        "funerary plaques",
+        "subdued lanterns"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f0-room2",
+      "name": "Alchemist’s Laboratory",
+      "floor": 0,
+      "authoredRoomType": "room",
+      "recognizedCategory": "laboratory",
+      "functionalFamily": "laboratory",
+      "suggestedWallFinish": "wainscot and tile",
+      "suggestedFloorFinish": "stone",
+      "furnishingIdeas": [
+        "workbench",
+        "instruments",
+        "glass vessels"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f0-room3",
+      "name": "Cursed Wine Cellar",
+      "floor": 0,
+      "authoredRoomType": "room",
+      "recognizedCategory": "cellar",
+      "functionalFamily": "storage",
+      "suggestedWallFinish": "stone",
+      "suggestedFloorFinish": "stone",
+      "furnishingIdeas": [
+        "barrels",
+        "shelving",
+        "storage bins"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f0-room4",
+      "name": "The Whispering Vault",
+      "floor": 0,
+      "authoredRoomType": "room",
+      "recognizedCategory": "vault",
+      "functionalFamily": "secured",
+      "suggestedWallFinish": "stone",
+      "suggestedFloorFinish": "stone",
+      "furnishingIdeas": [
+        "iron cabinets",
+        "lockboxes",
+        "reinforced doors"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f0-hall",
+      "name": "Basement — Central Corridor",
+      "floor": 0,
+      "authoredRoomType": "hallway",
+      "recognizedCategory": "corridor",
+      "functionalFamily": "circulation",
+      "suggestedWallFinish": "wainscot",
+      "suggestedFloorFinish": "wood",
+      "furnishingIdeas": [
+        "sconces",
+        "occasional framed art"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f0-regular",
+      "name": "The Grand Switchback Stairs",
+      "floor": 0,
+      "authoredRoomType": "staircase",
+      "recognizedCategory": "stair",
+      "functionalFamily": "vertical",
+      "suggestedWallFinish": "wainscot",
+      "suggestedFloorFinish": "wood",
+      "furnishingIdeas": [
+        "safe railings",
+        "no blocking furnishings"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f1-room1",
+      "name": "Grand Entrance Hall",
+      "floor": 1,
+      "authoredRoomType": "foyer",
+      "recognizedCategory": "entrance",
+      "functionalFamily": "circulation",
+      "suggestedWallFinish": "marble and damask",
+      "suggestedFloorFinish": "marble",
+      "furnishingIdeas": [
+        "entry table",
+        "sculptural details"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f1-room2",
+      "name": "The Speaking Portrait Gallery",
+      "floor": 1,
+      "authoredRoomType": "room",
+      "recognizedCategory": "gallery",
+      "functionalFamily": "exhibition",
+      "suggestedWallFinish": "damask",
+      "suggestedFloorFinish": "marble",
+      "furnishingIdeas": [
+        "frames",
+        "pedestals",
+        "benches"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f1-room3",
+      "name": "The Midnight Library",
+      "floor": 1,
+      "authoredRoomType": "library",
+      "recognizedCategory": "library",
+      "functionalFamily": "library",
+      "suggestedWallFinish": "darkwood",
+      "suggestedFloorFinish": "herringbone",
+      "furnishingIdeas": [
+        "bookcases",
+        "reading desk",
+        "ladder"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f1-room4",
+      "name": "The Phantom Ballroom",
+      "floor": 1,
+      "authoredRoomType": "room",
+      "recognizedCategory": "ballroom",
+      "functionalFamily": "entertainment",
+      "suggestedWallFinish": "damask",
+      "suggestedFloorFinish": "marble",
+      "furnishingIdeas": [
+        "chandeliers",
+        "mirrors",
+        "open dance area"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f1-hall",
+      "name": "Ground Floor — Central Corridor",
+      "floor": 1,
+      "authoredRoomType": "hallway",
+      "recognizedCategory": "corridor",
+      "functionalFamily": "circulation",
+      "suggestedWallFinish": "wainscot",
+      "suggestedFloorFinish": "wood",
+      "furnishingIdeas": [
+        "sconces",
+        "occasional framed art"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f1-regular",
+      "name": "The Grand Switchback Stairs",
+      "floor": 1,
+      "authoredRoomType": "staircase",
+      "recognizedCategory": "stair",
+      "functionalFamily": "vertical",
+      "suggestedWallFinish": "wainscot",
+      "suggestedFloorFinish": "wood",
+      "furnishingIdeas": [
+        "safe railings",
+        "no blocking furnishings"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f1-spiral",
+      "name": "The Serpent Spiral Stair",
+      "floor": 1,
+      "authoredRoomType": "staircase",
+      "recognizedCategory": "stair",
+      "functionalFamily": "vertical",
+      "suggestedWallFinish": "wainscot",
+      "suggestedFloorFinish": "wood",
+      "furnishingIdeas": [
+        "safe railings",
+        "no blocking furnishings"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f2-room1",
+      "name": "The Seer’s Chamber",
+      "floor": 2,
+      "authoredRoomType": "room",
+      "recognizedCategory": "unclassified",
+      "functionalFamily": "custom",
+      "suggestedWallFinish": "student-selected or Gothic Revival fallback",
+      "suggestedFloorFinish": "student-selected or neutral stone",
+      "furnishingIdeas": [
+        "manual room-specific furnishing plan required"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f2-room2",
+      "name": "Moonlit Conservatory",
+      "floor": 2,
+      "authoredRoomType": "conservatory",
+      "recognizedCategory": "conservatory",
+      "functionalFamily": "botanical",
+      "suggestedWallFinish": "iron and glass",
+      "suggestedFloorFinish": "stone",
+      "furnishingIdeas": [
+        "planters",
+        "botanical displays",
+        "paths"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f2-room3",
+      "name": "The Dollmaker’s Workshop",
+      "floor": 2,
+      "authoredRoomType": "room",
+      "recognizedCategory": "unclassified",
+      "functionalFamily": "custom",
+      "suggestedWallFinish": "student-selected or Gothic Revival fallback",
+      "suggestedFloorFinish": "student-selected or neutral stone",
+      "furnishingIdeas": [
+        "manual room-specific furnishing plan required"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f2-room4",
+      "name": "The Mirror Room",
+      "floor": 2,
+      "authoredRoomType": "room",
+      "recognizedCategory": "unclassified",
+      "functionalFamily": "custom",
+      "suggestedWallFinish": "student-selected or Gothic Revival fallback",
+      "suggestedFloorFinish": "student-selected or neutral stone",
+      "furnishingIdeas": [
+        "manual room-specific furnishing plan required"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f2-hall",
+      "name": "Second Floor — Central Corridor",
+      "floor": 2,
+      "authoredRoomType": "hallway",
+      "recognizedCategory": "corridor",
+      "functionalFamily": "circulation",
+      "suggestedWallFinish": "wainscot",
+      "suggestedFloorFinish": "wood",
+      "furnishingIdeas": [
+        "sconces",
+        "occasional framed art"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f2-regular",
+      "name": "The Raven Staircase",
+      "floor": 2,
+      "authoredRoomType": "staircase",
+      "recognizedCategory": "stair",
+      "functionalFamily": "vertical",
+      "suggestedWallFinish": "wainscot",
+      "suggestedFloorFinish": "wood",
+      "furnishingIdeas": [
+        "safe railings",
+        "no blocking furnishings"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f2-spiral",
+      "name": "The Serpent Spiral Stair",
+      "floor": 2,
+      "authoredRoomType": "staircase",
+      "recognizedCategory": "stair",
+      "functionalFamily": "vertical",
+      "suggestedWallFinish": "wainscot",
+      "suggestedFloorFinish": "wood",
+      "furnishingIdeas": [
+        "safe railings",
+        "no blocking furnishings"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f3-room1",
+      "name": "The Founder’s Study",
+      "floor": 3,
+      "authoredRoomType": "room",
+      "recognizedCategory": "study",
+      "functionalFamily": "study",
+      "suggestedWallFinish": "damask",
+      "suggestedFloorFinish": "wood",
+      "furnishingIdeas": [
+        "desk",
+        "writing accessories",
+        "bookcases"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f3-room2",
+      "name": "The Raven Observatory",
+      "floor": 3,
+      "authoredRoomType": "room",
+      "recognizedCategory": "observatory",
+      "functionalFamily": "scientific",
+      "suggestedWallFinish": "darkwood",
+      "suggestedFloorFinish": "wood",
+      "furnishingIdeas": [
+        "telescope",
+        "maps",
+        "star charts"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f3-room3",
+      "name": "The Spell Archive",
+      "floor": 3,
+      "authoredRoomType": "library",
+      "recognizedCategory": "library",
+      "functionalFamily": "library",
+      "suggestedWallFinish": "darkwood",
+      "suggestedFloorFinish": "herringbone",
+      "furnishingIdeas": [
+        "bookcases",
+        "reading desk",
+        "ladder"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f3-room4",
+      "name": "The Attic Nursery",
+      "floor": 3,
+      "authoredRoomType": "room",
+      "recognizedCategory": "nursery",
+      "functionalFamily": "sleeping",
+      "suggestedWallFinish": "wainscot",
+      "suggestedFloorFinish": "wood",
+      "furnishingIdeas": [
+        "crib",
+        "rocking chair",
+        "toys"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f3-hall",
+      "name": "Third Floor — Central Corridor",
+      "floor": 3,
+      "authoredRoomType": "hallway",
+      "recognizedCategory": "corridor",
+      "functionalFamily": "circulation",
+      "suggestedWallFinish": "wainscot",
+      "suggestedFloorFinish": "wood",
+      "furnishingIdeas": [
+        "sconces",
+        "occasional framed art"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    },
+    {
+      "roomId": "fe-f3-regular",
+      "name": "The Raven Staircase",
+      "floor": 3,
+      "authoredRoomType": "staircase",
+      "recognizedCategory": "stair",
+      "functionalFamily": "vertical",
+      "suggestedWallFinish": "wainscot",
+      "suggestedFloorFinish": "wood",
+      "furnishingIdeas": [
+        "safe railings",
+        "no blocking furnishings"
+      ],
+      "authoredFinishPrecedence": true,
+      "furnishStatus": "plan-only",
+      "materialExportStatus": "viewer-bridge-only; embedded GLB texture bake pending",
+      "safetyExclusions": [
+        "preserve doors",
+        "preserve stair/elevator clearances",
+        "preserve authored geometry"
+      ]
+    }
+  ],
+  "limitations": [
+    "classification uses room names and type hints; does not generate furniture",
+    "original-game procedural textures only mapped in Forge viewer",
+    "no new embedded GLB texture bake in this checkpoint",
+    "room type labels and student-selected styles require precedence in future source compiler"
+  ]
+}

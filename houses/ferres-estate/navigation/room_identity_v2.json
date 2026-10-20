@@ -1,0 +1,1053 @@
+{
+  "schema": "black-hollow.room-identity.v2",
+  "generatedBy": "room_identity_v2.py",
+  "sourceHauntSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "policy": "Beautiful but Abandoned; preserve authored dimensions and materials",
+  "rooms": [
+    {
+      "roomId": "fe-f0-room1",
+      "floor": 0,
+      "roomName": "The Forgotten Crypt",
+      "authoredType": "room",
+      "profile": "burial",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "carved epitaph panels",
+          "funerary candle sconces"
+        ],
+        "wallSuggestion": "carved stone",
+        "floorSuggestion": "stone",
+        "agingTheme": "cold dust and stone"
+      },
+      "interactionIdeas": [
+        "sarcophagus lid: inspect",
+        "memorial plaque: read"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "stone_sarcophagus",
+          "position": {
+            "x": 2.073,
+            "z": 1.025
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "memorial_stone",
+          "position": {
+            "x": 4.145,
+            "z": 3.492
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f0-room2",
+      "floor": 0,
+      "roomName": "Alchemist’s Laboratory",
+      "authoredType": "room",
+      "profile": "laboratory",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "tile splashback",
+          "suspended reagent rack"
+        ],
+        "wallSuggestion": "wainscot and tile",
+        "floorSuggestion": "stone",
+        "agingTheme": "chemical patina"
+      },
+      "interactionIdeas": [
+        "apparatus shelf: inspect",
+        "cabinet: open"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "experiment_bench",
+          "position": {
+            "x": 10.607,
+            "z": 0.925
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "apparatus_shelf",
+          "position": {
+            "x": 12.68,
+            "z": 3.492
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f0-room3",
+      "floor": 0,
+      "roomName": "Cursed Wine Cellar",
+      "authoredType": "room",
+      "profile": "storage",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "heavy timber shelving",
+          "stone bottle niches"
+        ],
+        "wallSuggestion": "stone",
+        "floorSuggestion": "stone",
+        "agingTheme": "damp cellar"
+      },
+      "interactionIdeas": [
+        "wine cabinet: open",
+        "barrel: inspect"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "barrel_rack",
+          "position": {
+            "x": 2.073,
+            "z": 6.946
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "wine_cabinet",
+          "position": {
+            "x": 4.145,
+            "z": 9.563
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f0-room4",
+      "floor": 0,
+      "roomName": "The Whispering Vault",
+      "authoredType": "room",
+      "profile": "secured",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "reinforced jamb trim",
+          "iron key hooks"
+        ],
+        "wallSuggestion": "stone",
+        "floorSuggestion": "stone",
+        "agingTheme": "contained and guarded"
+      },
+      "interactionIdeas": [
+        "lockbox: inspect",
+        "cabinet: unlock"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "reinforced_cabinet",
+          "position": {
+            "x": 10.607,
+            "z": 6.936
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "ledger_table",
+          "position": {
+            "x": 12.68,
+            "z": 9.453
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f0-hall",
+      "floor": 0,
+      "roomName": "Basement — Central Corridor",
+      "authoredType": "hallway",
+      "profile": "circulation",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "durable baseboards",
+          "lantern bracket"
+        ],
+        "wallSuggestion": "wainscot",
+        "floorSuggestion": "wood",
+        "agingTheme": "quiet transition"
+      },
+      "interactionIdeas": [
+        "wall plaque: read",
+        "sconce: inspect"
+      ],
+      "furniturePlacements": [],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f0-regular",
+      "floor": 0,
+      "roomName": "The Grand Switchback Stairs",
+      "authoredType": "staircase",
+      "profile": "stair",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "newel trim",
+          "balustrade detail"
+        ],
+        "wallSuggestion": "wainscot",
+        "floorSuggestion": "wood",
+        "agingTheme": "safe traversal priority"
+      },
+      "interactionIdeas": [
+        "banister: inspect",
+        "landing plaque: read"
+      ],
+      "furniturePlacements": [],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f1-room1",
+      "floor": 1,
+      "roomName": "Grand Entrance Hall",
+      "authoredType": "foyer",
+      "profile": "entry",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "stone baseboards",
+          "grand ceiling medallion"
+        ],
+        "wallSuggestion": "marble and damask",
+        "floorSuggestion": "marble",
+        "agingTheme": "carefully preserved"
+      },
+      "interactionIdeas": [
+        "guestbook: read",
+        "entry clock: inspect"
+      ],
+      "furniturePlacements": [],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f1-room2",
+      "floor": 1,
+      "roomName": "The Speaking Portrait Gallery",
+      "authoredType": "room",
+      "profile": "gallery",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "picture rail",
+          "niche molding"
+        ],
+        "wallSuggestion": "damask",
+        "floorSuggestion": "marble",
+        "agingTheme": "dusty gilt"
+      },
+      "interactionIdeas": [
+        "portrait: inspect",
+        "frame: investigate"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "portrait_stand",
+          "position": {
+            "x": 10.607,
+            "z": 0.77
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "velvet_bench",
+          "position": {
+            "x": 12.68,
+            "z": 3.367
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f1-room3",
+      "floor": 1,
+      "roomName": "The Midnight Library",
+      "authoredType": "library",
+      "profile": "library",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "carved shelf pilasters",
+          "bookcase crown"
+        ],
+        "wallSuggestion": "darkwood",
+        "floorSuggestion": "herringbone",
+        "agingTheme": "powdery dry dust"
+      },
+      "interactionIdeas": [
+        "bookcase: search",
+        "reading desk: open"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "bookcase",
+          "position": {
+            "x": 2.073,
+            "z": 6.906
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "reading_desk",
+          "position": {
+            "x": 4.145,
+            "z": 9.443
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f1-room4",
+      "floor": 1,
+      "roomName": "The Phantom Ballroom",
+      "authoredType": "room",
+      "profile": "entertainment",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "coffered ceiling accent",
+          "dancefloor perimeter inlay"
+        ],
+        "wallSuggestion": "damask",
+        "floorSuggestion": "marble",
+        "agingTheme": "pale fading gilding"
+      },
+      "interactionIdeas": [
+        "mirror: inspect",
+        "chandelier: inspect"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "velvet_settee",
+          "position": {
+            "x": 10.607,
+            "z": 7.036
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "gilded_cabinet",
+          "position": {
+            "x": 12.68,
+            "z": 9.538
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f1-hall",
+      "floor": 1,
+      "roomName": "Ground Floor — Central Corridor",
+      "authoredType": "hallway",
+      "profile": "circulation",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "durable baseboards",
+          "lantern bracket"
+        ],
+        "wallSuggestion": "wainscot",
+        "floorSuggestion": "wood",
+        "agingTheme": "quiet transition"
+      },
+      "interactionIdeas": [
+        "wall plaque: read",
+        "sconce: inspect"
+      ],
+      "furniturePlacements": [],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f1-regular",
+      "floor": 1,
+      "roomName": "The Grand Switchback Stairs",
+      "authoredType": "staircase",
+      "profile": "stair",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "newel trim",
+          "balustrade detail"
+        ],
+        "wallSuggestion": "wainscot",
+        "floorSuggestion": "wood",
+        "agingTheme": "safe traversal priority"
+      },
+      "interactionIdeas": [
+        "banister: inspect",
+        "landing plaque: read"
+      ],
+      "furniturePlacements": [],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f1-spiral",
+      "floor": 1,
+      "roomName": "The Serpent Spiral Stair",
+      "authoredType": "staircase",
+      "profile": "stair",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "newel trim",
+          "balustrade detail"
+        ],
+        "wallSuggestion": "wainscot",
+        "floorSuggestion": "wood",
+        "agingTheme": "safe traversal priority"
+      },
+      "interactionIdeas": [
+        "banister: inspect",
+        "landing plaque: read"
+      ],
+      "furniturePlacements": [],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f2-room1",
+      "floor": 2,
+      "roomName": "The Seer’s Chamber",
+      "authoredType": "room",
+      "profile": "occult",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "carved sigil architrave",
+          "ritual alcove molding"
+        ],
+        "wallSuggestion": "student-selected or Gothic Revival fallback",
+        "floorSuggestion": "student-selected or neutral stone",
+        "agingTheme": "unsettling candle smoke"
+      },
+      "interactionIdeas": [
+        "spellbook: read",
+        "reliquary: open"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "seer_table",
+          "position": {
+            "x": 2.073,
+            "z": 0.96
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "reliquary",
+          "position": {
+            "x": 4.145,
+            "z": 3.447
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f2-room2",
+      "floor": 2,
+      "roomName": "Moonlit Conservatory",
+      "authoredType": "conservatory",
+      "profile": "botanical",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "iron lattice trim",
+          "plant display shelving"
+        ],
+        "wallSuggestion": "iron and glass",
+        "floorSuggestion": "stone",
+        "agingTheme": "overgrown living green"
+      },
+      "interactionIdeas": [
+        "specimen: inspect",
+        "terrarium: open"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "botanical_workbench",
+          "position": {
+            "x": 10.607,
+            "z": 0.9
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "planter",
+          "position": {
+            "x": 12.68,
+            "z": 3.292
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f2-room3",
+      "floor": 2,
+      "roomName": "The Dollmaker’s Workshop",
+      "authoredType": "room",
+      "profile": "workshop",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "tool rail",
+          "bench shelving"
+        ],
+        "wallSuggestion": "student-selected or Gothic Revival fallback",
+        "floorSuggestion": "student-selected or neutral stone",
+        "agingTheme": "sawdust and corrosion"
+      },
+      "interactionIdeas": [
+        "workbench: search",
+        "toolbox: open"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "craft_workbench",
+          "position": {
+            "x": 2.073,
+            "z": 7.021
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "parts_cabinet",
+          "position": {
+            "x": 4.145,
+            "z": 9.538
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f2-room4",
+      "floor": 2,
+      "roomName": "The Mirror Room",
+      "authoredType": "room",
+      "profile": "mirror",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "mirrored pilasters",
+          "gilt corner rosettes"
+        ],
+        "wallSuggestion": "student-selected or Gothic Revival fallback",
+        "floorSuggestion": "student-selected or neutral stone",
+        "agingTheme": "distorted reflection"
+      },
+      "interactionIdeas": [
+        "mirror: inspect",
+        "hidden panel: test"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "standing_mirror",
+          "position": {
+            "x": 10.607,
+            "z": 6.856
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "draped_table",
+          "position": {
+            "x": 12.68,
+            "z": 9.503
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f2-hall",
+      "floor": 2,
+      "roomName": "Second Floor — Central Corridor",
+      "authoredType": "hallway",
+      "profile": "circulation",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "durable baseboards",
+          "lantern bracket"
+        ],
+        "wallSuggestion": "wainscot",
+        "floorSuggestion": "wood",
+        "agingTheme": "quiet transition"
+      },
+      "interactionIdeas": [
+        "wall plaque: read",
+        "sconce: inspect"
+      ],
+      "furniturePlacements": [],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f2-regular",
+      "floor": 2,
+      "roomName": "The Raven Staircase",
+      "authoredType": "staircase",
+      "profile": "stair",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "newel trim",
+          "balustrade detail"
+        ],
+        "wallSuggestion": "wainscot",
+        "floorSuggestion": "wood",
+        "agingTheme": "safe traversal priority"
+      },
+      "interactionIdeas": [
+        "banister: inspect",
+        "landing plaque: read"
+      ],
+      "furniturePlacements": [],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f2-spiral",
+      "floor": 2,
+      "roomName": "The Serpent Spiral Stair",
+      "authoredType": "staircase",
+      "profile": "stair",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "newel trim",
+          "balustrade detail"
+        ],
+        "wallSuggestion": "wainscot",
+        "floorSuggestion": "wood",
+        "agingTheme": "safe traversal priority"
+      },
+      "interactionIdeas": [
+        "banister: inspect",
+        "landing plaque: read"
+      ],
+      "furniturePlacements": [],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f3-room1",
+      "floor": 3,
+      "roomName": "The Founder’s Study",
+      "authoredType": "room",
+      "profile": "study",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "wood writing panels",
+          "carved hearth surround"
+        ],
+        "wallSuggestion": "damask",
+        "floorSuggestion": "wood",
+        "agingTheme": "warm aged brass"
+      },
+      "interactionIdeas": [
+        "desk: open",
+        "letter: read"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "writing_desk",
+          "position": {
+            "x": 2.073,
+            "z": 0.96
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "filing_cabinet",
+          "position": {
+            "x": 4.145,
+            "z": 3.442
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f3-room2",
+      "floor": 3,
+      "roomName": "The Raven Observatory",
+      "authoredType": "room",
+      "profile": "observatory",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "brass instrument mounting",
+          "roof beam trim"
+        ],
+        "wallSuggestion": "darkwood",
+        "floorSuggestion": "wood",
+        "agingTheme": "cold moonlit brass"
+      },
+      "interactionIdeas": [
+        "telescope: rotate",
+        "star chart: read"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "chart_cabinet",
+          "position": {
+            "x": 10.607,
+            "z": 0.83
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "instrument_desk",
+          "position": {
+            "x": 12.68,
+            "z": 3.342
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f3-room3",
+      "floor": 3,
+      "roomName": "The Spell Archive",
+      "authoredType": "library",
+      "profile": "library",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "carved shelf pilasters",
+          "bookcase crown"
+        ],
+        "wallSuggestion": "darkwood",
+        "floorSuggestion": "herringbone",
+        "agingTheme": "powdery dry dust"
+      },
+      "interactionIdeas": [
+        "bookcase: search",
+        "reading desk: open"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "bookcase",
+          "position": {
+            "x": 2.073,
+            "z": 6.906
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "reading_desk",
+          "position": {
+            "x": 4.145,
+            "z": 9.443
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f3-room4",
+      "floor": 3,
+      "roomName": "The Attic Nursery",
+      "authoredType": "room",
+      "profile": "nursery",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "painted dado",
+          "toy shelf trim"
+        ],
+        "wallSuggestion": "wainscot",
+        "floorSuggestion": "wood",
+        "agingTheme": "uncanny preservation"
+      },
+      "interactionIdeas": [
+        "toy chest: open",
+        "rocking chair: sit"
+      ],
+      "furniturePlacements": [
+        {
+          "objectName": "antique_crib",
+          "position": {
+            "x": 10.607,
+            "z": 7.096
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        },
+        {
+          "objectName": "old_wardrobe",
+          "position": {
+            "x": 12.68,
+            "z": 9.523
+          },
+          "state": "placement-proposed",
+          "clearance": "not-certified"
+        }
+      ],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f3-hall",
+      "floor": 3,
+      "roomName": "Third Floor — Central Corridor",
+      "authoredType": "hallway",
+      "profile": "circulation",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "durable baseboards",
+          "lantern bracket"
+        ],
+        "wallSuggestion": "wainscot",
+        "floorSuggestion": "wood",
+        "agingTheme": "quiet transition"
+      },
+      "interactionIdeas": [
+        "wall plaque: read",
+        "sconce: inspect"
+      ],
+      "furniturePlacements": [],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    },
+    {
+      "roomId": "fe-f3-regular",
+      "floor": 3,
+      "roomName": "The Raven Staircase",
+      "authoredType": "staircase",
+      "profile": "stair",
+      "recognition": "name/type heuristic; review custom rooms",
+      "visualIdentity": {
+        "architecturalAccents": [
+          "newel trim",
+          "balustrade detail"
+        ],
+        "wallSuggestion": "wainscot",
+        "floorSuggestion": "wood",
+        "agingTheme": "safe traversal priority"
+      },
+      "interactionIdeas": [
+        "banister: inspect",
+        "landing plaque: read"
+      ],
+      "furniturePlacements": [],
+      "constraints": {
+        "studentAuthoredFinishesWin": true,
+        "studentBlueprintImmutable": true,
+        "preserveTravelAndDoorSwings": true,
+        "automaticPlacementCollisionCertified": false
+      },
+      "exportStatus": "design-and-placement-plan; not baked/gameplay-certified"
+    }
+  ],
+  "limitations": [
+    "Room types are heuristic, not student-authoritative labels",
+    "Accents/interactions are recommended metadata until attached to GLB/runtime",
+    "Existing furnishing coordinates are not clearance certified",
+    "No generated playable behaviors asserted"
+  ]
+}

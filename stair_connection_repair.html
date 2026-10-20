@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Forge — Stair Connections</title><link rel="stylesheet" href="forge_pages.css"><style>body{background:#10131c;color:#eee5d9;font:16px system-ui;margin:0;padding:20px 14px 90px}main{max-width:840px;margin:auto}h1{color:#e2bb83}select{width:100%;font:inherit;padding:14px;background:#252437;color:#fff;border:1px solid #a88d67;border-radius:9px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#212332;padding:16px;border-radius:12px;line-height:1.7}p{line-height:1.6}strong{color:#ffd5a2}</style></head><body><main><h1>🦇 Stair Connection Repair</h1><p>This checks student-authored lower and upper doorway positions against a candidate spiral footprint. The three switchbacks remain <strong>unchanged</strong>. No stairs have passed gameplay certification.</p><select id="pick" aria-label="Stair connection"></select><pre id="info">Loading…</pre><p><a style="color:#e7c58b" href="spiral_geometry_inspector.html">Open 3D stair prototype inspector</a></p></main><script>
+fetch('houses/ferres-estate/navigation/stair_connection_repair.json').then(r=>{if(!r.ok)throw Error('Load failed');return r.json()}).then(data=>{let sel=document.getElementById('pick'),info=document.getElementById('info');data.connections.forEach((x,i)=>sel.add(new Option(x.linkId+' — '+x.authoredType,i)));function show(){let x=data.connections[+sel.value];info.textContent=`Authored staircase: ${x.authoredType}
+Lower room: ${x.lowerRoomId}
+Upper room: ${x.upperRoomId}
+Lower doorway (world meters): ${JSON.stringify(x.sourceDoorLower)}
+Upper doorway (world meters): ${JSON.stringify(x.sourceDoorUpper)}
+Lower door to stair envelope: ${x.lowerGapToSpiralEnvelopeM ?? 'unknown'} m
+Upper door to stair envelope: ${x.upperGapToSpiralEnvelopeM ?? 'unknown'} m
+
+Decision: ${x.decision}
+
+UNRESOLVED:
+• ${x.blockers.join('\n• ')}
+
+Certified gameplay routes: 0`;}sel.addEventListener('change',show);show();}).catch(e=>document.getElementById('info').textContent=e.message);
+</script><script src="forge_pages.js" defer></script></body></html>

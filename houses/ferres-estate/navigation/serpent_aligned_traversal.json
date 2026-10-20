@@ -1,0 +1,166 @@
+{
+  "schema": "forge-serpent-aligned-candidate-1.0",
+  "linkId": "connection_024",
+  "model": "geometry/stair_repair_candidates/connection_024_aligned_spiral.glb",
+  "authoredBlueprintUnmodified": true,
+  "modelReplacesAuthoredStairs": false,
+  "nTreads": 18,
+  "riseMeters": 3.048,
+  "riserMeters": 0.1693,
+  "anglePerTreadDeg": 20,
+  "rotationTotalDeg": 360,
+  "walkingRadiusMeters": 0.82,
+  "walkingGoingMeters": 0.2862,
+  "outerRadiusMeters": 0.99,
+  "nominalFootprintFit": true,
+  "doorAlignmentBothFloors": "WEST",
+  "centerWorldMeters": {
+    "x": 10.3632,
+    "z": 12.192
+  },
+  "routeLocalMeters": [
+    {
+      "x": -1.829,
+      "y": 0,
+      "z": 0,
+      "phase": "lower-door"
+    },
+    {
+      "x": -0.93,
+      "y": 0,
+      "z": 0,
+      "phase": "lower-approach"
+    },
+    {
+      "x": -0.8075,
+      "y": 0.1693,
+      "z": -0.1424,
+      "phase": "tread-01"
+    },
+    {
+      "x": -0.7101,
+      "y": 0.3387,
+      "z": -0.41,
+      "phase": "tread-02"
+    },
+    {
+      "x": -0.5271,
+      "y": 0.508,
+      "z": -0.6282,
+      "phase": "tread-03"
+    },
+    {
+      "x": -0.2805,
+      "y": 0.6773,
+      "z": -0.7705,
+      "phase": "tread-04"
+    },
+    {
+      "x": -0.0,
+      "y": 0.8467,
+      "z": -0.82,
+      "phase": "tread-05"
+    },
+    {
+      "x": 0.2805,
+      "y": 1.016,
+      "z": -0.7705,
+      "phase": "tread-06"
+    },
+    {
+      "x": 0.5271,
+      "y": 1.1853,
+      "z": -0.6282,
+      "phase": "tread-07"
+    },
+    {
+      "x": 0.7101,
+      "y": 1.3547,
+      "z": -0.41,
+      "phase": "tread-08"
+    },
+    {
+      "x": 0.8075,
+      "y": 1.524,
+      "z": -0.1424,
+      "phase": "tread-09"
+    },
+    {
+      "x": 0.8075,
+      "y": 1.6933,
+      "z": 0.1424,
+      "phase": "tread-10"
+    },
+    {
+      "x": 0.7101,
+      "y": 1.8627,
+      "z": 0.41,
+      "phase": "tread-11"
+    },
+    {
+      "x": 0.5271,
+      "y": 2.032,
+      "z": 0.6282,
+      "phase": "tread-12"
+    },
+    {
+      "x": 0.2805,
+      "y": 2.2013,
+      "z": 0.7705,
+      "phase": "tread-13"
+    },
+    {
+      "x": 0.0,
+      "y": 2.3707,
+      "z": 0.82,
+      "phase": "tread-14"
+    },
+    {
+      "x": -0.2805,
+      "y": 2.54,
+      "z": 0.7705,
+      "phase": "tread-15"
+    },
+    {
+      "x": -0.5271,
+      "y": 2.7093,
+      "z": 0.6282,
+      "phase": "tread-16"
+    },
+    {
+      "x": -0.7101,
+      "y": 2.8787,
+      "z": 0.41,
+      "phase": "tread-17"
+    },
+    {
+      "x": -0.8075,
+      "y": 3.048,
+      "z": 0.1424,
+      "phase": "tread-18"
+    },
+    {
+      "x": -0.93,
+      "y": 3.048,
+      "z": 0,
+      "phase": "upper-approach"
+    },
+    {
+      "x": -1.829,
+      "y": 3.048,
+      "z": 0,
+      "phase": "upper-door"
+    }
+  ],
+  "clearanceFlags": {
+    "treadSpacingChecked": true,
+    "nominalFootprintChecked": true,
+    "entryExitHorizontalAlignmentChecked": true,
+    "continuousCapsuleCollisionVerified": false,
+    "actualSlabHoleMeshChecked": false,
+    "fullHelicalHeadroomChecked": false,
+    "actualMansionDoorsTraversed": false
+  },
+  "gameplayCertified": false,
+  "disposition": "ALIGNED_VISUAL_CANDIDATE_NOT_CERTIFIED"
+}

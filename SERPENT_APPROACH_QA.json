@@ -1,0 +1,18 @@
+{
+  "originalSourcePreserved": true,
+  "modelExists": true,
+  "modelBoundsMeters": [
+    [
+      -1.8550000190734863,
+      -0.08500000089406967,
+      -0.3799999952316284
+    ],
+    [
+      -0.8999999761581421,
+      3.0924999713897705,
+      0.42250001430511475
+    ]
+  ],
+  "platformMeshes": 8,
+  "gameplayCertified": false
+}

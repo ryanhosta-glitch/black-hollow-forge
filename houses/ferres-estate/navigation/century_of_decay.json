@@ -1,0 +1,1668 @@
+{
+  "schema": "black-hollow.decay-plan.v1",
+  "sourceHauntSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "generationPolicy": "Deterministic per room; treatment metadata only; student materials and geometry unchanged",
+  "rooms": [
+    {
+      "roomId": "fe-f0-room1",
+      "roomName": "The Forgotten Crypt",
+      "floor": 0,
+      "profile": "burial",
+      "theme": "cold dust and stone",
+      "decayIntensity": 0.958,
+      "condition": "derelict",
+      "notes": "cold, mineral-rich dampness",
+      "seed": 268350594523845,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "mineral efflorescence",
+            "moss in joints"
+          ],
+          "strength": 0.808,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "darkened grain",
+            "fine scratches"
+          ],
+          "strength": 0.845,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges",
+            "tarnish around recesses"
+          ],
+          "strength": 0.686,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures",
+            "peeling finish"
+          ],
+          "strength": 0.664,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "streaks and grime",
+            "soft cloudy patches"
+          ],
+          "strength": 0.604,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation",
+            "faded patches"
+          ],
+          "strength": 0.606,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f0-room2",
+      "roomName": "Alchemist’s Laboratory",
+      "floor": 0,
+      "profile": "laboratory",
+      "theme": "chemical patina",
+      "decayIntensity": 0.568,
+      "condition": "neglected",
+      "notes": "localized chemical wear",
+      "seed": 72702665490141,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "hairline cracks"
+          ],
+          "strength": 0.435,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "rubbed varnish"
+          ],
+          "strength": 0.522,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges"
+          ],
+          "strength": 0.437,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "peeling finish"
+          ],
+          "strength": 0.293,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "soft cloudy patches"
+          ],
+          "strength": 0.347,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation"
+          ],
+          "strength": 0.383,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f0-room3",
+      "roomName": "Cursed Wine Cellar",
+      "floor": 0,
+      "profile": "storage",
+      "theme": "damp cellar",
+      "decayIntensity": 0.953,
+      "condition": "derelict",
+      "notes": "variable neglect",
+      "seed": 218686143890509,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "mineral efflorescence",
+            "moss in joints"
+          ],
+          "strength": 0.845,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "fine scratches",
+            "darkened grain"
+          ],
+          "strength": 0.509,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "tarnish around recesses",
+            "green oxidation at edges"
+          ],
+          "strength": 0.873,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "peeling finish",
+            "hairline plaster fissures"
+          ],
+          "strength": 0.485,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "streaks and grime",
+            "soft cloudy patches"
+          ],
+          "strength": 0.892,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation",
+            "faded patches"
+          ],
+          "strength": 0.894,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f0-room4",
+      "roomName": "The Whispering Vault",
+      "floor": 0,
+      "profile": "secured",
+      "theme": "contained and guarded",
+      "decayIntensity": 0.674,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 150016937826765,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "hairline cracks"
+          ],
+          "strength": 0.412,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "darkened grain"
+          ],
+          "strength": 0.484,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "tarnish around recesses"
+          ],
+          "strength": 0.372,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures"
+          ],
+          "strength": 0.556,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "streaks and grime"
+          ],
+          "strength": 0.589,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation"
+          ],
+          "strength": 0.474,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f0-hall",
+      "roomName": "Basement — Central Corridor",
+      "floor": 0,
+      "profile": "circulation",
+      "theme": "quiet transition",
+      "decayIntensity": 0.586,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 236031474046578,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "mineral efflorescence"
+          ],
+          "strength": 0.387,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "rubbed varnish"
+          ],
+          "strength": 0.458,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "tarnish around recesses"
+          ],
+          "strength": 0.483,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "peeling finish"
+          ],
+          "strength": 0.546,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "soft cloudy patches"
+          ],
+          "strength": 0.301,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation"
+          ],
+          "strength": 0.553,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f0-regular",
+      "roomName": "The Grand Switchback Stairs",
+      "floor": 0,
+      "profile": "stair",
+      "theme": "safe traversal priority",
+      "decayIntensity": 0.52,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 44389233811638,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "mineral efflorescence"
+          ],
+          "strength": 0.352,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "darkened grain"
+          ],
+          "strength": 0.478,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "tarnish around recesses"
+          ],
+          "strength": 0.28,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures"
+          ],
+          "strength": 0.417,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "soft cloudy patches"
+          ],
+          "strength": 0.282,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation"
+          ],
+          "strength": 0.452,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f1-room1",
+      "roomName": "Grand Entrance Hall",
+      "floor": 1,
+      "profile": "entry",
+      "theme": "carefully preserved",
+      "decayIntensity": 0.577,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 148977682204248,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "mineral efflorescence"
+          ],
+          "strength": 0.532,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "rubbed varnish"
+          ],
+          "strength": 0.5,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "tarnish around recesses"
+          ],
+          "strength": 0.297,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "peeling finish"
+          ],
+          "strength": 0.526,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "streaks and grime"
+          ],
+          "strength": 0.506,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "faded patches"
+          ],
+          "strength": 0.302,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f1-room2",
+      "roomName": "The Speaking Portrait Gallery",
+      "floor": 1,
+      "profile": "gallery",
+      "theme": "dusty gilt",
+      "decayIntensity": 0.511,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 225102374705958,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "moss in joints"
+          ],
+          "strength": 0.474,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "darkened grain"
+          ],
+          "strength": 0.47,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges"
+          ],
+          "strength": 0.31,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures"
+          ],
+          "strength": 0.321,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "streaks and grime"
+          ],
+          "strength": 0.387,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation"
+          ],
+          "strength": 0.482,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f1-room3",
+      "roomName": "The Midnight Library",
+      "floor": 1,
+      "profile": "library",
+      "theme": "powdery dry dust",
+      "decayIntensity": 0.303,
+      "condition": "preserved",
+      "notes": "gentle fading and settled dust",
+      "seed": 267950806017028,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "moss in joints"
+          ],
+          "strength": 0.285,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "darkened grain"
+          ],
+          "strength": 0.265,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges"
+          ],
+          "strength": 0.229,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures"
+          ],
+          "strength": 0.236,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "streaks and grime"
+          ],
+          "strength": 0.28,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation"
+          ],
+          "strength": 0.197,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f1-room4",
+      "roomName": "The Phantom Ballroom",
+      "floor": 1,
+      "profile": "entertainment",
+      "theme": "pale fading gilding",
+      "decayIntensity": 0.34,
+      "condition": "preserved",
+      "notes": "variable neglect",
+      "seed": 184686855360275,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "moss in joints"
+          ],
+          "strength": 0.242,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "fine scratches"
+          ],
+          "strength": 0.302,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges"
+          ],
+          "strength": 0.291,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures"
+          ],
+          "strength": 0.292,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "streaks and grime"
+          ],
+          "strength": 0.264,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "faded patches"
+          ],
+          "strength": 0.274,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f1-hall",
+      "roomName": "Ground Floor — Central Corridor",
+      "floor": 1,
+      "profile": "circulation",
+      "theme": "quiet transition",
+      "decayIntensity": 0.585,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 84077781817433,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "hairline cracks"
+          ],
+          "strength": 0.488,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "darkened grain"
+          ],
+          "strength": 0.389,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges"
+          ],
+          "strength": 0.435,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures"
+          ],
+          "strength": 0.496,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "soft cloudy patches"
+          ],
+          "strength": 0.333,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation"
+          ],
+          "strength": 0.384,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f1-regular",
+      "roomName": "The Grand Switchback Stairs",
+      "floor": 1,
+      "profile": "stair",
+      "theme": "safe traversal priority",
+      "decayIntensity": 0.503,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 162506724237612,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "hairline cracks"
+          ],
+          "strength": 0.359,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "rubbed varnish"
+          ],
+          "strength": 0.326,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges"
+          ],
+          "strength": 0.371,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "peeling finish"
+          ],
+          "strength": 0.347,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "soft cloudy patches"
+          ],
+          "strength": 0.443,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation"
+          ],
+          "strength": 0.455,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f1-spiral",
+      "roomName": "The Serpent Spiral Stair",
+      "floor": 1,
+      "profile": "stair",
+      "theme": "safe traversal priority",
+      "decayIntensity": 0.623,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 191181073422148,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "hairline cracks"
+          ],
+          "strength": 0.532,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "fine scratches"
+          ],
+          "strength": 0.572,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "tarnish around recesses"
+          ],
+          "strength": 0.369,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures"
+          ],
+          "strength": 0.492,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "soft cloudy patches"
+          ],
+          "strength": 0.365,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "faded patches"
+          ],
+          "strength": 0.352,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f2-room1",
+      "roomName": "The Seer’s Chamber",
+      "floor": 2,
+      "profile": "occult",
+      "theme": "unsettling candle smoke",
+      "decayIntensity": 0.649,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 195628769686362,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "hairline cracks"
+          ],
+          "strength": 0.474,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "rubbed varnish"
+          ],
+          "strength": 0.584,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges"
+          ],
+          "strength": 0.361,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures"
+          ],
+          "strength": 0.55,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "soft cloudy patches"
+          ],
+          "strength": 0.51,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "faded patches"
+          ],
+          "strength": 0.58,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f2-room2",
+      "roomName": "Moonlit Conservatory",
+      "floor": 2,
+      "profile": "botanical",
+      "theme": "overgrown living green",
+      "decayIntensity": 0.91,
+      "condition": "derelict",
+      "notes": "variable neglect",
+      "seed": 271087429865050,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "moss in joints",
+            "mineral efflorescence"
+          ],
+          "strength": 0.832,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "rubbed varnish",
+            "fine scratches"
+          ],
+          "strength": 0.559,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "tarnish around recesses",
+            "green oxidation at edges"
+          ],
+          "strength": 0.806,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "peeling finish",
+            "hairline plaster fissures"
+          ],
+          "strength": 0.536,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "streaks and grime",
+            "soft cloudy patches"
+          ],
+          "strength": 0.604,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation",
+            "faded patches"
+          ],
+          "strength": 0.651,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f2-room3",
+      "roomName": "The Dollmaker’s Workshop",
+      "floor": 2,
+      "profile": "workshop",
+      "theme": "sawdust and corrosion",
+      "decayIntensity": 0.638,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 40948692651379,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "mineral efflorescence"
+          ],
+          "strength": 0.535,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "rubbed varnish"
+          ],
+          "strength": 0.328,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "tarnish around recesses"
+          ],
+          "strength": 0.574,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "peeling finish"
+          ],
+          "strength": 0.571,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "streaks and grime"
+          ],
+          "strength": 0.605,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation"
+          ],
+          "strength": 0.528,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f2-room4",
+      "roomName": "The Mirror Room",
+      "floor": 2,
+      "profile": "mirror",
+      "theme": "distorted reflection",
+      "decayIntensity": 0.618,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 133273193821990,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "mineral efflorescence"
+          ],
+          "strength": 0.493,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "rubbed varnish"
+          ],
+          "strength": 0.434,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges"
+          ],
+          "strength": 0.379,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures"
+          ],
+          "strength": 0.33,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "streaks and grime"
+          ],
+          "strength": 0.559,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "faded patches"
+          ],
+          "strength": 0.417,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f2-hall",
+      "roomName": "Second Floor — Central Corridor",
+      "floor": 2,
+      "profile": "circulation",
+      "theme": "quiet transition",
+      "decayIntensity": 0.663,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 50898374605293,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "moss in joints"
+          ],
+          "strength": 0.336,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "rubbed varnish"
+          ],
+          "strength": 0.599,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges"
+          ],
+          "strength": 0.589,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures"
+          ],
+          "strength": 0.388,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "streaks and grime"
+          ],
+          "strength": 0.532,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "faded patches"
+          ],
+          "strength": 0.42,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f2-regular",
+      "roomName": "The Raven Staircase",
+      "floor": 2,
+      "profile": "stair",
+      "theme": "safe traversal priority",
+      "decayIntensity": 0.444,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 255068492130558,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "mineral efflorescence"
+          ],
+          "strength": 0.277,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "rubbed varnish"
+          ],
+          "strength": 0.327,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges"
+          ],
+          "strength": 0.417,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "peeling finish"
+          ],
+          "strength": 0.234,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "soft cloudy patches"
+          ],
+          "strength": 0.35,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "faded patches"
+          ],
+          "strength": 0.378,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f2-spiral",
+      "roomName": "The Serpent Spiral Stair",
+      "floor": 2,
+      "profile": "stair",
+      "theme": "safe traversal priority",
+      "decayIntensity": 0.667,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 30453821962568,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "hairline cracks"
+          ],
+          "strength": 0.569,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "darkened grain"
+          ],
+          "strength": 0.355,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges"
+          ],
+          "strength": 0.439,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "peeling finish"
+          ],
+          "strength": 0.362,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "soft cloudy patches"
+          ],
+          "strength": 0.334,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation"
+          ],
+          "strength": 0.549,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f3-room1",
+      "roomName": "The Founder’s Study",
+      "floor": 3,
+      "profile": "study",
+      "theme": "warm aged brass",
+      "decayIntensity": 0.503,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 135766204017719,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "mineral efflorescence"
+          ],
+          "strength": 0.252,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "rubbed varnish"
+          ],
+          "strength": 0.43,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "tarnish around recesses"
+          ],
+          "strength": 0.391,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures"
+          ],
+          "strength": 0.408,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "soft cloudy patches"
+          ],
+          "strength": 0.376,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "faded patches"
+          ],
+          "strength": 0.333,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f3-room2",
+      "roomName": "The Raven Observatory",
+      "floor": 3,
+      "profile": "observatory",
+      "theme": "cold moonlit brass",
+      "decayIntensity": 0.441,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 108751836318359,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "mineral efflorescence"
+          ],
+          "strength": 0.299,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "fine scratches"
+          ],
+          "strength": 0.404,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "tarnish around recesses"
+          ],
+          "strength": 0.261,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "peeling finish"
+          ],
+          "strength": 0.282,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "streaks and grime"
+          ],
+          "strength": 0.388,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation"
+          ],
+          "strength": 0.307,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f3-room3",
+      "roomName": "The Spell Archive",
+      "floor": 3,
+      "profile": "library",
+      "theme": "powdery dry dust",
+      "decayIntensity": 0.531,
+      "condition": "neglected",
+      "notes": "gentle fading and settled dust",
+      "seed": 198986822722520,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "moss in joints"
+          ],
+          "strength": 0.323,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "darkened grain"
+          ],
+          "strength": 0.39,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges"
+          ],
+          "strength": 0.472,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures"
+          ],
+          "strength": 0.352,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "soft cloudy patches"
+          ],
+          "strength": 0.351,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "faded patches"
+          ],
+          "strength": 0.5,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f3-room4",
+      "roomName": "The Attic Nursery",
+      "floor": 3,
+      "profile": "nursery",
+      "theme": "uncanny preservation",
+      "decayIntensity": 0.627,
+      "condition": "neglected",
+      "notes": "dust and fabric fading",
+      "seed": 250652494773497,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "hairline cracks"
+          ],
+          "strength": 0.572,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "fine scratches"
+          ],
+          "strength": 0.508,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "tarnish around recesses"
+          ],
+          "strength": 0.495,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures"
+          ],
+          "strength": 0.503,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "soft cloudy patches"
+          ],
+          "strength": 0.525,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "thin dust accumulation"
+          ],
+          "strength": 0.438,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f3-hall",
+      "roomName": "Third Floor — Central Corridor",
+      "floor": 3,
+      "profile": "circulation",
+      "theme": "quiet transition",
+      "decayIntensity": 0.562,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 88543747229873,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "moss in joints"
+          ],
+          "strength": 0.296,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "rubbed varnish"
+          ],
+          "strength": 0.467,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges"
+          ],
+          "strength": 0.513,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "hairline plaster fissures"
+          ],
+          "strength": 0.531,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "soft cloudy patches"
+          ],
+          "strength": 0.466,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "faded patches"
+          ],
+          "strength": 0.404,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    },
+    {
+      "roomId": "fe-f3-regular",
+      "roomName": "The Raven Staircase",
+      "floor": 3,
+      "profile": "stair",
+      "theme": "safe traversal priority",
+      "decayIntensity": 0.627,
+      "condition": "neglected",
+      "notes": "variable neglect",
+      "seed": 144268552053140,
+      "materialTreatments": [
+        {
+          "material": "stone",
+          "treatments": [
+            "mineral efflorescence"
+          ],
+          "strength": 0.42,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "wood",
+          "treatments": [
+            "fine scratches"
+          ],
+          "strength": 0.431,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "brass",
+          "treatments": [
+            "green oxidation at edges"
+          ],
+          "strength": 0.329,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "plaster",
+          "treatments": [
+            "peeling finish"
+          ],
+          "strength": 0.477,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "glass",
+          "treatments": [
+            "soft cloudy patches"
+          ],
+          "strength": 0.493,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        },
+        {
+          "material": "fabric",
+          "treatments": [
+            "faded patches"
+          ],
+          "strength": 0.585,
+          "coverage": "edges-and-recesses; leave readable surfaces intact"
+        }
+      ],
+      "studentAuthoredGeometryPreserved": true,
+      "gameplayCollisionCertified": false
+    }
+  ],
+  "limitations": [
+    "No mesh damage, collision changes or baked textures",
+    "Authored finishes supersede recommendations",
+    "Effects require verified surface mapping before production use"
+  ]
+}

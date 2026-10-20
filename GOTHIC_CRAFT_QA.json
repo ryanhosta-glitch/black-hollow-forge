@@ -1,0 +1,42 @@
+{
+  "sourcePreserved": true,
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "geometry": {
+    "floor_00.glb": {
+      "gothicDetailNodes": 248,
+      "lancets": 0,
+      "tracery": 0,
+      "piers": 63,
+      "dentils": 185
+    },
+    "floor_01.glb": {
+      "gothicDetailNodes": 276,
+      "lancets": 32,
+      "tracery": 12,
+      "piers": 48,
+      "dentils": 184
+    },
+    "floor_02.glb": {
+      "gothicDetailNodes": 268,
+      "lancets": 24,
+      "tracery": 12,
+      "piers": 48,
+      "dentils": 184
+    },
+    "floor_03.glb": {
+      "gothicDetailNodes": 272,
+      "lancets": 24,
+      "tracery": 12,
+      "piers": 51,
+      "dentils": 185
+    }
+  },
+  "features": [
+    "lancet stone surrounds",
+    "window tracery",
+    "projecting piers",
+    "carved dentil friezes"
+  ],
+  "visualBrowserTested": false,
+  "gameplayCertified": false
+}

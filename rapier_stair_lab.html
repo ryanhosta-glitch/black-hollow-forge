@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>Black Hollow Forge — Rapier Stair Physics Lab</title><style>
+html,body{margin:0;height:100%;overflow:hidden;background:#090b14;color:#f8dfae;font-family:system-ui}canvas{display:block}header{position:absolute;top:8px;left:8px;max-width:min(460px,92vw);background:#171421e9;border:1px solid #99734c;border-radius:10px;padding:12px;z-index:3;font-size:13px}header h2{margin:0 0 5px;font-size:16px}header p{margin:5px 0}a{color:#fad1a0}#status{font-variant-numeric:tabular-nums;white-space:pre-line}#controls{position:absolute;bottom:18px;left:12px;display:grid;grid-template-columns:repeat(3,58px);gap:7px;z-index:4}button{touch-action:none;background:#35283e;color:#f8dfae;border:1px solid #b08e62;border-radius:10px;font-size:20px;height:56px}button:active{background:#735477}#actions{position:absolute;bottom:18px;right:12px;display:grid;gap:8px;z-index:4}#actions button{width:105px;font-size:13px}#message{color:#f1bdbd} @media(max-height:540px){header{font-size:11px;padding:6px}header h2{font-size:13px}#controls button{height:40px}}
+</style><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","@dimforge/rapier3d-compat":"https://cdn.jsdelivr.net/npm/@dimforge/rapier3d-compat@0.17.3/rapier.es.js"}}</script></head><body><header><h2>Black Hollow · Rapier Stair Physics Lab</h2><p>Prototype: separate visible treads + physical ramp collider. Ascend and descend continuously; no floor teleporting.</p><p id="status">Loading physics…</p><p id="message">W/S or ↑/↓ move, A/D turn, Q/E strafe. Swipe to look. Press Reset to start over.</p><small>Calibration staircase ONLY. Not an exported Ferre's Estate staircase; no mansion route is certified. Requires internet for Three.js and Rapier.</small><p><a href="index.html">← Forge home</a></p></header><div id="controls"><span></span><button data-key="KeyW">▲</button><span></span><button data-key="KeyA">◀</button><button data-key="KeyS">▼</button><button data-key="KeyD">▶</button></div><div id="actions"><button id="reset">Reset</button><button id="show">Collider: ON</button><button id="auto">Autowalk: OFF</button></div><script type="module">
+import * as THREE from 'three';
+import RAPIER from '@dimforge/rapier3d-compat';
+const hud=document.getElementById('status'),msg=document.getElementById('message');
+window.addEventListener('error',e=>msg.textContent='Error: '+e.message);window.addEventListener('unhandledrejection',e=>msg.textContent='Error: '+e.reason);
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x0c1020);scene.fog=new THREE.Fog(0x0c1020,20,50);const camera=new THREE.PerspectiveCamera(68,innerWidth/innerHeight,.06,100);const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.setSize(innerWidth,innerHeight);document.body.prepend(renderer.domElement);scene.add(new THREE.HemisphereLight(0x9db6d9,0x231121,1.4));const light=new THREE.DirectionalLight(0xffd3a2,2.4);light.position.set(-4,11,7);scene.add(light);
+const materials={ground:new THREE.MeshStandardMaterial({color:0x4b4b61,roughness:0.85}),tread:new THREE.MeshStandardMaterial({color:0x654b43,roughness:.9}),gold:new THREE.MeshStandardMaterial({color:0xc6a278,roughness:.5}),proxy:new THREE.MeshStandardMaterial({color:0x4ce3b0,transparent:true,opacity:.26,side:THREE.DoubleSide,depthWrite:false})};
+function box(w,h,d,x,y,z,mat){let o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);o.position.set(x,y,z);scene.add(o);return o;}
+let world,controller,body,player,velY=0,auto=false,show=true,yaw=0,prev=performance.now(),lastY=0;
+const keys=new Set();document.addEventListener('keydown',e=>{keys.add(e.code);if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault()});document.addEventListener('keyup',e=>keys.delete(e.code));for(const b of document.querySelectorAll('[data-key]')){b.addEventListener('pointerdown',e=>{b.setPointerCapture(e.pointerId);keys.add(b.dataset.key)});for(const t of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(t,()=>keys.delete(b.dataset.key))}
+let touchX=null;renderer.domElement.addEventListener('pointerdown',e=>{touchX=e.clientX;renderer.domElement.setPointerCapture(e.pointerId)});renderer.domElement.addEventListener('pointermove',e=>{if(touchX!==null){yaw-=(e.clientX-touchX)*.004;touchX=e.clientX}});renderer.domElement.addEventListener('pointerup',()=>touchX=null);
+const rise=0.18,run=0.33,n=12,top=n*rise,extent=n*run,width=1.6;
+const proxyViews=[];
+function fixedCuboid(w,h,d,x,y,z){world.createCollider(RAPIER.ColliderDesc.cuboid(w/2,h/2,d/2).setTranslation(x,y,z));}
+function fixedTrianglePrism(x0,x1,y0,y1,zmin,zmax){ // continuous sloped ramp as a triangle-mesh physics collider, two-sided triangles
+ const a=[x0,y0,zmin,x1,y0,zmin,x1,y1,zmin,x0,y0,zmax,x1,y0,zmax,x1,y1,zmax];
+ const idx=[0,2,1,3,4,5,0,1,4,0,4,3,1,2,5,1,5,4,2,0,3,2,3,5];
+ const verts=new Float32Array(a);const indices=new Uint32Array(idx);world.createCollider(RAPIER.ColliderDesc.trimesh(verts,indices));
+ const geom=new THREE.BufferGeometry();geom.setAttribute('position',new THREE.Float32BufferAttribute(a,3));geom.setIndex(idx);geom.computeVertexNormals();let mesh=new THREE.Mesh(geom,materials.proxy);scene.add(mesh);proxyViews.push(mesh);
+}
+async function start(){await RAPIER.init();world=new RAPIER.World({x:0,y:-9.81,z:0});controller=world.createCharacterController(.015);controller.enableAutostep(.24,.13,false);controller.enableSnapToGround(.35);controller.setMaxSlopeClimbAngle(40*Math.PI/180);
+ // Physics: floor + inclined continuous run + upper floor, distinct from display steps.
+ fixedCuboid(4,.2,3,-2,-.1,0);fixedCuboid(3,.2,3,extent+1.5,top-.1,0);
+ fixedTrianglePrism(0,extent,0,top,-width/2,width/2);
+ box(4,.2,3,-2,-.1,0,materials.ground);box(3,.2,3,extent+1.5,top-.1,0,materials.ground);
+ // Authored-style stair treads are visual only. Physics follows continuous incline.
+ for(let i=0;i<n;i++){let x=(i+.5)*run,y=(i+1)*rise-.055;box(run-.008,.11,width,x,y,0,materials.tread);box(run-.008,.02,width,x,(i+1)*rise+.01,0,materials.gold)}
+ // rail visuals without untested colliders (explicit lab scope)
+ for(const z of [-.92,.92])for(let i=0;i<=n;i+=2){const x=i*run;box(.045,1,.045,x,i*rise+.55,z,materials.gold)}
+ box(.04,.04,3,-.04,.02,0,materials.gold);
+ player=world.createCollider(RAPIER.ColliderDesc.capsule((1.74-2*.32)/2,.32).setTranslation(-2,1.74/2+.03,0));
+ const wire=new THREE.Mesh(new THREE.CapsuleGeometry(.32,1.10,4,12),new THREE.MeshBasicMaterial({color:0xfbd2ab,wireframe:true}));scene.add(wire);body=wire;
+ document.getElementById('reset').onclick=reset;document.getElementById('show').onclick=()=>{show=!show;proxyViews.forEach(x=>x.visible=show);document.getElementById('show').textContent='Collider: '+(show?'ON':'OFF')};document.getElementById('auto').onclick=()=>{auto=!auto;document.getElementById('auto').textContent='Autowalk: '+(auto?'ON':'OFF')};loop(performance.now());}
+function reset(){player.setTranslation({x:-2,y:.87+0.03,z:0});velY=0;yaw=-Math.PI/2;auto=false;document.getElementById('auto').textContent='Autowalk: OFF'}
+function loop(now){requestAnimationFrame(loop);let dt=Math.min(.033,(now-prev)/1000);prev=now;const at=player.translation();
+ const forward=(keys.has('KeyW')||keys.has('ArrowUp')||auto?1:0)-(keys.has('KeyS')||keys.has('ArrowDown')?1:0),turn=(keys.has('KeyD')||keys.has('ArrowRight')?1:0)-(keys.has('KeyA')||keys.has('ArrowLeft')?1:0),strafe=(keys.has('KeyE')?1:0)-(keys.has('KeyQ')?1:0);yaw+=turn*dt*1.7;
+ const dirX=-Math.sin(yaw),dirZ=-Math.cos(yaw);let dx=(dirX*forward+dirZ*strafe)*dt*1.8,dz=(dirZ*forward-dirX*strafe)*dt*1.8;const mag=Math.hypot(dx,dz),limit=dt*1.8;if(mag>limit){dx*=limit/mag;dz*=limit/mag;}
+ velY=Math.max(-15,velY-9.81*dt);controller.computeColliderMovement(player,{x:dx,y:velY*dt,z:dz});const delta=controller.computedMovement();player.setTranslation({x:at.x+delta.x,y:at.y+delta.y,z:at.z+delta.z});if(controller.computedGrounded())velY=-.3;else if(delta.y>0)velY=0;
+ const p=player.translation();body.position.set(p.x,p.y,p.z);camera.position.set(p.x,p.y+.56,p.z);camera.rotation.order='YXZ';camera.rotation.y=yaw;camera.rotation.x=-.15;
+ let h=(p.y-.87).toFixed(2),progress=p.x>=extent?'UPPER FLOOR':p.x>=0?'STAIR FLIGHT':'LOWER FLOOR';hud.textContent=`Position: x ${p.x.toFixed(2)} m · feet ≈ ${h} m\nZone: ${progress} · Grounded: ${controller.computedGrounded()}\nPhysics: Rapier KCC · autostep 0.24 m · snap 0.35 m\nVisual stairs unchanged; green = collision proxy`;
+ if(p.x>extent+2.6&&auto){auto=false;document.getElementById('auto').textContent='Autowalk: OFF'}renderer.render(scene,camera)}
+window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+start().then(()=>{yaw=-Math.PI/2;hud.textContent='Physics initialized'}).catch(e=>{msg.textContent='Failed to load physics: '+e.message;hud.textContent='Not running'});
+</script></body></html>

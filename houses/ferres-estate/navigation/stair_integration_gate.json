@@ -1,0 +1,161 @@
+{
+  "schema": "black-hollow-stair-integration-gate-0.1",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "sourceModified": false,
+  "scope": "Separate generated staircase GLBs, landing collision boxes, visual alignment inspection and honest production safety gates",
+  "certifiedConnections": 0,
+  "blockedConnections": 4,
+  "generatedTreadProxyCount": 75,
+  "limits": [
+    "No automatic floor GLB boolean cuts",
+    "No completed 3D capsule sweep",
+    "No verified stair-to-landing world-transform alignment",
+    "No physical walk-up into existing Black Hollow v8.5.19 runtime"
+  ],
+  "connections": [
+    {
+      "linkId": "connection_022",
+      "type": "switchback",
+      "lower": "fe-f0-regular",
+      "upper": "fe-f1-regular",
+      "candidateModel": "geometry/stair_candidate_connection_022.glb",
+      "landingCollisionIds": [
+        "forge-landing-connection_022-fe-f0-regular",
+        "forge-landing-connection_022-fe-f1-regular"
+      ],
+      "localVisualBoundsMeters": [
+        [
+          -0.9,
+          0.0447,
+          -1.8139
+        ],
+        [
+          0.9,
+          3.0033,
+          1.301
+        ]
+      ],
+      "generatedCollisionBoxCount": 19,
+      "visualGeometryBoundsChecked": true,
+      "visualModelLoaded": true,
+      "stairFloorCutoutImplemented": false,
+      "firstPersonPhysicsCertified": false,
+      "gameplayStatus": "BLOCKED_PENDING_PHYSICAL_INTEGRATION",
+      "issues": [
+        "Candidate meshes are separate from permanent mansion floor GLBs",
+        "No verified opening cut through upper structural floor",
+        "No tested door-swing clearance or continuous capsule path",
+        "Simplified tread AABBs are not game-ready collision; especially spiral wedges"
+      ],
+      "collisionProxyFile": "navigation/stair_tread_collision_candidates.json"
+    },
+    {
+      "linkId": "connection_023",
+      "type": "switchback",
+      "lower": "fe-f1-regular",
+      "upper": "fe-f2-regular",
+      "candidateModel": "geometry/stair_candidate_connection_023.glb",
+      "landingCollisionIds": [
+        "forge-landing-connection_023-fe-f1-regular",
+        "forge-landing-connection_023-fe-f2-regular"
+      ],
+      "localVisualBoundsMeters": [
+        [
+          -0.9,
+          0.0447,
+          -1.8139
+        ],
+        [
+          0.9,
+          3.0033,
+          1.301
+        ]
+      ],
+      "generatedCollisionBoxCount": 19,
+      "visualGeometryBoundsChecked": true,
+      "visualModelLoaded": true,
+      "stairFloorCutoutImplemented": false,
+      "firstPersonPhysicsCertified": false,
+      "gameplayStatus": "BLOCKED_PENDING_PHYSICAL_INTEGRATION",
+      "issues": [
+        "Candidate meshes are separate from permanent mansion floor GLBs",
+        "No verified opening cut through upper structural floor",
+        "No tested door-swing clearance or continuous capsule path",
+        "Simplified tread AABBs are not game-ready collision; especially spiral wedges"
+      ],
+      "collisionProxyFile": "navigation/stair_tread_collision_candidates.json"
+    },
+    {
+      "linkId": "connection_024",
+      "type": "spiral",
+      "lower": "fe-f1-spiral",
+      "upper": "fe-f2-spiral",
+      "candidateModel": "geometry/stair_candidate_connection_024.glb",
+      "landingCollisionIds": [
+        "forge-landing-connection_024-fe-f1-spiral",
+        "forge-landing-connection_024-fe-f2-spiral"
+      ],
+      "localVisualBoundsMeters": [
+        [
+          -1.649,
+          0.01,
+          -1.6239
+        ],
+        [
+          1.649,
+          2.9687,
+          1.6239
+        ]
+      ],
+      "generatedCollisionBoxCount": 18,
+      "visualGeometryBoundsChecked": true,
+      "visualModelLoaded": true,
+      "stairFloorCutoutImplemented": false,
+      "firstPersonPhysicsCertified": false,
+      "gameplayStatus": "BLOCKED_PENDING_PHYSICAL_INTEGRATION",
+      "issues": [
+        "Candidate meshes are separate from permanent mansion floor GLBs",
+        "No verified opening cut through upper structural floor",
+        "No tested door-swing clearance or continuous capsule path",
+        "Simplified tread AABBs are not game-ready collision; especially spiral wedges"
+      ],
+      "collisionProxyFile": "navigation/stair_tread_collision_candidates.json"
+    },
+    {
+      "linkId": "connection_025",
+      "type": "switchback",
+      "lower": "fe-f2-regular",
+      "upper": "fe-f3-regular",
+      "candidateModel": "geometry/stair_candidate_connection_025.glb",
+      "landingCollisionIds": [
+        "forge-landing-connection_025-fe-f2-regular",
+        "forge-landing-connection_025-fe-f3-regular"
+      ],
+      "localVisualBoundsMeters": [
+        [
+          -0.9,
+          0.0447,
+          -1.8139
+        ],
+        [
+          0.9,
+          3.0033,
+          1.301
+        ]
+      ],
+      "generatedCollisionBoxCount": 19,
+      "visualGeometryBoundsChecked": true,
+      "visualModelLoaded": true,
+      "stairFloorCutoutImplemented": false,
+      "firstPersonPhysicsCertified": false,
+      "gameplayStatus": "BLOCKED_PENDING_PHYSICAL_INTEGRATION",
+      "issues": [
+        "Candidate meshes are separate from permanent mansion floor GLBs",
+        "No verified opening cut through upper structural floor",
+        "No tested door-swing clearance or continuous capsule path",
+        "Simplified tread AABBs are not game-ready collision; especially spiral wedges"
+      ],
+      "collisionProxyFile": "navigation/stair_tread_collision_candidates.json"
+    }
+  ]
+}

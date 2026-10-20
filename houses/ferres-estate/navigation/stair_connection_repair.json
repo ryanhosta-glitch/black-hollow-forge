@@ -1,0 +1,148 @@
+{
+  "schema": "black-hollow-stair-connection-repair-0.1",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "studentBlueprintModified": false,
+  "certifiedGameplayRoutes": 0,
+  "notes": "Door coordinates are derived from the student original. Markers show candidate landing locations, NOT playable surfaces. Original switchbacks are not replaced.",
+  "connections": [
+    {
+      "linkId": "connection_022",
+      "authoredType": "switchback",
+      "lowerRoomId": "fe-f0-regular",
+      "upperRoomId": "fe-f1-regular",
+      "sourceDoorLower": [
+        6.096,
+        12.192,
+        "right"
+      ],
+      "sourceDoorUpper": [
+        6.096,
+        12.192,
+        "right"
+      ],
+      "candidateCenterWorldXZ": [
+        4.8768,
+        12.192
+      ],
+      "spiralOuterRadiusM": 1.05,
+      "candidateOnly": true,
+      "gameplayCertified": false,
+      "lowerDoorDistanceToCenterM": 1.219,
+      "lowerGapToSpiralEnvelopeM": 0.169,
+      "upperDoorDistanceToCenterM": 1.219,
+      "upperGapToSpiralEnvelopeM": 0.169,
+      "decision": "DO_NOT_REPLACE_AUTHORED_SWITCHBACK",
+      "blockers": [
+        "Exact tread start/end azimuth not aligned to authored door openings",
+        "Accessible landing geometry and door approach not validated",
+        "Slab headroom and floor collision not validated",
+        "Full swept-capsule player traversal not validated"
+      ]
+    },
+    {
+      "linkId": "connection_023",
+      "authoredType": "switchback",
+      "lowerRoomId": "fe-f1-regular",
+      "upperRoomId": "fe-f2-regular",
+      "sourceDoorLower": [
+        6.096,
+        12.192,
+        "right"
+      ],
+      "sourceDoorUpper": [
+        6.096,
+        12.192,
+        "right"
+      ],
+      "candidateCenterWorldXZ": [
+        4.8768,
+        12.192
+      ],
+      "spiralOuterRadiusM": 1.05,
+      "candidateOnly": true,
+      "gameplayCertified": false,
+      "lowerDoorDistanceToCenterM": 1.219,
+      "lowerGapToSpiralEnvelopeM": 0.169,
+      "upperDoorDistanceToCenterM": 1.219,
+      "upperGapToSpiralEnvelopeM": 0.169,
+      "decision": "DO_NOT_REPLACE_AUTHORED_SWITCHBACK",
+      "blockers": [
+        "Exact tread start/end azimuth not aligned to authored door openings",
+        "Accessible landing geometry and door approach not validated",
+        "Slab headroom and floor collision not validated",
+        "Full swept-capsule player traversal not validated"
+      ]
+    },
+    {
+      "linkId": "connection_024",
+      "authoredType": "spiral",
+      "lowerRoomId": "fe-f1-spiral",
+      "upperRoomId": "fe-f2-spiral",
+      "sourceDoorLower": [
+        8.5344,
+        12.192,
+        "left"
+      ],
+      "sourceDoorUpper": [
+        8.5344,
+        12.192,
+        "left"
+      ],
+      "candidateCenterWorldXZ": [
+        10.3632,
+        12.192
+      ],
+      "spiralOuterRadiusM": 1.05,
+      "candidateOnly": true,
+      "gameplayCertified": false,
+      "lowerDoorDistanceToCenterM": 1.829,
+      "lowerGapToSpiralEnvelopeM": 0.779,
+      "upperDoorDistanceToCenterM": 1.829,
+      "upperGapToSpiralEnvelopeM": 0.779,
+      "decision": "INSPECT_AUTHORED_SPIRAL_FOR_CONNECTION",
+      "blockers": [
+        "Exact tread start/end azimuth not aligned to authored door openings",
+        "Accessible landing geometry and door approach not validated",
+        "Slab headroom and floor collision not validated",
+        "Full swept-capsule player traversal not validated"
+      ],
+      "visualLandingMarkerModel": "geometry/stair_repair_candidates/connection_024_landing_markers.glb",
+      "visualApproachPlatformModel": "geometry/stair_repair_candidates/connection_024_approach_platforms.glb",
+      "approachPlatformStatus": "3D platform generated; tread entry and collision unresolved"
+    },
+    {
+      "linkId": "connection_025",
+      "authoredType": "switchback",
+      "lowerRoomId": "fe-f2-regular",
+      "upperRoomId": "fe-f3-regular",
+      "sourceDoorLower": [
+        6.096,
+        12.192,
+        "right"
+      ],
+      "sourceDoorUpper": [
+        6.096,
+        12.192,
+        "right"
+      ],
+      "candidateCenterWorldXZ": [
+        4.8768,
+        12.192
+      ],
+      "spiralOuterRadiusM": 1.05,
+      "candidateOnly": true,
+      "gameplayCertified": false,
+      "lowerDoorDistanceToCenterM": 1.219,
+      "lowerGapToSpiralEnvelopeM": 0.169,
+      "upperDoorDistanceToCenterM": 1.219,
+      "upperGapToSpiralEnvelopeM": 0.169,
+      "decision": "DO_NOT_REPLACE_AUTHORED_SWITCHBACK",
+      "blockers": [
+        "Exact tread start/end azimuth not aligned to authored door openings",
+        "Accessible landing geometry and door approach not validated",
+        "Slab headroom and floor collision not validated",
+        "Full swept-capsule player traversal not validated"
+      ]
+    }
+  ]
+}

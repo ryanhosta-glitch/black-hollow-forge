@@ -1,0 +1,20 @@
+{
+  "materialSets": [
+    "mahogany",
+    "dark_marble",
+    "forest_damask",
+    "aged_plaster",
+    "antique_brass"
+  ],
+  "modifiedMeshes": {
+    "mahogany": 98,
+    "dark_marble": 12,
+    "forest_damask": 23,
+    "aged_plaster": 1,
+    "antique_brass": 137
+  },
+  "originalMeshCount": 1681,
+  "exportMeshCount": 1681,
+  "originalHauntUnchanged": true,
+  "liveBrowserVerified": false
+}

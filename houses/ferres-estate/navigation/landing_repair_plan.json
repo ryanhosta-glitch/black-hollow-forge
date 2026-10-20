@@ -1,0 +1,123 @@
+{
+  "schema": "black-hollow-forge-repair-plan-0.1",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "sourceModified": false,
+  "gameplayValidated": false,
+  "scope": "Landing placement candidate search within BOTH authored stair room footprints, with door approach clearance; never changes blueprint; no geometry repair exported yet",
+  "limits": [
+    "No furniture collision",
+    "No hinge sweep",
+    "No ceiling headroom",
+    "No stair run/risers and mesh collision",
+    "No GLB slab cutout",
+    "No repaired supernatural portal implemented"
+  ],
+  "plans": [
+    {
+      "linkId": "connection_022",
+      "lowerRoomId": "fe-f0-regular",
+      "upperRoomId": "fe-f1-regular",
+      "status": "REPOSITION_LANDING_IN_AUTHORED_FOOTPRINT",
+      "landingCenterMeters": {
+        "x": 5.281,
+        "z": 12.192
+      },
+      "landingPadMeters": {
+        "width": 0.95,
+        "depth": 1.2,
+        "inset": 0.3
+      },
+      "approachDoorIds": [
+        "fe-f0-regular-entry-b",
+        "fe-f1-regular-entry-b"
+      ],
+      "shiftMeters": 0.404,
+      "candidatePositionsChecked": 100,
+      "validPositions": 90,
+      "warnings": [
+        "3D headroom, door swing, furniture, floor opening and continuous capsule collision are not certified"
+      ]
+    },
+    {
+      "linkId": "connection_023",
+      "lowerRoomId": "fe-f1-regular",
+      "upperRoomId": "fe-f2-regular",
+      "status": "REPOSITION_LANDING_IN_AUTHORED_FOOTPRINT",
+      "landingCenterMeters": {
+        "x": 5.281,
+        "z": 12.192
+      },
+      "landingPadMeters": {
+        "width": 0.95,
+        "depth": 1.2,
+        "inset": 0.3
+      },
+      "approachDoorIds": [
+        "fe-f1-regular-entry-b",
+        "fe-f2-regular-entry-b"
+      ],
+      "shiftMeters": 0.404,
+      "candidatePositionsChecked": 100,
+      "validPositions": 90,
+      "warnings": [
+        "3D headroom, door swing, furniture, floor opening and continuous capsule collision are not certified"
+      ]
+    },
+    {
+      "linkId": "connection_024",
+      "lowerRoomId": "fe-f1-spiral",
+      "upperRoomId": "fe-f2-spiral",
+      "status": "REPOSITION_LANDING_IN_AUTHORED_FOOTPRINT",
+      "landingCenterMeters": {
+        "x": 9.3494,
+        "z": 12.192
+      },
+      "landingPadMeters": {
+        "width": 0.95,
+        "depth": 1.2,
+        "inset": 0.3
+      },
+      "approachDoorIds": [
+        "fe-f1-spiral-entry-b",
+        "fe-f2-spiral-entry-b"
+      ],
+      "shiftMeters": 1.014,
+      "candidatePositionsChecked": 100,
+      "validPositions": 100,
+      "warnings": [
+        "3D headroom, door swing, furniture, floor opening and continuous capsule collision are not certified"
+      ]
+    },
+    {
+      "linkId": "connection_025",
+      "lowerRoomId": "fe-f2-regular",
+      "upperRoomId": "fe-f3-regular",
+      "status": "REPOSITION_LANDING_IN_AUTHORED_FOOTPRINT",
+      "landingCenterMeters": {
+        "x": 5.281,
+        "z": 12.192
+      },
+      "landingPadMeters": {
+        "width": 0.95,
+        "depth": 1.2,
+        "inset": 0.3
+      },
+      "approachDoorIds": [
+        "fe-f2-regular-entry-b",
+        "fe-f3-regular-entry-b"
+      ],
+      "shiftMeters": 0.404,
+      "candidatePositionsChecked": 100,
+      "validPositions": 90,
+      "warnings": [
+        "3D headroom, door swing, furniture, floor opening and continuous capsule collision are not certified"
+      ]
+    }
+  ],
+  "summary": {
+    "verticalLinks": 4,
+    "retained": 0,
+    "repositionCandidates": 4,
+    "supernaturalRequired": 0
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "policy": "stable approximately 50 percent of eligible windowless rooms; authored openings preserved",
+  "originalBlueprintModified": false,
+  "generationMode": "actual wall cutouts with inset glazing",
+  "floors": [
+    {
+      "floor": 0,
+      "floorName": "Basement",
+      "eligibleWindowlessRooms": 0,
+      "enhancedRooms": 0,
+      "windows": []
+    },
+    {
+      "floor": 1,
+      "floorName": "Ground Floor",
+      "eligibleWindowlessRooms": 3,
+      "enhancedRooms": 2,
+      "windows": [
+        {
+          "roomId": "fe-f1-room4",
+          "wall": "bottom",
+          "pos": 0.28,
+          "positionMeters": [
+            10.24128,
+            6.096
+          ],
+          "widthMeters": 0.78,
+          "kind": "forge-decorative-window",
+          "sourceBlueprintModified": false,
+          "note": "Visual facade glazing only. Wall cutout and playable visibility not yet constructed."
+        },
+        {
+          "roomId": "fe-f1-room4",
+          "wall": "bottom",
+          "pos": 0.72,
+          "positionMeters": [
+            12.92352,
+            6.096
+          ],
+          "widthMeters": 0.78,
+          "kind": "forge-decorative-window",
+          "sourceBlueprintModified": false,
+          "note": "Visual facade glazing only. Wall cutout and playable visibility not yet constructed."
+        },
+        {
+          "roomId": "fe-f1-room3",
+          "wall": "bottom",
+          "pos": 0.28,
+          "positionMeters": [
+            1.7068800000000002,
+            6.096
+          ],
+          "widthMeters": 0.78,
+          "kind": "forge-decorative-window",
+          "sourceBlueprintModified": false,
+          "note": "Visual facade glazing only. Wall cutout and playable visibility not yet constructed."
+        },
+        {
+          "roomId": "fe-f1-room3",
+          "wall": "bottom",
+          "pos": 0.72,
+          "positionMeters": [
+            4.38912,
+            6.096
+          ],
+          "widthMeters": 0.78,
+          "kind": "forge-decorative-window",
+          "sourceBlueprintModified": false,
+          "note": "Visual facade glazing only. Wall cutout and playable visibility not yet constructed."
+        }
+      ]
+    },
+    {
+      "floor": 2,
+      "floorName": "Second Floor",
+      "eligibleWindowlessRooms": 4,
+      "enhancedRooms": 2,
+      "windows": [
+        {
+          "roomId": "fe-f2-room4",
+          "wall": "bottom",
+          "pos": 0.28,
+          "positionMeters": [
+            10.24128,
+            6.096
+          ],
+          "widthMeters": 0.78,
+          "kind": "forge-decorative-window",
+          "sourceBlueprintModified": false,
+          "note": "Visual facade glazing only. Wall cutout and playable visibility not yet constructed."
+        },
+        {
+          "roomId": "fe-f2-room4",
+          "wall": "bottom",
+          "pos": 0.72,
+          "positionMeters": [
+            12.92352,
+            6.096
+          ],
+          "widthMeters": 0.78,
+          "kind": "forge-decorative-window",
+          "sourceBlueprintModified": false,
+          "note": "Visual facade glazing only. Wall cutout and playable visibility not yet constructed."
+        },
+        {
+          "roomId": "fe-f2-room2",
+          "wall": "bottom",
+          "pos": 0.28,
+          "positionMeters": [
+            10.24128,
+            0.0
+          ],
+          "widthMeters": 0.78,
+          "kind": "forge-decorative-window",
+          "sourceBlueprintModified": false,
+          "note": "Visual facade glazing only. Wall cutout and playable visibility not yet constructed."
+        },
+        {
+          "roomId": "fe-f2-room2",
+          "wall": "bottom",
+          "pos": 0.72,
+          "positionMeters": [
+            12.92352,
+            0.0
+          ],
+          "widthMeters": 0.78,
+          "kind": "forge-decorative-window",
+          "sourceBlueprintModified": false,
+          "note": "Visual facade glazing only. Wall cutout and playable visibility not yet constructed."
+        }
+      ]
+    },
+    {
+      "floor": 3,
+      "floorName": "Third Floor",
+      "eligibleWindowlessRooms": 3,
+      "enhancedRooms": 2,
+      "windows": [
+        {
+          "roomId": "fe-f3-room2",
+          "wall": "bottom",
+          "pos": 0.28,
+          "positionMeters": [
+            10.24128,
+            0.0
+          ],
+          "widthMeters": 0.78,
+          "kind": "forge-decorative-window",
+          "sourceBlueprintModified": false,
+          "note": "Visual facade glazing only. Wall cutout and playable visibility not yet constructed."
+        },
+        {
+          "roomId": "fe-f3-room2",
+          "wall": "bottom",
+          "pos": 0.72,
+          "positionMeters": [
+            12.92352,
+            0.0
+          ],
+          "widthMeters": 0.78,
+          "kind": "forge-decorative-window",
+          "sourceBlueprintModified": false,
+          "note": "Visual facade glazing only. Wall cutout and playable visibility not yet constructed."
+        },
+        {
+          "roomId": "fe-f3-room1",
+          "wall": "bottom",
+          "pos": 0.28,
+          "positionMeters": [
+            1.7068800000000002,
+            0.0
+          ],
+          "widthMeters": 0.78,
+          "kind": "forge-decorative-window",
+          "sourceBlueprintModified": false,
+          "note": "Visual facade glazing only. Wall cutout and playable visibility not yet constructed."
+        },
+        {
+          "roomId": "fe-f3-room1",
+          "wall": "bottom",
+          "pos": 0.72,
+          "positionMeters": [
+            4.38912,
+            0.0
+          ],
+          "widthMeters": 0.78,
+          "kind": "forge-decorative-window",
+          "sourceBlueprintModified": false,
+          "note": "Visual facade glazing only. Wall cutout and playable visibility not yet constructed."
+        }
+      ]
+    }
+  ]
+}

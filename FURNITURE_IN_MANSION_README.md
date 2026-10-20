@@ -1,0 +1,3 @@
+# Furniture Inside Mansion — interactive preview
+
+Open `furniture_in_mansion.html` on GitHub Pages, or use the Furniture Library link. This places 3D furniture proxies at the existing exported world coordinates on top of the actual mansion floor GLBs. Drawer components translate and cabinet doors rotate using state from `furniture_library_runtime.mjs`; sit/stand supports occupancy state. Furniture meshes are currently procedural proxies, NOT high-fidelity art. Interaction is a viewer demonstration, not free-body gameplay. Placement clearance, wall intersections, collisions, and seat animation are NOT certified. The library data is for Ferre’s Estate; general `forge.py` furniture-library export remains to be integrated. Original `.haunt` unchanged.

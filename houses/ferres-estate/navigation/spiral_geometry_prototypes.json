@@ -1,0 +1,125 @@
+{
+  "schema": "black-hollow-spiral-geometry-prototype-1.0",
+  "purpose": "Visible separate staircase candidates, never replacements for original authored stairs",
+  "sourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "sourceModified": false,
+  "certifiedGameplayRoutes": 0,
+  "links": [
+    {
+      "linkId": "connection_022",
+      "authoredType": "switchback",
+      "prototypeType": "spiral",
+      "model": "geometry/stair_prototypes/connection_022.glb",
+      "stairwellMeters": [
+        2.438,
+        3.658
+      ],
+      "riseMeters": 3.048,
+      "diameterMeters": 2.1,
+      "risers": 18,
+      "riserHeightMeters": 0.1693,
+      "anglePerStepDegrees": 25,
+      "walkingLineRadiusMeters": 0.77,
+      "goingAtWalkingLineMeters": 0.336,
+      "estimatedClearancePerTurnMeters": 2.288,
+      "footprintFit": true,
+      "treadMeshes": 18,
+      "modelGeometryGenerated": true,
+      "safeGameplayTraversalCertified": false,
+      "unverified": [
+        "Door positions and authored stair type preservation",
+        "Top/bottom usable landing",
+        "Continuous user collision",
+        "Slab cut and tread headroom in house coordinate space",
+        "Handrail grip, foot clearance, and applicable code"
+      ]
+    },
+    {
+      "linkId": "connection_023",
+      "authoredType": "switchback",
+      "prototypeType": "spiral",
+      "model": "geometry/stair_prototypes/connection_023.glb",
+      "stairwellMeters": [
+        2.438,
+        3.658
+      ],
+      "riseMeters": 3.048,
+      "diameterMeters": 2.1,
+      "risers": 18,
+      "riserHeightMeters": 0.1693,
+      "anglePerStepDegrees": 25,
+      "walkingLineRadiusMeters": 0.77,
+      "goingAtWalkingLineMeters": 0.336,
+      "estimatedClearancePerTurnMeters": 2.288,
+      "footprintFit": true,
+      "treadMeshes": 18,
+      "modelGeometryGenerated": true,
+      "safeGameplayTraversalCertified": false,
+      "unverified": [
+        "Door positions and authored stair type preservation",
+        "Top/bottom usable landing",
+        "Continuous user collision",
+        "Slab cut and tread headroom in house coordinate space",
+        "Handrail grip, foot clearance, and applicable code"
+      ]
+    },
+    {
+      "linkId": "connection_024",
+      "authoredType": "spiral",
+      "prototypeType": "spiral",
+      "model": "geometry/stair_prototypes/connection_024.glb",
+      "stairwellMeters": [
+        3.658,
+        3.658
+      ],
+      "riseMeters": 3.048,
+      "diameterMeters": 2.1,
+      "risers": 18,
+      "riserHeightMeters": 0.1693,
+      "anglePerStepDegrees": 25,
+      "walkingLineRadiusMeters": 0.77,
+      "goingAtWalkingLineMeters": 0.336,
+      "estimatedClearancePerTurnMeters": 2.288,
+      "footprintFit": true,
+      "treadMeshes": 18,
+      "modelGeometryGenerated": true,
+      "safeGameplayTraversalCertified": false,
+      "unverified": [
+        "Door positions and authored stair type preservation",
+        "Top/bottom usable landing",
+        "Continuous user collision",
+        "Slab cut and tread headroom in house coordinate space",
+        "Handrail grip, foot clearance, and applicable code"
+      ]
+    },
+    {
+      "linkId": "connection_025",
+      "authoredType": "switchback",
+      "prototypeType": "spiral",
+      "model": "geometry/stair_prototypes/connection_025.glb",
+      "stairwellMeters": [
+        2.438,
+        3.658
+      ],
+      "riseMeters": 3.048,
+      "diameterMeters": 2.1,
+      "risers": 18,
+      "riserHeightMeters": 0.1693,
+      "anglePerStepDegrees": 25,
+      "walkingLineRadiusMeters": 0.77,
+      "goingAtWalkingLineMeters": 0.336,
+      "estimatedClearancePerTurnMeters": 2.288,
+      "footprintFit": true,
+      "treadMeshes": 18,
+      "modelGeometryGenerated": true,
+      "safeGameplayTraversalCertified": false,
+      "unverified": [
+        "Door positions and authored stair type preservation",
+        "Top/bottom usable landing",
+        "Continuous user collision",
+        "Slab cut and tread headroom in house coordinate space",
+        "Handrail grip, foot clearance, and applicable code"
+      ]
+    }
+  ]
+}

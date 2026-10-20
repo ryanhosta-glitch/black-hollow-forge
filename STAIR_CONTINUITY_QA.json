@@ -1,0 +1,54 @@
+{
+  "geometryReadback": true,
+  "connections": 4,
+  "modelsMerged": 9,
+  "uniqueLandings": 6,
+  "sourceUnmodified": true,
+  "collisionCertified": false,
+  "connectionsSummary": [
+    {
+      "connectionId": "connection_022",
+      "lowerRoomId": "fe-f0-regular",
+      "upperRoomId": "fe-f1-regular",
+      "stairWithinShaft": true,
+      "upperLandingOpeningOverlapPercent": 100.0,
+      "upperLandingNearDestinationFloor": true,
+      "stairTopHeightGapMeters": 0.0447,
+      "upperLandingInFloorVoid": true,
+      "status": "ASSEMBLED_NOT_WALKABILITY_CERTIFIED"
+    },
+    {
+      "connectionId": "connection_023",
+      "lowerRoomId": "fe-f1-regular",
+      "upperRoomId": "fe-f2-regular",
+      "stairWithinShaft": true,
+      "upperLandingOpeningOverlapPercent": 100.0,
+      "upperLandingNearDestinationFloor": true,
+      "stairTopHeightGapMeters": 0.0447,
+      "upperLandingInFloorVoid": true,
+      "status": "ASSEMBLED_NOT_WALKABILITY_CERTIFIED"
+    },
+    {
+      "connectionId": "connection_024",
+      "lowerRoomId": "fe-f1-spiral",
+      "upperRoomId": "fe-f2-spiral",
+      "stairWithinShaft": true,
+      "upperLandingOpeningOverlapPercent": 100.0,
+      "upperLandingNearDestinationFloor": true,
+      "stairTopHeightGapMeters": 0.0793,
+      "upperLandingInFloorVoid": true,
+      "status": "ASSEMBLED_NOT_WALKABILITY_CERTIFIED"
+    },
+    {
+      "connectionId": "connection_025",
+      "lowerRoomId": "fe-f2-regular",
+      "upperRoomId": "fe-f3-regular",
+      "stairWithinShaft": true,
+      "upperLandingOpeningOverlapPercent": 100.0,
+      "upperLandingNearDestinationFloor": true,
+      "stairTopHeightGapMeters": 0.0447,
+      "upperLandingInFloorVoid": true,
+      "status": "ASSEMBLED_NOT_WALKABILITY_CERTIFIED"
+    }
+  ]
+}

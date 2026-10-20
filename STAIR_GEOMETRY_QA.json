@@ -1,0 +1,16 @@
+{
+  "checkpoint": "Structural stair route alignment",
+  "scope": "first-person guided stair traversal prototype",
+  "improvements": [
+    "visible stair treads follow same sampled route as the camera",
+    "visual risers appear for ascending and descending routes",
+    "route step count determined by horizontal distance",
+    "route is removed when changing rooms or cancelling",
+    "original architect .haunt untouched"
+  ],
+  "limitations": [
+    "steps are not physical capsule-collision surfaces",
+    "stairwell ceiling cutouts are not yet generated",
+    "not verified in browser on the target hardware"
+  ]
+}

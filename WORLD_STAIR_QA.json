@@ -1,0 +1,13 @@
+{
+  "connections": 4,
+  "worldModels": 4,
+  "fitsShaftCount": 4,
+  "certified": 0,
+  "sourceHashVerified": true,
+  "topGapsMeters": {
+    "connection_022": 0.0447,
+    "connection_023": 0.0447,
+    "connection_024": 0.0793,
+    "connection_025": 0.0447
+  }
+}

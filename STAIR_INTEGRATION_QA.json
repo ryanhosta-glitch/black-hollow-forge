@@ -1,0 +1,9 @@
+{
+  "linksInspected": 4,
+  "candidateMeshCollisionBoxes": 75,
+  "uncertifiedPhysicalRoutes": 4,
+  "certifiedRoutes": 0,
+  "missingFloorCuts": 4,
+  "originalSourceSha256": "83ce1300ba6c0617591eea2b4851d5b2bafc1b7ecb2da994c9404266b51b4b3d",
+  "note": "Inspection gate added; physical stair routes remain blocked pending permanent slab cuts, coordinates and collision"
+}
