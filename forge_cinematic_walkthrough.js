@@ -94,7 +94,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
     S.revealUntil=performance.now()+1150;S.lookYaw=0;S.lookUntil=0;
     // Room changes snap camera into the new legal volume only; follow rotation stays continuous.
     S.lastPortal=p.portal.shared;S.lastPortalAt=performance.now();
-    S.doorState.set(p.portal.shared,{progress:1,closingAt:performance.now()+1700});
+    S.doorState.set(p.portal.shared,{progress:1,closingAt:performance.now()+2300});
     selectRoom(p.room.id);sync();
     status('Entered '+p.room.name+' · release W, then press W to continue');
     return;
@@ -144,12 +144,12 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   for(const [id,d] of doorMeshes){
    const distance=Math.hypot(S.x-d.centerX,S.z-d.centerZ);
    const old=S.doorState.get(id);
-   const nearby=S.active&&distance<1.35&&S.room?.floor===d.floor;
-   if(nearby){S.doorState.set(id,{progress:1,closingAt:now+650});}
-   else if(old&&now>old.closingAt&&distance>1.05){S.doorState.delete(id);}
+   const nearby=S.active&&distance<1.7&&S.room?.floor===d.floor;
+   if(nearby){S.doorState.set(id,{progress:1,closingAt:now+1350});}
+   else if(old&&now>old.closingAt&&distance>1.9){S.doorState.delete(id);}
    d.target=S.doorState.has(id)?1:0;
    d.open+=(d.target-d.open)*Math.min(1,dt*5.5);
-   d.pivot.rotation.y=d.open*(d.axis==='x'?1:-1)*1.40;
+   d.pivot.rotation.y=d.open*(d.axis==='x'?1:-1)*1.56;
    d.pivot.visible=S.active; 
   }
  }
@@ -220,27 +220,19 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
    if(Math.abs(d)>1e-6)permitted=Math.min(permitted,Math.max(0,((d>0?hi:lo)-p)/d));
   }
   let desired=new THREE.Vector3(S.x+back.x*Math.max(0,permitted-.025),height,S.z+back.z*Math.max(0,permitted-.025));
-  // Door arrival: NEVER put the camera beyond the explorer, inside an opposite
-  // doorway, or directly against the destination wall.
-  // Choose a camera position with actual clearance inside the NEW room.
-  if(arrival||permitted<.85){
-   const choices=[
-    {dx:back.x,dz:back.z},
-    {dx:1,dz:0},{dx:-1,dz:0},{dx:0,dz:1},{dx:0,dz:-1}
-   ];
-   let best=null,bestScore=-Infinity;
-   for(const c of choices){
-    let max=2.15;
-    for(const [p,d,lo,hi] of [[S.x,c.dx,b.minX+pad,b.maxX-pad],[S.z,c.dz,b.minZ+pad,b.maxZ-pad]]){
-     if(Math.abs(d)>1e-6)max=Math.min(max,Math.max(0,((d>0?hi:lo)-p)/d));
+  // On arrival or when pressed against a wall, select a camera behind the
+  // explorer or toward the ROOM INTERIOR. Never orbit around to a side door.
+  if(arrival||permitted<.75){
+   const cx=(b.minX+b.maxX)*.5,cz=(b.minZ+b.maxZ)*.5;
+   const dx=cx-S.x,dz=cz-S.z,magnitude=Math.hypot(dx,dz);
+   if(magnitude>.01){
+    const interior=new THREE.Vector3(dx/magnitude,0,dz/magnitude);
+    // Reserve a clear view from inside the room when the wall blocks chase.
+    const fromBack=Math.max(0,permitted-.035);
+    const shift=Math.min(1.5,magnitude*.7);
+    if(shift>fromBack+.15){
+     desired.set(S.x+interior.x*shift,Math.min(floor+1.56,ceiling-.46),S.z+interior.z*shift);
     }
-    // Avoid a camera almost inside the character; prefer a meaningful visible shot.
-    const len=Math.min(1.85,Math.max(0,max-.035));
-    const score=len+(.18*(c.dx*back.x+c.dz*back.z));
-    if(score>bestScore){bestScore=score;best={dx:c.dx,dz:c.dz,len};}
-   }
-   if(best&&best.len>.35){
-    desired.set(S.x+best.dx*best.len,Math.min(floor+1.63,ceiling-.46),S.z+best.dz*best.len);
    }
   }
   if(!hallway&&!arrival&&S.directorMode==='dollhouse'){
