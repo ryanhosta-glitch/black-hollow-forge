@@ -141,9 +141,10 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
  // Each shared architect-door becomes one hinged mesh, built in world space
  // from the exact same bounds/opening ID used by player navigation.
  function buildDoors(){
+  const disposedGeometry=new Set(),disposedMaterial=new Set();
   for(const item of doorMeshes.values()){
    item.pivot.removeFromParent();
-   item.pivot.traverse(o=>{if(o.isMesh){o.geometry.dispose();o.material.dispose();}});
+   item.pivot.traverse(o=>{if(o.isMesh){if(!disposedGeometry.has(o.geometry)){disposedGeometry.add(o.geometry);o.geometry.dispose();}if(!disposedMaterial.has(o.material)){disposedMaterial.add(o.material);o.material.dispose();}}});
   }
   doorMeshes.clear();
   const rooms=window.__forgeWalkRooms||[],seen=new Set();
@@ -165,10 +166,28 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
     const panel=new THREE.Mesh(new THREE.BoxGeometry(p.axis==='x'?.075:span,height,p.axis==='x'?span:.075),panelMaterial);
     panel.position.set(p.axis==='x'?0:span/2,height/2,p.axis==='x'?span/2:0);
     panel.castShadow=true;panel.receiveShadow=true;panel.name='bh-door-leaf-'+o.shared;pivot.add(panel);
+    // Six raised walnut panels on both faces, instanced to keep draw calls low.
+    // All relief is decorative; the original slab remains the collision authority.
+    const reliefMaterial=new THREE.MeshStandardMaterial({color:0x563525,roughness:.48,metalness:.02});
+    const relief=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),reliefMaterial,12);
+    relief.name='walnut-raised-door-panels';
+    const transform=new THREE.Object3D();let reliefIndex=0;
+    for(const face of [-1,1])for(let row=0;row<3;row++)for(let col=0;col<2;col++){
+     const lateral=span*(.26+col*.48)-span/2,vertical=height*(.19+row*.30)-height/2;
+     transform.position.set(p.axis==='x'?face*.046:lateral,vertical,p.axis==='x'?lateral:face*.046);
+     transform.scale.set(p.axis==='x'?.021:span*.36,height*.23,p.axis==='x'?span*.36:.021);
+     transform.updateMatrix();relief.setMatrixAt(reliefIndex++,transform.matrix);
+    }
+    relief.castShadow=false;relief.receiveShadow=true;panel.add(relief);
+
     const trimMaterial=new THREE.MeshStandardMaterial({color:0x87613a,metalness:.55,roughness:.48});
     const knob=new THREE.Mesh(new THREE.SphereGeometry(.045,8,6),trimMaterial);
     knob.position.set(p.axis==='x'?.065:span*.83,1.00,p.axis==='x'?span*.83:.065);
-    pivot.add(knob);doorGroup.add(pivot);
+    pivot.add(knob);
+    const backKnob=knob.clone();if(p.axis==='x')backKnob.position.x=-.065;else backKnob.position.z=-.065;pivot.add(backKnob);
+    const plateGeometry=new THREE.BoxGeometry(p.axis==='x'?.012:.085,.19,p.axis==='x'?.085:.012);
+    for(const face of [-1,1]){const plate=new THREE.Mesh(plateGeometry,trimMaterial);plate.name='brass-door-escutcheon';plate.position.copy(knob.position);if(p.axis==='x')plate.position.x=face*.045;else plate.position.z=face*.045;pivot.add(plate);}
+    doorGroup.add(pivot);
     panel.geometry.computeBoundingBox();
     doorMeshes.set(o.shared,{pivot,leaf:panel,centerX:p.x,centerZ:p.z,axis:p.axis,floor:r.floor,open:0,target:0,side:o.wall});
    }
