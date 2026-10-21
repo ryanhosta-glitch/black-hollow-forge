@@ -47,7 +47,7 @@ import {createForgeRealismEight} from './forge_realism_eight.js';
 import {createUniversalRealism} from './forge_universal_realism.js';
 import {createFurniturePhotorealism,createWowzaDirector} from './forge_wowza_director.js';
 import {createHouseAwakening} from './forge_house_awakening.js';
-import {createCinematicWalkthrough} from './forge_cinematic_walkthrough.js';
+import {createNavigation2ForgeViewer} from './forge_navigation2_viewer.js';
 import {createCinematicInspector} from './forge_cinematic_inspector_3_5.js';
 import {createWholeHouseLighting} from './forge_physical_lighting_3_2.js';
 import {createEstateHistory} from './forge_estate_history_3_4.js';
@@ -109,7 +109,7 @@ function applyMaterialMode(){[...levelModels,...furnishingModels,...newFurniture
 // 3.2 room lighting follows the existing selected-room light when available.
 let autoRotate=false;const specialCache=new Map();const cutPlane=new THREE.Plane(new THREE.Vector3(1,0,0),-6.5);
 // First-person visual inspection does not alter the blueprint or game navigation graph.
-const cinematicWalkthrough=createCinematicWalkthrough(THREE,{
+const cinematicWalkthrough=createNavigation2ForgeViewer(THREE,{
  scene,camera,controls,canvas:renderer.domElement,
  getRoom:()=>getRoom(roomId),levelY:i=>vertical(i),
  selectRoom:id=>selectRoom(id,true),
