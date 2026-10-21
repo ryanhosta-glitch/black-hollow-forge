@@ -18,7 +18,7 @@ const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setSize(innerW
 const solid=new THREE.MeshStandardMaterial({color:0x64536a,roughness:.83}),floorMat=new THREE.MeshStandardMaterial({color:0x827c83}),railMat=new THREE.MeshStandardMaterial({color:0xab805a}),doorMat=new THREE.MeshStandardMaterial({color:0x613c28}),stepMat=new THREE.MeshStandardMaterial({color:0x978b86}),coatMat=new THREE.MeshStandardMaterial({color:0x20324a}),hatMat=new THREE.MeshStandardMaterial({color:0x191522});
 const world=new THREE.Group();scene.add(world);let blockers=[],doors=[],stage='rooms',rooms=[],stairPath=null,progress=0,estateData=null,estateFloor=1,stairMetric=null;
 const visualGroup=new THREE.Group();scene.add(visualGroup);
-let victorianVisuals=false,visualReady=false,loadingVisuals=false;const visualAssets=[];
+let victorianVisuals=false,visualReady=false,loadingVisuals=false,doorwayDip=0;const visualAssets=[];
 function box(x,y,z,w,h,d,mat=solid,obstacle=true){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);world.add(m);if(obstacle)blockers.push(m);return m}
 function clear(){stairMetric=null;while(world.children.length){const m=world.children[0];world.remove(m);m.geometry?.dispose()}blockers=[];doors=[];rooms=[];stairPath=null;progress=0}
 const avatar=new THREE.Group();scene.add(avatar);
@@ -195,8 +195,8 @@ function update(dt){
   current=rooms.find(r=>P.x>=r.minX&&P.x<=r.maxX&&P.z>=r.minZ&&P.z<=r.maxZ)?.name||'Door threshold';
   for(const door of doors){
    const nearPlayer=Math.hypot(P.x-door.x,P.z-door.z)<2.0;
-   const nearCamera=Math.hypot(camera.position.x-door.x,camera.position.z-door.z)<1.35;
-   if(nearPlayer||nearCamera)door.hold=1.4;
+   const nearCamera=Math.hypot(camera.position.x-door.x,camera.position.z-door.z)<1.75;
+   if(nearPlayer||nearCamera)door.hold=2.3;
    else door.hold=Math.max(0,(door.hold||0)-dt);
    const open=nearPlayer||nearCamera||door.hold>0;
    door.openness+=(Number(open)-door.openness)*Math.min(1,dt*6);
@@ -214,8 +214,11 @@ function update(dt){
  stride+=Math.abs(P.vel)*dt*4;feet[0].rotation.x=Math.sin(stride)*.24;feet[1].rotation.x=-Math.sin(stride)*.24;
  camYaw+=Math.atan2(Math.sin(P.yaw+lookYaw-camYaw),Math.cos(P.yaw+lookYaw-camYaw))*Math.min(1,dt*4);
  const back=new THREE.Vector3(Math.sin(camYaw),0,Math.cos(camYaw));
- const target=new THREE.Vector3(P.x,P.y+1.22,P.z);
- const desired=target.clone().addScaledVector(back,3.0);desired.y+=.95;
+ // A subtle doorway dip, only while passing a real estate doorway.
+ const doorway=stage==='estate'&&doors.some(d=>d.kind==='estate'&&(Math.hypot(P.x-d.x,P.z-d.z)<1.15||Math.hypot(camera.position.x-d.x,camera.position.z-d.z)<.9));
+ doorwayDip+=(Number(doorway)-doorwayDip)*Math.min(1,dt*(doorway?5:2.3));
+ const target=new THREE.Vector3(P.x,P.y+1.22-doorwayDip*.13,P.z);
+ const desired=target.clone().addScaledVector(back,3.0);desired.y+=.95-doorwayDip*.68;
  // True occlusion query: cast toward camera and retract before first opaque blocker.
  const rayVector=desired.clone().sub(target);const length=rayVector.length();
  if(stairMetric){
