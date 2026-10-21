@@ -33,7 +33,8 @@ export async function loadForgeContract(root){
 export function getFloorElevations(contract){
   let y=0;return contract.manifest.floors.map((floor,i)=>{
     const heights=contract.getFloorRooms(i).map(r=>Number(r.boundsFeet.h)||10);
-    const rise=(Math.max(...heights,10))*METERS_PER_FOOT;
+    const rise=(heights.length?Math.max(...heights):10)*METERS_PER_FOOT;
+    if(Number.isFinite(floor.elevationMeters))y=floor.elevationMeters;
     const out={index:i,id:floor.id,yMeters:y,riseMeters:rise};y+=rise;return out;
   });
 }
@@ -44,10 +45,10 @@ export async function addForgeGeometry(contract,{THREE,GLTFLoader,scene,includeR
   const elevations=getFloorElevations(contract),floorGroups=[];
   for(const position of elevations){
     const floor=contract.manifest.floors[position.index];const gltf=await getGltf(contract.url(floor.model));
-    gltf.scene.position.y=position.yMeters;gltf.scene.name=floor.name;gltf.scene.userData.forgeFloor=position.index;
+    gltf.scene.position.y=contract.manifest.geometrySpace==='world'?0:position.yMeters;gltf.scene.name=floor.name;gltf.scene.userData.forgeFloor=position.index;
     group.add(gltf.scene);floorGroups.push(gltf.scene);
   }
-  if(includeRoof&&contract.manifest.roof){const gltf=await getGltf(contract.url(contract.manifest.roof));gltf.scene.position.y=elevations.at(-1).yMeters+elevations.at(-1).riseMeters;gltf.scene.name='Forge roof';group.add(gltf.scene)}
+  if(includeRoof&&contract.manifest.roof){const gltf=await getGltf(contract.url(contract.manifest.roof));gltf.scene.position.y=contract.manifest.geometrySpace==='world'?0:elevations.at(-1).yMeters+elevations.at(-1).riseMeters;gltf.scene.name='Forge roof';group.add(gltf.scene)}
   scene.add(group);return {group,floorGroups,elevations,dispose(){scene.remove(group);group.traverse(o=>{if(o.isMesh)o.geometry?.dispose()})}};
 }
 export function gameReadiness(contract){
