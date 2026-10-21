@@ -1,3 +1,4 @@
+import {circleTouchesRectangle} from './navigation/door_leaf_collision.mjs';
 // Black Hollow Forge — Navigation 2 main-viewer compatibility controller.
 // Reusable preview controller, not yet a certified game physics engine. Closed/locked doors require game logic.
 export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas,getRoom,levelY,selectRoom,getConnections,isReady}){
@@ -74,12 +75,30 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
  }
  // Navigation 2 transition: preserve exact world position across a shared boundary.
  // No doorway teleport, no stop-and-release requirement, and no forced heading snap.
+ // Test the actual hinged leaf, including fully open doors. Transforming the
+ // capsule center into leaf-local space avoids an oversized world AABB at 45°.
+ function blockedByDoor(x,z){
+  const floor=levelY(S.room.floor);
+  for(const d of doorMeshes.values()){
+   if(d.floor!==S.room.floor)continue;
+   d.leaf.updateWorldMatrix(true,false);
+   const p=d.leaf.worldToLocal(new THREE.Vector3(x,floor+1,z));
+   const b=d.leaf.geometry.boundingBox;
+   if(circleTouchesRectangle(p.x,p.z,b.min.x,b.max.x,b.min.z,b.max.z,radius+.01))return true;
+  }
+  return false;
+ }
  function step(dx,dz){
   const count=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.055));
   const vx=dx/count,vz=dz/count;
   for(let i=0;i<count;i++){
    const current=bnd(S.room);if(!current)break;
-   const nx=S.x+vx,nz=S.z+vz;
+   // Resolve each short move against every leaf before room-interior shortcuts.
+   // Axis separation retains wall-style sliding instead of freezing both axes.
+   let nx=S.x+vx,nz=S.z+vz;
+   if(blockedByDoor(nx,S.z))nx=S.x;
+   if(blockedByDoor(nx,nz))nz=S.z;
+   if(nx===S.x&&nz===S.z)continue;
    const inside=nx>=current.minX+margin&&nx<=current.maxX-margin&&nz>=current.minZ+margin&&nz<=current.maxZ-margin;
    // After crossing a shared wall the explorer is still within the receiving
    // room's physical doorway strip. Let him finish walking into that room;
@@ -150,7 +169,8 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
     const knob=new THREE.Mesh(new THREE.SphereGeometry(.045,8,6),trimMaterial);
     knob.position.set(p.axis==='x'?.065:span*.83,1.00,p.axis==='x'?span*.83:.065);
     pivot.add(knob);doorGroup.add(pivot);
-    doorMeshes.set(o.shared,{pivot,centerX:p.x,centerZ:p.z,axis:p.axis,floor:r.floor,open:0,target:0,side:o.wall});
+    panel.geometry.computeBoundingBox();
+    doorMeshes.set(o.shared,{pivot,leaf:panel,centerX:p.x,centerZ:p.z,axis:p.axis,floor:r.floor,open:0,target:0,side:o.wall});
    }
   }
  }
