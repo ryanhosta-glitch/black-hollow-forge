@@ -71,11 +71,18 @@ function buildEstate(){
     const t=Math.max(0,Math.min(1,Number(o.pos??.5)));
     const x=(side==='left'?r.minX:side==='right'?r.maxX:r.minX+(r.maxX-r.minX)*t);
     const z=(side==='top'?r.minZ:side==='bottom'?r.maxZ:r.minZ+(r.maxZ-r.minZ)*t);
-    const pivot=new THREE.Group();pivot.position.set(x,0,z);world.add(pivot);
     const isX=side==='left'||side==='right';
+    const half=doorWidth/2;
+    // Hinge sits on one jamb, not the middle of the opening.
+    // A wall at fixed X has a door leaf extending along local +Z;
+    // a wall at fixed Z has one extending along local +X.
+    const hingeX=isX?x:x-half,hingeZ=isX?z-half:z;
+    const pivot=new THREE.Group();pivot.position.set(hingeX,0,hingeZ);world.add(pivot);
     const leaf=new THREE.Mesh(new THREE.BoxGeometry(isX?.075:doorWidth,2.25,isX?doorWidth:.075),doorMat);
-    leaf.position.set(isX?0:doorWidth/2,1.125,isX?doorWidth/2:0);pivot.add(leaf);
-    doors.push({x,z,pivot,openness:0});
+    leaf.position.set(isX?0:half,1.125,isX?half:0);pivot.add(leaf);
+    // Rotate INTO the originating room, so an open leaf parks against its wall.
+    const sign=side==='left'?1:side==='right'?-1:side==='top'?-1:1;
+    doors.push({x,z,pivot,leaf,openness:0,side,sign,width:doorWidth,kind:'estate'});
    }
   }
  }
@@ -101,13 +108,29 @@ function buildStairs(kind){
  else {box(-3,3.05,3.0,7,.11,.12,railMat,false);box(-3,4.5,-2.3,7,.11,.12,railMat,false)}
 }
 function load(which){stage=which;clear();if(which==='rooms')buildRooms();else if(which==='estate')buildEstate();else buildStairs(which);reset();for(const id of ['rooms','switch','spiral','estate'])document.getElementById(id).setAttribute('aria-pressed',String(id===which));}
-function blocked(x,z){const radius=.27;
- for(const m of blockers){m.updateMatrixWorld(true);const bounds=new THREE.Box3().setFromObject(m);
- // Collision primarily against waist-height walls rather than flat floors/steps.
- if(bounds.max.y<.65||bounds.min.y>1.45)continue;
- if(x>bounds.min.x-radius&&x<bounds.max.x+radius&&z>bounds.min.z-radius&&z<bounds.max.z+radius)return true;
+function blocked(x,z){
+ const radius=.27;
+ for(const m of blockers){
+  m.updateMatrixWorld(true);const bounds=new THREE.Box3().setFromObject(m);
+  if(bounds.max.y<.65||bounds.min.y>1.45)continue;
+  if(x>bounds.min.x-radius&&x<bounds.max.x+radius&&z>bounds.min.z-radius&&z<bounds.max.z+radius)return true;
  }
- return false}
+ // Estate door leaf uses the SAME transform as its visible animated panel.
+ // Do not test the simplified original lab doors, preserving the proven control sample.
+ if(stage==='estate'){
+  const p=new THREE.Vector2(x,z);
+  for(const door of doors){
+   if(door.kind!=='estate')continue;
+   door.pivot.updateMatrixWorld(true);
+   const start=door.pivot.localToWorld(new THREE.Vector3(0,1.1,0));
+   const end=door.pivot.localToWorld(new THREE.Vector3(door.side==='left'||door.side==='right'?0:door.width,1.1,door.side==='left'||door.side==='right'?door.width:0));
+   const u=new THREE.Vector2(start.x,start.z),v=new THREE.Vector2(end.x,end.z),d=v.clone().sub(u);
+   const t=Math.max(0,Math.min(1,p.clone().sub(u).dot(d)/Math.max(1e-8,d.lengthSq())));
+   if(p.distanceTo(u.addScaledVector(d,t))<radius+.045)return true;
+  }
+ }
+ return false;
+}
 function travel(dx,dz){const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.06));for(let i=0;i<steps;i++){const x=P.x+dx/steps,z=P.z+dz/steps;if(!blocked(x,P.z))P.x=x;if(!blocked(P.x,z))P.z=z}}
 function update(dt){
  const turn=Number(keys.has('KeyD')||keys.has('ArrowRight'))-Number(keys.has('KeyA')||keys.has('ArrowLeft'));
@@ -122,7 +145,7 @@ function update(dt){
   for(const door of doors){
    const nearby=Math.hypot(P.x-door.x,P.z-door.z)<1.75;
    door.openness+=(Number(nearby)-door.openness)*Math.min(1,dt*6);
-   door.pivot.rotation.y=door.openness*1.56;
+   door.pivot.rotation.y=door.openness*(door.sign??1)*1.56;
   }
  }else{
   // Stair guided walk route is a separate lab: no room teleport; continuous 3D height.
