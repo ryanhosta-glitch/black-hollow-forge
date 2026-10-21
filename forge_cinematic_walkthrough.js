@@ -1,7 +1,7 @@
 // Black Hollow Forge 4.2 — cinematic explorer + verified automatic doorway crossing.
 // Preview navigation, not a certified physics engine. Closed/locked doors require game logic.
 export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,getRoom,levelY,selectRoom,getConnections,isReady}){
- const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',clock:performance.now(),hintUntil:0};
+ const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',clock:performance.now(),hintUntil:0,revealUntil:0};
  const K=.3048,margin=.25,eye=1.68,radius=.23,topPitch=0.65;
  const panel=document.createElement('section');panel.id='bh-walk-panel';panel.innerHTML=`<style>
  #bh-walk-panel{position:fixed;z-index:1200;bottom:12px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;width:min(94vw,820px);padding:8px;background:#10131ef0;color:#f6e8d7;border:1px solid #a08462;border-radius:12px;font:12px system-ui;box-sizing:border-box}#bh-walk-panel button{background:#342839;color:#fff;border:1px solid #997a62;padding:8px;border-radius:7px;cursor:pointer}#bh-walk-panel .walking{display:none}#bh-walk-panel.active .walking{display:inline-block}#bh-walk-panel small{width:100%;text-align:center;color:#d3bfa6}#bh-walk-panel .room{font-weight:bold}#bh-walk-panel .touch{touch-action:none}#bh-walk-panel #bh-walk-status{color:#e8cc9a}</style>
@@ -12,6 +12,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  const torso=new THREE.Group();avatar.add(torso);const body=new THREE.Mesh(new THREE.CylinderGeometry(.26,.37,1.08,10),coat);body.position.y=1.2;torso.add(body);addBox(torso,.29,.5,.09,0,1.30,-.28,vest);
  const head=new THREE.Mesh(new THREE.SphereGeometry(.245,12,10),skin);head.position.y=1.96;torso.add(head);const brim=new THREE.Mesh(new THREE.CylinderGeometry(.39,.39,.055,14),hat);brim.position.y=2.19;torso.add(brim);const crown=new THREE.Mesh(new THREE.CylinderGeometry(.245,.29,.34,12),hat);crown.position.y=2.39;torso.add(crown);
  const legs=[],arms=[];for(const side of [-1,1]){let leg=new THREE.Group();leg.position.set(side*.16,.71,0);avatar.add(leg);addBox(leg,.22,.72,.25,0,-.32,0,cloth);addBox(leg,.26,.15,.38,0,-.74,-.09,boots);legs.push(leg);let arm=new THREE.Group();arm.position.set(side*.34,1.57,0);torso.add(arm);addBox(arm,.17,.65,.18,side*.015,-.3,0,coat);arms.push(arm)}
+ avatar.scale.setScalar(.68); // 1.75m including hat; architectural feet-to-meter scale.
  avatar.visible=false;
  function bnd(r){const b=r?.boundsFeet;if(!b)return null;return {minX:b.x*K,maxX:(b.x+b.l)*K,minZ:b.y*K,maxZ:(b.y+b.w)*K,y:levelY(r.floor),floor:r.floor};}
  const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
@@ -22,24 +23,72 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  function enter(){if(!isReady())return false;S.room=getRoom();const b=bnd(S.room);if(!b)return false;S.active=true;S.mode='cinematic';S.moving.clear();placeAtCenter(S.room);S.yaw=0;S.pitch=0;controls.enabled=false;S.clock=performance.now();if(scene&&avatar.parent!==scene)scene.add(avatar);sync();follow(.05,true);status('Cinematic explorer · W/S walk · arrows turn · approach a matched door to cross automatically');return true;}
  function exit(){S.active=false;S.moving.clear();S.mouse=false;avatar.visible=false;controls.enabled=true;camera.fov=62;camera.updateProjectionMatrix();sync();}
  function changeCamera(){S.mode=S.mode==='cinematic'?'explorer':S.mode==='explorer'?'first':'cinematic';sync();follow(.05,true)}
- // Only a matched, same-floor architect-door is walkable. Magical elevator and stairs stay explicit.
+ // 4.3: Only a matched, same-floor architect-door is walkable. Magical elevator and stairs stay explicit.
  function doorPortal(r,o){const b=bnd(r);if(!b||!o||o.type!=='door'||!o.shared)return null;const pos=clamp(Number(o.pos??.5),0,1),w=clamp(Number(o.width||o.widthFeet||3)*K, .65, 2.1);let x,z,axis,dir;
  if(o.wall==='left'){x=b.minX;z=b.minZ+(b.maxZ-b.minZ)*pos;axis='x';dir=-1}
  else if(o.wall==='right'){x=b.maxX;z=b.minZ+(b.maxZ-b.minZ)*pos;axis='x';dir=1}
  else if(o.wall==='top'){z=b.minZ;x=b.minX+(b.maxX-b.minX)*pos;axis='z';dir=-1}
  else if(o.wall==='bottom'){z=b.maxZ;x=b.minX+(b.maxX-b.minX)*pos;axis='z';dir=1}
  else return null;return {x,z,axis,dir,half:Math.max(.22,w*.5-radius),shared:o.shared};}
- function findPassage(nx,nz){const r=S.room,b=bnd(r);if(!r||!b)return null;const over=nx<b.minX?'left':nx>b.maxX?'right':nz<b.minZ?'top':nz>b.maxZ?'bottom':null;if(!over)return null;
- const portal=(r.openings||[]).filter(o=>o.wall===over).map(o=>doorPortal(r,o)).find(p=>p&&Math.abs(p.axis==='x'?nz-p.z:nx-p.x)<=p.half);if(!portal)return null;
- const ids=getConnections(r.id)||[];for(const id of ids){const other=window.__forgeWalkRooms?.find(a=>a.id===id);if(!other||other.floor!==r.floor)continue;const destOpen=(other.openings||[]).some(o=>o.type==='door'&&o.shared===portal.shared);if(!destOpen)continue;const bb=bnd(other);if(!bb)continue;const gap=portal.axis==='x'?(portal.dir>0?bb.minX-b.maxX:b.minX-bb.maxX):(portal.dir>0?bb.minZ-b.maxZ:b.minZ-bb.maxZ);
- // Tolerate tiny blueprint rounding, never jump through a distant disconnected structure.
- if(Math.abs(gap)>.25)continue;
- return {room:other,box:bb,portal};}return null;}
- // Explicit registration of navigation data is provided by index.html; no fabricated door pairs.
- function step(dx,dz){const dist=Math.hypot(dx,dz),count=Math.max(1,Math.ceil(dist/.08));for(let i=0;i<count;i++){const nx=S.x+dx/count,nz=S.z+dz/count,b=bnd(S.room);if(!b)break;
- const p=findPassage(nx,nz);if(p){S.room=p.room;S.x=clamp(nx,p.box.minX+margin,p.box.maxX-margin);S.z=clamp(nz,p.box.minZ+margin,p.box.maxZ-margin);sync();selectRoom(p.room.id);status('Automatically entered '+p.room.name);continue;}
- S.x=clamp(nx,b.minX+margin,b.maxX-margin);S.z=clamp(nz,b.minZ+margin,b.maxZ-margin);
- }}
+ // Check the player capsule against the doorway BEFORE the usual room-edge clamp.
+ // The prior algorithm clamped to an inset boundary and only looked for doors
+ // after crossing the outer boundary, making a valid passage unreachable.
+ function findPassage(nx,nz,dx,dz){
+  const r=S.room,b=bnd(r);if(!r||!b)return null;
+  const sides=[];
+  if(dx<0&&nx<=b.minX+margin+.015)sides.push('left');
+  if(dx>0&&nx>=b.maxX-margin-.015)sides.push('right');
+  if(dz<0&&nz<=b.minZ+margin+.015)sides.push('top');
+  if(dz>0&&nz>=b.maxZ-margin-.015)sides.push('bottom');
+  if(!sides.length)return null;
+  const ids=getConnections(r.id)||[];
+  const all=window.__forgeWalkRooms||[];
+  for(const side of sides){
+   for(const o of (r.openings||[])){
+    if(o.wall!==side||o.type!=='door'||!o.shared)continue;
+    const portal=doorPortal(r,o);
+    if(!portal)continue;
+    const lateral=portal.axis==='x'?nz:nx;
+    const center=portal.axis==='x'?portal.z:portal.x;
+    if(Math.abs(lateral-center)>portal.half)continue;
+    for(const id of ids){
+     const other=all.find(a=>a.id===id);
+     if(!other||other.floor!==r.floor)continue;
+     const opposing={left:'right',right:'left',top:'bottom',bottom:'top'}[side];
+     if(!(other.openings||[]).some(d=>d.type==='door'&&d.shared===o.shared&&d.wall===opposing))continue;
+     const bb=bnd(other);if(!bb)continue;
+     const gap=side==='left'?b.minX-bb.maxX:side==='right'?bb.minX-b.maxX:side==='top'?b.minZ-bb.maxZ:bb.minZ-b.maxZ;
+     if(Math.abs(gap)>.26)continue;
+     return {room:other,box:bb,side,portal};
+    }
+   }
+  }
+  return null;
+ }
+ function step(dx,dz){
+  const distance=Math.hypot(dx,dz),count=Math.max(1,Math.ceil(distance/.07));
+  for(let i=0;i<count;i++){
+   const vx=dx/count,vz=dz/count,nx=S.x+vx,nz=S.z+vz,b=bnd(S.room);
+   if(!b)break;
+   const p=findPassage(nx,nz,vx,vz);
+   if(p){
+    // Cross the shared wall at the actual portal center. Only a small capsule
+    // clearance offset is used; there is no arbitrary jump to a distant room.
+    const landing=.29;
+    S.room=p.room;
+    if(p.side==='left'){S.x=p.box.maxX-landing;S.z=clamp(nz,p.box.minZ+margin,p.box.maxZ-margin)}
+    else if(p.side==='right'){S.x=p.box.minX+landing;S.z=clamp(nz,p.box.minZ+margin,p.box.maxZ-margin)}
+    else if(p.side==='top'){S.z=p.box.maxZ-landing;S.x=clamp(nx,p.box.minX+margin,p.box.maxX-margin)}
+    else {S.z=p.box.minZ+landing;S.x=clamp(nx,p.box.minX+margin,p.box.maxX-margin)}
+    S.revealUntil=performance.now()+1300;
+    selectRoom(p.room.id);sync();
+    status('Entered '+p.room.name+' · automatic architectural portal');
+    continue;
+   }
+   S.x=clamp(nx,b.minX+margin,b.maxX-margin);
+   S.z=clamp(nz,b.minZ+margin,b.maxZ-margin);
+  }
+ }
  function follow(dt,instant=false){
   const b=bnd(S.room);if(!b)return;
   const floor=b.y;
@@ -49,7 +98,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   // Height comes from the authored room, never from a fixed "cinematic" offset.
   const authoredHeight=Math.max(2.15,(Number(S.room?.boundsFeet?.h)||9)*K);
   const ceiling=floor+authoredHeight;
-  const headY=Math.min(floor+1.42,ceiling-.68);
+  const headY=Math.min(floor+1.21,ceiling-.68);
   if(S.mode==='first'){
    camera.position.set(S.x,Math.min(floor+eye,ceiling-.38),S.z);
    camera.lookAt(S.x+face.x*5,camera.position.y+Math.tan(S.pitch)*5,S.z+face.z*5);
@@ -59,8 +108,8 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   // Third-person camera looks AT the character, not over a nearby ceiling beam.
   // Keep it inside the actual ceiling, and use a short chase distance in hallways.
   const long=S.mode==='cinematic';
-  const distance=long?3.15:2.25;
-  const height=Math.min(floor+(long?2.00:1.85),ceiling-.42);
+  const reveal=performance.now()<S.revealUntil;const distance=long?(reveal?3.7:3.3):2.3;
+  const height=Math.min(floor+(long?(reveal?2.23:2.08):1.86),ceiling-.42);
   const aim=new THREE.Vector3(S.x,headY,S.z);
   const cx=clamp(S.x-face.x*distance,b.minX+.34,b.maxX-.34);
   const cz=clamp(S.z-face.z*distance,b.minZ+.34,b.maxZ-.34);
