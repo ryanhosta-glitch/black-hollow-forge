@@ -1,7 +1,7 @@
 // Black Hollow Forge 4.2 — cinematic explorer + verified automatic doorway crossing.
 // Reusable preview controller, not yet a certified game physics engine. Closed/locked doors require game logic.
 export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,getRoom,levelY,selectRoom,getConnections,isReady}){
- const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',clock:performance.now(),hintUntil:0,revealUntil:0,facingYaw:0,cameraYaw:0,movementAnchor:null,speed:0,turnSpeed:0,lookYaw:0,lookUntil:0,lastPortal:null,lastPortalAt:0,doorState:new Map()};
+ const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',directorMode:'hybrid',clock:performance.now(),hintUntil:0,revealUntil:0,facingYaw:0,cameraYaw:0,movementAnchor:null,speed:0,turnSpeed:0,lookYaw:0,lookUntil:0,lastPortal:null,lastPortalAt:0,doorState:new Map()};
  const K=.3048,margin=.25,eye=1.68,radius=.23,topPitch=0.65;
  const heading=()=>new THREE.Vector3(-Math.sin(S.yaw),0,-Math.cos(S.yaw));
  const doorMeshes=new Map();
@@ -9,7 +9,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  if(scene)scene.add(doorGroup);
  const panel=document.createElement('section');panel.id='bh-walk-panel';panel.innerHTML=`<style>
  #bh-walk-panel{position:fixed;z-index:1200;bottom:12px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;width:min(94vw,820px);padding:8px;background:#10131ef0;color:#f6e8d7;border:1px solid #a08462;border-radius:12px;font:12px system-ui;box-sizing:border-box}#bh-walk-panel button{background:#342839;color:#fff;border:1px solid #997a62;padding:8px;border-radius:7px;cursor:pointer}#bh-walk-panel .walking{display:none}#bh-walk-panel.active .walking{display:inline-block}#bh-walk-panel small{width:100%;text-align:center;color:#d3bfa6}#bh-walk-panel .room{font-weight:bold}#bh-walk-panel .touch{touch-action:none}#bh-walk-panel #bh-walk-status{color:#e8cc9a}</style>
- <button id="bh-walk-toggle">Enter Cinematic Explorer</button><span class="room" id="bh-walk-room">Room inspection</span><button class="walking" id="bh-walk-camera">Camera: CINEMATIC</button><button class="walking" id="bh-walk-exit">Exit</button><button class="walking touch" data-walk="forward">▲</button><button class="walking touch" data-walk="turnleft">↶</button><button class="walking touch" data-walk="backward">▼</button><button class="walking touch" data-walk="turnright">↷</button><button class="walking" id="bh-walk-next">Next linked room (QA)</button><small id="bh-walk-status">W/↑ forward · S/↓ back · A/← turn left · D/→ turn right</small>`;
+ <button id="bh-walk-toggle">Enter Cinematic Explorer</button><span class="room" id="bh-walk-room">Room inspection</span><button class="walking" id="bh-walk-camera">Camera: CINEMATIC</button><button class="walking" id="bh-walk-exit">Exit</button><button class="walking touch" data-walk="forward">▲</button><button class="walking touch" data-walk="turnleft">↶</button><button class="walking touch" data-walk="backward">▼</button><button class="walking touch" data-walk="turnright">↷</button><button class="walking" id="bh-director-mode">Director: HYBRID</button><button class="walking" id="bh-camera-plan">Export camera plan</button><button class="walking" id="bh-walk-next">Next linked room (QA)</button><small id="bh-walk-status">W/↑ forward · S/↓ back · A/← turn left · D/→ turn right</small>`;
  document.body.append(panel);const q=id=>panel.querySelector('#'+id);const avatar=new THREE.Group();avatar.name='forge_victorian_explorer_preview';
  const coat=new THREE.MeshStandardMaterial({color:0x27334a,roughness:.9}),vest=new THREE.MeshStandardMaterial({color:0x665344}),skin=new THREE.MeshStandardMaterial({color:0xc6a68c}),hat=new THREE.MeshStandardMaterial({color:0x191922}),cloth=new THREE.MeshStandardMaterial({color:0x252733}),boots=new THREE.MeshStandardMaterial({color:0x17161c});
  function addBox(parent,w,h,d,x,y,z,material){let a=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);a.position.set(x,y,z);parent.add(a);return a}
@@ -20,7 +20,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  avatar.visible=false;
  function bnd(r){const b=r?.boundsFeet;if(!b)return null;return {minX:b.x*K,maxX:(b.x+b.l)*K,minZ:b.y*K,maxZ:(b.y+b.w)*K,y:levelY(r.floor),floor:r.floor};}
  const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
- function sync(){panel.classList.toggle('active',S.active);q('bh-walk-toggle').textContent=S.active?'Explorer ON':'Enter Cinematic Explorer';q('bh-walk-room').textContent=S.room?.name||'Room inspection';q('bh-walk-camera').textContent='Camera: '+S.mode.toUpperCase();avatar.visible=S.active&&S.mode!=='first';}
+ function sync(){q('bh-director-mode').textContent='Director: '+S.directorMode.toUpperCase();panel.classList.toggle('active',S.active);q('bh-walk-toggle').textContent=S.active?'Explorer ON':'Enter Cinematic Explorer';q('bh-walk-room').textContent=S.room?.name||'Room inspection';q('bh-walk-camera').textContent='Camera: '+S.mode.toUpperCase();avatar.visible=S.active&&S.mode!=='first';}
  function status(t){q('bh-walk-status').textContent=t;}
  function orient(){return heading();}
  function placeAtCenter(r){const b=bnd(r);if(!b)return;S.x=(b.minX+b.maxX)*.5;S.z=(b.minZ+b.maxZ)*.5;}
@@ -150,6 +150,40 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
    d.pivot.visible=S.active; 
   }
  }
+ // Camera plans are derived only from authored room bounds and matching door IDs.
+ // These are safe-zone proposals, NOT mesh-level collision certification.
+ function directorPlan(r){
+  const b=bnd(r);if(!b)return null;
+  const wx=b.maxX-b.minX,wz=b.maxZ-b.minZ;
+  const compact=Math.min(wx,wz)<3.0;
+  const portals=(r.openings||[]).filter(o=>o.type==='door'&&o.shared).map(o=>{
+   const p=doorPortal(r,o);return p?{id:o.shared,wall:o.wall,center:[p.x,p.z],widthMeters:Math.round((p.half+radius)*200)/100}:null;
+  }).filter(Boolean);
+  const pad=Math.min(.24,wx*.14,wz*.14);
+  return {roomId:r.id,floor:r.floor,classification:compact?'narrow':Math.max(wx,wz)>9?'grand':'room',
+   safeBoundsMeters:{minX:b.minX+pad,maxX:b.maxX-pad,minZ:b.minZ+pad,maxZ:b.maxZ-pad,floorY:b.y},
+   focusMeters:[(b.minX+b.maxX)/2,b.y+1.1,(b.minZ+b.maxZ)/2],
+   preferredDistanceMeters:compact?1.9:Math.max(wx,wz)>9?3.25:2.7,
+   portals,shotModes:['hybrid','chase','dollhouse'],
+   dollhouseSide:wx>wz?'z':'x'};
+ }
+ function cameraPlan(){
+  const rooms=window.__forgeWalkRooms||[];
+  return {format:'black-hollow-camera-plan',version:1,units:'meters',generator:'forge-cinematic-director-preview',
+   certification:'PROVISIONAL-ROOM-BOUNDS-ONLY',rooms:rooms.map(directorPlan).filter(Boolean)};
+ }
+ function saveCameraPlan(){
+  const json=JSON.stringify(cameraPlan(),null,2);
+  const url=URL.createObjectURL(new Blob([json],{type:'application/json'}));
+  const a=document.createElement('a');a.href=url;a.download='black-hollow-camera-plan.preview.json';a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  status('Camera plan exported for QA; not certified for CASA gameplay');
+ }
+ function changeDirector(){
+  const modes=['hybrid','chase','dollhouse'],i=modes.indexOf(S.directorMode);
+  S.directorMode=modes[(i+1)%modes.length];sync();follow(.05,true);
+  status('Camera director: '+S.directorMode+' · movement controls unchanged');
+ }
  function follow(dt,instant=false){
   const b=bnd(S.room);if(!b)return;
   const floor=b.y;
@@ -173,8 +207,9 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   // Keep it inside the actual ceiling, and use a short chase distance in hallways.
   const long=S.mode==='cinematic';
   const reveal=performance.now()<S.revealUntil;
+  const plan=directorPlan(S.room);
   const width=Math.min(b.maxX-b.minX,b.maxZ-b.minZ);
-  const distance=long?(width<3.0?2.05:reveal?3.35:2.85):2.15;
+  const distance=S.directorMode==='chase'?2.65:S.directorMode==='dollhouse'?plan.preferredDistanceMeters:long?(width<3.0?2.05:reveal?3.35:2.85):2.15;
   const height=Math.min(floor+(long?(reveal?2.16:2.03):1.88),ceiling-.45);
   const aim=new THREE.Vector3(S.x,headY,S.z);
   // Project the camera backwards along a line from the explorer. Shrink that
@@ -187,6 +222,12 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
    if(Math.abs(d)>1e-5)allowed=Math.min(allowed,Math.max(0,((d>0?hi:lo)-p)/d));
   }
   let desired=new THREE.Vector3(S.x+back.x*Math.max(0,allowed-.035),height,S.z+back.z*Math.max(0,allowed-.035));
+  if(S.directorMode==='dollhouse'){
+   const zz=plan.dollhouseSide==='z';const side=zz?(b.maxZ-safePad):(b.maxX-safePad);
+   desired=new THREE.Vector3(zz?S.x:side,height,zz?side:S.z);
+   desired.x=clamp(desired.x,b.minX+safePad,b.maxX-safePad);
+   desired.z=clamp(desired.z,b.minZ+safePad,b.maxZ-safePad);
+  }
   // Do not raycast against mixed viewer decoration and trim here: those
   // meshes were forcing camera placement into an extreme close-up.
   // The legal room bounding volume above controls camera wall containment.
@@ -245,8 +286,8 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  document.addEventListener('keyup',e=>{const m=keymap[e.code];if(m)S.moving.delete(m);});window.addEventListener('blur',()=>S.moving.clear());
  canvas.addEventListener('pointerdown',e=>{if(!S.active)return;S.mouse=true;S.px=e.clientX;S.py=e.clientY;});canvas.addEventListener('pointermove',e=>{if(!S.active||!S.mouse)return;S.lookYaw=clamp(S.lookYaw-(e.clientX-S.px)*.004,-1.15,1.15);S.lookUntil=performance.now()+950;S.pitch=clamp(S.pitch-(e.clientY-S.py)*.004,-topPitch,topPitch);S.px=e.clientX;S.py=e.clientY;});for(const event of ['pointerup','pointercancel','pointerleave'])canvas.addEventListener(event,()=>S.mouse=false);
  for(const btn of panel.querySelectorAll('[data-walk]')){const m=btn.dataset.walk;btn.addEventListener('pointerdown',e=>{e.preventDefault();btn.setPointerCapture(e.pointerId);S.moving.add(m)});for(const evt of ['pointerup','pointercancel','lostpointercapture'])btn.addEventListener(evt,()=>S.moving.delete(m));}
- q('bh-walk-toggle').onclick=()=>S.active?exit():enter();q('bh-walk-exit').onclick=exit;q('bh-walk-camera').onclick=changeCamera;
+ q('bh-walk-toggle').onclick=()=>S.active?exit():enter();q('bh-walk-exit').onclick=exit;q('bh-walk-camera').onclick=changeCamera;q('bh-director-mode').onclick=changeDirector;q('bh-camera-plan').onclick=saveCameraPlan;
  q('bh-walk-next').onclick=()=>{const ids=S.room?getConnections(S.room.id)||[]:[];if(!ids.length){status('No linked room in navigation graph');return;}exit();selectRoom(ids[0]);enter();status('QA connection jump (not physical door travel)');};
  function onRoomChanged(){if(!S.active)return;S.room=getRoom();placeAtCenter(S.room);sync();follow(.05,true);}
- return {enter,exit,update,onRoomChanged,get active(){return S.active},get position(){return [S.x,bnd(S.room)?.y??0,S.z]},get currentRoomId(){return S.room?.id||null},get doorStates(){return [...doorMeshes].map(([id,d])=>({shared:id,open:d.open}))}};
+ return {enter,exit,update,onRoomChanged,get active(){return S.active},get position(){return [S.x,bnd(S.room)?.y??0,S.z]},get currentRoomId(){return S.room?.id||null},get doorStates(){return [...doorMeshes].map(([id,d])=>({shared:id,open:d.open}))},get cameraPlan(){return cameraPlan()},get directorMode(){return S.directorMode}};
 }
