@@ -177,26 +177,16 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   // Project the camera backwards along a line from the explorer. Shrink that
   // distance where the line meets a wall, instead of clamping X and Z
   // independently (which shifted the camera sideways and lost the player).
-  const safePad=.19;
+  const safePad=.34;
   const back=new THREE.Vector3(-face.x,0,-face.z);
   let allowed=distance;
   for(const [p,d,lo,hi] of [[S.x,back.x,b.minX+safePad,b.maxX-safePad],[S.z,back.z,b.minZ+safePad,b.maxZ-safePad]]){
    if(Math.abs(d)>1e-5)allowed=Math.min(allowed,Math.max(0,((d>0?hi:lo)-p)/d));
   }
   let desired=new THREE.Vector3(S.x+back.x*Math.max(0,allowed-.035),height,S.z+back.z*Math.max(0,allowed-.035));
-  // A shoulder-offset helps keep the character visible down narrow corridors.
-  // Stop short of any opaque geometry between avatar and chase camera.
-  const direction=desired.clone().sub(aim);
-  const rayLength=direction.length();
-  if(rayLength>.3){
-   const ray=new THREE.Raycaster(aim,direction.clone().normalize(),.15,rayLength);
-   const models=(scene?.children||[]).filter(o=>o!==avatar&&o!==doorGroup&&o.visible&&o.type==='Group'&&!String(o.name||'').startsWith('forge_'));
-   const hits=ray.intersectObjects(models,true).filter(h=>h.object?.isMesh&&h.object.visible&&h.object.material?.transparent!==true);
-   if(hits.length){
-    const near=Math.max(.40,hits[0].distance-.25);
-    desired=aim.clone().addScaledVector(direction.normalize(),near);
-   }
-  }
+  // Do not raycast against mixed viewer decoration and trim here: those
+  // meshes were forcing camera placement into an extreme close-up.
+  // The legal room bounding volume above controls camera wall containment.
   const outsideRoom=(camera.position.x<b.minX+safePad-.015||camera.position.x>b.maxX-safePad+.015||camera.position.z<b.minZ+safePad-.015||camera.position.z>b.maxZ-safePad+.015);
   // Snap on a real room transition: never lerp *through* the connecting wall.
   if(instant||outsideRoom)camera.position.copy(desired);
