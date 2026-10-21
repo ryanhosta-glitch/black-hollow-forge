@@ -1,0 +1,51 @@
+import {AVAILABLE_HOUSE_PHOTOS} from './unique_house_photo_pool.js';
+import {FURNITURE_CATALOG} from './victorian_furniture_library.js';
+import {floorElevationsFeet} from './forge_readiness_audit.mjs';
+const FT=.3048;
+export const AVAILABLE_PORTRAITS=Object.freeze(AVAILABLE_HOUSE_PHOTOS.map(photo=>photo.id));
+const overlap=(a,b,p=0)=>a.minX<b.maxX+p&&a.maxX>b.minX-p&&a.minZ<b.maxZ+p&&a.maxZ>b.minZ-p;
+const rect=(x,z,w,d)=>({minX:x-w/2,maxX:x+w/2,minZ:z-d/2,maxZ:z+d/2});
+function kind(r){const s=[r.roomType,r.type,r.name].filter(Boolean).join(' ').toLowerCase();if(/stair|corridor|elevator|crypt/.test(s))return 'circulation';if(/bedchamber/.test(s))return 'bedroom';if(/conservatory|observatory|laboratory/.test(s))return 'study';return ['library','study','bedroom','parlor','gallery','dining','ballroom','nursery'].find(k=>s.includes(k))||(/hall|foyer|entry/.test(s)?'gallery':'parlor');}
+function portal(r,o,y){const x=+r.x*FT,z=+r.y*FT,w=+r.l*FT,d=+r.w*FT,p=Math.max(0,Math.min(1,Number(o.pos??.5)));return [o.wall==='left'?x:o.wall==='right'?x+w:x+w*p,y,o.wall==='top'?z:o.wall==='bottom'?z+d:z+d*p];}
+/** Pure deterministic preparation. Generated items never modify authored source. */
+export function planDecoration(source){
+ const furniture=[],artwork=[],lights=[],reserved=[],colliders=[],issues=[],changes=[],levels=floorElevationsFeet(source.floors),rooms=[];let artIndex=0;
+ for(const [floor,f] of source.floors.entries())for(const r of f.rooms){
+  const x=+r.x*FT,z=+r.y*FT,w=+r.l*FT,d=+r.w*FT,h=+r.h*FT,y=levels[floor]*FT,id=String(r.id),center=[x+w/2,y,z+d/2],roomBounds=rect(center[0],center[2],w,d),blocked=[];
+  rooms.push({id,floor,bounds:roomBounds,y});
+  // Protect conservative rectangles containing every portal-to-room-center segment, plus leaf sweeps.
+  for(const o of r.openings||[]){if(o.type==='window')continue;const p=portal(r,o,y),margin=Math.max(.48,(o.clearWidthMeters||1.08)/2+.16),a={minX:Math.min(p[0],center[0])-.48,maxX:Math.max(p[0],center[0])+.48,minZ:Math.min(p[2],center[2])-.48,maxZ:Math.max(p[2],center[2])+.48};blocked.push(a);reserved.push({roomId:id,floor,kind:'portal-route',openingId:o.id||null,bounds:a});const leaf=rect(p[0],p[2],margin*4,margin*4);blocked.push(leaf);reserved.push({roomId:id,floor,kind:o.forgeElevator?'elevator-approach':'door-sweep',openingId:o.id||null,bounds:leaf});}
+  const central=rect(center[0],center[2],.96,.96);blocked.push(central);reserved.push({roomId:id,floor,kind:'arrival',bounds:central});
+  const place=(type,px,pz,authored=null,index=0)=>{
+   const spec=FURNITURE_CATALOG[type];if(!spec){issues.push({severity:'ADVISORY',code:'UNSUPPORTED_AUTHORED_FURNITURE',roomId:id,object:structuredClone(authored)});return false;}
+   const b=rect(px,pz,spec.footprint[0]+.18,spec.footprint[1]+.18),fits=b.minX>x+.12&&b.maxX<x+w-.12&&b.minZ>z+.12&&b.maxZ<z+d-.12&&spec.height<h-.15,clear=!blocked.some(a=>overlap(a,b));
+   const oid=String(authored?.id||`forge:${id}:furniture:${index}`);
+   if(!fits||!clear){if(authored)issues.push({severity:'BLOCK_GAME_READY',code:'AUTHORED_FURNITURE_CLEARANCE',objectId:oid,roomId:id,authored:structuredClone(authored)});if(!authored)return false;}
+   const obj={id:oid,roomId:id,floor,type,model:`geometry/furniture/${type}.glb`,positionMeters:[px,y,pz],rotationY:0,authored:!!authored,source:authored?structuredClone(authored):null};
+   furniture.push(obj);blocked.push(b);colliders.push({objectId:oid,roomId:id,floor,bounds:b,minY:y,maxY:y+spec.height});changes.push({code:authored?'COMPILE_AUTHORED_FURNITURE':'ADD_ROOM_FURNITURE',objectId:oid,roomId:id});return true;
+  };
+  const aliases={desk:'writing_desk',chair:'armchair',sofa:'settee',table:'dining_table',bookshelf:'bookcase',cabinet:'wardrobe'};
+  (r.furniture||[]).forEach((obj,i)=>{const t=String(obj.type||obj.kind||'');if(Number(obj.rotation||obj.rotationY||0)!==0){issues.push({severity:'BLOCK_GAME_READY',code:'AUTHORED_ROTATION_REQUIRES_REVIEW',roomId:id,authored:structuredClone(obj)});return;}place(aliases[t]||t,x+w*Number(obj.x??obj.posX??.5),z+d*Number(obj.y??obj.z??obj.posY??.5),obj,`authored-${i}`);});
+  const types=Object.keys(FURNITURE_CATALOG).filter(t=>FURNITURE_CATALOG[t].rooms.includes(kind(r)));
+  if(!(r.furniture||[]).length){let count=0;for(const t of types){let placed=false;const [fw,fd]=FURNITURE_CATALOG[t].footprint;for(const px of [x+fw/2+.24,x+w-fw/2-.24])for(const pz of [z+fd/2+.24,z+d-fd/2-.24]){if(count>=3||placed)continue;if(place(t,px,pz,null,count)){count++;placed=true;}}if(count>=3)break;}}
+  // Never place generated pictures over windows, doors, or removed partitions.
+  const wall=['top','bottom','left','right'].find(side=>!(r.openings||[]).some(o=>o.wall===side));
+  if(wall&&h>=2.35&&Math.min(w,d)>=1.35&&artIndex<AVAILABLE_PORTRAITS.length){const pic=AVAILABLE_PORTRAITS[artIndex++],p=portal(r,{wall,pos:.5},y+1.6),normal=wall==='top'?[0,0,1]:wall==='bottom'?[0,0,-1]:wall==='left'?[1,0,0]:[-1,0,0];p[0]+=normal[0]*.10;p[2]+=normal[2]*.10;artwork.push({id:`forge:${id}:portrait`,roomId:id,floor,artworkId:pic,asset:`assets/portraits/${pic}.webp`,positionMeters:p,normal,sizeMeters:[.58,.87],interaction:{action:'inspect',anchorMeters:[p[0]+normal[0]*.75,y,p[2]+normal[2]*.75],gameplayBinding:null}});}
+  for(const field of ['decor','artwork','photos'])if(r[field]?.length)issues.push({severity:'BLOCK_GAME_READY',code:'AUTHORED_DECOR_REQUIRES_BINDING',roomId:id,field,records:structuredClone(r[field])});
+  lights.push({id:`forge:${id}:ceiling-light`,roomId:id,floor,positionMeters:[center[0],y+h-.22,center[2]],color:'#ffd6a0',intensity:1.2,rangeMeters:Math.max(w,d),static:true,castShadow:false,gameEffects:[]});
+ }
+ const bounds={minX:Math.min(...rooms.map(r=>r.bounds.minX)),maxX:Math.max(...rooms.map(r=>r.bounds.maxX)),minZ:Math.min(...rooms.map(r=>r.bounds.minZ)),maxZ:Math.max(...rooms.map(r=>r.bounds.maxZ))},groundFloor=Math.max(0,source.floors.findIndex(f=>/main|ground/i.test(String(f.kind||'')+' '+String(f.name||'')))),groundY=levels[groundFloor]*FT,grounds=[],paths=[];
+ // Reserve a complete perimeter promenade and straight escape corridors from every exterior ground portal.
+ for(const [fi,f]of source.floors.entries())if(levels[fi]*FT===groundY)for(const r of f.rooms)for(const o of r.openings||[])if(o.type!=='window'&&!o.shared){const p=portal(r,o,groundY),vertical=o.wall==='left'||o.wall==='right',end=vertical?[o.wall==='left'?bounds.minX-9:bounds.maxX+9,groundY,p[2]]:[p[0],groundY,o.wall==='top'?bounds.minZ-9:bounds.maxZ+9];paths.push({id:`path:${r.id}:${o.id||o.wall}`,fromMeters:p,toMeters:end,widthMeters:1.8});}
+ const treeStyles=['lightning-split','crooked-willow','skeletal-oak'],graveStyles=['arched','cross','obelisk','shouldered'];
+ let i=0,attempts=0;outer:for(let x=bounds.minX-8;x<=bounds.maxX+8;x+=2.6)for(let z=bounds.minZ-8;z<=bounds.maxZ+8;z+=2.8){if(++attempts>20000){issues.push({severity:'ADVISORY',code:'GROUNDS_DENSITY_CAPPED'});break outer;}if(x>bounds.minX-3&&x<bounds.maxX+3&&z>bounds.minZ-3&&z<bounds.maxZ+3)continue;if(grounds.length>=160)break outer;const tree=i%5===0,size=tree?1.6:.9,b=rect(x,z,size,size);if(paths.some(p=>overlap(b,{minX:Math.min(p.fromMeters[0],p.toMeters[0])-.9,maxX:Math.max(p.fromMeters[0],p.toMeters[0])+.9,minZ:Math.min(p.fromMeters[2],p.toMeters[2])-.9,maxZ:Math.max(p.fromMeters[2],p.toMeters[2])+.9})))continue;const obj={id:`forge:grounds:${i}`,type:tree?'tree':'headstone',style:tree?treeStyles[i%3]:graveStyles[i%4],positionMeters:[x,groundY,z],rotationY:(i%7-.5)*.13};grounds.push(obj);colliders.push({objectId:obj.id,roomId:null,floor:null,bounds:b,minY:groundY,maxY:groundY+(tree?4.5:1.2)});i++;}
+ return {version:1,units:'meters',geometrySpace:'world',furniture,artwork,lights,grounds,paths,reserved,colliders,bounds,groundY,groundFloor,issues,changes,readiness:{placementChecked:true,physicsCertified:false,browserVerified:false,gameplayCertified:false},authoredSourcePreserved:true};
+}
+/** Box parts reuse the compiler's grouped material palette. Furniture uses the existing detailed catalog models. */
+export function decorationBoxes(plan){const out=[],box=(c,s,mat,rot=0,rotAxis='z')=>out.push({c,s,mat,rot,rotAxis});
+ if(plan.grounds.length){const b=plan.bounds,outer={minX:b.minX-10,maxX:b.maxX+10,minZ:b.minZ-10,maxZ:b.maxZ+10};for(const r of [{minX:outer.minX,maxX:outer.maxX,minZ:outer.minZ,maxZ:b.minZ-.25},{minX:outer.minX,maxX:outer.maxX,minZ:b.maxZ+.25,maxZ:outer.maxZ},{minX:outer.minX,maxX:b.minX-.25,minZ:b.minZ-.25,maxZ:b.maxZ+.25},{minX:b.maxX+.25,maxX:outer.maxX,minZ:b.minZ-.25,maxZ:b.maxZ+.25}])box([(r.minX+r.maxX)/2,plan.groundY-.12,(r.minZ+r.maxZ)/2],[r.maxX-r.minX,.12,r.maxZ-r.minZ],7);}
+ for(const p of plan.paths){const a=p.fromMeters,b=p.toMeters;box([(a[0]+b[0])/2,plan.groundY-.035,(a[2]+b[2])/2],[Math.max(p.widthMeters,Math.abs(a[0]-b[0])),.06,Math.max(p.widthMeters,Math.abs(a[2]-b[2]))],7);}
+ for(const o of plan.grounds){const [x,y,z]=o.positionMeters;if(o.type==='tree'){box([x,y+1.7,z],[.32,3.4,.32],5,.13);for(let k=0;k<7;k++){const side=k%2?-1:1;box([x+side*(.4+k*.065),y+2.1+k*.27,z+(k%3-.8)*.21],[.13,1.65,.13],5,side*(.65+(k%3)*.2));if(o.style==='crooked-willow')box([x+side*.9,y+1.8+k*.2,z],[.055,1.5,.055],5,side*.13);}}else{box([x,y+.09,z],[.85,.18,.63],7);box([x,y+.55,z],[.59,.90,.22],7);if(o.style==='cross'){box([x,y+1.23,z],[.16,.55,.18],7);box([x,y+1.32,z],[.62,.14,.18],7);}else if(o.style==='obelisk'){box([x,y+1.05,z],[.35,.55,.26],7);box([x,y+1.39,z],[.23,.20,.21],7,.25);}else if(o.style==='arched'){for(let k=0;k<3;k++)box([x,y+1+k*.07,z],[.53-k*.13,.10,.22],7);}else box([x,y+1.04,z],[.77,.17,.27],7);for(let k=0;k<3;k++)box([x,y+.77-k*.15,z+.115],[.34-k*.05,.018,.012],5);}}
+ for(const l of plan.lights){const [x,y,z]=l.positionMeters;box([x,y+.08,z],[.12,.22,.12],8);box([x,y-.07,z],[.38,.12,.38],8);box([x,y-.15,z],[.22,.10,.22],3);}
+ for(const a of plan.artwork){const [x,y,z]=a.positionMeters,[w,h]=a.sizeMeters,side=Math.abs(a.normal[0])>0;for(const sign of [-1,1]){box([x+(side?0:sign*(w/2+.025)),y,z+(side?sign*(w/2+.025):0)],[side?.065:.055,h+.13,side?.055:.065],8);box([x,y+sign*(h/2+.025),z],[side?.065:w+.13,.055,side?w+.13:.065],8);}}
+ return out;}

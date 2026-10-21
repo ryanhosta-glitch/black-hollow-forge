@@ -127,6 +127,10 @@ export const HOUSE_PHOTO_LIBRARY = Object.freeze([
   }
 ]);
 
+// Only these files are shipped. Keep the planned catalog above without selecting missing color assets.
+export const AVAILABLE_HOUSE_PHOTOS=Object.freeze(HOUSE_PHOTO_LIBRARY.filter(photo=>photo.file.endsWith('_bw.webp')));
+
+
 function makeSeededRng(seed = 1) {
   let state = (seed >>> 0) || 1;
   return () => {
@@ -150,7 +154,7 @@ function scorePhoto(photo, { roomType = '', preferredTags = [], requireStyle = '
  * A photo ID cannot repeat within that house instance.
  */
 export function createUniqueHousePhotoAllocator({
-  photos = HOUSE_PHOTO_LIBRARY,
+  photos = AVAILABLE_HOUSE_PHOTOS,
   seed = 1,
   basePath = 'assets/portraits/'
 } = {}) {
