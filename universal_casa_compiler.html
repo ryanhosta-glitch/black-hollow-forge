@@ -82,7 +82,7 @@ function nav5(rooms){
   const b=r.bounds,originX=b.x*FT,originZ=b.y*FT;
   const isStair=/stair/i.test((r.type||'')+' '+(r.roomType||'')+' '+r.name);
   if(isStair){const match=rooms.find(t=>t.floor===r.floor+1&&/stair/i.test((t.type||'')+' '+(t.roomType||'')+' '+t.name)&&Math.abs(t.bounds.x-b.x)<.1&&Math.abs(t.bounds.y-b.y)<.1&&Math.abs(t.bounds.l-b.l)<.1&&Math.abs(t.bounds.w-b.w)<.1);
-   stairs.push({roomId:r.id,floor:r.floor,upperRoomId:match?.id||null,shaft:{x:originX,z:originZ,width:b.l*FT,depth:b.w*FT,rise:b.h*FT},layout:/spiral/i.test(r.name)?'spiral':/switchback|stair/i.test(r.name)?'switchback':'unspecified',walkableCertified:false,ceilingOpeningRequired:!!match});
+   stairs.push({roomId:r.id,floor:r.floor,upperRoomId:match?.id||null,shaft:{x:originX,z:originZ,width:b.l*FT,depth:b.w*FT,rise:14*FT},layout:/spiral/i.test(r.name)?'spiral':/switchback|stair/i.test(r.name)?'switchback':'unspecified',walkableCertified:false,ceilingOpeningRequired:!!match});
   }
   for(const side of ['left','right','top','bottom']){
    const span=(side==='left'||side==='right'?b.w:b.l)*FT,axis=side==='left'||side==='right'?'z':'x';
@@ -170,6 +170,67 @@ function envelopeAudit(n){
  }
  return {version:1,certified:false,roomsInspected:rooms.length,exteriorEnvelope:{walls:exterior,exposedSideCount:exterior.length,roofCertification:'NOT_CERTIFIED'},issues,repairs,limitations:['Free-form stair foot placement not certified','Door leaf geometry/camera clearance requires browser validation','Furniture collision and structural GLB classification remain pending']};
 }
+function repairForPlay(source){
+ const bp=JSON.parse(JSON.stringify(source)),changes=[],unresolved=[],pairs=new Map();
+ const rooms=bp.floors.flatMap((f,fi)=>f.rooms.map(r=>({r,fi})));
+ for(const {r} of rooms)for(const o of r.openings||[])if(o.type==='door'&&o.shared){if(!pairs.has(o.shared))pairs.set(o.shared,[]);pairs.get(o.shared).push({r,o});}
+ for(const [shared,ends] of pairs){
+  if(ends.length!==2){unresolved.push({code:'DOOR_PAIR_COUNT',shared});continue;}
+  const [a,b]=ends,axis=a.o.wall==='left'||a.o.wall==='right'?'y':'x',len=e=>Number((e.o.wall==='left'||e.o.wall==='right')?e.r.w:e.r.l);
+  const width=1.08/.3048,margin=.25/.3048;
+  const low=Math.max(...ends.map(e=>Number(e.r[axis])+width/2+margin));
+  const high=Math.min(...ends.map(e=>Number(e.r[axis])+len(e)-width/2-margin));
+  if(low>high){unresolved.push({code:'DOOR_NO_SHARED_JAMB_CLEARANCE',shared});continue;}
+  const mid=Number(a.r[axis])+len(a)*Number(a.o.pos??.5),fixed=Math.min(high,Math.max(low,mid));
+  for(const e of ends){const pos=(fixed-Number(e.r[axis]))/len(e),previous=Number(e.o.pos??.5);
+   if(Math.abs(pos-previous)>1e-6){e.o.pos=pos;changes.push({code:'ALIGN_PAIRED_DOOR',shared,roomId:e.r.id,from:previous,to:pos});}
+  }
+ }
+ return {blueprint:bp,changes,unresolved,status:unresolved.length?'PARTIAL':changes.length?'AUTO_REPAIRED':'NO_REPAIR_NEEDED'};
+}
+function forgeStairTreads(floor,fi){
+ const boxes=[],add=(c,s)=>{if(s.every(n=>n>.02))boxes.push({c,s,mat:5});};
+ for(const r of floor.rooms)if(/stair/i.test([r.name,r.type,r.roomType].join(' '))){
+  const x=+r.x,z=+r.y,w=+r.l,d=+r.w,h=14,base=fi*14; // compiled upper-floor origin is 14ft higher
+  if(/spiral/i.test(r.name)){const radius=Math.min(w,d)*.29;
+   for(let i=0;i<32;i++){const t=i/32,a=1.5*Math.PI+2.5*Math.PI*t;add([x+w/2+radius*Math.cos(a),base+t*h-.12,z+d/2+radius*Math.sin(a)],[Math.max(.65,w*.22),.24,Math.max(.28,d*.09)]);}
+  }else{for(let i=0;i<20;i++){const t=i/20,first=t<.5,v=first?t*2:(t-.5)*2;add([x+w*(first?.30:.72),base+h*t-.12,z+d*(first?.15+.7*v:.85-.7*v)],[Math.max(.55,w*.32),.24,Math.max(.3,d*.085)]);}
+   add([x+w*.5,base+h*.5-.12,z+d*.85],[w*.65,.24,d*.16]);}
+ }
+ return boxes;
+}
+function forgeReachability(rooms,doors,stairs,entry){
+ const graph=new Map(rooms.map(r=>[r.id,new Set()]));
+ const link=(a,b)=>{if(graph.has(a)&&graph.has(b)){graph.get(a).add(b);graph.get(b).add(a);}};
+ for(const d of doors)link(d.roomA,d.roomB);
+ for(const s of stairs)if(s.upperRoomId)link(s.roomId,s.upperRoomId);
+ const visited=new Set(),pending=[entry.roomId];
+ while(pending.length){const id=pending.shift();if(visited.has(id)||!graph.has(id))continue;visited.add(id);for(const dest of graph.get(id))if(!visited.has(dest))pending.push(dest);}
+ return {method:'portal-and-stair-link-graph',certified:false,reachable:[...visited],unreachable:rooms.filter(r=>!visited.has(r.id)).map(r=>r.id)};
+}
+function forgePhysicalQA(n,nav,roofSource){
+ const issues=[],checks=[],FT=.3048;
+ // Simulated 90-degree door swing circle against the room's available depth
+ // and same-wall neighboring hinges; precise mesh sweep remains unverified.
+ for(const d of nav.doors){
+  const host=n.rooms.find(r=>r.id===d.roomA);
+  if(!host)continue;
+  const op=host.openings.find(o=>o.shared===d.sharedId);
+  if(!op)continue;
+  const b=host.bounds,width=d.widthMeters;
+  const depth=(op.wall==='left'||op.wall==='right'?b.l:b.w)*FT;
+  const safe=depth>=width+.27;
+  checks.push({type:'door-swing',sharedId:d.sharedId,clearDepthMeters:depth,leafReachMeters:width,pass:safe});
+  if(!safe)issues.push({severity:'BLOCK_GAME_READY',code:'DOOR_SWING_BLOCKED',shared:d.sharedId});
+ }
+ // Envelope uses generated perimeter walls and a reported roof design, not
+ // unverified claims of watertightness or exact roof-to-wall mesh intersection.
+ const floors=n.rooms.map(r=>r.floor),top=Math.max(...floors);
+ const roof=roofSource||null;
+ const audit={topFloor:top,roofAuthored:!!roof,roofGeometryGenerated:true,roofBuild:'continuous QA cap panels over top-floor rooms',meshWatertightCertified:false,exteriorWallSegments:nav.walls.length};
+ if(!roof)issues.push({severity:'ADVISORY',code:'ROOF_SOURCE_NOT_DECLARED',floor:top});
+ return {version:1,gameplayCertified:false,doorTests:checks,envelope:audit,issues,limitations:['Exact rendered GLB surface gap inspection pending','Door geometry sweep against furnishings pending','Automated physics player simulation pending']};
+}
 function geom(floor,fi,allFloors){let boxes=[];const box=(c,s,mat)=>{if(s.every(x=>x>.009))boxes.push({c,s,mat})};for(const r of floor.rooms){const x=+r.x,z=+r.y,l=+r.l,w=+r.w,h=+r.h,base=fi*14;// Keep an upper stair shaft OPEN when the lower floor connects to it.
 const stairRoom=/stair/i.test((r.type||'')+' '+(r.roomType||'')+' '+(r.name||''));
 const lower=fi>0&&stairRoom&&(allFloors?.[fi-1]?.rooms||[]).some(q=>/stair/i.test((q.type||'')+' '+(q.roomType||'')+' '+(q.name||''))&&Math.abs(+q.x-x)<.04&&Math.abs(+q.y-z)<.04&&Math.abs(+q.l-l)<.04&&Math.abs(+q.w-w)<.04);
@@ -177,5 +238,13 @@ if(!lower)box([x+l/2,base-.12,z+w/2],[l,.24,w],0);if(!/stair/i.test((r.type||'')
 async function sha(bytes){const hash=await crypto.subtle.digest('SHA-256',bytes);return Array.from(new Uint8Array(hash),b=>b.toString(16).padStart(2,'0')).join('');}
 function refresh(){const name=$('name').value.trim();$('build').disabled=!normalized||!name;}
 $('haunt').addEventListener('change',async()=>{blueprint=null;normalized=null;$('build').disabled=true;try{const file=$('haunt').files[0];if(!file)return;if(file.size>5e6)throw Error('Blueprint over 5 MB. Inspect it before compiling.');blueprint=JSON.parse((await file.text()).replace(/^\ufeff/,''));normalized=inspect(blueprint);$('name').value=blueprint.name||file.name.replace(/\.(haunt|json)$/i,'');$('id').value='house-'+(await sha(pack(blueprint))).slice(0,14);$('audit').textContent=`${normalized.rooms.length} rooms · ${normalized.floors.length} floors · ${normalized.stairs} authored stair references · ${normalized.issues.length} validation findings. QA ONLY. `+normalized.issues.map(x=>x.code).join(', ');$('audit').className='box warn';$('status').textContent='Blueprint validated. Enter house identity and compile.';refresh();}catch(e){$('audit').textContent=e.message;$('status').textContent='Blueprint rejected.';}});$('name').addEventListener('input',refresh);
-$('build').onclick=async()=>{const button=$('build');button.disabled=true;$('progress').hidden=false;try{const houseId=$('id').value.trim();if(!/^[a-zA-Z0-9][a-zA-Z0-9_-]{2,109}$/.test(houseId))throw Error('House ID must contain 3–110 letters, digits, hyphens or underscores.');let name=$('name').value.trim();if(!name)throw Error('Mansion name required.');const files=new Map(),add=(p,d)=>files.set(p,d instanceof Uint8Array?d:pack(d)),n=normalized;const identity={houseId,name,architect:$('creator').value.trim(),description:$('desc').value.trim(),slug:slug(name),street:{mailboxName:name,preview:'exterior/street_preview.glb'}};add('source.haunt',blueprint);add('casa_identity.json',identity);add('navigation/rooms.json',{rooms:n.rooms,entry:n.entry});const nav=nav5(n.rooms);n.issues.push(...nav.issues);const envelope=envelopeAudit(n);n.issues.push(...envelope.issues);add('qa/building_envelope.json',envelope);add('navigation/doorways.json',{version:1,units:'meters',doors:nav.doors,issues:nav.issues});const cam=buildCasaCameraPlan(n.rooms);n.issues.push(...cam.issues);add('camera/room_zones.json',cam.plan);add('camera/validation.json',{version:1,gameReady:false,roomCount:n.rooms.length,zoneCount:cam.plan.zones.length,issues:cam.issues,limitations:['No mesh-level camera collision certification','No dynamic stair or elevator camera anchors']});add('navigation/collision.json',nav);add('navigation/stairs.json',{version:1,units:'meters',physicsCertified:false,status:'QA-guided-shafts',stairs:nav.stairs});let prev=[];const floors=[];for(let fi=0;fi<n.floors.length;fi++){const boxes=geom(n.floors[fi],fi,n.floors).concat(victorianDetails(n.floors[fi],fi,n.floors)).map(part=>({...part,c:part.c.map(v=>v*CAMERA_FT),s:part.s.map(v=>v*CAMERA_FT)}));const path='geometry/floor_'+String(fi).padStart(2,'0')+'.glb';add(path,glb(boxes));floors.push({id:'floor_'+String(fi).padStart(2,'0'),name:n.floors[fi].name||'Floor '+(fi+1),model:path,roomIds:n.rooms.filter(r=>r.floor===fi).map(r=>r.id)});if(fi===0)prev=boxes;}add('exterior/street_preview.glb',glb(prev));add('manifest.json',{format:'black-hollow-house',version:'1.0-qa',id:houseId,name,entry:n.entry,floors,navigation:'navigation/rooms.json',collision:'navigation/collision.json',doorways:'navigation/doorways.json',buildingEnvelopeAudit:'qa/building_envelope.json',stairNavigation:'navigation/stairs.json',cameraPlan:'camera/room_zones.json',cameraValidation:'camera/validation.json',casa:{spec:'black-hollow-casa',specVersion:'1.0',creator:identity.architect,description:identity.description,streetPreview:'exterior/street_preview.glb',source:'source.haunt',gameplayCertified:false,geometryLevel:'qa-victorian-trim-furniture-roof',gameOwned:['missions','ghosts','Impossible Elevator','Floor 13','save games']}});const entries={};let z=0;for(const [k,v] of files){entries[k]={bytes:v.length,sha256:await sha(v)};$('progress').value=Math.round(++z/files.size*85);}add('casa_validation.json',{spec:'black-hollow-casa',version:'1.0',packagingStatus:'QA_PACKAGE',gameReady:false,architecturalRooms:n.rooms.length,floors:n.floors.length,issues:n.issues,entries});const blob=zipStore([...files]),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=identity.slug+'.casa';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);$('progress').value=100;$('status').textContent='Victorian QA export created: '+a.download+' ('+(blob.size/1024).toFixed(0)+' KiB). Not gameplay-certified.';}catch(e){$('status').textContent='Export failed: '+e.message;console.error(e)}finally{button.disabled=false;}};
+$('build').onclick=async()=>{const button=$('build');button.disabled=true;$('progress').hidden=false;try{const houseId=$('id').value.trim();if(!/^[a-zA-Z0-9][a-zA-Z0-9_-]{2,109}$/.test(houseId))throw Error('House ID must contain 3–110 letters, digits, hyphens or underscores.');let name=$('name').value.trim();if(!name)throw Error('Mansion name required.');const files=new Map(),add=(p,d)=>files.set(p,d instanceof Uint8Array?d:pack(d)),repair=repairForPlay(blueprint),n=inspect(repair.blueprint);const identity={houseId,name,architect:$('creator').value.trim(),description:$('desc').value.trim(),slug:slug(name),street:{mailboxName:name,preview:'exterior/street_preview.glb'}};add('source.haunt',blueprint);add('repaired.haunt',repair.blueprint);add('qa/repairs.json',{status:repair.status,changes:repair.changes,unresolved:repair.unresolved});add('casa_identity.json',identity);add('navigation/rooms.json',{rooms:n.rooms,entry:n.entry});const nav=nav5(n.rooms);n.issues.push(...nav.issues);const physical=forgePhysicalQA(n,nav,repair.blueprint.roof);add('qa/structural_checks.json',physical);n.issues.push(...physical.issues);const reach=forgeReachability(n.rooms,nav.doors,nav.stairs,n.entry);add('qa/reachability.json',reach);if(reach.unreachable.length)n.issues.push({severity:'BLOCK_GAME_READY',code:'UNREACHABLE_ROOMS',rooms:reach.unreachable});for(const issue of repair.unresolved)n.issues.push({severity:'BLOCK_GAME_READY',...issue});const envelope=envelopeAudit(n);n.issues.push(...envelope.issues);add('qa/building_envelope.json',envelope);add('navigation/doorways.json',{version:1,units:'meters',doors:nav.doors,issues:nav.issues});const cam=buildCasaCameraPlan(n.rooms);n.issues.push(...cam.issues);add('camera/room_zones.json',cam.plan);add('camera/validation.json',{version:1,gameReady:false,roomCount:n.rooms.length,zoneCount:cam.plan.zones.length,issues:cam.issues,limitations:['No mesh-level camera collision certification','No dynamic stair or elevator camera anchors']});add('navigation/collision.json',nav);add('navigation/stairs.json',{version:1,units:'meters',physicsCertified:false,status:'QA-guided-shafts',stairs:nav.stairs});let prev=[];const floors=[];for(let fi=0;fi<n.floors.length;fi++){const boxes=geom(n.floors[fi],fi,n.floors).concat(forgeStairTreads(n.floors[fi],fi),victorianDetails(n.floors[fi],fi,n.floors)).map(part=>({...part,c:part.c.map(v=>v*CAMERA_FT),s:part.s.map(v=>v*CAMERA_FT)}));const path='geometry/floor_'+String(fi).padStart(2,'0')+'.glb';add(path,glb(boxes));floors.push({id:'floor_'+String(fi).padStart(2,'0'),name:n.floors[fi].name||'Floor '+(fi+1),model:path,roomIds:n.rooms.filter(r=>r.floor===fi).map(r=>r.id)});if(fi===0)prev=boxes;}add('exterior/street_preview.glb',glb(prev));// Guaranteed top-floor weather cap in QA geometry; a fully styled mansard
+// remains an artistic geometry pass, not something we claim to certify here.
+const topIndex=n.floors.length-1;
+const roofBoxes=n.floors[topIndex].rooms.map(r=>({
+ c:[Number(r.x)+Number(r.l)/2,topIndex*14+14,Number(r.y)+Number(r.w)/2],
+ s:[Number(r.l)+.15,.32,Number(r.w)+.15],mat:4
+})).map(p=>({...p,c:p.c.map(v=>v*CAMERA_FT),s:p.s.map(v=>v*CAMERA_FT)}));
+add('geometry/roof.glb',glb(roofBoxes));
+add('manifest.json',{format:'black-hollow-house',version:'1.0-qa',id:houseId,name,entry:n.entry,floors,roof:'geometry/roof.glb',navigation:'navigation/rooms.json',collision:'navigation/collision.json',doorways:'navigation/doorways.json',buildingEnvelopeAudit:'qa/building_envelope.json',repairLog:'qa/repairs.json',structuralChecks:'qa/structural_checks.json',reachabilityAudit:'qa/reachability.json',repairedSource:'repaired.haunt',stairNavigation:'navigation/stairs.json',cameraPlan:'camera/room_zones.json',cameraValidation:'camera/validation.json',casa:{spec:'black-hollow-casa',specVersion:'1.0',creator:identity.architect,description:identity.description,streetPreview:'exterior/street_preview.glb',source:'source.haunt',gameplayCertified:false,geometryLevel:'qa-victorian-trim-furniture-roof',gameOwned:['missions','ghosts','Impossible Elevator','Floor 13','save games']}});const entries={};let z=0;for(const [k,v] of files){entries[k]={bytes:v.length,sha256:await sha(v)};$('progress').value=Math.round(++z/files.size*85);}add('casa_validation.json',{spec:'black-hollow-casa',version:'1.0',packagingStatus:'QA_PACKAGE',gameReady:false,architecturalRooms:n.rooms.length,floors:n.floors.length,issues:n.issues,entries});const blob=zipStore([...files]),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=identity.slug+'.casa';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);$('progress').value=100;$('status').textContent='Victorian QA export created: '+a.download+' ('+(blob.size/1024).toFixed(0)+' KiB). Not gameplay-certified.';}catch(e){$('status').textContent='Export failed: '+e.message;console.error(e)}finally{button.disabled=false;}};
 </script></body></html>
