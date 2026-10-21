@@ -45,7 +45,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   if(dz<0&&nz<=b.minZ+margin+.015)sides.push('top');
   if(dz>0&&nz>=b.maxZ-margin-.015)sides.push('bottom');
   if(!sides.length)return null;
-  const ids=getConnections(r.id)||[];
+  const ids=new Set([...(getConnections(r.id)||[]),...(window.__forgeWalkRooms||[]).filter(q=>q.id!==r.id&&q.floor===r.floor&&(q.openings||[]).some(v=>v.type==='door'&&v.shared&&(r.openings||[]).some(o=>o.shared===v.shared))).map(q=>q.id)]);
   const all=window.__forgeWalkRooms||[];
   for(const side of sides){
    for(const o of (r.openings||[])){
@@ -88,7 +88,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
    const passage=findPassage(nx,nz,vx,vz);
    if(passage){
     const leaf=doorMeshes.get(passage.portal.shared);
-    if(leaf&&leaf.open<.90)continue;
+    if(leaf&&leaf.open<.90){S.doorState.set(passage.portal.shared,{progress:1,closingAt:performance.now()+3000});continue;}
     // Remain inside the actual portal's narrow lane instead of jumping into
     // the next room. Use a small physical margin, not a .29m relocation.
     const axis=passage.portal.axis,lateral=axis==='x'?nz:nx;
@@ -129,7 +129,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
    for(const o of r.openings||[]){
     if(o.type!=='door'||!o.shared||seen.has(o.shared))continue;
     const other=rooms.find(c=>c.id!==r.id&&c.floor===r.floor&&(c.openings||[]).some(q=>q.type==='door'&&q.shared===o.shared));
-    if(!other||!(getConnections(r.id)||[]).includes(other.id))continue;
+    if(!other)continue; // Paired blueprint door is authoritative, not optional magic graph
     const p=doorPortal(r,o),b=bnd(r);if(!p||!b)continue;
     seen.add(o.shared);
     const span=Math.max(.65,Math.min(1.08,Number(o.width||o.widthFeet||3.54)*K));
@@ -226,7 +226,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   }
   avatar.visible=true;
   const plan=directorPlan(S.room),long=S.mode==='cinematic';
-  const distance=hallway?2.0:S.directorMode==='chase'?2.65:S.directorMode==='dollhouse'?plan.preferredDistanceMeters:long?2.85:2.15;
+  const distance=hallway?1.35:S.directorMode==='chase'?2.15:S.directorMode==='dollhouse'?Math.min(2.25,plan.preferredDistanceMeters):long?2.35:1.85;
   const desired=aim.clone().addScaledVector(back,distance);
   desired.y=Math.min(floor+(hallway?1.78:2.03)-dip*.58,ceiling-.42);
   // Gather actual visible architecture. Do not treat nonstructural atmosphere,
@@ -245,7 +245,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   if(distanceToCamera>.01){
    const hits=new THREE.Raycaster(aim,direction.clone().normalize(),.12,distanceToCamera).intersectObjects(occluders,false);
    const obstacle=hits.find(hit=>hit.distance>.13);
-   if(obstacle)desired.copy(aim).addScaledVector(direction.normalize(),Math.max(.33,obstacle.distance-.22));
+   if(obstacle)desired.copy(aim).addScaledVector(direction.normalize(),Math.max(.65,obstacle.distance-.25));
   }
   // Avoid abrupt camera relocation on room changes. If the OLD camera is now
   // behind a wall, immediately adopt the safe target instead of easing through it.
@@ -257,7 +257,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   const finalRay=camera.position.clone().sub(aim),finalLength=finalRay.length();
   if(finalLength>.2){
    const hit=new THREE.Raycaster(aim,finalRay.clone().normalize(),.12,finalLength).intersectObjects(occluders,false).find(h=>h.distance>.13);
-   if(hit)camera.position.copy(aim).addScaledVector(finalRay.normalize(),Math.max(.33,hit.distance-.22));
+   if(hit)camera.position.copy(aim).addScaledVector(finalRay.normalize(),Math.max(.65,hit.distance-.25));
   }
   camera.near=.045;camera.fov=hallway?72:long?69:64;camera.updateProjectionMatrix();
   camera.lookAt(aim.x,aim.y+S.pitch*.18,aim.z);
