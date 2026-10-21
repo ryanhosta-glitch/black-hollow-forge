@@ -208,108 +208,61 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   avatar.position.set(S.x,floor,S.z);avatar.rotation.y=S.facingYaw;
   const width=Math.min(b.maxX-b.minX,b.maxZ-b.minZ);
   const hallway=width<3.05;
-  const arrival=now<S.arrivalUntil;
-  const targetYaw=S.yaw+(hallway?0:S.lookYaw);
-  S.cameraYaw=angleTo(S.cameraYaw,targetYaw,instant?1:Math.min(1,dt*(hallway?4.8:2.7)));
+  // Navigation 2 camera: smooth, predictable chase direction even in corridors.
+  const targetYaw=S.yaw+S.lookYaw;
+  S.cameraYaw=angleTo(S.cameraYaw,targetYaw,instant?1:Math.min(1,dt*4));
   const face=new THREE.Vector3(-Math.sin(S.cameraYaw),0,-Math.cos(S.cameraYaw));
+  const back=face.clone().negate();
   const roomHeight=Math.max(2.15,(Number(S.room?.boundsFeet?.h)||9)*K);
   const ceiling=floor+roomHeight;
-  const headY=Math.min(floor+1.07,ceiling-.68);
+  const doorNear=[...doorMeshes.values()].some(d=>d.floor===S.room?.floor&&Math.hypot(S.x-d.centerX,S.z-d.centerZ)<1.3);
+  S.doorwayDip=(S.doorwayDip||0)+(Number(doorNear)-(S.doorwayDip||0))*Math.min(1,dt*(doorNear?5:2.3));
+  const dip=S.doorwayDip;
+  const aim=new THREE.Vector3(S.x,Math.min(floor+1.18-dip*.10,ceiling-.75),S.z);
   if(S.mode==='first'){
-   camera.position.set(clamp(S.x,b.minX+.09,b.maxX-.09),Math.min(floor+eye,ceiling-.38),clamp(S.z,b.minZ+.09,b.maxZ-.09));
+   camera.position.set(S.x,Math.min(floor+eye,ceiling-.38),S.z);
    camera.lookAt(S.x+face.x*5,camera.position.y+Math.tan(S.pitch)*5,S.z+face.z*5);
    avatar.visible=false;return;
   }
   avatar.visible=true;
-  const long=S.mode==='cinematic',reveal=now<S.revealUntil&&!hallway;
-  const plan=directorPlan(S.room);
-  const distance=hallway?1.8:S.directorMode==='chase'?2.65:S.directorMode==='dollhouse'?plan.preferredDistanceMeters:long?(reveal?3.35:2.85):2.15;
-  const height=Math.min(floor+(hallway?1.48:long?(reveal?2.1:1.93):1.8),ceiling-.46);
-  const aim=new THREE.Vector3(S.x,headY,S.z);
-  const pad=Math.min(.23,Math.max(.10,width*.075));
-  const back=new THREE.Vector3(-face.x,0,-face.z);
-  let permitted=distance;
-  for(const [p,d,lo,hi] of [[S.x,back.x,b.minX+pad,b.maxX-pad],[S.z,back.z,b.minZ+pad,b.maxZ-pad]]){
-   if(Math.abs(d)>1e-6)permitted=Math.min(permitted,Math.max(0,((d>0?hi:lo)-p)/d));
-  }
-  let desired=new THREE.Vector3(S.x+back.x*Math.max(0,permitted-.025),height,S.z+back.z*Math.max(0,permitted-.025));
-  // On arrival or when pressed against a wall, select a camera behind the
-  // explorer or toward the ROOM INTERIOR. Never orbit around to a side door.
-  if(arrival||permitted<.75){
-   const cx=(b.minX+b.maxX)*.5,cz=(b.minZ+b.maxZ)*.5;
-   const dx=cx-S.x,dz=cz-S.z,magnitude=Math.hypot(dx,dz);
-   if(magnitude>.01){
-    const interior=new THREE.Vector3(dx/magnitude,0,dz/magnitude);
-    // Reserve a clear view from inside the room when the wall blocks chase.
-    const fromBack=Math.max(0,permitted-.035);
-    const shift=Math.min(1.5,magnitude*.7);
-    if(shift>fromBack+.15){
-     desired.set(S.x+interior.x*shift,Math.min(floor+1.56,ceiling-.46),S.z+interior.z*shift);
-    }
-   }
-  }
-  if(!hallway&&!arrival&&S.directorMode==='dollhouse'){
-   const zz=plan.dollhouseSide==='z';
-   desired.set(zz?S.x:b.maxX-pad,height,zz?b.maxZ-pad:S.z);
-  }
-  // Always keep the camera inside its current room.
-  desired.x=clamp(desired.x,b.minX+pad,b.maxX-pad);
-  desired.z=clamp(desired.z,b.minZ+pad,b.maxZ-pad);
-  const roomChanged=S.cameraRoomId!==S.room.id;
-  S.cameraRoomId=S.room.id;
-  if(instant||roomChanged)camera.position.copy(desired);
-  else camera.position.lerp(desired,Math.min(1,dt*(hallway?6.2:3.6)));
-  camera.position.x=clamp(camera.position.x,b.minX+pad,b.maxX-pad);
-  camera.position.z=clamp(camera.position.z,b.minZ+pad,b.maxZ-pad);
-  camera.near=.045;camera.fov=hallway?74:long?69:64;camera.updateProjectionMatrix();
-  camera.lookAt(aim.x,aim.y+S.pitch*.18,aim.z);
-  camera.updateMatrixWorld(true);
-  // Hard visibility guard: doors and solid room geometry must not hide the explorer.
-  // Include hinged doors even when they are generated outside the model groups.
+  const plan=directorPlan(S.room),long=S.mode==='cinematic';
+  const distance=hallway?2.0:S.directorMode==='chase'?2.65:S.directorMode==='dollhouse'?plan.preferredDistanceMeters:long?2.85:2.15;
+  const desired=aim.clone().addScaledVector(back,distance);
+  desired.y=Math.min(floor+(hallway?1.78:2.03)-dip*.58,ceiling-.42);
+  // Gather actual visible architecture. Do not treat nonstructural atmosphere,
+  // decorations, invisible models, or the explorer as camera walls.
   const occluders=[];
   scene?.traverse(o=>{
-   if(!o.isMesh||!o.visible||!o.parent?.visible||o===avatar||o.userData?.cameraIgnore)return;
-   if(avatar.getObjectById(o.id))return;
+   if(!o.isMesh||!o.visible||!o.parent?.visible||o.userData?.cameraIgnore||avatar.getObjectById(o.id))return;
    const n=String(o.name||'').toLowerCase();
-   // Prefer structural surfaces; ignore tiny decorative items and translucent layers.
-   if(o.material?.transparent||/particle|mist|fog|smoke|flame|highlight|decay/i.test(n))return;
-   if(o.geometry?.boundingBox===null)o.geometry.computeBoundingBox();
-   const bb=o.geometry?.boundingBox;
-   const ext=bb?bb.getSize(new THREE.Vector3()):null;
+   if(/particle|mist|fog|smoke|flame|highlight|decay/i.test(n))return;
+   if(Array.isArray(o.material)?o.material.every(m=>m.transparent):o.material?.transparent)return;
+   if(!o.geometry?.boundingBox)o.geometry?.computeBoundingBox();
+   const ext=o.geometry?.boundingBox?.getSize(new THREE.Vector3());
    if((ext&&Math.max(ext.x,ext.y,ext.z)>.65)||o.parent===doorGroup||n.includes('door'))occluders.push(o);
   });
-  function blockedAt(position){
-   const target=aim.clone(),vector=target.sub(position),dist=vector.length();
-   if(dist<.17)return false;
-   const ray=new THREE.Raycaster(position,vector.normalize(),.04,dist-.12);
-   return ray.intersectObjects(occluders,false).some(hit=>hit.distance<dist-.12);
+  const direction=desired.clone().sub(aim),distanceToCamera=direction.length();
+  if(distanceToCamera>.01){
+   const hits=new THREE.Raycaster(aim,direction.clone().normalize(),.12,distanceToCamera).intersectObjects(occluders,false);
+   const obstacle=hits.find(hit=>hit.distance>.13);
+   if(obstacle)desired.copy(aim).addScaledVector(direction.normalize(),Math.max(.33,obstacle.distance-.22));
   }
-  const projected=aim.clone().project(camera);
-  let recovery=!Number.isFinite(projected.x)||Math.abs(projected.x)>.42||Math.abs(projected.y)>.7||blockedAt(camera.position);
-  if(recovery){
-   const center=new THREE.Vector3((b.minX+b.maxX)/2,0,(b.minZ+b.maxZ)/2);
-   const toCenter=new THREE.Vector3(center.x-S.x,0,center.z-S.z).normalize();
-   const samples=[back.clone(),toCenter,new THREE.Vector3(1,0,0),new THREE.Vector3(-1,0,0),new THREE.Vector3(0,0,1),new THREE.Vector3(0,0,-1)];
-   let best=null,bestScore=-Infinity;
-   for(const dir of samples){
-    for(const length of [1.7,1.1,.65,.32]){
-     const p=new THREE.Vector3(clamp(S.x+dir.x*length,b.minX+pad,b.maxX-pad),Math.min(floor+1.52,ceiling-.46),clamp(S.z+dir.z*length,b.minZ+pad,b.maxZ-pad));
-     if(blockedAt(p))continue;
-     const separation=Math.hypot(p.x-S.x,p.z-S.z);
-     const score=separation+.2*dir.dot(back)-.1*p.distanceTo(camera.position);
-     if(score>bestScore){bestScore=score;best=p;}
-    }
-   }
-   if(best)camera.position.lerp(best,Math.min(1,dt*12));
-   else{
-    // Extremely confined spaces: move almost into explorer's position rather
-    // than showing an opaque wall or door between camera and character.
-    camera.position.set(clamp(S.x,b.minX+pad,b.maxX-pad),Math.min(floor+1.44,ceiling-.46),clamp(S.z,b.minZ+pad,b.maxZ-pad));
-   }
+  // Avoid abrupt camera relocation on room changes. If the OLD camera is now
+  // behind a wall, immediately adopt the safe target instead of easing through it.
+  const currentRay=camera.position.clone().sub(aim),currentLength=currentRay.length();
+  const oldOccluded=currentLength>.2&&new THREE.Raycaster(aim,currentRay.normalize(),.13,currentLength).intersectObjects(occluders,false).some(h=>h.distance>.15&&h.distance<currentLength-.1);
+  if(instant||oldOccluded)camera.position.copy(desired);
+  else camera.position.lerp(desired,Math.min(1,dt*8));
+  // Second check: interpolation can cross geometry even if its target is clear.
+  const finalRay=camera.position.clone().sub(aim),finalLength=finalRay.length();
+  if(finalLength>.2){
+   const hit=new THREE.Raycaster(aim,finalRay.clone().normalize(),.12,finalLength).intersectObjects(occluders,false).find(h=>h.distance>.13);
+   if(hit)camera.position.copy(aim).addScaledVector(finalRay.normalize(),Math.max(.33,hit.distance-.22));
   }
-  // Aim again after fallback adjustment to preserve centered screen composition.
+  camera.near=.045;camera.fov=hallway?72:long?69:64;camera.updateProjectionMatrix();
   camera.lookAt(aim.x,aim.y+S.pitch*.18,aim.z);
  }
+
  let stride=0;
  function angleTo(current,target,amount){
   const delta=Math.atan2(Math.sin(target-current),Math.cos(target-current));
