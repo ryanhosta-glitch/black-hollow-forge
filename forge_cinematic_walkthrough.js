@@ -85,7 +85,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
     const landing=.29;
     S.room=p.room;
     // End this movement at the doorway. Holding W cannot traverse the opposite door.
-    S.requireFreshForward=true;S.speed=0;S.arrivalUntil=performance.now()+950;
+    S.requireFreshForward=true;S.speed=0;S.arrivalUntil=performance.now()+700;
     S.cameraYaw=S.yaw;
     if(p.side==='left'){S.x=p.box.maxX-landing;S.z=clamp(nz,p.box.minZ+margin,p.box.maxZ-margin)}
     else if(p.side==='right'){S.x=p.box.minX+landing;S.z=clamp(nz,p.box.minZ+margin,p.box.maxZ-margin)}
@@ -220,13 +220,30 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
    if(Math.abs(d)>1e-6)permitted=Math.min(permitted,Math.max(0,((d>0?hi:lo)-p)/d));
   }
   let desired=new THREE.Vector3(S.x+back.x*Math.max(0,permitted-.025),height,S.z+back.z*Math.max(0,permitted-.025));
-  // Show the explorer stepping INTO the new hall instead of staring back through
-  // the departure doorway. Arrival framing is temporary and hands back to chase.
-  if(arrival){
-   const forward=new THREE.Vector3(-Math.sin(S.yaw),0,-Math.cos(S.yaw));
-   desired.set(S.x+forward.x*1.15,Math.min(floor+1.68,ceiling-.45),S.z+forward.z*1.15);
+  // Door arrival: NEVER put the camera beyond the explorer, inside an opposite
+  // doorway, or directly against the destination wall.
+  // Choose a camera position with actual clearance inside the NEW room.
+  if(arrival||permitted<.85){
+   const choices=[
+    {dx:back.x,dz:back.z},
+    {dx:1,dz:0},{dx:-1,dz:0},{dx:0,dz:1},{dx:0,dz:-1}
+   ];
+   let best=null,bestScore=-Infinity;
+   for(const c of choices){
+    let max=2.15;
+    for(const [p,d,lo,hi] of [[S.x,c.dx,b.minX+pad,b.maxX-pad],[S.z,c.dz,b.minZ+pad,b.maxZ-pad]]){
+     if(Math.abs(d)>1e-6)max=Math.min(max,Math.max(0,((d>0?hi:lo)-p)/d));
+    }
+    // Avoid a camera almost inside the character; prefer a meaningful visible shot.
+    const len=Math.min(1.85,Math.max(0,max-.035));
+    const score=len+(.18*(c.dx*back.x+c.dz*back.z));
+    if(score>bestScore){bestScore=score;best={dx:c.dx,dz:c.dz,len};}
+   }
+   if(best&&best.len>.35){
+    desired.set(S.x+best.dx*best.len,Math.min(floor+1.63,ceiling-.46),S.z+best.dz*best.len);
+   }
   }
-  if(!hallway&&S.directorMode==='dollhouse'){
+  if(!hallway&&!arrival&&S.directorMode==='dollhouse'){
    const zz=plan.dollhouseSide==='z';
    desired.set(zz?S.x:b.maxX-pad,height,zz?b.maxZ-pad:S.z);
   }
@@ -254,7 +271,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   }
   if(recovery){
    const safeBack=new THREE.Vector3(-Math.sin(S.yaw),0,-Math.cos(S.yaw));
-   const shortDist=Math.min(.6,permitted*.75);
+   const shortDist=Math.min(.85,Math.max(.15,permitted*.75));
    const fallback=new THREE.Vector3(S.x-safeBack.x*shortDist,Math.min(floor+1.33,ceiling-.45),S.z-safeBack.z*shortDist);
    fallback.x=clamp(fallback.x,b.minX+pad,b.maxX-pad);
    fallback.z=clamp(fallback.z,b.minZ+pad,b.maxZ-pad);
