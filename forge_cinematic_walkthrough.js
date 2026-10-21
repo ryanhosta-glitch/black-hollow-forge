@@ -1,8 +1,9 @@
 // Black Hollow Forge 4.2 — cinematic explorer + verified automatic doorway crossing.
 // Preview navigation, not a certified physics engine. Closed/locked doors require game logic.
 export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,getRoom,levelY,selectRoom,getConnections,isReady}){
- const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',clock:performance.now(),hintUntil:0,revealUntil:0};
+ const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',clock:performance.now(),hintUntil:0,revealUntil:0,lastPortal:null,lastPortalAt:0,doorState:new Map()};
  const K=.3048,margin=.25,eye=1.68,radius=.23,topPitch=0.65;
+ const validPorts=new Map();
  const panel=document.createElement('section');panel.id='bh-walk-panel';panel.innerHTML=`<style>
  #bh-walk-panel{position:fixed;z-index:1200;bottom:12px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;width:min(94vw,820px);padding:8px;background:#10131ef0;color:#f6e8d7;border:1px solid #a08462;border-radius:12px;font:12px system-ui;box-sizing:border-box}#bh-walk-panel button{background:#342839;color:#fff;border:1px solid #997a62;padding:8px;border-radius:7px;cursor:pointer}#bh-walk-panel .walking{display:none}#bh-walk-panel.active .walking{display:inline-block}#bh-walk-panel small{width:100%;text-align:center;color:#d3bfa6}#bh-walk-panel .room{font-weight:bold}#bh-walk-panel .touch{touch-action:none}#bh-walk-panel #bh-walk-status{color:#e8cc9a}</style>
  <button id="bh-walk-toggle">Enter Cinematic Explorer</button><span class="room" id="bh-walk-room">Room inspection</span><button class="walking" id="bh-walk-camera">Camera: CINEMATIC</button><button class="walking" id="bh-walk-exit">Exit</button><button class="walking touch" data-walk="forward">▲</button><button class="walking touch" data-walk="turnleft">↶</button><button class="walking touch" data-walk="backward">▼</button><button class="walking touch" data-walk="turnright">↷</button><button class="walking" id="bh-walk-next">Next linked room (QA)</button><small id="bh-walk-status">W/S walk · A/D strafe · ←/→ turn · drag look · V changes camera · doors automatically cross when matched</small>`;
@@ -20,7 +21,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  function status(t){q('bh-walk-status').textContent=t;}
  function orient(){const dir=new THREE.Vector3(-Math.sin(S.yaw),0,-Math.cos(S.yaw));return dir;}
  function placeAtCenter(r){const b=bnd(r);if(!b)return;S.x=(b.minX+b.maxX)*.5;S.z=(b.minZ+b.maxZ)*.5;}
- function enter(){if(!isReady())return false;S.room=getRoom();const b=bnd(S.room);if(!b)return false;S.active=true;S.mode='cinematic';S.moving.clear();placeAtCenter(S.room);S.yaw=0;S.pitch=0;controls.enabled=false;S.clock=performance.now();if(scene&&avatar.parent!==scene)scene.add(avatar);sync();follow(.05,true);status('Cinematic explorer · W/S walk · arrows turn · approach a matched door to cross automatically');return true;}
+ function enter(){if(!isReady())return false;S.room=getRoom();const b=bnd(S.room);if(!b)return false;S.active=true;S.mode='cinematic';S.moving.clear();S.lastPortal=null;S.lastPortalAt=0;placeAtCenter(S.room);S.yaw=0;S.pitch=0;controls.enabled=false;S.clock=performance.now();if(scene&&avatar.parent!==scene)scene.add(avatar);sync();follow(.05,true);status('Cinematic explorer · W/S walk · arrows turn · approach a matched door to cross automatically');return true;}
  function exit(){S.active=false;S.moving.clear();S.mouse=false;avatar.visible=false;controls.enabled=true;camera.fov=62;camera.updateProjectionMatrix();sync();}
  function changeCamera(){S.mode=S.mode==='cinematic'?'explorer':S.mode==='explorer'?'first':'cinematic';sync();follow(.05,true)}
  // 4.3: Only a matched, same-floor architect-door is walkable. Magical elevator and stairs stay explicit.
@@ -51,6 +52,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
     const lateral=portal.axis==='x'?nz:nx;
     const center=portal.axis==='x'?portal.z:portal.x;
     if(Math.abs(lateral-center)>portal.half)continue;
+    if(S.lastPortal===o.shared&&performance.now()-S.lastPortalAt<550)continue;
     for(const id of ids){
      const other=all.find(a=>a.id===id);
      if(!other||other.floor!==r.floor)continue;
@@ -81,6 +83,8 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
     else if(p.side==='top'){S.z=p.box.maxZ-landing;S.x=clamp(nx,p.box.minX+margin,p.box.maxX-margin)}
     else {S.z=p.box.minZ+landing;S.x=clamp(nx,p.box.minX+margin,p.box.maxX-margin)}
     S.revealUntil=performance.now()+1300;
+    S.lastPortal=p.portal.shared;S.lastPortalAt=performance.now();
+    S.doorState.set(p.portal.shared,{progress:1,closingAt:performance.now()+1700});
     selectRoom(p.room.id);sync();
     status('Entered '+p.room.name+' · automatic architectural portal');
     continue;
@@ -89,6 +93,10 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
    S.z=clamp(nz,b.minZ+margin,b.maxZ-margin);
   }
  }
+ // Door states provide a single transition signal for game-owned panel animations.
+ // Forge's existing GLB meshes are not modified here; their authored panel geometry
+ // must be tagged or exported as independent hinged objects in the next geometry pass.
+ function tickDoors(now){for(const [id,d] of S.doorState){if(now>d.closingAt){d.progress=Math.max(0,d.progress-.1);if(d.progress===0)S.doorState.delete(id)}}}
  function follow(dt,instant=false){
   const b=bnd(S.room);if(!b)return;
   const floor=b.y;
@@ -133,7 +141,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   camera.lookAt(aim.x+face.x*.25,aim.y+S.pitch*.25,aim.z+face.z*.25);
  }
  let stride=0;
- function update(t){let dt=Math.min(.05,Math.max(0,(t-S.clock)/1000));S.clock=t;if(!S.active)return;let turn=(Number(S.moving.has('turnright'))-Number(S.moving.has('turnleft')));S.yaw+=turn*dt*1.8;
+ function update(t){let dt=Math.min(.05,Math.max(0,(t-S.clock)/1000));S.clock=t;if(!S.active)return;tickDoors(t);let turn=(Number(S.moving.has('turnright'))-Number(S.moving.has('turnleft')));S.yaw+=turn*dt*1.8;
  let f=Number(S.moving.has('forward'))-Number(S.moving.has('backward')),side=Number(S.moving.has('right'))-Number(S.moving.has('left'));const len=Math.hypot(f,side)||1;f/=len;side/=len;const dir=orient(),speed=S.moving.has('sprint')?5.4:3.1;const dx=(dir.x*f+(-dir.z)*side)*speed*dt,dz=(dir.z*f+dir.x*side)*speed*dt;step(dx,dz);
  const moving=Math.hypot(dx,dz)>.0001;stride+=dt*(moving?10:0);const a=moving?Math.sin(stride)*.45:0;legs[0].rotation.x=a;legs[1].rotation.x=-a;arms[0].rotation.x=-a*.75;arms[1].rotation.x=a*.75;torso.position.y=moving?Math.abs(Math.sin(stride))*.035:0;follow(dt);
  }
@@ -145,5 +153,5 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  q('bh-walk-toggle').onclick=()=>S.active?exit():enter();q('bh-walk-exit').onclick=exit;q('bh-walk-camera').onclick=changeCamera;
  q('bh-walk-next').onclick=()=>{const ids=S.room?getConnections(S.room.id)||[]:[];if(!ids.length){status('No linked room in navigation graph');return;}exit();selectRoom(ids[0]);enter();status('QA connection jump (not physical door travel)');};
  function onRoomChanged(){if(!S.active)return;S.room=getRoom();placeAtCenter(S.room);sync();follow(.05,true);}
- return {enter,exit,update,onRoomChanged,get active(){return S.active},get position(){return [S.x,bnd(S.room)?.y??0,S.z]}};
+ return {enter,exit,update,onRoomChanged,get active(){return S.active},get position(){return [S.x,bnd(S.room)?.y??0,S.z]},get currentRoomId(){return S.room?.id||null},get doorStates(){return [...S.doorState].map(([id,d])=>({shared:id,open:d.progress}))}};
 }
