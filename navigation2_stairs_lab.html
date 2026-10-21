@@ -28,7 +28,7 @@ const pathPoint=(points,t)=>{const u=Math.max(0,Math.min(points.length-1.000001,
 function reset(){P.vel=0;P.turn=0;lookYaw=0;
  if(stage==='rooms'){P.x=-4;P.z=0;P.y=0;P.yaw=-Math.PI/2;}else if(stage==='estate'){const r=rooms.find(r=>/grand entrance/i.test(r.name))||rooms[0];P.x=(r.minX+r.maxX)/2;P.z=(r.minZ+r.maxZ)/2;P.y=0;P.yaw=0;}
  else{progress=0;const v=pathPoint(stairPath,0);P.x=v.x;P.z=v.z;P.y=v.y;const d=pathPoint(stairPath,.05).sub(v);P.yaw=Math.atan2(-d.x,-d.z)}
- camYaw=P.yaw;camera.position.set(P.x+2,P.y+1.9,P.z+2)}
+ camYaw=P.yaw;camera.position.set(P.x+2,P.y+1.9,P.z+2);if(stairMetric){const b=stairMetric.bounds;camera.position.x=Math.max(b.minX,Math.min(b.maxX,P.x));camera.position.z=Math.max(b.minZ,Math.min(b.maxZ,P.z));camera.position.y=P.y+1.65;}}
 function buildRooms(){
  rooms=[{name:'West Room',minX:-8,maxX:-1,minZ:-5,maxZ:5},{name:'Corridor',minX:-1,maxX:1.5,minZ:-5,maxZ:5},{name:'East Room',minX:1.5,maxX:8,minZ:-5,maxZ:5}];
  for(const r of rooms)box((r.minX+r.maxX)/2,-.15,(r.minZ+r.maxZ)/2,r.maxX-r.minX,.3,r.maxZ-r.minZ,floorMat,false);
@@ -105,7 +105,7 @@ function buildEstateStair(kind){
   for(let k=0;k<3;k++)for(let i=0;i<36;i++)points.push(knots[k].clone().lerp(knots[k+1],i/36));
   points.push(knots[3]);
  }
- stairPath=points;stairMetric={kind:spiral?'spiral':'switchback',roomId:target.id,toRoomId:upper.id,rise};
+ stairPath=points;stairMetric={kind:spiral?'spiral':'switchback',roomId:target.id,toRoomId:upper.id,rise,bounds:{minX:x+.22,maxX:x+w-.22,minZ:z+.22,maxZ:z+d-.22}};
  box(x+w/2,-.16,z+d/2,w+.2,.25,d+.2,floorMat,false);
  // Leave the ENTIRE shaft open overhead; no intermediate floor slab.
  for(let i=0;i<4;i++){if(i<2)box(i?x+w:x,rise*.5,z+d/2,.12,rise,d,solid,false);else box(x+w/2,rise*.5,i===2?z:z+d,w,rise,.12,solid,false);}
@@ -190,11 +190,23 @@ function update(dt){
  const desired=target.clone().addScaledVector(back,3.0);desired.y+=.95;
  // True occlusion query: cast toward camera and retract before first opaque blocker.
  const rayVector=desired.clone().sub(target);const length=rayVector.length();
+ if(stairMetric){
+  const b=stairMetric.bounds;
+  desired.x=Math.max(b.minX,Math.min(b.maxX,desired.x));
+  desired.z=Math.max(b.minZ,Math.min(b.maxZ,desired.z));
+  desired.y=Math.max(P.y+1.28,Math.min(P.y+2.15,desired.y));
+  if(Math.hypot(desired.x-P.x,desired.z-P.z)<.45){
+   const dx=(b.minX+b.maxX)/2-P.x,dz=(b.minZ+b.maxZ)/2-P.z,d=Math.hypot(dx,dz);
+   if(d>.15){desired.x=P.x+dx/d*Math.min(1.05,d);desired.z=P.z+dz/d*Math.min(1.05,d);}
+  }
+ }
  if(stage==='rooms'||stage==='estate'){
   const hit=new THREE.Raycaster(target,rayVector.clone().normalize(),.15,length).intersectObjects(blockers,false)[0];
   if(hit)desired.copy(target).addScaledVector(rayVector.normalize(),Math.max(.55,hit.distance-.25));
  }
- camera.position.lerp(desired,Math.min(1,dt*8));camera.lookAt(target);
+ camera.position.lerp(desired,Math.min(1,dt*8));
+ if(stairMetric){const b=stairMetric.bounds;camera.position.x=Math.max(b.minX,Math.min(b.maxX,camera.position.x));camera.position.z=Math.max(b.minZ,Math.min(b.maxZ,camera.position.z));}
+ camera.lookAt(target);
  document.getElementById('readout').textContent='Space: '+current+' | X '+P.x.toFixed(2)+' | Z '+P.z.toFixed(2)+' | Height '+P.y.toFixed(2)+' m | W held: '+keys.has('KeyW');
  renderer.render(scene,camera);
 }
