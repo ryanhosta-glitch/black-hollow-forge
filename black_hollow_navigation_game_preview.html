@@ -11,6 +11,7 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js';
 import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js';
 import {loadForgeContract,gameReadiness} from './game_import/forge_house_adapter.mjs';
+import {makeNavigation2Core} from './navigation/navigation2_core.mjs';
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x12121c);
 scene.add(new THREE.HemisphereLight(0xe5e8ff,0x30283d,2.1));
 const sun=new THREE.DirectionalLight(0xffdda2,2.1);sun.position.set(5,13,8);scene.add(sun);
@@ -53,7 +54,7 @@ function buildEstate(){
  if(!estateData)return;
  const K=.3048,listed=estateData.rooms.filter(r=>r.floor===estateFloor);
  rooms=listed.map(r=>({id:r.id,name:r.name,minX:r.boundsFeet.x*K,maxX:(r.boundsFeet.x+r.boundsFeet.l)*K,minZ:r.boundsFeet.y*K,maxZ:(r.boundsFeet.y+r.boundsFeet.w)*K,openings:r.openings||[]}));
- const seen=new Set(),TH=.18,H=2.8,doorWidth=1.08; // game preview: clear walking aperture
+ const seen=new Set(),TH=.18,H=2.8,doorWidth=gameContract?.doorways?.doors?.[0]?.widthMeters||1.08; // Forge exported aperture when available
  for(const r of rooms){
   box((r.minX+r.maxX)/2,-.14,(r.minZ+r.maxZ)/2,r.maxX-r.minX,.25,r.maxZ-r.minZ,floorMat,false);
   for(const [side,length] of [['left',r.maxZ-r.minZ],['right',r.maxZ-r.minZ],['top',r.maxX-r.minX],['bottom',r.maxX-r.minX]]){
@@ -88,7 +89,8 @@ function buildEstate(){
     leaf.position.set(isX?0:half,1.24,isX?half:0);pivot.add(leaf);
     // Rotate INTO the originating room, so an open leaf parks against its wall.
     const sign=side==='left'?1:side==='right'?-1:side==='top'?-1:1;
-    doors.push({x,z,pivot,leaf,openness:0,side,sign,width:doorWidth,kind:'estate',hold:0});
+    const meta=gameContract?.doorways?.doors?.find(d=>d.sharedId===o.shared);
+    doors.push({x,z,pivot,leaf,openness:0,side,sign,width:doorWidth,kind:'estate',hold:0,openOnApproachMeters:meta?.openOnApproachMeters,openAngleRadians:meta?.openAngleRadians});
    }
   }
  }
@@ -190,30 +192,8 @@ function updateQuest(dt){
   keys.delete('KeyE');
  }
 }
-function blocked(x,z){
- const radius=.27;
- for(const m of blockers){
-  m.updateMatrixWorld(true);const bounds=new THREE.Box3().setFromObject(m);
-  if(bounds.max.y<.65||bounds.min.y>1.45)continue;
-  if(x>bounds.min.x-radius&&x<bounds.max.x+radius&&z>bounds.min.z-radius&&z<bounds.max.z+radius)return true;
- }
- // Estate door leaf uses the SAME transform as its visible animated panel.
- // Do not test the simplified original lab doors, preserving the proven control sample.
- if(stage==='estate'){
-  const p=new THREE.Vector2(x,z);
-  for(const door of doors){
-   if(door.kind!=='estate'||door.openness>.90)continue; // fully parked open leaf must not trap the explorer
-   door.pivot.updateMatrixWorld(true);
-   const start=door.pivot.localToWorld(new THREE.Vector3(0,1.1,0));
-   const end=door.pivot.localToWorld(new THREE.Vector3(door.side==='left'||door.side==='right'?0:door.width,1.1,door.side==='left'||door.side==='right'?door.width:0));
-   const u=new THREE.Vector2(start.x,start.z),v=new THREE.Vector2(end.x,end.z),d=v.clone().sub(u);
-   const t=Math.max(0,Math.min(1,p.clone().sub(u).dot(d)/Math.max(1e-8,d.lengthSq())));
-   if(p.distanceTo(u.addScaledVector(d,t))<radius+.045)return true;
-  }
- }
- return false;
-}
-function travel(dx,dz){const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.06));for(let i=0;i<steps;i++){const x=P.x+dx/steps,z=P.z+dz/steps;if(!blocked(x,P.z))P.x=x;if(!blocked(P.x,z))P.z=z}}
+const nav2=makeNavigation2Core({THREE,getBlockers:()=>blockers,getDoors:()=>doors,getStage:()=>stage,getPlayer:()=>P});
+const {blocked,travel}=nav2;
 function update(dt){
  const turn=Number(keys.has('KeyD')||keys.has('ArrowRight'))-Number(keys.has('KeyA')||keys.has('ArrowLeft'));
  P.turn+=(-turn*1.6-P.turn)*Math.min(1,dt*9);
@@ -224,15 +204,7 @@ function update(dt){
  if(stage==='rooms'||stage==='estate'){
   travel(-Math.sin(P.yaw)*P.vel*dt,-Math.cos(P.yaw)*P.vel*dt);
   current=rooms.find(r=>P.x>=r.minX&&P.x<=r.maxX&&P.z>=r.minZ&&P.z<=r.maxZ)?.name||'Door threshold';
-  for(const door of doors){
-   const nearPlayer=Math.hypot(P.x-door.x,P.z-door.z)<2.6;
-   const nearCamera=Math.hypot(camera.position.x-door.x,camera.position.z-door.z)<1.75;
-   if(nearPlayer||nearCamera)door.hold=2.6;
-   else door.hold=Math.max(0,(door.hold||0)-dt);
-   const open=nearPlayer||nearCamera||door.hold>0;
-   door.openness+=(Number(open)-door.openness)*Math.min(1,dt*6);
-   door.pivot.rotation.y=door.openness*(door.sign??1)*1.57;
-  }
+  nav2.updateDoors(dt,camera);
  }else{
   // Stair guided walk route is a separate lab: no room teleport; continuous 3D height.
   progress=Math.max(0,Math.min(stairPath.length-1.00001,progress+P.vel*dt/.38));
