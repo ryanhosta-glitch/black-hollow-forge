@@ -1,7 +1,7 @@
 // Black Hollow Forge 4.2 — cinematic explorer + verified automatic doorway crossing.
 // Reusable preview controller, not yet a certified game physics engine. Closed/locked doors require game logic.
 export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,getRoom,levelY,selectRoom,getConnections,isReady}){
- const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',directorMode:'hybrid',clock:performance.now(),hintUntil:0,revealUntil:0,facingYaw:0,cameraYaw:0,movementAnchor:null,speed:0,turnSpeed:0,lookYaw:0,lookUntil:0,cameraRoomId:null,lastPortal:null,lastPortalAt:0,doorState:new Map()};
+ const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',directorMode:'hybrid',clock:performance.now(),hintUntil:0,revealUntil:0,facingYaw:0,cameraYaw:0,movementAnchor:null,speed:0,turnSpeed:0,lookYaw:0,lookUntil:0,cameraRoomId:null,requireFreshForward:false,arrivalUntil:0,lastPortal:null,lastPortalAt:0,doorState:new Map()};
  const K=.3048,margin=.25,eye=1.68,radius=.23,topPitch=0.65;
  const heading=()=>new THREE.Vector3(-Math.sin(S.yaw),0,-Math.cos(S.yaw));
  const doorMeshes=new Map();
@@ -24,8 +24,8 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  function status(t){q('bh-walk-status').textContent=t;}
  function orient(){return heading();}
  function placeAtCenter(r){const b=bnd(r);if(!b)return;S.x=(b.minX+b.maxX)*.5;S.z=(b.minZ+b.maxZ)*.5;}
- function enter(){if(!isReady())return false;buildDoors();S.room=getRoom();const b=bnd(S.room);if(!b)return false;S.active=true;S.mode='cinematic';S.moving.clear();S.lastPortal=null;S.lastPortalAt=0;S.doorState.clear();placeAtCenter(S.room);S.yaw=0;S.facingYaw=0;S.cameraYaw=0;S.movementAnchor=null;S.pitch=0;S.speed=0;S.turnSpeed=0;S.lookYaw=0;S.lookUntil=0;S.cameraRoomId=null;controls.enabled=false;S.clock=performance.now();if(scene&&avatar.parent!==scene)scene.add(avatar);sync();follow(.05,true);status('W/↑ forward · S/↓ back · A/← turn left · D/→ turn right · camera behind explorer');return true;}
- function exit(){S.active=false;for(const d of doorMeshes.values()){d.pivot.visible=false;d.open=0;d.pivot.rotation.y=0;}S.moving.clear();S.movementAnchor=null;S.speed=0;S.turnSpeed=0;S.mouse=false;avatar.visible=false;controls.enabled=true;camera.fov=62;camera.updateProjectionMatrix();sync();}
+ function enter(){if(!isReady())return false;buildDoors();S.room=getRoom();const b=bnd(S.room);if(!b)return false;S.active=true;S.mode='cinematic';S.moving.clear();S.lastPortal=null;S.lastPortalAt=0;S.doorState.clear();placeAtCenter(S.room);S.yaw=0;S.facingYaw=0;S.cameraYaw=0;S.movementAnchor=null;S.pitch=0;S.speed=0;S.turnSpeed=0;S.lookYaw=0;S.lookUntil=0;S.cameraRoomId=null;S.requireFreshForward=false;S.arrivalUntil=0;controls.enabled=false;S.clock=performance.now();if(scene&&avatar.parent!==scene)scene.add(avatar);sync();follow(.05,true);status('W/↑ forward · S/↓ back · A/← turn left · D/→ turn right · camera behind explorer');return true;}
+ function exit(){S.active=false;for(const d of doorMeshes.values()){d.pivot.visible=false;d.open=0;d.pivot.rotation.y=0;}S.moving.clear();S.movementAnchor=null;S.speed=0;S.turnSpeed=0;S.requireFreshForward=false;S.mouse=false;avatar.visible=false;controls.enabled=true;camera.fov=62;camera.updateProjectionMatrix();sync();}
  function changeCamera(){S.mode=S.mode==='cinematic'?'explorer':S.mode==='explorer'?'first':'cinematic';sync();follow(.05,true)}
  // 4.3: Only a matched, same-floor architect-door is walkable. Magical elevator and stairs stay explicit.
  function doorPortal(r,o){const b=bnd(r);if(!b||!o||o.type!=='door'||!o.shared)return null;const pos=clamp(Number(o.pos??.5),0,1),w=clamp(Number(o.width||o.widthFeet||3)*K, .65, 2.1);let x,z,axis,dir;
@@ -84,6 +84,9 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
     // clearance offset is used; there is no arbitrary jump to a distant room.
     const landing=.29;
     S.room=p.room;
+    // End this movement at the doorway. Holding W cannot traverse the opposite door.
+    S.requireFreshForward=true;S.speed=0;S.arrivalUntil=performance.now()+950;
+    S.cameraYaw=S.yaw;
     if(p.side==='left'){S.x=p.box.maxX-landing;S.z=clamp(nz,p.box.minZ+margin,p.box.maxZ-margin)}
     else if(p.side==='right'){S.x=p.box.minX+landing;S.z=clamp(nz,p.box.minZ+margin,p.box.maxZ-margin)}
     else if(p.side==='top'){S.z=p.box.maxZ-landing;S.x=clamp(nx,p.box.minX+margin,p.box.maxX-margin)}
@@ -93,8 +96,8 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
     S.lastPortal=p.portal.shared;S.lastPortalAt=performance.now();
     S.doorState.set(p.portal.shared,{progress:1,closingAt:performance.now()+1700});
     selectRoom(p.room.id);sync();
-    status('Entered '+p.room.name+' · automatic architectural portal');
-    continue;
+    status('Entered '+p.room.name+' · release W, then press W to continue');
+    return;
    }
    S.x=clamp(nx,b.minX+margin,b.maxX-margin);
    S.z=clamp(nz,b.minZ+margin,b.maxZ-margin);
@@ -192,6 +195,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   avatar.position.set(S.x,floor,S.z);avatar.rotation.y=S.facingYaw;
   const width=Math.min(b.maxX-b.minX,b.maxZ-b.minZ);
   const hallway=width<3.05;
+  const arrival=now<S.arrivalUntil;
   const targetYaw=S.yaw+(hallway?0:S.lookYaw);
   S.cameraYaw=angleTo(S.cameraYaw,targetYaw,instant?1:Math.min(1,dt*(hallway?4.8:2.7)));
   const face=new THREE.Vector3(-Math.sin(S.cameraYaw),0,-Math.cos(S.cameraYaw));
@@ -216,6 +220,12 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
    if(Math.abs(d)>1e-6)permitted=Math.min(permitted,Math.max(0,((d>0?hi:lo)-p)/d));
   }
   let desired=new THREE.Vector3(S.x+back.x*Math.max(0,permitted-.025),height,S.z+back.z*Math.max(0,permitted-.025));
+  // Show the explorer stepping INTO the new hall instead of staring back through
+  // the departure doorway. Arrival framing is temporary and hands back to chase.
+  if(arrival){
+   const forward=new THREE.Vector3(-Math.sin(S.yaw),0,-Math.cos(S.yaw));
+   desired.set(S.x+forward.x*1.15,Math.min(floor+1.68,ceiling-.45),S.z+forward.z*1.15);
+  }
   if(!hallway&&S.directorMode==='dollhouse'){
    const zz=plan.dollhouseSide==='z';
    desired.set(zz?S.x:b.maxX-pad,height,zz?b.maxZ-pad:S.z);
@@ -272,7 +282,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   S.turnSpeed+=(turnTarget-S.turnSpeed)*Math.min(1,dt*(turn?7:10));
   S.yaw+=S.turnSpeed*dt;
   S.facingYaw=S.yaw;
-  const f=Number(S.moving.has('forward'))-Number(S.moving.has('backward'));
+  const f=Number(S.moving.has('forward')&&!S.requireFreshForward)-Number(S.moving.has('backward'));
   const targetSpeed=f*(S.moving.has('sprint')?4.6:2.55);
   S.speed+=(targetSpeed-S.speed)*Math.min(1,dt*(f?7:11));
   if(Math.abs(S.speed)>.015){
@@ -293,7 +303,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  }
  const keymap={KeyW:'forward',ArrowUp:'forward',KeyS:'backward',ArrowDown:'backward',KeyA:'turnleft',KeyD:'turnright',ArrowLeft:'turnleft',ArrowRight:'turnright',ShiftLeft:'sprint',ShiftRight:'sprint'};
  document.addEventListener('keydown',e=>{if(!S.active||e.target?.closest?.('input,textarea,select'))return;if(e.code==='KeyV'){changeCamera();e.preventDefault();return;}if(e.code==='Escape'){exit();return;}const m=keymap[e.code];if(m){S.moving.add(m);e.preventDefault();}});
- document.addEventListener('keyup',e=>{const m=keymap[e.code];if(m)S.moving.delete(m);});window.addEventListener('blur',()=>S.moving.clear());
+ document.addEventListener('keyup',e=>{const m=keymap[e.code];if(m){S.moving.delete(m);if(m==='forward')S.requireFreshForward=false;}});window.addEventListener('blur',()=>S.moving.clear());
  canvas.addEventListener('pointerdown',e=>{if(!S.active)return;S.mouse=true;S.px=e.clientX;S.py=e.clientY;});canvas.addEventListener('pointermove',e=>{if(!S.active||!S.mouse)return;S.lookYaw=clamp(S.lookYaw-(e.clientX-S.px)*.004,-1.15,1.15);S.lookUntil=performance.now()+950;S.pitch=clamp(S.pitch-(e.clientY-S.py)*.004,-topPitch,topPitch);S.px=e.clientX;S.py=e.clientY;});for(const event of ['pointerup','pointercancel','pointerleave'])canvas.addEventListener(event,()=>S.mouse=false);
  for(const btn of panel.querySelectorAll('[data-walk]')){const m=btn.dataset.walk;btn.addEventListener('pointerdown',e=>{e.preventDefault();btn.setPointerCapture(e.pointerId);S.moving.add(m)});for(const evt of ['pointerup','pointercancel','lostpointercapture'])btn.addEventListener(evt,()=>S.moving.delete(m));}
  q('bh-walk-toggle').onclick=()=>S.active?exit():enter();q('bh-walk-exit').onclick=exit;q('bh-walk-camera').onclick=changeCamera;q('bh-director-mode').onclick=changeDirector;q('bh-camera-plan').onclick=saveCameraPlan;
