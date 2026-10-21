@@ -89,6 +89,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
     else if(p.side==='top'){S.z=p.box.maxZ-landing;S.x=clamp(nx,p.box.minX+margin,p.box.maxX-margin)}
     else {S.z=p.box.minZ+landing;S.x=clamp(nx,p.box.minX+margin,p.box.maxX-margin)}
     S.revealUntil=performance.now()+1300;
+    // Room changes snap camera into the new legal volume only; follow rotation stays continuous.
     S.lastPortal=p.portal.shared;S.lastPortalAt=performance.now();
     S.doorState.set(p.portal.shared,{progress:1,closingAt:performance.now()+1700});
     selectRoom(p.room.id);sync();
@@ -155,7 +156,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   avatar.position.set(S.x,floor,S.z);
   avatar.rotation.y=S.facingYaw;
   // Camera bearing eases behind the body instead of snapping 90 degrees on A/D.
-  S.cameraYaw=S.yaw; // The camera stays behind the explorer while A/D moves him.
+  S.cameraYaw=angleTo(S.cameraYaw,S.yaw,instant?1:Math.min(1,dt*2.0)); // Gradual angular follow, never snap on A/D.
   const face=new THREE.Vector3(-Math.sin(S.cameraYaw),0,-Math.cos(S.cameraYaw));
   // Height comes from the authored room, never from a fixed "cinematic" offset.
   const authoredHeight=Math.max(2.15,(Number(S.room?.boundsFeet?.h)||9)*K);
@@ -170,36 +171,26 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   // Third-person camera looks AT the character, not over a nearby ceiling beam.
   // Keep it inside the actual ceiling, and use a short chase distance in hallways.
   const long=S.mode==='cinematic';
-  const reveal=performance.now()<S.revealUntil;const distance=long?(reveal?3.5:3.05):2.5;
+  const reveal=performance.now()<S.revealUntil;const distance=long?(reveal?3.4:2.9):2.4;
   const height=Math.min(floor+(long?(reveal?2.16:2.03):1.88),ceiling-.45);
   const aim=new THREE.Vector3(S.x,headY,S.z);
   // Project the camera backwards along a line from the explorer. Shrink that
   // distance where the line meets a wall, instead of clamping X and Z
   // independently (which shifted the camera sideways and lost the player).
-  const safePad=.19;
+  const safePad=.34;
   const back=new THREE.Vector3(-face.x,0,-face.z);
   let allowed=distance;
   for(const [p,d,lo,hi] of [[S.x,back.x,b.minX+safePad,b.maxX-safePad],[S.z,back.z,b.minZ+safePad,b.maxZ-safePad]]){
    if(Math.abs(d)>1e-5)allowed=Math.min(allowed,Math.max(0,((d>0?hi:lo)-p)/d));
   }
   let desired=new THREE.Vector3(S.x+back.x*Math.max(0,allowed-.035),height,S.z+back.z*Math.max(0,allowed-.035));
-  // A shoulder-offset helps keep the character visible down narrow corridors.
-  // Stop short of any opaque geometry between avatar and chase camera.
-  const direction=desired.clone().sub(aim);
-  const rayLength=direction.length();
-  if(rayLength>.3){
-   const ray=new THREE.Raycaster(aim,direction.clone().normalize(),.15,rayLength);
-   const models=(scene?.children||[]).filter(o=>o!==avatar&&o!==doorGroup&&o.visible&&o.type==='Group'&&!String(o.name||'').startsWith('forge_'));
-   const hits=ray.intersectObjects(models,true).filter(h=>h.object?.isMesh&&h.object.visible&&h.object.material?.transparent!==true);
-   if(hits.length){
-    const near=Math.max(.40,hits[0].distance-.25);
-    desired=aim.clone().addScaledVector(direction.normalize(),near);
-   }
-  }
-  const outsideRoom=(camera.position.x<b.minX+safePad||camera.position.x>b.maxX-safePad||camera.position.z<b.minZ+safePad||camera.position.z>b.maxZ-safePad);
+  // Do not raycast against mixed viewer decoration and trim here: those
+  // meshes were forcing camera placement into an extreme close-up.
+  // The legal room bounding volume above controls camera wall containment.
+  const outsideRoom=(camera.position.x<b.minX+safePad-.015||camera.position.x>b.maxX-safePad+.015||camera.position.z<b.minZ+safePad-.015||camera.position.z>b.maxZ-safePad+.015);
   // Snap on a real room transition: never lerp *through* the connecting wall.
-  if(instant||outsideRoom||camera.position.distanceTo(desired)>7)camera.position.copy(desired);
-  else camera.position.lerp(desired,Math.min(1,dt*4.2));
+  if(instant||outsideRoom)camera.position.copy(desired);
+  else camera.position.lerp(desired,Math.min(1,dt*3.0));
   camera.position.x=clamp(camera.position.x,b.minX+safePad,b.maxX-safePad);
   camera.position.z=clamp(camera.position.z,b.minZ+safePad,b.maxZ-safePad);
   camera.near=.07;
@@ -222,7 +213,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   tickDoors(t,dt);
   // Agreed adventure controls: A/D rotate the explorer, never strafe or orbit a free camera.
   const turn=Number(S.moving.has('turnright'))-Number(S.moving.has('turnleft'));
-  S.yaw-=turn*dt*1.8; // Forward = -Z; negative yaw turns toward +X (right).
+  S.yaw-=turn*dt*1.25; // Gentle continuous character rotation; negative yaw faces world-right.
   S.facingYaw=S.yaw;
   const f=Number(S.moving.has('forward'))-Number(S.moving.has('backward'));
   const len=Math.abs(f);
