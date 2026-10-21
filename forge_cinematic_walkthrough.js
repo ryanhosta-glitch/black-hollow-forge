@@ -3,7 +3,9 @@
 export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,getRoom,levelY,selectRoom,getConnections,isReady}){
  const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',clock:performance.now(),hintUntil:0,revealUntil:0,lastPortal:null,lastPortalAt:0,doorState:new Map()};
  const K=.3048,margin=.25,eye=1.68,radius=.23,topPitch=0.65;
- const validPorts=new Map();
+ const doorMeshes=new Map();
+ const doorGroup=new THREE.Group();doorGroup.name='forge_43_hinged_doors';
+ if(scene)scene.add(doorGroup);
  const panel=document.createElement('section');panel.id='bh-walk-panel';panel.innerHTML=`<style>
  #bh-walk-panel{position:fixed;z-index:1200;bottom:12px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;width:min(94vw,820px);padding:8px;background:#10131ef0;color:#f6e8d7;border:1px solid #a08462;border-radius:12px;font:12px system-ui;box-sizing:border-box}#bh-walk-panel button{background:#342839;color:#fff;border:1px solid #997a62;padding:8px;border-radius:7px;cursor:pointer}#bh-walk-panel .walking{display:none}#bh-walk-panel.active .walking{display:inline-block}#bh-walk-panel small{width:100%;text-align:center;color:#d3bfa6}#bh-walk-panel .room{font-weight:bold}#bh-walk-panel .touch{touch-action:none}#bh-walk-panel #bh-walk-status{color:#e8cc9a}</style>
  <button id="bh-walk-toggle">Enter Cinematic Explorer</button><span class="room" id="bh-walk-room">Room inspection</span><button class="walking" id="bh-walk-camera">Camera: CINEMATIC</button><button class="walking" id="bh-walk-exit">Exit</button><button class="walking touch" data-walk="forward">▲</button><button class="walking touch" data-walk="turnleft">↶</button><button class="walking touch" data-walk="backward">▼</button><button class="walking touch" data-walk="turnright">↷</button><button class="walking" id="bh-walk-next">Next linked room (QA)</button><small id="bh-walk-status">W/S walk · A/D strafe · ←/→ turn · drag look · V changes camera · doors automatically cross when matched</small>`;
@@ -21,8 +23,8 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  function status(t){q('bh-walk-status').textContent=t;}
  function orient(){const dir=new THREE.Vector3(-Math.sin(S.yaw),0,-Math.cos(S.yaw));return dir;}
  function placeAtCenter(r){const b=bnd(r);if(!b)return;S.x=(b.minX+b.maxX)*.5;S.z=(b.minZ+b.maxZ)*.5;}
- function enter(){if(!isReady())return false;S.room=getRoom();const b=bnd(S.room);if(!b)return false;S.active=true;S.mode='cinematic';S.moving.clear();S.lastPortal=null;S.lastPortalAt=0;placeAtCenter(S.room);S.yaw=0;S.pitch=0;controls.enabled=false;S.clock=performance.now();if(scene&&avatar.parent!==scene)scene.add(avatar);sync();follow(.05,true);status('Cinematic explorer · W/S walk · arrows turn · approach a matched door to cross automatically');return true;}
- function exit(){S.active=false;S.moving.clear();S.mouse=false;avatar.visible=false;controls.enabled=true;camera.fov=62;camera.updateProjectionMatrix();sync();}
+ function enter(){if(!isReady())return false;buildDoors();S.room=getRoom();const b=bnd(S.room);if(!b)return false;S.active=true;S.mode='cinematic';S.moving.clear();S.lastPortal=null;S.lastPortalAt=0;S.doorState.clear();placeAtCenter(S.room);S.yaw=0;S.pitch=0;controls.enabled=false;S.clock=performance.now();if(scene&&avatar.parent!==scene)scene.add(avatar);sync();follow(.05,true);status('Cinematic explorer · W/S walk · arrows turn · approach a matched door to cross automatically');return true;}
+ function exit(){S.active=false;for(const d of doorMeshes.values()){d.pivot.visible=false;d.open=0;d.pivot.rotation.y=0;}S.moving.clear();S.mouse=false;avatar.visible=false;controls.enabled=true;camera.fov=62;camera.updateProjectionMatrix();sync();}
  function changeCamera(){S.mode=S.mode==='cinematic'?'explorer':S.mode==='explorer'?'first':'cinematic';sync();follow(.05,true)}
  // 4.3: Only a matched, same-floor architect-door is walkable. Magical elevator and stairs stay explicit.
  function doorPortal(r,o){const b=bnd(r);if(!b||!o||o.type!=='door'||!o.shared)return null;const pos=clamp(Number(o.pos??.5),0,1),w=clamp(Number(o.width||o.widthFeet||3)*K, .65, 2.1);let x,z,axis,dir;
@@ -93,10 +95,56 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
    S.z=clamp(nz,b.minZ+margin,b.maxZ-margin);
   }
  }
- // Door states provide a single transition signal for game-owned panel animations.
- // Forge's existing GLB meshes are not modified here; their authored panel geometry
- // must be tagged or exported as independent hinged objects in the next geometry pass.
- function tickDoors(now){for(const [id,d] of S.doorState){if(now>d.closingAt){d.progress=Math.max(0,d.progress-.1);if(d.progress===0)S.doorState.delete(id)}}}
+ // Each shared architect-door becomes one hinged mesh, built in world space
+ // from the exact same bounds/opening ID used by player navigation.
+ function buildDoors(){
+  for(const item of doorMeshes.values()){
+   item.pivot.removeFromParent();
+   item.pivot.traverse(o=>{if(o.isMesh){o.geometry.dispose();o.material.dispose();}});
+  }
+  doorMeshes.clear();
+  const rooms=window.__forgeWalkRooms||[],seen=new Set();
+  for(const r of rooms){
+   for(const o of r.openings||[]){
+    if(o.type!=='door'||!o.shared||seen.has(o.shared))continue;
+    const other=rooms.find(c=>c.id!==r.id&&c.floor===r.floor&&(c.openings||[]).some(q=>q.type==='door'&&q.shared===o.shared));
+    if(!other||!(getConnections(r.id)||[]).includes(other.id))continue;
+    const p=doorPortal(r,o),b=bnd(r);if(!p||!b)continue;
+    seen.add(o.shared);
+    const span=Math.max(.65,Math.min(1.08,Number(o.width||o.widthFeet||3)*K));
+    const height=Math.min(2.18,Math.max(1.9,(Number(r.boundsFeet.h)||9)*K-.25));
+    const pivot=new THREE.Group();pivot.name='bh-door-'+o.shared;
+    const center=p.axis==='x'?p.z:p.x,edge=center-span/2;
+    // Axis x => wall is constant x, panel spans z.
+    if(p.axis==='x')pivot.position.set(p.x,b.y,edge);
+    else pivot.position.set(edge,b.y,p.z);
+    const panelMaterial=new THREE.MeshStandardMaterial({color:0x3b2118,roughness:.83,metalness:.04,side:THREE.DoubleSide});
+    const panel=new THREE.Mesh(new THREE.BoxGeometry(p.axis==='x'?.075:span,height,p.axis==='x'?span:.075),panelMaterial);
+    panel.position.set(p.axis==='x'?0:span/2,height/2,p.axis==='x'?span/2:0);
+    panel.castShadow=true;panel.receiveShadow=true;panel.name='bh-door-leaf-'+o.shared;pivot.add(panel);
+    const trimMaterial=new THREE.MeshStandardMaterial({color:0x87613a,metalness:.55,roughness:.48});
+    const knob=new THREE.Mesh(new THREE.SphereGeometry(.045,8,6),trimMaterial);
+    knob.position.set(p.axis==='x'?.065:span*.83,1.00,p.axis==='x'?span*.83:.065);
+    pivot.add(knob);doorGroup.add(pivot);
+    doorMeshes.set(o.shared,{pivot,centerX:p.x,centerZ:p.z,axis:p.axis,open:0,target:0,side:o.wall});
+   }
+  }
+ }
+ // Approach triggers automatic doors; crossing keeps them open long enough for
+ // the player/camera to clear the threshold. Only matched architect-doors exist here.
+ function tickDoors(now,dt){
+  for(const [id,d] of doorMeshes){
+   const distance=Math.hypot(S.x-d.centerX,S.z-d.centerZ);
+   const old=S.doorState.get(id);
+   const nearby=S.active&&distance<1.85;
+   if(nearby){S.doorState.set(id,{progress:1,closingAt:now+1800});}
+   else if(old&&now>old.closingAt){S.doorState.delete(id);}
+   d.target=S.doorState.has(id)?1:0;
+   d.open+=(d.target-d.open)*Math.min(1,dt*5.5);
+   d.pivot.rotation.y=d.open*(d.axis==='x'?1:-1)*1.40;
+   d.pivot.visible=S.active; 
+  }
+ }
  function follow(dt,instant=false){
   const b=bnd(S.room);if(!b)return;
   const floor=b.y;
@@ -128,10 +176,10 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   const rayLength=direction.length();
   if(rayLength>.3){
    const ray=new THREE.Raycaster(aim,direction.clone().normalize(),.15,rayLength);
-   const models=(scene?.children||[]).filter(o=>o!==avatar&&o.visible&&o.type==='Group'&&!String(o.name||'').startsWith('forge_'));
+   const models=(scene?.children||[]).filter(o=>o!==avatar&&o!==doorGroup&&o.visible&&o.type==='Group'&&!String(o.name||'').startsWith('forge_'));
    const hits=ray.intersectObjects(models,true).filter(h=>h.object?.isMesh&&h.object.visible&&h.object.material?.transparent!==true);
    if(hits.length){
-    const near=Math.max(.38,hits[0].distance-.22);
+    const near=Math.max(.48,hits[0].distance-.28);
     desired=aim.clone().addScaledVector(direction.normalize(),near);
    }
   }
@@ -141,7 +189,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   camera.lookAt(aim.x+face.x*.25,aim.y+S.pitch*.25,aim.z+face.z*.25);
  }
  let stride=0;
- function update(t){let dt=Math.min(.05,Math.max(0,(t-S.clock)/1000));S.clock=t;if(!S.active)return;tickDoors(t);let turn=(Number(S.moving.has('turnright'))-Number(S.moving.has('turnleft')));S.yaw+=turn*dt*1.8;
+ function update(t){let dt=Math.min(.05,Math.max(0,(t-S.clock)/1000));S.clock=t;if(!S.active)return;tickDoors(t,dt);let turn=(Number(S.moving.has('turnright'))-Number(S.moving.has('turnleft')));S.yaw+=turn*dt*1.8;
  let f=Number(S.moving.has('forward'))-Number(S.moving.has('backward')),side=Number(S.moving.has('right'))-Number(S.moving.has('left'));const len=Math.hypot(f,side)||1;f/=len;side/=len;const dir=orient(),speed=S.moving.has('sprint')?5.4:3.1;const dx=(dir.x*f+(-dir.z)*side)*speed*dt,dz=(dir.z*f+dir.x*side)*speed*dt;step(dx,dz);
  const moving=Math.hypot(dx,dz)>.0001;stride+=dt*(moving?10:0);const a=moving?Math.sin(stride)*.45:0;legs[0].rotation.x=a;legs[1].rotation.x=-a;arms[0].rotation.x=-a*.75;arms[1].rotation.x=a*.75;torso.position.y=moving?Math.abs(Math.sin(stride))*.035:0;follow(dt);
  }
@@ -153,5 +201,5 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  q('bh-walk-toggle').onclick=()=>S.active?exit():enter();q('bh-walk-exit').onclick=exit;q('bh-walk-camera').onclick=changeCamera;
  q('bh-walk-next').onclick=()=>{const ids=S.room?getConnections(S.room.id)||[]:[];if(!ids.length){status('No linked room in navigation graph');return;}exit();selectRoom(ids[0]);enter();status('QA connection jump (not physical door travel)');};
  function onRoomChanged(){if(!S.active)return;S.room=getRoom();placeAtCenter(S.room);sync();follow(.05,true);}
- return {enter,exit,update,onRoomChanged,get active(){return S.active},get position(){return [S.x,bnd(S.room)?.y??0,S.z]},get currentRoomId(){return S.room?.id||null},get doorStates(){return [...S.doorState].map(([id,d])=>({shared:id,open:d.progress}))}};
+ return {enter,exit,update,onRoomChanged,get active(){return S.active},get position(){return [S.x,bnd(S.room)?.y??0,S.z]},get currentRoomId(){return S.room?.id||null},get doorStates(){return [...doorMeshes].map(([id,d])=>({shared:id,open:d.open}))}};
 }
