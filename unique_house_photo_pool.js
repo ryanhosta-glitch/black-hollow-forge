@@ -124,7 +124,14 @@ export const HOUSE_PHOTO_LIBRARY = Object.freeze([
     style: 'victorian_bw',
     tags: ['laboratory', 'madman', 'electrified', 'experiment', 'victorian_bw'],
     rooms: ['laboratory', 'workshop', 'cellar', 'study']
-  }
+  },
+  {"id": "carnivorous_plant_collection_bw", "file": "carnivorous_plant_collection_bw.webp", "orientation": "portrait", "aspectRatio": 0.770898, "palette": "monochrome", "style": "victorian_bw", "tags": ["botanical", "carnivorous", "conservatory"], "rooms": ["conservatory", "study", "library", "gallery", "laboratory"]},
+  {"id": "pitcher_plant_botanical_bw", "file": "pitcher_plant_botanical_bw.webp", "orientation": "portrait", "aspectRatio": 0.552381, "palette": "monochrome", "style": "victorian_bw", "tags": ["botanical", "carnivorous", "conservatory"], "rooms": ["conservatory", "study", "library", "gallery", "laboratory"]},
+  {"id": "pitcher_plant_study_bw", "file": "pitcher_plant_study_bw.webp", "orientation": "portrait", "aspectRatio": 0.72, "palette": "monochrome", "style": "victorian_bw", "tags": ["botanical", "carnivorous", "conservatory"], "rooms": ["conservatory", "study", "library", "gallery", "laboratory"]},
+  {"id": "victorian_bird_gentleman_bw", "file": "victorian_bird_gentleman_bw.webp", "orientation": "portrait", "aspectRatio": 0.639752, "palette": "monochrome", "style": "victorian_bw", "tags": ["victorian", "bird", "fantastical"], "rooms": ["gallery", "hall", "study", "library", "parlor"]},
+  {"id": "victorian_witch_owl_bw", "file": "victorian_witch_owl_bw.webp", "orientation": "portrait", "aspectRatio": 0.746094, "palette": "monochrome", "style": "victorian_bw", "tags": ["witch", "occult", "owl"], "rooms": ["gallery", "hall", "study", "library", "parlor"]},
+  {"id": "victorian_woman_book_bw", "file": "victorian_woman_book_bw.webp", "orientation": "landscape", "aspectRatio": 1.0347, "palette": "monochrome", "style": "victorian_bw", "tags": ["victorian", "reading", "book"], "rooms": ["gallery", "hall", "study", "library", "parlor"]},
+  {"id": "windswept_witch_bw", "file": "windswept_witch_bw.webp", "orientation": "portrait", "aspectRatio": 0.734177, "palette": "monochrome", "style": "victorian_bw", "tags": ["witch", "occult", "owl"], "rooms": ["gallery", "hall", "study", "library", "parlor"]}
 ]);
 
 // Only these files are shipped. Keep the planned catalog above without selecting missing color assets.
