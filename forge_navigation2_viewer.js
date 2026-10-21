@@ -104,7 +104,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
      S.revealUntil=performance.now()+850;
      S.lastPortal=passage.portal.shared;S.lastPortalAt=performance.now();
      S.doorState.set(passage.portal.shared,{progress:1,closingAt:performance.now()+2600});
-     selectRoom(passage.room.id);sync();
+     selectRoom(passage.room.id);if(document.activeElement?.matches?.('select,button'))document.activeElement.blur();sync();
      status('Entered '+passage.room.name);
     }
     continue;
@@ -325,6 +325,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   // Agreed controls: W/S translate, A/D turn the character, never strafe.
   // Smooth acceleration prevents instantaneous pivots and foot sliding.
   const turn=Number(S.moving.has('turnright'))-Number(S.moving.has('turnleft'));
+  // Turning must remain available after the Forge room selector updates.
   const turnTarget=-turn*1.5;
   S.turnSpeed+=(turnTarget-S.turnSpeed)*Math.min(1,dt*(turn?7:10));
   S.yaw+=S.turnSpeed*dt;
@@ -349,7 +350,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   follow(dt);
  }
  const keymap={KeyW:'forward',ArrowUp:'forward',KeyS:'backward',ArrowDown:'backward',KeyA:'turnleft',KeyD:'turnright',ArrowLeft:'turnleft',ArrowRight:'turnright',ShiftLeft:'sprint',ShiftRight:'sprint'};
- document.addEventListener('keydown',e=>{if(!S.active||e.target?.closest?.('input,textarea,select'))return;if(e.code==='KeyV'){changeCamera();e.preventDefault();return;}if(e.code==='Escape'){exit();return;}const m=keymap[e.code];if(m){S.moving.add(m);e.preventDefault();}});
+ window.addEventListener('keydown',e=>{if(!S.active)return;const m=keymap[e.code];if(m){S.moving.add(m);e.preventDefault();e.stopPropagation();return;}if(e.code==='KeyV'){changeCamera();e.preventDefault();return;}if(e.code==='Escape'){exit();e.preventDefault();return;}},true);
  document.addEventListener('keyup',e=>{const m=keymap[e.code];if(m){S.moving.delete(m);if(m==='forward')S.requireFreshForward=false;}});window.addEventListener('blur',()=>S.moving.clear());
  canvas.addEventListener('pointerdown',e=>{if(!S.active)return;S.mouse=true;S.px=e.clientX;S.py=e.clientY;});canvas.addEventListener('pointermove',e=>{if(!S.active||!S.mouse)return;S.lookYaw=clamp(S.lookYaw-(e.clientX-S.px)*.004,-1.15,1.15);S.lookUntil=performance.now()+950;S.pitch=clamp(S.pitch-(e.clientY-S.py)*.004,-topPitch,topPitch);S.px=e.clientX;S.py=e.clientY;});for(const event of ['pointerup','pointercancel','pointerleave'])canvas.addEventListener(event,()=>S.mouse=false);
  for(const btn of panel.querySelectorAll('[data-walk]')){const m=btn.dataset.walk;btn.addEventListener('pointerdown',e=>{e.preventDefault();btn.setPointerCapture(e.pointerId);S.moving.add(m)});for(const evt of ['pointerup','pointercancel','lostpointercapture'])btn.addEventListener(evt,()=>S.moving.delete(m));}
