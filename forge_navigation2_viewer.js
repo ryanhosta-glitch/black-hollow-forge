@@ -29,12 +29,12 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
  function exit(){if(!S.active)return;S.active=false;for(const d of doorMeshes.values()){d.pivot.visible=false;d.open=0;d.pivot.rotation.y=0;}S.moving.clear();S.movementAnchor=null;S.speed=0;S.turnSpeed=0;S.requireFreshForward=false;S.mouse=false;avatar.visible=false;controls.enabled=true;camera.near=.1;camera.fov=62;camera.updateProjectionMatrix();controls.target.set(S.x,(bnd(S.room)?.y??0)+1.18,S.z);sync();}
  function changeCamera(){S.mode=S.mode==='cinematic'?'explorer':S.mode==='explorer'?'first':'cinematic';sync();follow(.05,true)}
  // 4.3: Only a matched, same-floor architect-door is walkable. Magical elevator and stairs stay explicit.
- function doorPortal(r,o){const b=bnd(r);if(!b||!o||o.type!=='door'||!o.shared)return null;const pos=clamp(Number(o.pos??.5),0,1),w=clamp(Number(o.width||o.widthFeet||3.54)*K, .65, 2.1);let x,z,axis,dir;
+ function doorPortal(r,o){const b=bnd(r);if(!b||!o||!['door','open','arch'].includes(o.type)||!o.shared)return null;const pos=clamp(Number(o.pos??.5),0,1),w=clamp(Number(o.clearWidthMeters??Number(o.width||o.widthFeet||3.54)*K), .44, 30);let x,z,axis,dir;
  if(o.wall==='left'){x=b.minX;z=b.minZ+(b.maxZ-b.minZ)*pos;axis='x';dir=-1}
  else if(o.wall==='right'){x=b.maxX;z=b.minZ+(b.maxZ-b.minZ)*pos;axis='x';dir=1}
  else if(o.wall==='top'){z=b.minZ;x=b.minX+(b.maxX-b.minX)*pos;axis='z';dir=-1}
  else if(o.wall==='bottom'){z=b.maxZ;x=b.minX+(b.maxX-b.minX)*pos;axis='z';dir=1}
- else return null;return {x,z,axis,dir,half:Math.max(.22,w*.5-radius),shared:o.shared};}
+ else return null;return {x,z,axis,dir,half:Math.max(.015,w*.5-radius-.01),shared:o.shared};}
  // Check the player capsule against the doorway BEFORE the usual room-edge clamp.
  // The prior algorithm clamped to an inset boundary and only looked for doors
  // after crossing the outer boundary, making a valid passage unreachable.
@@ -46,22 +46,22 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   if(dz<0&&nz<=b.minZ+margin+.015)sides.push('top');
   if(dz>0&&nz>=b.maxZ-margin-.015)sides.push('bottom');
   if(!sides.length)return null;
-  const ids=new Set([...(getConnections(r.id)||[]),...(window.__forgeWalkRooms||[]).filter(q=>q.id!==r.id&&q.floor===r.floor&&(q.openings||[]).some(v=>v.type==='door'&&v.shared&&(r.openings||[]).some(o=>o.shared===v.shared))).map(q=>q.id)]);
+  const ids=new Set([...(getConnections(r.id)||[]),...(window.__forgeWalkRooms||[]).filter(q=>q.id!==r.id&&q.floor===r.floor&&(q.openings||[]).some(v=>['door','open','arch'].includes(v.type)&&v.shared&&(r.openings||[]).some(o=>o.shared===v.shared))).map(q=>q.id)]);
   const all=window.__forgeWalkRooms||[];
   for(const side of sides){
    for(const o of (r.openings||[])){
-    if(o.wall!==side||o.type!=='door'||!o.shared)continue;
+    if(o.wall!==side||!['door','open','arch'].includes(o.type)||!o.shared)continue;
     const portal=doorPortal(r,o);
     if(!portal)continue;
     const lateral=portal.axis==='x'?nz:nx;
     const center=portal.axis==='x'?portal.z:portal.x;
-    if(Math.abs(lateral-center)>Math.max(.18,portal.half-.02))continue;
+    if(Math.abs(lateral-center)>Math.max(.005,portal.half-.01))continue;
     // Continuous traversal is controlled by wall crossing, not by a time lock.
     for(const id of ids){
      const other=all.find(a=>a.id===id);
      if(!other||other.floor!==r.floor)continue;
      const opposing={left:'right',right:'left',top:'bottom',bottom:'top'}[side];
-     const receiving=(other.openings||[]).find(d=>d.type==='door'&&d.shared===o.shared&&d.wall===opposing);
+     const receiving=(other.openings||[]).find(d=>['door','open','arch'].includes(d.type)&&d.shared===o.shared&&d.wall===opposing);
      const receivingPortal=doorPortal(other,receiving);
      if(!receivingPortal||Math.abs(lateral-(receivingPortal.axis==='x'?receivingPortal.z:receivingPortal.x))>receivingPortal.half)continue;
      const bb=bnd(other);if(!bb)continue;
@@ -161,7 +161,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
     if(!other)continue; // Paired blueprint door is authoritative, not optional magic graph
     const p=doorPortal(r,o),b=bnd(r);if(!p||!b)continue;
     seen.add(o.shared);
-    const span=Math.max(.65,Math.min(1.08,Number(o.width||o.widthFeet||3.54)*K));
+    const span=Math.max(.44,Math.min(1.08,Number(o.clearWidthMeters??Number(o.width||o.widthFeet||3.54)*K)));
     const height=Math.min(2.18,Math.max(1.9,(Number(r.boundsFeet.h)||9)*K-.25));
     const pivot=new THREE.Group();pivot.name='bh-door-'+o.shared;
     const center=p.axis==='x'?p.z:p.x,edge=center-span/2;
@@ -361,7 +361,8 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
  for(const btn of panel.querySelectorAll('[data-walk]')){const m=btn.dataset.walk;btn.addEventListener('pointerdown',e=>{e.preventDefault();btn.setPointerCapture(e.pointerId);S.moving.add(m)});for(const evt of ['pointerup','pointercancel','lostpointercapture'])btn.addEventListener(evt,()=>S.moving.delete(m));}
  q('bh-walk-toggle').onclick=()=>S.active?exit():enter();q('bh-walk-exit').onclick=exit;q('bh-walk-camera').onclick=changeCamera;q('bh-director-mode').onclick=changeDirector;q('bh-camera-plan').onclick=saveCameraPlan;
  q('bh-walk-next').onclick=()=>{const ids=S.room?getConnections(S.room.id)||[]:[];if(!ids.length){status('No linked room in navigation graph');return;}exit();selectRoom(ids[0]);enter();status('QA connection jump (not physical door travel)');};
+ function setCameraMode(mode){if(!['cinematic','explorer','first'].includes(mode))return false;S.mode=mode;sync();if(S.active)follow(.05,true);return true;}
  function setPosition(x,y,z,yaw=0){if(!S.active)return;S.x=x;S.z=z;S.groundY=y;S.yaw=yaw;S.facingYaw=yaw;S.cameraYaw=yaw;S.moving.clear();S.speed=0;follow(.05,true);}
  function onRoomChanged(){if(!S.active)return;S.room=getRoom();placeAtCenter(S.room);sync();follow(.05,true);}
- return {enter,exit,update,onRoomChanged,setPosition,get active(){return S.active},get position(){return [S.x,bnd(S.room)?.y??0,S.z]},get currentRoomId(){return S.room?.id||null},get doorStates(){return [...doorMeshes].map(([id,d])=>({shared:id,open:d.open}))},get cameraPlan(){return cameraPlan()},get directorMode(){return S.directorMode}};
+ return {enter,exit,update,onRoomChanged,setPosition,setCameraMode,get active(){return S.active},get position(){return [S.x,bnd(S.room)?.y??0,S.z]},get currentRoomId(){return S.room?.id||null},get doorStates(){return [...doorMeshes].map(([id,d])=>({shared:id,open:d.open}))},get cameraPlan(){return cameraPlan()},get directorMode(){return S.directorMode}};
 }

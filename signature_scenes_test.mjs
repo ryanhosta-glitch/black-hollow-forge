@@ -1,5 +1,6 @@
 // node signature_scenes_test.mjs /path/to/three.module.mjs /path/to/GLTFLoader.mjs
 import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';import {pathToFileURL} from 'node:url';import vm from 'node:vm';
+import {planHouseAccess} from './forge_access_plan.mjs';
 import {signatureSurface,signatureActions,signatureLinks,signatureBlocked} from './signature_navigation.mjs';import {auditHaunt,floorElevationsFeet} from './forge_readiness_audit.mjs';
 const source=JSON.parse(await readFile('houses/ferres-estate/source.haunt','utf8')),before=JSON.stringify(source);const audit=auditHaunt(source);assert.equal(JSON.stringify(source),before);assert.equal(audit.gameReady,false);assert.equal(audit.sourceRoomCount,26);
 assert.deepEqual(floorElevationsFeet([{rooms:[{h:8}]},{rooms:[{h:12}]},{rooms:[{h:9}]}]),[0,8,20]);
@@ -10,7 +11,7 @@ assert.equal(signatureActions('hall',[0,0,14]).boardElevator,false);assert.equal
 const report=JSON.parse(await readFile('houses/ferres-estate/navigation/signature_visual_report.json','utf8'));assert.ok(signatureBlocked('floor13',0,0,0,report.scenes.floor13.blockers));assert.ok(!signatureBlocked('floor13',3.5,0,0,report.scenes.floor13.blockers));
 // Evaluate the actual browser compiler functions with event bindings stubbed.
 const html=await readFile('universal_casa_compiler.html','utf8'),script=html.match(/<script type="module">([\s\S]*?)<\/script>/)[1].replace(/^import .*;$/gm,'');
-const nodes=new Map(),el=id=>{if(!nodes.has(id))nodes.set(id,{value:'',addEventListener(){},files:[]});return nodes.get(id);};const ctx={auditHaunt,floorElevationsFeet,signatureLinks,TextEncoder,Uint8Array,Uint32Array,Float32Array,DataView,Map,Set,structuredClone,document:{getElementById:el},console,crypto:globalThis.crypto};vm.createContext(ctx);vm.runInContext(script,ctx);
+const nodes=new Map(),el=id=>{if(!nodes.has(id))nodes.set(id,{value:'',addEventListener(){},files:[]});return nodes.get(id);};const ctx={planHouseAccess,auditHaunt,floorElevationsFeet,signatureLinks,TextEncoder,Uint8Array,Uint32Array,Float32Array,DataView,Map,Set,structuredClone,document:{getElementById:el},console,crypto:globalThis.crypto};vm.createContext(ctx);vm.runInContext(script,ctx);
 const sample={floors:[{rooms:[{id:'lower',x:0,y:0,l:20,w:20,h:8,openings:[{id:'entry',wall:'top',type:'door',pos:.5}]}]},{rooms:[{id:'upper',x:0,y:0,l:20,w:20,h:12,openings:[]}]}],gameEntry:{roomId:'lower',openingId:'entry'}};
 ctx.sample=sample;vm.runInContext('inspect(sample)',ctx);assert.equal(vm.runInContext('floorBase(1)',ctx),8);assert.ok(vm.runInContext('openingShape({type:"door",pos:.5},20,10).high*.3048',ctx)>2.4);assert.equal(vm.runInContext('openingShape({type:"door",pos:0},20,10).center',ctx),0);
 // Run the real browser export handler, capturing its ZIP rather than clicking UI.

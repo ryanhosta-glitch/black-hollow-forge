@@ -6,8 +6,8 @@ export function auditHaunt(source){
  for(const [floor,f] of (source.floors||[]).entries())for(const r of f.rooms||[]){
   if(!r.id||ids.has(r.id))issue('ROOM_ID_NOT_UNIQUE',{roomId:r.id});ids.add(r.id);
   if(!['x','y','l','w','h'].every(k=>Number.isFinite(Number(r[k])))||['l','w','h'].some(k=>Number(r[k])<=0))issue('INVALID_ROOM_BOUNDS',{roomId:r.id});
-  if(r.openPlanWith?.length)issue('OPEN_PLAN_PARTITION_REMOVAL_UNVERIFIED',{roomId:r.id,neighbors:r.openPlanWith});
-  if(r.embeddedStair)issue('EMBEDDED_STAIR_PHYSICS_UNVERIFIED',{roomId:r.id});
+  if(r.openPlanWith?.length&&!r.openPlanWith.every(id=>(r.openings||[]).some(o=>o.forgeRemovedPartition&&o.shared==='forge-open-'+[r.id,id].sort().join('-'))))issue('OPEN_PLAN_PARTITION_REMOVAL_UNVERIFIED',{roomId:r.id,neighbors:r.openPlanWith});
+  if(r.embeddedStair)issue(r.stairAccessFallback==='elevator'?'EMBEDDED_STAIR_BYPASSED':'EMBEDDED_STAIR_PHYSICS_UNVERIFIED',{roomId:r.id},r.stairAccessFallback==='elevator'?'ADVISORY':'BLOCK_GAME_READY');
   if(r.elevatorShaftId){if(!shaft.has(r.elevatorShaftId))shaft.set(r.elevatorShaftId,[]);shaft.get(r.elevatorShaftId).push({...r,floor});}
   for(const o of r.openings||[]){if(!Number.isFinite(Number(o.pos??.5))||Number(o.pos??.5)<0||Number(o.pos??.5)>1)issue('OPENING_POSITION_INVALID',{roomId:r.id,openingId:o.id});if(o.shared){if(!portals.has(o.shared))portals.set(o.shared,[]);portals.get(o.shared).push({roomId:r.id,floor,type:o.type});}}
   rooms.push({...r,floor});
