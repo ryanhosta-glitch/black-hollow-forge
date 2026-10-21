@@ -1,3 +1,4 @@
+import {decorationBlocked} from '../forge_decoration_runtime.mjs';
 import {createElevatorRuntime} from '../forge_access_plan.mjs';
 /* Black Hollow Forge game-import adapter, v1.0. No engine globals and no source mutations. */
 const REQUIRED=['manifest.json','navigation/collision.json','navigation/integrity.json'];
@@ -7,13 +8,14 @@ async function jsonAt(url){const r=await fetch(url);if(!r.ok)throw Error(`${r.st
 export async function loadForgeContract(root){
   const manifest=await jsonAt(urlFor(root,'manifest.json'));
   if(manifest.format!=='black-hollow-house')throw Error('Not a Black Hollow Forge house');
-  const [navigation,integrity,collision,doorways,stairNavigation,accessPlan]=await Promise.all([
+  const [navigation,integrity,collision,doorways,stairNavigation,accessPlan,decoration]=await Promise.all([
     jsonAt(urlFor(root,manifest.navigation)),
     manifest.integrity?jsonAt(urlFor(root,manifest.integrity)):Promise.resolve({status:'not-included-in-new-qa-casa'}),
     manifest.collision?jsonAt(urlFor(root,manifest.collision)):Promise.resolve(null),
     manifest.doorways?jsonAt(urlFor(root,manifest.doorways)):Promise.resolve(null),
     manifest.stairNavigation?jsonAt(urlFor(root,manifest.stairNavigation)):Promise.resolve(null),
-    manifest.accessPlan?jsonAt(urlFor(root,manifest.accessPlan)):Promise.resolve(null)
+    manifest.accessPlan?jsonAt(urlFor(root,manifest.accessPlan)):Promise.resolve(null),
+    manifest.decorationPlan?jsonAt(urlFor(root,manifest.decorationPlan)):Promise.resolve(null)
   ]);
   // Older estate packages use boundsFeet; new CASA compilation uses bounds.
   const standardRooms=navigation.rooms.map(room=>({...room,boundsFeet:room.boundsFeet||room.bounds}));
@@ -23,7 +25,7 @@ export async function loadForgeContract(root){
   if(rooms.size!==standardRooms.length)throw Error('Duplicate room IDs');
   if(!rooms.has(manifest.entry.roomId))throw Error('Game entry room not found');
   for(const floor of manifest.floors)for(const id of floor.roomIds)if(!rooms.has(id))throw Error('Floor references unknown room '+id);
-  return Object.freeze({root,manifest,navigation:normalizedNavigation,integrity,collision,doorways,stairNavigation,accessPlan,runtimeStart:manifest.runtimeStart||{scene:'estate'},rooms,entry:manifest.entry,
+  return Object.freeze({root,manifest,navigation:normalizedNavigation,integrity,collision,doorways,stairNavigation,accessPlan,decoration,runtimeStart:manifest.runtimeStart||{scene:'estate'},rooms,entry:manifest.entry,
     getRoom:id=>rooms.get(id)||null,
     getFloorRooms:i=>standardRooms.filter(r=>r.floor===i),
     roomCenterMeters:id=>{const r=rooms.get(id);if(!r)return null;const b=r.boundsFeet;return {x:(b.x+b.l/2)*METERS_PER_FOOT,z:(b.y+b.w/2)*METERS_PER_FOOT,floor:r.floor};},
@@ -51,6 +53,10 @@ export async function addForgeGeometry(contract,{THREE,GLTFLoader,scene,includeR
     group.add(gltf.scene);floorGroups.push(gltf.scene);
   }
   if(includeRoof&&contract.manifest.roof){const gltf=await getGltf(contract.url(contract.manifest.roof));gltf.scene.position.y=contract.manifest.geometrySpace==='world'?0:elevations.at(-1).yMeters+elevations.at(-1).riseMeters;gltf.scene.name='Forge roof';group.add(gltf.scene)}
+  if(contract.decoration){
+    const templates=new Map();for(const item of contract.decoration.furniture){if(!templates.has(item.model))templates.set(item.model,(await getGltf(contract.url(item.model))).scene);const model=templates.get(item.model).clone(true);model.position.fromArray(item.positionMeters);model.rotation.y=item.rotationY;model.userData.objectId=item.id;floorGroups[item.floor].add(model);}
+    for(const path of [contract.manifest.decorationGeometry,contract.manifest.artworkGeometry].filter(Boolean)){const gltf=await getGltf(contract.url(path));gltf.scene.name=path;group.add(gltf.scene);}
+  }
   scene.add(group);return {group,floorGroups,elevations,dispose(){scene.remove(group);group.traverse(o=>{if(o.isMesh)o.geometry?.dispose()})}};
 }
 export function gameReadiness(contract){
@@ -65,3 +71,6 @@ export function gameReadiness(contract){
 }
 
 export function createHouseElevator(contract,options={}){if(!contract.accessPlan)throw Error('House has no elevator access contract');return createElevatorRuntime(contract.accessPlan,options);}
+
+// Attach to Navigation 2 canOccupy; combines with the consumer’s architectural collision checks.
+export function decorationCanOccupy(contract,floor,x,z,y,radius=.24){return !contract.decoration||!decorationBlocked(contract.decoration,floor,x,z,y,radius);}
