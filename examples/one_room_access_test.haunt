@@ -1,0 +1,21 @@
+{
+  "name": "The Lonely Candle",
+  "floors": [
+    {
+      "kind": "main",
+      "name": "Main Floor",
+      "rooms": [
+        {
+          "id": "candle-room",
+          "name": "The Candle Room",
+          "x": 0,
+          "y": 0,
+          "l": 12,
+          "w": 10,
+          "h": 9,
+          "openings": []
+        }
+      ]
+    }
+  ]
+}

@@ -37,6 +37,9 @@ def run(source,out,reuse=None):
   shutil.copytree(reuse,out,dirs_exist_ok=True)
   mode='validated-existing-compile'
  else:
+  from tools.production_preflight import inspect as preflight
+  readiness=preflight(ROOT)
+  if not readiness['canFreshCompile']:raise RuntimeError('Fresh compile blocked: '+json.dumps(readiness))
   from forge import main
   main(str(source),str(out))
   mode='fresh-geometry-compile'

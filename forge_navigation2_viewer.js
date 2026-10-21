@@ -1,8 +1,8 @@
 import {circleTouchesRectangle} from './navigation/door_leaf_collision.mjs';
 // Black Hollow Forge — Navigation 2 main-viewer compatibility controller.
 // Reusable preview controller, not yet a certified game physics engine. Closed/locked doors require game logic.
-export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas,getRoom,levelY,selectRoom,getConnections,isReady}){
- const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',directorMode:'hybrid',clock:performance.now(),hintUntil:0,revealUntil:0,facingYaw:0,cameraYaw:0,movementAnchor:null,speed:0,turnSpeed:0,lookYaw:0,lookUntil:0,cameraRoomId:null,requireFreshForward:false,arrivalUntil:0,lastPortal:null,lastPortalAt:0,doorState:new Map()};
+export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas,getRoom,levelY,selectRoom,getConnections,isReady,getSurfaceHeight=null,canOccupy=null,getCameraOccluders=null}){
+ const S={groundY:0,active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',directorMode:'hybrid',clock:performance.now(),hintUntil:0,revealUntil:0,facingYaw:0,cameraYaw:0,movementAnchor:null,speed:0,turnSpeed:0,lookYaw:0,lookUntil:0,cameraRoomId:null,requireFreshForward:false,arrivalUntil:0,lastPortal:null,lastPortalAt:0,doorState:new Map()};
  const K=.3048,margin=.20,eye=1.68,radius=.20,topPitch=0.65;
  const heading=()=>new THREE.Vector3(-Math.sin(S.yaw),0,-Math.cos(S.yaw));
  const doorMeshes=new Map();
@@ -19,22 +19,22 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
  const legs=[],arms=[];for(const side of [-1,1]){let leg=new THREE.Group();leg.position.set(side*.16,.71,0);avatar.add(leg);addBox(leg,.22,.72,.25,0,-.32,0,cloth);addBox(leg,.26,.15,.38,0,-.74,-.09,boots);legs.push(leg);let arm=new THREE.Group();arm.position.set(side*.34,1.57,0);torso.add(arm);addBox(arm,.17,.65,.18,side*.015,-.3,0,coat);arms.push(arm)}
  avatar.scale.setScalar(.68); // 1.75m including hat; architectural feet-to-meter scale.
  avatar.visible=false;
- function bnd(r){const b=r?.boundsFeet;if(!b)return null;return {minX:b.x*K,maxX:(b.x+b.l)*K,minZ:b.y*K,maxZ:(b.y+b.w)*K,y:levelY(r.floor),floor:r.floor};}
+ function bnd(r){const b=r?.boundsFeet;if(!b)return null;return {minX:b.x*K,maxX:(b.x+b.l)*K,minZ:b.y*K,maxZ:(b.y+b.w)*K,y:getSurfaceHeight&&r===S.room?S.groundY:levelY(r.floor),floor:r.floor};}
  const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
  function sync(){q('bh-director-mode').textContent='Director: '+S.directorMode.toUpperCase();panel.classList.toggle('active',S.active);q('bh-walk-toggle').textContent=S.active?'Explorer ON':'Enter Cinematic Explorer';q('bh-walk-room').textContent=S.room?.name||'Room inspection';q('bh-walk-camera').textContent='Camera: '+S.mode.toUpperCase();avatar.visible=S.active&&S.mode!=='first';}
  function status(t){q('bh-walk-status').textContent=t;}
  function orient(){return heading();}
- function placeAtCenter(r){const b=bnd(r);if(!b)return;S.x=(b.minX+b.maxX)*.5;S.z=(b.minZ+b.maxZ)*.5;}
+ function placeAtCenter(r){const b=bnd(r);if(!b)return;S.x=(b.minX+b.maxX)*.5;S.z=(b.minZ+b.maxZ)*.5;S.groundY=getSurfaceHeight?.(r,S.x,S.z,0)??levelY(r.floor);}
  function enter(){if(!isReady())return false;buildDoors();S.room=getRoom();const b=bnd(S.room);if(!b)return false;S.active=true;S.mode='cinematic';S.moving.clear();S.lastPortal=null;S.lastPortalAt=0;S.doorState.clear();placeAtCenter(S.room);S.yaw=0;S.facingYaw=0;S.cameraYaw=0;S.movementAnchor=null;S.pitch=0;S.speed=0;S.turnSpeed=0;S.lookYaw=0;S.lookUntil=0;S.cameraRoomId=null;S.requireFreshForward=false;S.arrivalUntil=0;controls.enabled=false;S.clock=performance.now();if(scene&&avatar.parent!==scene)scene.add(avatar);sync();follow(.05,true);status('W/↑ forward · S/↓ back · A/← turn left · D/→ turn right · camera behind explorer');return true;}
  function exit(){if(!S.active)return;S.active=false;for(const d of doorMeshes.values()){d.pivot.visible=false;d.open=0;d.pivot.rotation.y=0;}S.moving.clear();S.movementAnchor=null;S.speed=0;S.turnSpeed=0;S.requireFreshForward=false;S.mouse=false;avatar.visible=false;controls.enabled=true;camera.near=.1;camera.fov=62;camera.updateProjectionMatrix();controls.target.set(S.x,(bnd(S.room)?.y??0)+1.18,S.z);sync();}
  function changeCamera(){S.mode=S.mode==='cinematic'?'explorer':S.mode==='explorer'?'first':'cinematic';sync();follow(.05,true)}
  // 4.3: Only a matched, same-floor architect-door is walkable. Magical elevator and stairs stay explicit.
- function doorPortal(r,o){const b=bnd(r);if(!b||!o||o.type!=='door'||!o.shared)return null;const pos=clamp(Number(o.pos??.5),0,1),w=clamp(Number(o.width||o.widthFeet||3.54)*K, .65, 2.1);let x,z,axis,dir;
+ function doorPortal(r,o){const b=bnd(r);if(!b||!o||!['door','open','arch'].includes(o.type)||!o.shared)return null;const pos=clamp(Number(o.pos??.5),0,1),w=clamp(Number(o.clearWidthMeters??Number(o.width||o.widthFeet||3.54)*K), .44, 30);let x,z,axis,dir;
  if(o.wall==='left'){x=b.minX;z=b.minZ+(b.maxZ-b.minZ)*pos;axis='x';dir=-1}
  else if(o.wall==='right'){x=b.maxX;z=b.minZ+(b.maxZ-b.minZ)*pos;axis='x';dir=1}
  else if(o.wall==='top'){z=b.minZ;x=b.minX+(b.maxX-b.minX)*pos;axis='z';dir=-1}
  else if(o.wall==='bottom'){z=b.maxZ;x=b.minX+(b.maxX-b.minX)*pos;axis='z';dir=1}
- else return null;return {x,z,axis,dir,half:Math.max(.22,w*.5-radius),shared:o.shared};}
+ else return null;return {x,z,axis,dir,half:Math.max(.015,w*.5-radius-.01),shared:o.shared};}
  // Check the player capsule against the doorway BEFORE the usual room-edge clamp.
  // The prior algorithm clamped to an inset boundary and only looked for doors
  // after crossing the outer boundary, making a valid passage unreachable.
@@ -46,22 +46,22 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   if(dz<0&&nz<=b.minZ+margin+.015)sides.push('top');
   if(dz>0&&nz>=b.maxZ-margin-.015)sides.push('bottom');
   if(!sides.length)return null;
-  const ids=new Set([...(getConnections(r.id)||[]),...(window.__forgeWalkRooms||[]).filter(q=>q.id!==r.id&&q.floor===r.floor&&(q.openings||[]).some(v=>v.type==='door'&&v.shared&&(r.openings||[]).some(o=>o.shared===v.shared))).map(q=>q.id)]);
+  const ids=new Set([...(getConnections(r.id)||[]),...(window.__forgeWalkRooms||[]).filter(q=>q.id!==r.id&&q.floor===r.floor&&(q.openings||[]).some(v=>['door','open','arch'].includes(v.type)&&v.shared&&(r.openings||[]).some(o=>o.shared===v.shared))).map(q=>q.id)]);
   const all=window.__forgeWalkRooms||[];
   for(const side of sides){
    for(const o of (r.openings||[])){
-    if(o.wall!==side||o.type!=='door'||!o.shared)continue;
+    if(o.wall!==side||!['door','open','arch'].includes(o.type)||!o.shared)continue;
     const portal=doorPortal(r,o);
     if(!portal)continue;
     const lateral=portal.axis==='x'?nz:nx;
     const center=portal.axis==='x'?portal.z:portal.x;
-    if(Math.abs(lateral-center)>Math.max(.18,portal.half-.02))continue;
+    if(Math.abs(lateral-center)>Math.max(.005,portal.half-.01))continue;
     // Continuous traversal is controlled by wall crossing, not by a time lock.
     for(const id of ids){
      const other=all.find(a=>a.id===id);
      if(!other||other.floor!==r.floor)continue;
      const opposing={left:'right',right:'left',top:'bottom',bottom:'top'}[side];
-     const receiving=(other.openings||[]).find(d=>d.type==='door'&&d.shared===o.shared&&d.wall===opposing);
+     const receiving=(other.openings||[]).find(d=>['door','open','arch'].includes(d.type)&&d.shared===o.shared&&d.wall===opposing);
      const receivingPortal=doorPortal(other,receiving);
      if(!receivingPortal||Math.abs(lateral-(receivingPortal.axis==='x'?receivingPortal.z:receivingPortal.x))>receivingPortal.half)continue;
      const bb=bnd(other);if(!bb)continue;
@@ -98,6 +98,12 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
    let nx=S.x+vx,nz=S.z+vz;
    if(blockedByDoor(nx,S.z))nx=S.x;
    if(blockedByDoor(nx,nz))nz=S.z;
+   if(getSurfaceHeight){
+    const surface=(x,z)=>{const y=getSurfaceHeight(S.room,x,z,S.groundY);return y!==null&&(!canOccupy||canOccupy(S.room,x,z,y))?y:null;};
+    if(surface(nx,S.z)===null)nx=S.x;
+    if(surface(nx,nz)===null)nz=S.z;
+    const y=surface(nx,nz);if(y===null)continue;S.groundY=y;
+   }
    if(nx===S.x&&nz===S.z)continue;
    const inside=nx>=current.minX+margin&&nx<=current.maxX-margin&&nz>=current.minZ+margin&&nz<=current.maxZ-margin;
    // After crossing a shared wall the explorer is still within the receiving
@@ -141,9 +147,10 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
  // Each shared architect-door becomes one hinged mesh, built in world space
  // from the exact same bounds/opening ID used by player navigation.
  function buildDoors(){
+  const disposedGeometry=new Set(),disposedMaterial=new Set();
   for(const item of doorMeshes.values()){
    item.pivot.removeFromParent();
-   item.pivot.traverse(o=>{if(o.isMesh){o.geometry.dispose();o.material.dispose();}});
+   item.pivot.traverse(o=>{if(o.isMesh){if(!disposedGeometry.has(o.geometry)){disposedGeometry.add(o.geometry);o.geometry.dispose();}if(!disposedMaterial.has(o.material)){disposedMaterial.add(o.material);o.material.dispose();}}});
   }
   doorMeshes.clear();
   const rooms=window.__forgeWalkRooms||[],seen=new Set();
@@ -154,7 +161,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
     if(!other)continue; // Paired blueprint door is authoritative, not optional magic graph
     const p=doorPortal(r,o),b=bnd(r);if(!p||!b)continue;
     seen.add(o.shared);
-    const span=Math.max(.65,Math.min(1.08,Number(o.width||o.widthFeet||3.54)*K));
+    const span=Math.max(.44,Math.min(1.08,Number(o.clearWidthMeters??Number(o.width||o.widthFeet||3.54)*K)));
     const height=Math.min(2.18,Math.max(1.9,(Number(r.boundsFeet.h)||9)*K-.25));
     const pivot=new THREE.Group();pivot.name='bh-door-'+o.shared;
     const center=p.axis==='x'?p.z:p.x,edge=center-span/2;
@@ -165,10 +172,28 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
     const panel=new THREE.Mesh(new THREE.BoxGeometry(p.axis==='x'?.075:span,height,p.axis==='x'?span:.075),panelMaterial);
     panel.position.set(p.axis==='x'?0:span/2,height/2,p.axis==='x'?span/2:0);
     panel.castShadow=true;panel.receiveShadow=true;panel.name='bh-door-leaf-'+o.shared;pivot.add(panel);
+    // Six raised walnut panels on both faces, instanced to keep draw calls low.
+    // All relief is decorative; the original slab remains the collision authority.
+    const reliefMaterial=new THREE.MeshStandardMaterial({color:0x563525,roughness:.48,metalness:.02});
+    const relief=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),reliefMaterial,12);
+    relief.name='walnut-raised-door-panels';
+    const transform=new THREE.Object3D();let reliefIndex=0;
+    for(const face of [-1,1])for(let row=0;row<3;row++)for(let col=0;col<2;col++){
+     const lateral=span*(.26+col*.48)-span/2,vertical=height*(.19+row*.30)-height/2;
+     transform.position.set(p.axis==='x'?face*.046:lateral,vertical,p.axis==='x'?lateral:face*.046);
+     transform.scale.set(p.axis==='x'?.021:span*.36,height*.23,p.axis==='x'?span*.36:.021);
+     transform.updateMatrix();relief.setMatrixAt(reliefIndex++,transform.matrix);
+    }
+    relief.castShadow=false;relief.receiveShadow=true;panel.add(relief);
+
     const trimMaterial=new THREE.MeshStandardMaterial({color:0x87613a,metalness:.55,roughness:.48});
     const knob=new THREE.Mesh(new THREE.SphereGeometry(.045,8,6),trimMaterial);
     knob.position.set(p.axis==='x'?.065:span*.83,1.00,p.axis==='x'?span*.83:.065);
-    pivot.add(knob);doorGroup.add(pivot);
+    pivot.add(knob);
+    const backKnob=knob.clone();if(p.axis==='x')backKnob.position.x=-.065;else backKnob.position.z=-.065;pivot.add(backKnob);
+    const plateGeometry=new THREE.BoxGeometry(p.axis==='x'?.012:.085,.19,p.axis==='x'?.085:.012);
+    for(const face of [-1,1]){const plate=new THREE.Mesh(plateGeometry,trimMaterial);plate.name='brass-door-escutcheon';plate.position.copy(knob.position);if(p.axis==='x')plate.position.x=face*.045;else plate.position.z=face*.045;pivot.add(plate);}
+    doorGroup.add(pivot);
     panel.geometry.computeBoundingBox();
     doorMeshes.set(o.shared,{pivot,leaf:panel,centerX:p.x,centerZ:p.z,axis:p.axis,floor:r.floor,open:0,target:0,side:o.wall});
    }
@@ -257,8 +282,8 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   desired.y=Math.min(floor+(hallway?1.78:2.03)-dip*.58,ceiling-.42);
   // Gather actual visible architecture. Do not treat nonstructural atmosphere,
   // decorations, invisible models, or the explorer as camera walls.
-  const occluders=[];
-  scene?.traverse(o=>{
+  const occluders=getCameraOccluders?.()||[];
+  if(!getCameraOccluders?.())scene?.traverse(o=>{
    if(!o.isMesh||o.userData?.cameraIgnore||avatar.getObjectById(o.id))return;
    for(let ancestor=o;ancestor;ancestor=ancestor.parent)if(!ancestor.visible)return;
    const n=String(o.name||'').toLowerCase();
@@ -336,6 +361,8 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
  for(const btn of panel.querySelectorAll('[data-walk]')){const m=btn.dataset.walk;btn.addEventListener('pointerdown',e=>{e.preventDefault();btn.setPointerCapture(e.pointerId);S.moving.add(m)});for(const evt of ['pointerup','pointercancel','lostpointercapture'])btn.addEventListener(evt,()=>S.moving.delete(m));}
  q('bh-walk-toggle').onclick=()=>S.active?exit():enter();q('bh-walk-exit').onclick=exit;q('bh-walk-camera').onclick=changeCamera;q('bh-director-mode').onclick=changeDirector;q('bh-camera-plan').onclick=saveCameraPlan;
  q('bh-walk-next').onclick=()=>{const ids=S.room?getConnections(S.room.id)||[]:[];if(!ids.length){status('No linked room in navigation graph');return;}exit();selectRoom(ids[0]);enter();status('QA connection jump (not physical door travel)');};
+ function setCameraMode(mode){if(!['cinematic','explorer','first'].includes(mode))return false;S.mode=mode;sync();if(S.active)follow(.05,true);return true;}
+ function setPosition(x,y,z,yaw=0){if(!S.active)return;S.x=x;S.z=z;S.groundY=y;S.yaw=yaw;S.facingYaw=yaw;S.cameraYaw=yaw;S.moving.clear();S.speed=0;follow(.05,true);}
  function onRoomChanged(){if(!S.active)return;S.room=getRoom();placeAtCenter(S.room);sync();follow(.05,true);}
- return {enter,exit,update,onRoomChanged,get active(){return S.active},get position(){return [S.x,bnd(S.room)?.y??0,S.z]},get currentRoomId(){return S.room?.id||null},get doorStates(){return [...doorMeshes].map(([id,d])=>({shared:id,open:d.open}))},get cameraPlan(){return cameraPlan()},get directorMode(){return S.directorMode}};
+ return {enter,exit,update,onRoomChanged,setPosition,setCameraMode,get active(){return S.active},get position(){return [S.x,bnd(S.room)?.y??0,S.z]},get currentRoomId(){return S.room?.id||null},get doorStates(){return [...doorMeshes].map(([id,d])=>({shared:id,open:d.open}))},get cameraPlan(){return cameraPlan()},get directorMode(){return S.directorMode}};
 }

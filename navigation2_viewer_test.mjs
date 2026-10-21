@@ -35,6 +35,8 @@ key('keydown','KeyW');frames(100);
 assert.equal(nav.currentRoomId,'a');
 assert.ok(nav.position[2]>1.30,'fully open leaf blocks inside room');
 key('keyup','KeyW');nav.exit();
+// Open-plan links cross the removed partition without synthesizing a door leaf.
+selected=rooms[0];rooms[0].openings[0].type='open';rooms[1].openings[0].type='open';nav.enter();assert.equal(scene.getObjectByName('bh-door-leaf-ab'),undefined);key('keydown','KeyW');frames(100);assert.equal(nav.currentRoomId,'b');key('keyup','KeyW');nav.exit();rooms[0].openings[0].type='door';rooms[1].openings[0].type='door';
 // A mismatched receiving aperture must remain a wall even with the same door ID.
 rooms[1].openings[0].pos=.05;selected=rooms[0];nav.enter();key('keydown','KeyW');frames(160);assert.equal(nav.currentRoomId,'a');assert.ok(nav.position[2]>=.20-1e-6);key('keyup','KeyW');
 // A/D turns the explorer, releasing and blurring do not leave a key held.

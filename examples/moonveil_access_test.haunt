@@ -1,0 +1,633 @@
+{
+  "floor": 1,
+  "migrationInfo": {
+    "fromSchema": 1,
+    "toSchema": 2,
+    "notes": "Additive upgrade; room dimensions and verified calculations retained."
+  },
+  "missionDay": 1,
+  "elevationView": false,
+  "zoom": 1,
+  "sectionView": false,
+  "connections": [
+    {
+      "fromOpeningId": "link-mv-crypt-mv-stair-basementa",
+      "floorId": "floor_qwqoceix4",
+      "fromRoomId": "mv-crypt",
+      "toOpeningId": "link-mv-crypt-mv-stair-basementb",
+      "toRoomId": "mv-stair-basement",
+      "shared": "link-mv-crypt-mv-stair-basement",
+      "id": "connection_floor_qwqoceix4_link-mv-crypt-mv-stair-basement",
+      "kind": "door"
+    },
+    {
+      "toRoomId": "mv-dining",
+      "fromOpeningId": "link-mv-foyer-mv-dininga",
+      "floorId": "floor_5mfq20jqt",
+      "shared": "link-mv-foyer-mv-dining",
+      "toOpeningId": "link-mv-foyer-mv-diningb",
+      "id": "connection_floor_5mfq20jqt_link-mv-foyer-mv-dining",
+      "fromRoomId": "mv-foyer",
+      "kind": "door"
+    },
+    {
+      "shared": "link-mv-library-mv-conservatory",
+      "fromRoomId": "mv-library",
+      "fromOpeningId": "link-mv-library-mv-conservatorya",
+      "id": "connection_floor_5mfq20jqt_link-mv-library-mv-conservatory",
+      "kind": "door",
+      "floorId": "floor_5mfq20jqt",
+      "toOpeningId": "link-mv-library-mv-conservatoryb",
+      "toRoomId": "mv-conservatory"
+    },
+    {
+      "fromOpeningId": "link-mv-library-mv-stair-maina",
+      "toOpeningId": "link-mv-library-mv-stair-mainb",
+      "id": "connection_floor_5mfq20jqt_link-mv-library-mv-stair-main",
+      "toRoomId": "mv-stair-main",
+      "kind": "door",
+      "shared": "link-mv-library-mv-stair-main",
+      "fromRoomId": "mv-library",
+      "floorId": "floor_5mfq20jqt"
+    },
+    {
+      "toOpeningId": "mv-up-entry-b",
+      "toRoomId": "mv-stair-up-main",
+      "floorId": "floor_5mfq20jqt",
+      "id": "connection_floor_5mfq20jqt_mv-up-entry",
+      "shared": "mv-up-entry",
+      "fromOpeningId": "mv-up-entry-a",
+      "fromRoomId": "mv-conservatory",
+      "kind": "door"
+    },
+    {
+      "fromRoomId": "mv-observatory",
+      "floorId": "floor_zpvvv4rwr",
+      "shared": "mv-upper-gallery-observ",
+      "toRoomId": "mv-gallery",
+      "toOpeningId": "mv-upper-gallery-observb",
+      "kind": "door",
+      "id": "connection_floor_zpvvv4rwr_mv-upper-gallery-observ",
+      "fromOpeningId": "mv-upper-gallery-observa"
+    },
+    {
+      "fromRoomId": "mv-gallery",
+      "toOpeningId": "mv-upper-gallery-bedb",
+      "kind": "door",
+      "shared": "mv-upper-gallery-bed",
+      "floorId": "floor_zpvvv4rwr",
+      "id": "connection_floor_zpvvv4rwr_mv-upper-gallery-bed",
+      "fromOpeningId": "mv-upper-gallery-beda",
+      "toRoomId": "mv-bedchamber"
+    },
+    {
+      "floorId": "floor_zpvvv4rwr",
+      "shared": "mv-upper-bed-stair",
+      "fromRoomId": "mv-bedchamber",
+      "kind": "door",
+      "toRoomId": "mv-stair-up-upper",
+      "toOpeningId": "mv-upper-bed-stairb",
+      "id": "connection_floor_zpvvv4rwr_mv-upper-bed-stair",
+      "fromOpeningId": "mv-upper-bed-staira"
+    }
+  ],
+  "showLabels": true,
+  "roof": {
+    "rise": 4,
+    "type": "mansard"
+  },
+  "gameCompatibility": {
+    "axisY": "south",
+    "coordinateUnits": "feet",
+    "axisZ": "up",
+    "generatedBy": "Haunted Estate Architect",
+    "axisX": "east"
+  },
+  "rotation": 31.112695312500023,
+  "sitePlan": false,
+  "proveMode": true,
+  "proBlueprint": false,
+  "xray": false,
+  "selected": "mv-dining",
+  "measurePts": [],
+  "grade5Mode": true,
+  "planMath": true,
+  "schemaVersion": 2,
+  "cutaway": "walls",
+  "name": "Moonveil Manor \u2014 Three-Level Staircase Test Estate",
+  "permitMax": 1008500,
+  "version": 8.8,
+  "exploded": false,
+  "measureMode": false,
+  "floors": [
+    {
+      "kind": "basement",
+      "id": "floor_qwqoceix4",
+      "rooms": [
+        {
+          "id": "mv-crypt",
+          "w": 30,
+          "openings": [
+            {
+              "assetId": "door.wood",
+              "id": "link-mv-crypt-mv-stair-basementa",
+              "shared": "link-mv-crypt-mv-stair-basement",
+              "wall": "right",
+              "pos": 0.13333333333333333,
+              "style": "wood",
+              "type": "door"
+            }
+          ],
+          "materials": {},
+          "x": 0,
+          "flooring": "stone",
+          "l": 34,
+          "furniture": [],
+          "type": "room",
+          "h": 9,
+          "name": "The Grand Forgotten Crypt",
+          "verified": true,
+          "y": 0,
+          "style": "stonewall"
+        },
+        {
+          "name": "The Crypt Stairwell",
+          "stairEntrance": "left",
+          "stairLayout": "u",
+          "h": 10,
+          "type": "stairs",
+          "openings": [
+            {
+              "wall": "left",
+              "id": "link-mv-crypt-mv-stair-basementb",
+              "style": "wood",
+              "shared": "link-mv-crypt-mv-stair-basement",
+              "type": "door",
+              "pos": 0.5,
+              "assetId": "door.wood"
+            }
+          ],
+          "x": 34,
+          "l": 12,
+          "stairRiser": 7,
+          "flooring": "stone",
+          "w": 8,
+          "furniture": [],
+          "stairWidth": 3,
+          "id": "mv-stair-basement",
+          "style": "stonewall",
+          "verified": true,
+          "stairTurn": "cw",
+          "materials": {},
+          "y": 0,
+          "stairTread": 11
+        }
+      ],
+      "name": "Basement",
+      "visible": true
+    },
+    {
+      "rooms": [
+        {
+          "furniture": [],
+          "verified": true,
+          "materials": {},
+          "style": "damask",
+          "y": 0,
+          "flooring": "marble",
+          "h": 9,
+          "openPlanWith": [
+            "mv-library"
+          ],
+          "openings": [
+            {
+              "assetId": "door.wood",
+              "style": "wood",
+              "shared": "link-mv-foyer-mv-dining",
+              "type": "door",
+              "pos": 0.5,
+              "id": "link-mv-foyer-mv-dininga",
+              "wall": "bottom"
+            },
+            {
+              "pos": 0.5232669890873016,
+              "style": "wood",
+              "type": "door",
+              "id": "mv-front-entry",
+              "assetId": "door.wood",
+              "wall": "top"
+            },
+            {
+              "id": "window-mv-foyer-left-0.5",
+              "wall": "left",
+              "type": "window",
+              "assetId": "window.gothic",
+              "pos": 0.5,
+              "style": "gothic"
+            }
+          ],
+          "x": 0,
+          "name": "The Whispering Foyer",
+          "l": 14,
+          "w": 16,
+          "type": "room",
+          "id": "mv-foyer"
+        },
+        {
+          "type": "room",
+          "verified": true,
+          "id": "mv-library",
+          "w": 16,
+          "x": 14,
+          "name": "The Midnight Library",
+          "l": 20,
+          "h": 9,
+          "y": 0,
+          "materials": {},
+          "openings": [
+            {
+              "type": "door",
+              "id": "link-mv-library-mv-conservatorya",
+              "assetId": "door.wood",
+              "wall": "bottom",
+              "style": "wood",
+              "pos": 0.5,
+              "shared": "link-mv-library-mv-conservatory"
+            },
+            {
+              "pos": 0.25,
+              "assetId": "door.wood",
+              "shared": "link-mv-library-mv-stair-main",
+              "type": "door",
+              "style": "wood",
+              "id": "link-mv-library-mv-stair-maina",
+              "wall": "right"
+            },
+            {
+              "assetId": "window.gothic",
+              "id": "window-mv-library-top-0.3",
+              "wall": "top",
+              "pos": 0.3,
+              "style": "gothic",
+              "type": "window"
+            },
+            {
+              "style": "gothic",
+              "pos": 0.75,
+              "type": "window",
+              "assetId": "window.gothic",
+              "id": "window-mv-library-top-0.75",
+              "wall": "top"
+            }
+          ],
+          "flooring": "herringbone",
+          "openPlanWith": [
+            "mv-foyer"
+          ],
+          "furniture": [],
+          "style": "wainscot"
+        },
+        {
+          "x": 0,
+          "openings": [
+            {
+              "type": "door",
+              "assetId": "door.wood",
+              "shared": "link-mv-foyer-mv-dining",
+              "id": "link-mv-foyer-mv-diningb",
+              "pos": 0.5,
+              "wall": "top",
+              "style": "wood"
+            },
+            {
+              "style": "gothic",
+              "id": "window-mv-dining-left-0.5",
+              "type": "window",
+              "pos": 0.5,
+              "assetId": "window.gothic",
+              "wall": "left"
+            }
+          ],
+          "l": 14,
+          "type": "room",
+          "materials": {},
+          "w": 14,
+          "flooring": "checker",
+          "name": "The Phantom Banquet Hall",
+          "furniture": [],
+          "id": "mv-dining",
+          "style": "redbrick",
+          "h": 9,
+          "verified": true,
+          "openPlanWith": [
+            "mv-conservatory"
+          ],
+          "y": 16,
+          "vaultHatch": true
+        },
+        {
+          "h": 9,
+          "style": "moss",
+          "openPlanWith": [
+            "mv-dining"
+          ],
+          "openings": [
+            {
+              "type": "door",
+              "id": "link-mv-library-mv-conservatoryb",
+              "style": "wood",
+              "shared": "link-mv-library-mv-conservatory",
+              "assetId": "door.wood",
+              "wall": "top",
+              "pos": 0.5
+            },
+            {
+              "wall": "right",
+              "style": "gothic",
+              "assetId": "window.gothic",
+              "pos": 0.35,
+              "type": "window",
+              "id": "window-mv-conservatory-right-0.35"
+            },
+            {
+              "id": "window-mv-conservatory-right-0.75",
+              "wall": "right",
+              "pos": 0.75,
+              "assetId": "window.gothic",
+              "style": "gothic",
+              "type": "window"
+            },
+            {
+              "type": "window",
+              "pos": 0.4807074652777778,
+              "id": "window-mv-conservatory-bottom-0.5",
+              "style": "gothic",
+              "wall": "bottom",
+              "assetId": "window.gothic"
+            },
+            {
+              "id": "mv-up-entry-a",
+              "type": "door",
+              "pos": 0.2857142857142857,
+              "style": "wood",
+              "wall": "right",
+              "shared": "mv-up-entry",
+              "assetId": "door.wood"
+            }
+          ],
+          "w": 14,
+          "name": "The Moonlit Conservatory",
+          "x": 14,
+          "flooring": "tile",
+          "l": 20,
+          "type": "room",
+          "furniture": [],
+          "y": 16,
+          "verified": true,
+          "materials": {},
+          "id": "mv-conservatory"
+        },
+        {
+          "stairRiser": 7,
+          "furniture": [],
+          "style": "stonewall",
+          "openings": [
+            {
+              "wall": "left",
+              "style": "wood",
+              "assetId": "door.wood",
+              "id": "link-mv-library-mv-stair-mainb",
+              "pos": 0.5,
+              "shared": "link-mv-library-mv-stair-main",
+              "type": "door"
+            }
+          ],
+          "flooring": "stone",
+          "id": "mv-stair-main",
+          "stairTurn": "cw",
+          "type": "stairs",
+          "materials": {},
+          "name": "The Descending Stairwell",
+          "y": 0,
+          "verified": true,
+          "stairTread": 11,
+          "h": 10,
+          "stairEntrance": "left",
+          "x": 34,
+          "stairLayout": "u",
+          "l": 12,
+          "w": 8,
+          "stairWidth": 3
+        },
+        {
+          "style": "stonewall",
+          "w": 8,
+          "stairLayout": "u",
+          "l": 12,
+          "stairRiser": 7,
+          "x": 34,
+          "openings": [
+            {
+              "style": "wood",
+              "type": "door",
+              "assetId": "door.wood",
+              "pos": 0.5,
+              "wall": "left",
+              "shared": "mv-up-entry",
+              "id": "mv-up-entry-b"
+            }
+          ],
+          "h": 10,
+          "flooring": "stone",
+          "stairEntrance": "left",
+          "stairTurn": "ccw",
+          "materials": {},
+          "y": 16,
+          "stairTread": 11,
+          "id": "mv-stair-up-main",
+          "verified": true,
+          "furniture": [],
+          "type": "stairs",
+          "stairWidth": 3,
+          "name": "The Raven Staircase \u2014 Ascending"
+        }
+      ],
+      "visible": true,
+      "kind": "main",
+      "name": "Main Floor",
+      "id": "floor_5mfq20jqt"
+    },
+    {
+      "rooms": [
+        {
+          "openings": [
+            {
+              "style": "wood",
+              "pos": 0.5,
+              "type": "door",
+              "shared": "mv-upper-gallery-observ",
+              "assetId": "door.wood",
+              "wall": "right",
+              "id": "mv-upper-gallery-observa"
+            },
+            {
+              "type": "window",
+              "assetId": "window.gothic",
+              "id": "mv-upper-window-1",
+              "wall": "top",
+              "style": "gothic",
+              "pos": 0.5
+            }
+          ],
+          "id": "mv-observatory",
+          "style": "damask",
+          "y": 0,
+          "flooring": "herringbone",
+          "l": 14,
+          "furniture": [],
+          "x": 0,
+          "verified": true,
+          "w": 16,
+          "name": "The Starless Observatory",
+          "materials": {},
+          "type": "room",
+          "h": 9
+        },
+        {
+          "materials": {},
+          "furniture": [],
+          "y": 0,
+          "openings": [
+            {
+              "type": "door",
+              "id": "mv-upper-gallery-observb",
+              "wall": "left",
+              "style": "wood",
+              "shared": "mv-upper-gallery-observ",
+              "pos": 0.5,
+              "assetId": "door.wood"
+            },
+            {
+              "assetId": "door.wood",
+              "wall": "bottom",
+              "shared": "mv-upper-gallery-bed",
+              "id": "mv-upper-gallery-beda",
+              "style": "wood",
+              "type": "door",
+              "pos": 0.5
+            },
+            {
+              "assetId": "window.gothic",
+              "type": "window",
+              "wall": "top",
+              "style": "gothic",
+              "pos": 0.5,
+              "id": "mv-upper-window-2"
+            }
+          ],
+          "style": "wainscot",
+          "flooring": "marble",
+          "type": "room",
+          "h": 9,
+          "id": "mv-gallery",
+          "name": "The Portrait Gallery",
+          "w": 16,
+          "verified": true,
+          "l": 20,
+          "x": 14
+        },
+        {
+          "verified": true,
+          "y": 16,
+          "type": "room",
+          "furniture": [],
+          "name": "The Cursed Bedchamber",
+          "h": 9,
+          "l": 20,
+          "openings": [
+            {
+              "wall": "top",
+              "id": "mv-upper-gallery-bedb",
+              "type": "door",
+              "shared": "mv-upper-gallery-bed",
+              "pos": 0.5,
+              "assetId": "door.wood",
+              "style": "wood"
+            },
+            {
+              "type": "door",
+              "id": "mv-upper-bed-staira",
+              "shared": "mv-upper-bed-stair",
+              "wall": "right",
+              "style": "wood",
+              "pos": 0.2857142857142857,
+              "assetId": "door.wood"
+            },
+            {
+              "wall": "bottom",
+              "style": "gothic",
+              "type": "window",
+              "pos": 0.5,
+              "assetId": "window.gothic",
+              "id": "mv-upper-window-3"
+            }
+          ],
+          "x": 14,
+          "style": "moss",
+          "id": "mv-bedchamber",
+          "materials": {},
+          "flooring": "herringbone",
+          "w": 14
+        },
+        {
+          "id": "mv-stair-up-upper",
+          "stairRiser": 7,
+          "w": 8,
+          "stairTurn": "ccw",
+          "l": 12,
+          "materials": {},
+          "x": 34,
+          "name": "The Raven Staircase \u2014 Upper Landing",
+          "h": 10,
+          "style": "stonewall",
+          "type": "stairs",
+          "stairEntrance": "left",
+          "furniture": [],
+          "verified": true,
+          "y": 16,
+          "stairTread": 11,
+          "flooring": "stone",
+          "stairLayout": "u",
+          "stairWidth": 3,
+          "openings": [
+            {
+              "style": "wood",
+              "type": "door",
+              "assetId": "door.wood",
+              "id": "mv-upper-bed-stairb",
+              "pos": 0.5,
+              "wall": "left",
+              "shared": "mv-upper-bed-stair"
+            }
+          ]
+        }
+      ],
+      "kind": "upper",
+      "name": "Upper Floor \u2014 The Raven Wing",
+      "id": "floor_zpvvv4rwr",
+      "visible": true
+    }
+  ],
+  "decor": [],
+  "viewMode": "build",
+  "curriculum": {
+    "compositeVerified": 0,
+    "unitForecasts": 0,
+    "fractionSolved": 0,
+    "finalApproved": false,
+    "missingSolved": 0,
+    "inspectionsRun": 0
+  },
+  "ghostFloors": true,
+  "sceneMode": "night"
+}

@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "architecturalAccessTests": "PASS",
+  "gameplayCertified": false,
+  "renderedBrowserVerification": "PENDING_WEBGL_UNAVAILABLE",
+  "policy": "one elevator entrance per connected floor component; Floor 13 concealed until unlocked",
+  "oneRoom": {
+    "rooms": 1,
+    "stops": 1,
+    "export": "PASS"
+  },
+  "populatedStudentRecords": [
+    {
+      "name": "Bat Manor",
+      "rooms": 8,
+      "reachable": 8,
+      "stops": 8,
+      "entry": {
+        "roomId": "rh8q9mpl",
+        "openingId": "forge-main-entry"
+      },
+      "openPlanRepairs": 0,
+      "issues": [],
+      "remainingBlockingCodes": [
+        "COLLISION_PHYSICS_NOT_CERTIFIED",
+        "GAME_CASA_LOADER_NOT_INTEGRATED"
+      ],
+      "sourceUnchanged": true
+    },
+    {
+      "name": "Moonveil Manor \u2014 Three-Level Staircase Test Estate",
+      "rooms": 12,
+      "reachable": 12,
+      "stops": 3,
+      "entry": {
+        "roomId": "mv-foyer",
+        "openingId": "mv-front-entry"
+      },
+      "openPlanRepairs": 2,
+      "issues": [],
+      "remainingBlockingCodes": [
+        "COLLISION_PHYSICS_NOT_CERTIFIED",
+        "GAME_CASA_LOADER_NOT_INTEGRATED"
+      ],
+      "sourceUnchanged": true
+    },
+    {
+      "name": "Haunted Estate",
+      "rooms": 2,
+      "reachable": 2,
+      "stops": 1,
+      "entry": {
+        "roomId": "r2qacb1d",
+        "openingId": "forge-main-entry"
+      },
+      "openPlanRepairs": 0,
+      "issues": [],
+      "remainingBlockingCodes": [
+        "COLLISION_PHYSICS_NOT_CERTIFIED",
+        "GAME_CASA_LOADER_NOT_INTEGRATED"
+      ],
+      "sourceUnchanged": true
+    },
+    {
+      "name": "Aycers",
+      "rooms": 6,
+      "reachable": 6,
+      "stops": 4,
+      "entry": {
+        "roomId": "rnt08etw",
+        "openingId": "rzb0nn25"
+      },
+      "openPlanRepairs": 0,
+      "issues": [],
+      "remainingBlockingCodes": [
+        "COLLISION_PHYSICS_NOT_CERTIFIED",
+        "GAME_CASA_LOADER_NOT_INTEGRATED"
+      ],
+      "sourceUnchanged": true
+    }
+  ],
+  "emptyRecordsRejected": 9,
+  "testCommands": [
+    "node forge_access_plan_test.mjs",
+    "node navigation2_viewer_test.mjs /path/to/three.module.mjs",
+    "node signature_scenes_test.mjs /path/to/three.module.mjs /path/to/GLTFLoader.mjs",
+    "node locked_study_3d_test.mjs"
+  ]
+}

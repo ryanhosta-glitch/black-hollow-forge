@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "sourceRoomCount": 26,
+  "sourceUnchanged": true,
+  "gameReady": false,
+  "certification": "SOURCE_AUDIT_ONLY",
+  "floorElevationsMeters": [
+    0,
+    3.048,
+    6.096,
+    9.144
+  ],
+  "elevators": [],
+  "issues": [],
+  "runtimeRequirements": [
+    "physical-door-leaves",
+    "furniture-collision",
+    "mesh-camera-collision",
+    "continuous-stair-support",
+    "game-loader-integration"
+  ]
+}
