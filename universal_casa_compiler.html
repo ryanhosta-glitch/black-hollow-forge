@@ -143,6 +143,24 @@ function envelopeAudit(n){
    if(Math.min(b.l,b.w)*FT<2.2)issues.push({severity:'ADVISORY',code:'NARROW_STAIR_SHAFT',roomId:r.id});
   }
  }
+ // Explicit exterior envelope inventory: every uncovered room wall becomes part
+ // of the building wrapper. Shared walls remain interior.
+ const exterior=[];
+ for(const r of rooms){
+  const b=r.bounds;
+  for(const side of ['left','right','top','bottom']){
+   const neighbors=rooms.filter(q=>q!==r&&q.floor===r.floor).filter(q=>{
+    const t=q.bounds;
+    if(side==='left'||side==='right'){
+     const wall=side==='left'?b.x:b.x+b.l,edge=side==='left'?t.x+t.l:t.x;
+     return Math.abs(wall-edge)<eps&&Math.min(b.y+b.w,t.y+t.w)-Math.max(b.y,t.y)>eps;
+    }
+    const wall=side==='top'?b.y:b.y+b.w,edge=side==='top'?t.y+t.w:t.y;
+    return Math.abs(wall-edge)<eps&&Math.min(b.x+b.l,t.x+t.l)-Math.max(b.x,t.x)>eps;
+   });
+   if(!neighbors.length)exterior.push({roomId:r.id,floor:r.floor,side,kind:'exposed-perimeter-wall'});
+  }
+ }
  // Colliding bounds at the same floor indicate a blueprint envelope conflict.
  for(let i=0;i<rooms.length;i++)for(let j=i+1;j<rooms.length;j++){
   const a=rooms[i],b=rooms[j];if(a.floor!==b.floor)continue;
@@ -150,7 +168,7 @@ function envelopeAudit(n){
   const overlapZ=Math.min(a.bounds.y+a.bounds.w,b.bounds.y+b.bounds.w)-Math.max(a.bounds.y,b.bounds.y);
   if(overlapX>eps&&overlapZ>eps)issues.push({severity:'BLOCK_GAME_READY',code:'OVERLAPPING_ROOM_VOLUMES',rooms:[a.id,b.id],overlapSquareMeters:overlapX*overlapZ*FT*FT});
  }
- return {version:1,certified:false,roomsInspected:rooms.length,issues,repairs,limitations:['Free-form stair foot placement not certified','Door leaf geometry/camera clearance requires browser validation','Furniture collision and structural GLB classification remain pending']};
+ return {version:1,certified:false,roomsInspected:rooms.length,exteriorEnvelope:{walls:exterior,exposedSideCount:exterior.length,roofCertification:'NOT_CERTIFIED'},issues,repairs,limitations:['Free-form stair foot placement not certified','Door leaf geometry/camera clearance requires browser validation','Furniture collision and structural GLB classification remain pending']};
 }
 function geom(floor,fi,allFloors){let boxes=[];const box=(c,s,mat)=>{if(s.every(x=>x>.009))boxes.push({c,s,mat})};for(const r of floor.rooms){const x=+r.x,z=+r.y,l=+r.l,w=+r.w,h=+r.h,base=fi*14;// Keep an upper stair shaft OPEN when the lower floor connects to it.
 const stairRoom=/stair/i.test((r.type||'')+' '+(r.roomType||'')+' '+(r.name||''));
