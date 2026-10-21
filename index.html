@@ -295,4 +295,16 @@ body:not(.bh-advanced-open) .legend{display:none!important}
 <script>
 (()=>{const btn=document.getElementById('toolDrawerButton'),drawer=document.getElementById('toolDrawer'),cinema=document.getElementById('cinemaMode');btn.addEventListener('click',()=>{const open=drawer.classList.toggle('open');btn.setAttribute('aria-expanded',String(open));btn.textContent=open?'× Close':'☷ Tools'});cinema.addEventListener('click',()=>{const on=document.body.classList.toggle('forge-cinema');cinema.setAttribute('aria-pressed',String(on));cinema.textContent=on?'◈ Show controls':'◈ Cinematic view';drawer.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.textContent='☷ Tools'});document.addEventListener('keydown',e=>{if(e.key==='Escape'){drawer.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.textContent='☷ Tools';if(document.body.classList.contains('forge-cinema'))cinema.click()}})})();
 </script><div id="hall-visual-label" style="position:fixed;left:12px;bottom:12px;z-index:20;background:#231b24dc;border:1px solid #b99051;color:#f3e6d1;padding:7px 11px;font:12px Georgia,serif;pointer-events:none;border-radius:7px">Grand Entrance Hall • Visual Benchmark v2</div>
-<a href="frame_atelier.html" style="position:fixed;bottom:12px;right:12px;z-index:500;background:#241d2c;color:#e8cca0;border:1px solid #9b7c51;border-radius:8px;padding:9px;text-decoration:none;font:12px system-ui">Frame Atelier</a><a href="./casa_publisher.html" id="casa-launch" style="position:fixed;z-index:400;bottom:16px;left:16px;background:#7a3064;color:white;text-decoration:none;border:1px solid #d99ac4;padding:11px 15px;border-radius:9px;font:bold 14px system-ui;box-shadow:0 8px 25px #000a">✦ Publish CASA</a></body></html>
+<a href="frame_atelier.html" style="position:fixed;bottom:12px;right:12px;z-index:500;background:#241d2c;color:#e8cca0;border:1px solid #9b7c51;border-radius:8px;padding:9px;text-decoration:none;font:12px system-ui">Frame Atelier</a><a href="./casa_publisher.html" id="casa-launch" style="position:fixed;z-index:400;bottom:16px;left:16px;background:#7a3064;color:white;text-decoration:none;border:1px solid #d99ac4;padding:11px 15px;border-radius:9px;font:bold 14px system-ui;box-shadow:0 8px 25px #000a">✦ Publish CASA</a>
+<style id="bh-overlay-clearance">
+/* Tools and QA share the right-hand workspace; show one panel at a time. */
+body:has(#toolDrawer.open) #bh-qa-panel,
+body:has(#toolDrawer.open) #bh-qa-open{display:none!important}
+#bh-qa-open{bottom:70px!important}
+a[href="frame_atelier.html"][style]{right:115px!important}
+body.bh-photo #bh-qa-panel,body.bh-photo #bh-qa-open,
+body.bh-photo #casa-launch,body.bh-photo a[href="frame_atelier.html"][style],
+body.bh-photo #bh-walk-panel,body.bh-photo #bh-page-switcher{display:none!important}
+#toolDrawer{max-height:calc(100dvh - 135px)!important}
+</style>
+</body></html>
