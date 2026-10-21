@@ -78,7 +78,8 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
    const p=findPassage(nx,nz,vx,vz);
    if(p){
     const leaf=doorMeshes.get(p.portal.shared);
-    if(leaf&&leaf.open<.67)continue; // Closed or moving leaf blocks the crossing.
+    if(leaf&&leaf.open<.92)continue; // Allow traversal only after the hinged leaf has substantially cleared the doorway.
+    // The connected room replaces the camera containment volume at this threshold.
     // Cross the shared wall at the actual portal center. Only a small capsule
     // clearance offset is used; there is no arbitrary jump to a distant room.
     const landing=.29;
@@ -159,7 +160,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   const ceiling=floor+authoredHeight;
   const headY=Math.min(floor+1.21,ceiling-.68);
   if(S.mode==='first'){
-   camera.position.set(S.x,Math.min(floor+eye,ceiling-.38),S.z);
+   camera.position.set(clamp(S.x,b.minX+.08,b.maxX-.08),Math.min(floor+eye,ceiling-.38),clamp(S.z,b.minZ+.08,b.maxZ-.08));
    camera.lookAt(S.x+face.x*5,camera.position.y+Math.tan(S.pitch)*5,S.z+face.z*5);
    avatar.visible=false;return;
   }
@@ -173,7 +174,11 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   // Chase camera follows real heading; room-edge clamp caused sideways views.
   const cx=S.x-face.x*distance;
   const cz=S.z-face.z*distance;
-  let desired=new THREE.Vector3(cx,height,cz);
+  // The chase camera belongs to the same room as the explorer. A door transition
+  // updates S.room; until then, neither rotation nor interpolation may take the
+  // camera through walls or into adjacent rooms.
+  const safePad=Math.min(.28,Math.max(.08,(b.maxX-b.minX)*.10),(b.maxZ-b.minZ)*.10);
+  let desired=new THREE.Vector3(clamp(cx,b.minX+safePad,b.maxX-safePad),height,clamp(cz,b.minZ+safePad,b.maxZ-safePad));
   // A shoulder-offset helps keep the character visible down narrow corridors.
   // Stop short of any opaque geometry between avatar and chase camera.
   const direction=desired.clone().sub(aim);
@@ -187,8 +192,12 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
     desired=aim.clone().addScaledVector(direction.normalize(),near);
    }
   }
-  if(instant||camera.position.distanceTo(desired)>7)camera.position.copy(desired);
+  const outsideRoom=(camera.position.x<b.minX+safePad||camera.position.x>b.maxX-safePad||camera.position.z<b.minZ+safePad||camera.position.z>b.maxZ-safePad);
+  // Snap on a real room transition: never lerp *through* the connecting wall.
+  if(instant||outsideRoom||camera.position.distanceTo(desired)>7)camera.position.copy(desired);
   else camera.position.lerp(desired,Math.min(1,dt*9));
+  camera.position.x=clamp(camera.position.x,b.minX+safePad,b.maxX-safePad);
+  camera.position.z=clamp(camera.position.z,b.minZ+safePad,b.maxZ-safePad);
   camera.near=.07;
   camera.fov=long?69:64;
   camera.updateProjectionMatrix();
