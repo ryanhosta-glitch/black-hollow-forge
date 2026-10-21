@@ -2,7 +2,7 @@
 // Reusable preview controller, not yet a certified game physics engine. Closed/locked doors require game logic.
 export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas,getRoom,levelY,selectRoom,getConnections,isReady}){
  const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',directorMode:'hybrid',clock:performance.now(),hintUntil:0,revealUntil:0,facingYaw:0,cameraYaw:0,movementAnchor:null,speed:0,turnSpeed:0,lookYaw:0,lookUntil:0,cameraRoomId:null,requireFreshForward:false,arrivalUntil:0,lastPortal:null,lastPortalAt:0,doorState:new Map()};
- const K=.3048,margin=.14,eye=1.68,radius=.20,topPitch=0.65;
+ const K=.3048,margin=.20,eye=1.68,radius=.20,topPitch=0.65;
  const heading=()=>new THREE.Vector3(-Math.sin(S.yaw),0,-Math.cos(S.yaw));
  const doorMeshes=new Map();
  const doorGroup=new THREE.Group();doorGroup.name='forge_43_hinged_doors';
@@ -25,7 +25,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
  function orient(){return heading();}
  function placeAtCenter(r){const b=bnd(r);if(!b)return;S.x=(b.minX+b.maxX)*.5;S.z=(b.minZ+b.maxZ)*.5;}
  function enter(){if(!isReady())return false;buildDoors();S.room=getRoom();const b=bnd(S.room);if(!b)return false;S.active=true;S.mode='cinematic';S.moving.clear();S.lastPortal=null;S.lastPortalAt=0;S.doorState.clear();placeAtCenter(S.room);S.yaw=0;S.facingYaw=0;S.cameraYaw=0;S.movementAnchor=null;S.pitch=0;S.speed=0;S.turnSpeed=0;S.lookYaw=0;S.lookUntil=0;S.cameraRoomId=null;S.requireFreshForward=false;S.arrivalUntil=0;controls.enabled=false;S.clock=performance.now();if(scene&&avatar.parent!==scene)scene.add(avatar);sync();follow(.05,true);status('W/↑ forward · S/↓ back · A/← turn left · D/→ turn right · camera behind explorer');return true;}
- function exit(){S.active=false;for(const d of doorMeshes.values()){d.pivot.visible=false;d.open=0;d.pivot.rotation.y=0;}S.moving.clear();S.movementAnchor=null;S.speed=0;S.turnSpeed=0;S.requireFreshForward=false;S.mouse=false;avatar.visible=false;controls.enabled=true;camera.fov=62;camera.updateProjectionMatrix();sync();}
+ function exit(){if(!S.active)return;S.active=false;for(const d of doorMeshes.values()){d.pivot.visible=false;d.open=0;d.pivot.rotation.y=0;}S.moving.clear();S.movementAnchor=null;S.speed=0;S.turnSpeed=0;S.requireFreshForward=false;S.mouse=false;avatar.visible=false;controls.enabled=true;camera.near=.1;camera.fov=62;camera.updateProjectionMatrix();controls.target.set(S.x,(bnd(S.room)?.y??0)+1.18,S.z);sync();}
  function changeCamera(){S.mode=S.mode==='cinematic'?'explorer':S.mode==='explorer'?'first':'cinematic';sync();follow(.05,true)}
  // 4.3: Only a matched, same-floor architect-door is walkable. Magical elevator and stairs stay explicit.
  function doorPortal(r,o){const b=bnd(r);if(!b||!o||o.type!=='door'||!o.shared)return null;const pos=clamp(Number(o.pos??.5),0,1),w=clamp(Number(o.width||o.widthFeet||3.54)*K, .65, 2.1);let x,z,axis,dir;
@@ -60,7 +60,9 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
      const other=all.find(a=>a.id===id);
      if(!other||other.floor!==r.floor)continue;
      const opposing={left:'right',right:'left',top:'bottom',bottom:'top'}[side];
-     if(!(other.openings||[]).some(d=>d.type==='door'&&d.shared===o.shared&&d.wall===opposing))continue;
+     const receiving=(other.openings||[]).find(d=>d.type==='door'&&d.shared===o.shared&&d.wall===opposing);
+     const receivingPortal=doorPortal(other,receiving);
+     if(!receivingPortal||Math.abs(lateral-(receivingPortal.axis==='x'?receivingPortal.z:receivingPortal.x))>receivingPortal.half)continue;
      const bb=bnd(other);if(!bb)continue;
      const gap=side==='left'?b.minX-bb.maxX:side==='right'?bb.minX-b.maxX:side==='top'?b.minZ-bb.maxZ:bb.minZ-b.maxZ;
      if(Math.abs(gap)>.26)continue;
@@ -82,7 +84,8 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
    // After crossing a shared wall the explorer is still within the receiving
    // room's physical doorway strip. Let him finish walking into that room;
    // otherwise the old inset margin pins him against the threshold.
-   const justCrossed=performance.now()-S.lastPortalAt<1250;
+   const arrivalPortal=(S.room.openings||[]).filter(o=>o.shared===S.lastPortal).map(o=>doorPortal(S.room,o)).find(p=>p&&Math.abs((p.axis==='x'?nz:nx)-(p.axis==='x'?p.z:p.x))<=p.half&&Math.abs((p.axis==='x'?nx:nz)-(p.axis==='x'?p.x:p.z))<=margin+.06);
+   const justCrossed=!!arrivalPortal;
    const physicallyInside=nx>=current.minX&&nx<=current.maxX&&nz>=current.minZ&&nz<=current.maxZ;
    if(inside||(justCrossed&&physicallyInside)){S.x=nx;S.z=nz;continue;}
    const passage=findPassage(nx,nz,vx,vz);
@@ -157,13 +160,15 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   for(const [id,d] of doorMeshes){
    const distance=Math.hypot(S.x-d.centerX,S.z-d.centerZ);
    const old=S.doorState.get(id);
-   const nearby=S.active&&distance<2.6&&S.room?.floor===d.floor;
+   const sameFloor=S.room?.floor===d.floor;
+   const nearby=S.active&&sameFloor&&(distance<2.6||Math.hypot(camera.position.x-d.centerX,camera.position.z-d.centerZ)<1.75);
    if(nearby){S.doorState.set(id,{progress:1,closingAt:now+2600});}
    else if(old&&now>old.closingAt&&distance>2.6){S.doorState.delete(id);}
    d.target=S.doorState.has(id)?1:0;
    d.open+=(d.target-d.open)*Math.min(1,dt*6);
-   d.pivot.rotation.y=d.open*(d.axis==='x'?1:-1)*1.56;
-   d.pivot.visible=S.active; 
+   const sign={left:1,right:-1,top:-1,bottom:1}[d.side];
+   d.pivot.rotation.y=d.open*sign*1.56;
+   d.pivot.visible=S.active&&sameFloor;
   }
  }
  // Camera plans are derived only from authored room bounds and matching door IDs.
@@ -220,6 +225,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   const dip=S.doorwayDip;
   const aim=new THREE.Vector3(S.x,Math.min(floor+1.18-dip*.10,ceiling-.75),S.z);
   if(S.mode==='first'){
+   camera.near=.045;camera.updateProjectionMatrix();
    camera.position.set(S.x,Math.min(floor+eye,ceiling-.38),S.z);
    camera.lookAt(S.x+face.x*5,camera.position.y+Math.tan(S.pitch)*5,S.z+face.z*5);
    avatar.visible=false;return;
@@ -233,7 +239,8 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   // decorations, invisible models, or the explorer as camera walls.
   const occluders=[];
   scene?.traverse(o=>{
-   if(!o.isMesh||!o.visible||!o.parent?.visible||o.userData?.cameraIgnore||avatar.getObjectById(o.id))return;
+   if(!o.isMesh||o.userData?.cameraIgnore||avatar.getObjectById(o.id))return;
+   for(let ancestor=o;ancestor;ancestor=ancestor.parent)if(!ancestor.visible)return;
    const n=String(o.name||'').toLowerCase();
    if(/particle|mist|fog|smoke|flame|highlight|decay/i.test(n))return;
    if(Array.isArray(o.material)?o.material.every(m=>m.transparent):o.material?.transparent)return;
@@ -245,7 +252,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   if(distanceToCamera>.01){
    const hits=new THREE.Raycaster(aim,direction.clone().normalize(),.12,distanceToCamera).intersectObjects(occluders,false);
    const obstacle=hits.find(hit=>hit.distance>.13);
-   if(obstacle)desired.copy(aim).addScaledVector(direction.normalize(),Math.max(.65,obstacle.distance-.25));
+   if(obstacle)desired.copy(aim).addScaledVector(direction.normalize(),Math.max(.05,obstacle.distance-.25));
   }
   // Avoid abrupt camera relocation on room changes. If the OLD camera is now
   // behind a wall, immediately adopt the safe target instead of easing through it.
@@ -257,7 +264,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
   const finalRay=camera.position.clone().sub(aim),finalLength=finalRay.length();
   if(finalLength>.2){
    const hit=new THREE.Raycaster(aim,finalRay.clone().normalize(),.12,finalLength).intersectObjects(occluders,false).find(h=>h.distance>.13);
-   if(hit)camera.position.copy(aim).addScaledVector(finalRay.normalize(),Math.max(.65,hit.distance-.25));
+   if(hit)camera.position.copy(aim).addScaledVector(finalRay.normalize(),Math.max(.05,hit.distance-.25));
   }
   camera.near=.045;camera.fov=hallway?72:long?69:64;camera.updateProjectionMatrix();
   camera.lookAt(aim.x,aim.y+S.pitch*.18,aim.z);
