@@ -26,6 +26,15 @@ frames(170,()=>{const p=nav.position;assert.ok(Math.hypot(p[0]-previous[0],p[2]-
 assert.equal(nav.currentRoomId,'b');assert.equal(changes,1);assert.ok(nav.position[2]>=-3.048+.20-1e-6,'solid north wall blocks');
 key('keyup','KeyW');key('keydown','KeyS');frames(170);assert.equal(nav.currentRoomId,'a','reverse through doorway');key('keyup','KeyS');
 nav.exit();assert.equal(controls.enabled,true);assert.equal(camera.near,.1);
+// Put the opened leaf inside the room, away from its threshold: it must still
+// block travel. The old threshold-only / openness gate walked straight through.
+selected=rooms[0];nav.enter();frames(120);
+const leaf=scene.getObjectByName('bh-door-leaf-ab');
+leaf.parent.position.set(1.524,0,.10);
+key('keydown','KeyW');frames(100);
+assert.equal(nav.currentRoomId,'a');
+assert.ok(nav.position[2]>1.30,'fully open leaf blocks inside room');
+key('keyup','KeyW');nav.exit();
 // A mismatched receiving aperture must remain a wall even with the same door ID.
 rooms[1].openings[0].pos=.05;selected=rooms[0];nav.enter();key('keydown','KeyW');frames(160);assert.equal(nav.currentRoomId,'a');assert.ok(nav.position[2]>=.20-1e-6);key('keyup','KeyW');
 // A/D turns the explorer, releasing and blurring do not leave a key held.
