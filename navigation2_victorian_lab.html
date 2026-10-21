@@ -82,11 +82,11 @@ function buildEstate(){
     // a wall at fixed Z has one extending along local +X.
     const hingeX=isX?x:x-half,hingeZ=isX?z-half:z;
     const pivot=new THREE.Group();pivot.position.set(hingeX,0,hingeZ);world.add(pivot);
-    const leaf=new THREE.Mesh(new THREE.BoxGeometry(isX?.075:doorWidth,2.25,isX?doorWidth:.075),doorMat);
-    leaf.position.set(isX?0:half,1.125,isX?half:0);pivot.add(leaf);
+    const leaf=new THREE.Mesh(new THREE.BoxGeometry(isX?.075:doorWidth,2.48,isX?doorWidth:.075),doorMat);
+    leaf.position.set(isX?0:half,1.24,isX?half:0);pivot.add(leaf);
     // Rotate INTO the originating room, so an open leaf parks against its wall.
     const sign=side==='left'?1:side==='right'?-1:side==='top'?-1:1;
-    doors.push({x,z,pivot,leaf,openness:0,side,sign,width:doorWidth,kind:'estate'});
+    doors.push({x,z,pivot,leaf,openness:0,side,sign,width:doorWidth,kind:'estate',hold:0});
    }
   }
  }
@@ -194,8 +194,12 @@ function update(dt){
   travel(-Math.sin(P.yaw)*P.vel*dt,-Math.cos(P.yaw)*P.vel*dt);
   current=rooms.find(r=>P.x>=r.minX&&P.x<=r.maxX&&P.z>=r.minZ&&P.z<=r.maxZ)?.name||'Door threshold';
   for(const door of doors){
-   const nearby=Math.hypot(P.x-door.x,P.z-door.z)<1.75;
-   door.openness+=(Number(nearby)-door.openness)*Math.min(1,dt*6);
+   const nearPlayer=Math.hypot(P.x-door.x,P.z-door.z)<2.0;
+   const nearCamera=Math.hypot(camera.position.x-door.x,camera.position.z-door.z)<1.35;
+   if(nearPlayer||nearCamera)door.hold=1.4;
+   else door.hold=Math.max(0,(door.hold||0)-dt);
+   const open=nearPlayer||nearCamera||door.hold>0;
+   door.openness+=(Number(open)-door.openness)*Math.min(1,dt*6);
    door.pivot.rotation.y=door.openness*(door.sign??1)*1.56;
   }
  }else{
@@ -225,8 +229,16 @@ function update(dt){
   }
  }
  if(stage==='rooms'||stage==='estate'){
-  const hit=new THREE.Raycaster(target,rayVector.clone().normalize(),.15,length).intersectObjects(blockers,false)[0];
-  if(hit)desired.copy(target).addScaledVector(rayVector.normalize(),Math.max(.55,hit.distance-.25));
+  // Camera occlusion is independent of character collision: check Victorian
+  // display meshes and both animated and structural doors.
+  const occluders=[...blockers,...doors.map(d=>d.leaf).filter(Boolean)];
+  if(visualGroup.visible)visualGroup.traverse(o=>{if(o.isMesh&&o.visible&&!(o.material?.transparent))occluders.push(o);});
+  const ray=new THREE.Raycaster(target,rayVector.clone().normalize(),.08,length);
+  const hit=ray.intersectObjects(occluders,false).find(h=>h.distance>.13);
+  if(hit){
+   const clear=Math.max(.34,hit.distance-.24);
+   desired.copy(target).addScaledVector(rayVector.normalize(),clear);
+  }
  }
  camera.position.lerp(desired,Math.min(1,dt*8));
  if(stairMetric){const b=stairMetric.bounds;camera.position.x=Math.max(b.minX,Math.min(b.maxX,camera.position.x));camera.position.z=Math.max(b.minZ,Math.min(b.maxZ,camera.position.z));}
