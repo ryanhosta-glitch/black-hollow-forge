@@ -54,8 +54,8 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
     if(!portal)continue;
     const lateral=portal.axis==='x'?nz:nx;
     const center=portal.axis==='x'?portal.z:portal.x;
-    if(Math.abs(lateral-center)>portal.half)continue;
-    if(S.lastPortal===o.shared&&performance.now()-S.lastPortalAt<550)continue;
+    if(Math.abs(lateral-center)>Math.max(.18,portal.half-.02))continue;
+    // Continuous traversal is controlled by wall crossing, not by a time lock.
     for(const id of ids){
      const other=all.find(a=>a.id===id);
      if(!other||other.floor!==r.floor)continue;
