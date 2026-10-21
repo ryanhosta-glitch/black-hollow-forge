@@ -1,7 +1,7 @@
 // Black Hollow Forge 4.2 — cinematic explorer + verified automatic doorway crossing.
 // Reusable preview controller, not yet a certified game physics engine. Closed/locked doors require game logic.
 export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,getRoom,levelY,selectRoom,getConnections,isReady}){
- const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',clock:performance.now(),hintUntil:0,revealUntil:0,lastPortal:null,lastPortalAt:0,doorState:new Map()};
+ const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',clock:performance.now(),hintUntil:0,revealUntil:0,facingYaw:0,movementAnchor:null,lastPortal:null,lastPortalAt:0,doorState:new Map()};
  const K=.3048,margin=.25,eye=1.68,radius=.23,topPitch=0.65;
  const heading=()=>new THREE.Vector3(-Math.sin(S.yaw),0,-Math.cos(S.yaw));
  const doorMeshes=new Map();
@@ -9,7 +9,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  if(scene)scene.add(doorGroup);
  const panel=document.createElement('section');panel.id='bh-walk-panel';panel.innerHTML=`<style>
  #bh-walk-panel{position:fixed;z-index:1200;bottom:12px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;width:min(94vw,820px);padding:8px;background:#10131ef0;color:#f6e8d7;border:1px solid #a08462;border-radius:12px;font:12px system-ui;box-sizing:border-box}#bh-walk-panel button{background:#342839;color:#fff;border:1px solid #997a62;padding:8px;border-radius:7px;cursor:pointer}#bh-walk-panel .walking{display:none}#bh-walk-panel.active .walking{display:inline-block}#bh-walk-panel small{width:100%;text-align:center;color:#d3bfa6}#bh-walk-panel .room{font-weight:bold}#bh-walk-panel .touch{touch-action:none}#bh-walk-panel #bh-walk-status{color:#e8cc9a}</style>
- <button id="bh-walk-toggle">Enter Cinematic Explorer</button><span class="room" id="bh-walk-room">Room inspection</span><button class="walking" id="bh-walk-camera">Camera: CINEMATIC</button><button class="walking" id="bh-walk-exit">Exit</button><button class="walking touch" data-walk="forward">▲</button><button class="walking touch" data-walk="turnleft">↶</button><button class="walking touch" data-walk="backward">▼</button><button class="walking touch" data-walk="turnright">↷</button><button class="walking" id="bh-walk-next">Next linked room (QA)</button><small id="bh-walk-status">W/↑ forward · S/↓ backward · A/← turn left · D/→ turn right · V camera mode</small>`;
+ <button id="bh-walk-toggle">Enter Cinematic Explorer</button><span class="room" id="bh-walk-room">Room inspection</span><button class="walking" id="bh-walk-camera">Camera: CINEMATIC</button><button class="walking" id="bh-walk-exit">Exit</button><button class="walking touch" data-walk="forward">▲</button><button class="walking touch" data-walk="turnleft">↶</button><button class="walking touch" data-walk="backward">▼</button><button class="walking touch" data-walk="turnright">↷</button><button class="walking" id="bh-walk-next">Next linked room (QA)</button><small id="bh-walk-status">W/↑ forward · S/↓ back · A/← step left · D/→ step right · camera follows</small>`;
  document.body.append(panel);const q=id=>panel.querySelector('#'+id);const avatar=new THREE.Group();avatar.name='forge_victorian_explorer_preview';
  const coat=new THREE.MeshStandardMaterial({color:0x27334a,roughness:.9}),vest=new THREE.MeshStandardMaterial({color:0x665344}),skin=new THREE.MeshStandardMaterial({color:0xc6a68c}),hat=new THREE.MeshStandardMaterial({color:0x191922}),cloth=new THREE.MeshStandardMaterial({color:0x252733}),boots=new THREE.MeshStandardMaterial({color:0x17161c});
  function addBox(parent,w,h,d,x,y,z,material){let a=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);a.position.set(x,y,z);parent.add(a);return a}
@@ -24,8 +24,8 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  function status(t){q('bh-walk-status').textContent=t;}
  function orient(){return heading();}
  function placeAtCenter(r){const b=bnd(r);if(!b)return;S.x=(b.minX+b.maxX)*.5;S.z=(b.minZ+b.maxZ)*.5;}
- function enter(){if(!isReady())return false;buildDoors();S.room=getRoom();const b=bnd(S.room);if(!b)return false;S.active=true;S.mode='cinematic';S.moving.clear();S.lastPortal=null;S.lastPortalAt=0;S.doorState.clear();placeAtCenter(S.room);S.yaw=0;S.pitch=0;controls.enabled=false;S.clock=performance.now();if(scene&&avatar.parent!==scene)scene.add(avatar);sync();follow(.05,true);status('W/↑ forward · S/↓ backward · A/← turn left · D/→ turn right · camera follows behind');return true;}
- function exit(){S.active=false;for(const d of doorMeshes.values()){d.pivot.visible=false;d.open=0;d.pivot.rotation.y=0;}S.moving.clear();S.mouse=false;avatar.visible=false;controls.enabled=true;camera.fov=62;camera.updateProjectionMatrix();sync();}
+ function enter(){if(!isReady())return false;buildDoors();S.room=getRoom();const b=bnd(S.room);if(!b)return false;S.active=true;S.mode='cinematic';S.moving.clear();S.lastPortal=null;S.lastPortalAt=0;S.doorState.clear();placeAtCenter(S.room);S.yaw=0;S.facingYaw=0;S.movementAnchor=null;S.pitch=0;controls.enabled=false;S.clock=performance.now();if(scene&&avatar.parent!==scene)scene.add(avatar);sync();follow(.05,true);status('W/↑ forward · S/↓ back · A/← move left · D/→ move right · camera behind explorer');return true;}
+ function exit(){S.active=false;for(const d of doorMeshes.values()){d.pivot.visible=false;d.open=0;d.pivot.rotation.y=0;}S.moving.clear();S.movementAnchor=null;S.mouse=false;avatar.visible=false;controls.enabled=true;camera.fov=62;camera.updateProjectionMatrix();sync();}
  function changeCamera(){S.mode=S.mode==='cinematic'?'explorer':S.mode==='explorer'?'first':'cinematic';sync();follow(.05,true)}
  // 4.3: Only a matched, same-floor architect-door is walkable. Magical elevator and stairs stay explicit.
  function doorPortal(r,o){const b=bnd(r);if(!b||!o||o.type!=='door'||!o.shared)return null;const pos=clamp(Number(o.pos??.5),0,1),w=clamp(Number(o.width||o.widthFeet||3)*K, .65, 2.1);let x,z,axis,dir;
@@ -152,8 +152,8 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   const b=bnd(S.room);if(!b)return;
   const floor=b.y;
   avatar.position.set(S.x,floor,S.z);
-  avatar.rotation.y=S.yaw;
-  const face=orient();
+  avatar.rotation.y=S.facingYaw;
+  const face=new THREE.Vector3(-Math.sin(S.facingYaw),0,-Math.cos(S.facingYaw));
   // Height comes from the authored room, never from a fixed "cinematic" offset.
   const authoredHeight=Math.max(2.15,(Number(S.room?.boundsFeet?.h)||9)*K);
   const ceiling=floor+authoredHeight;
@@ -193,14 +193,43 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   camera.lookAt(aim.x+face.x*.25,aim.y+S.pitch*.25,aim.z+face.z*.25);
  }
  let stride=0;
- function update(t){let dt=Math.min(.05,Math.max(0,(t-S.clock)/1000));S.clock=t;if(!S.active)return;tickDoors(t,dt);let turn=(Number(S.moving.has('turnright'))-Number(S.moving.has('turnleft')));S.yaw-=turn*dt*2.0;
- let f=Number(S.moving.has('forward'))-Number(S.moving.has('backward')),side=Number(S.moving.has('right'))-Number(S.moving.has('left'));const len=Math.hypot(f,side)||1;f/=len;side/=len;const dir=orient(),speed=S.moving.has('sprint')?5.4:3.1;const dx=(dir.x*f+(-dir.z)*side)*speed*dt,dz=(dir.z*f+dir.x*side)*speed*dt;step(dx,dz);
- const moving=Math.hypot(dx,dz)>.0001;stride+=dt*(moving?10:0);const a=moving?Math.sin(stride)*.45:0;legs[0].rotation.x=a;legs[1].rotation.x=-a;arms[0].rotation.x=-a*.75;arms[1].rotation.x=a*.75;torso.position.y=moving?Math.abs(Math.sin(stride))*.035:0;follow(dt);
+ function angleTo(current,target,amount){
+  const delta=Math.atan2(Math.sin(target-current),Math.cos(target-current));
+  return current+delta*Math.min(1,amount);
  }
- const keymap={KeyW:'forward',ArrowUp:'forward',KeyS:'backward',ArrowDown:'backward',KeyA:'turnleft',KeyD:'turnright',ArrowLeft:'turnleft',ArrowRight:'turnright',ShiftLeft:'sprint',ShiftRight:'sprint'};
+ // W/S moves forward/back; A/D and horizontal arrows move the actual character.
+ // Face the direction of travel. Camera follows the avatar's back.
+ // Keep the movement basis fixed until keys release, avoiding steering spirals.
+ function update(t){
+  const dt=Math.min(.05,Math.max(0,(t-S.clock)/1000));S.clock=t;
+  if(!S.active)return;
+  tickDoors(t,dt);
+  const f=Number(S.moving.has('forward'))-Number(S.moving.has('backward'));
+  const side=Number(S.moving.has('right'))-Number(S.moving.has('left'));
+  const len=Math.hypot(f,side);
+  if(len>.001){
+   if(S.movementAnchor===null)S.movementAnchor=S.yaw;
+   const base=S.movementAnchor,fx=-Math.sin(base),fz=-Math.cos(base);
+   const speed=S.moving.has('sprint')?5.0:2.75;
+   const dx=(fx*f-fz*side)/len*speed*dt;
+   const dz=(fz*f+fx*side)/len*speed*dt;
+   step(dx,dz);
+   const target=(f<0&&side===0)?S.yaw:Math.atan2(-dx,-dz);
+   S.facingYaw=angleTo(S.facingYaw,target,dt*13);
+  }else{
+   if(S.movementAnchor!==null){S.yaw=S.facingYaw;S.movementAnchor=null;}
+  }
+  const moving=len>.001;
+  stride+=dt*(moving?10:0);const a=moving?Math.sin(stride)*.45:0;
+  legs[0].rotation.x=a;legs[1].rotation.x=-a;
+  arms[0].rotation.x=-a*.75;arms[1].rotation.x=a*.75;
+  torso.position.y=moving?Math.abs(Math.sin(stride))*.035:0;
+  follow(dt);
+ }
+ const keymap={KeyW:'forward',ArrowUp:'forward',KeyS:'backward',ArrowDown:'backward',KeyA:'left',KeyD:'right',ArrowLeft:'left',ArrowRight:'right',ShiftLeft:'sprint',ShiftRight:'sprint'};
  document.addEventListener('keydown',e=>{if(!S.active||e.target?.closest?.('input,textarea,select'))return;if(e.code==='KeyV'){changeCamera();e.preventDefault();return;}if(e.code==='Escape'){exit();return;}const m=keymap[e.code];if(m){S.moving.add(m);e.preventDefault();}});
  document.addEventListener('keyup',e=>{const m=keymap[e.code];if(m)S.moving.delete(m);});window.addEventListener('blur',()=>S.moving.clear());
- canvas.addEventListener('pointerdown',e=>{if(!S.active)return;S.mouse=true;S.px=e.clientX;S.py=e.clientY;});canvas.addEventListener('pointermove',e=>{if(!S.active||!S.mouse)return;S.yaw-=(e.clientX-S.px)*.004;S.pitch=clamp(S.pitch-(e.clientY-S.py)*.004,-topPitch,topPitch);S.px=e.clientX;S.py=e.clientY;});for(const event of ['pointerup','pointercancel','pointerleave'])canvas.addEventListener(event,()=>S.mouse=false);
+ canvas.addEventListener('pointerdown',e=>{if(!S.active)return;S.mouse=true;S.px=e.clientX;S.py=e.clientY;});canvas.addEventListener('pointermove',e=>{if(!S.active||!S.mouse)return;S.yaw-=(e.clientX-S.px)*.004;S.facingYaw=S.yaw;S.movementAnchor=null;S.pitch=clamp(S.pitch-(e.clientY-S.py)*.004,-topPitch,topPitch);S.px=e.clientX;S.py=e.clientY;});for(const event of ['pointerup','pointercancel','pointerleave'])canvas.addEventListener(event,()=>S.mouse=false);
  for(const btn of panel.querySelectorAll('[data-walk]')){const m=btn.dataset.walk;btn.addEventListener('pointerdown',e=>{e.preventDefault();btn.setPointerCapture(e.pointerId);S.moving.add(m)});for(const evt of ['pointerup','pointercancel','lostpointercapture'])btn.addEventListener(evt,()=>S.moving.delete(m));}
  q('bh-walk-toggle').onclick=()=>S.active?exit():enter();q('bh-walk-exit').onclick=exit;q('bh-walk-camera').onclick=changeCamera;
  q('bh-walk-next').onclick=()=>{const ids=S.room?getConnections(S.room.id)||[]:[];if(!ids.length){status('No linked room in navigation graph');return;}exit();selectRoom(ids[0]);enter();status('QA connection jump (not physical door travel)');};
