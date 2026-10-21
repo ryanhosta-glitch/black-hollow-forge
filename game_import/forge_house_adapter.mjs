@@ -6,14 +6,24 @@ async function jsonAt(url){const r=await fetch(url);if(!r.ok)throw Error(`${r.st
 export async function loadForgeContract(root){
   const manifest=await jsonAt(urlFor(root,'manifest.json'));
   if(manifest.format!=='black-hollow-house')throw Error('Not a Black Hollow Forge house');
-  const [navigation,integrity]=await Promise.all([jsonAt(urlFor(root,manifest.navigation)),jsonAt(urlFor(root,manifest.integrity))]);
-  const rooms=new Map(navigation.rooms.map(room=>[room.id,room]));
-  if(rooms.size!==navigation.rooms.length)throw Error('Duplicate room IDs');
+  const [navigation,integrity,collision,doorways,stairNavigation]=await Promise.all([
+    jsonAt(urlFor(root,manifest.navigation)),
+    manifest.integrity?jsonAt(urlFor(root,manifest.integrity)):Promise.resolve({status:'not-included-in-new-qa-casa'}),
+    manifest.collision?jsonAt(urlFor(root,manifest.collision)):Promise.resolve(null),
+    manifest.doorways?jsonAt(urlFor(root,manifest.doorways)):Promise.resolve(null),
+    manifest.stairNavigation?jsonAt(urlFor(root,manifest.stairNavigation)):Promise.resolve(null)
+  ]);
+  // Older estate packages use boundsFeet; new CASA compilation uses bounds.
+  const standardRooms=navigation.rooms.map(room=>({...room,boundsFeet:room.boundsFeet||room.bounds}));
+  if(standardRooms.some(room=>!room.boundsFeet))throw Error('Room lacks navigation dimensions');
+  const normalizedNavigation={...navigation,rooms:standardRooms};
+  const rooms=new Map(standardRooms.map(room=>[room.id,room]));
+  if(rooms.size!==standardRooms.length)throw Error('Duplicate room IDs');
   if(!rooms.has(manifest.entry.roomId))throw Error('Game entry room not found');
   for(const floor of manifest.floors)for(const id of floor.roomIds)if(!rooms.has(id))throw Error('Floor references unknown room '+id);
-  return Object.freeze({root,manifest,navigation,integrity,rooms,entry:manifest.entry,
+  return Object.freeze({root,manifest,navigation:normalizedNavigation,integrity,collision,doorways,stairNavigation,rooms,entry:manifest.entry,
     getRoom:id=>rooms.get(id)||null,
-    getFloorRooms:i=>navigation.rooms.filter(r=>r.floor===i),
+    getFloorRooms:i=>standardRooms.filter(r=>r.floor===i),
     roomCenterMeters:id=>{const r=rooms.get(id);if(!r)return null;const b=r.boundsFeet;return {x:(b.x+b.l/2)*METERS_PER_FOOT,z:(b.y+b.w/2)*METERS_PER_FOOT,floor:r.floor};},
     url:path=>urlFor(root,path)
   });
