@@ -167,8 +167,8 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   // Third-person camera looks AT the character, not over a nearby ceiling beam.
   // Keep it inside the actual ceiling, and use a short chase distance in hallways.
   const long=S.mode==='cinematic';
-  const reveal=performance.now()<S.revealUntil;const distance=long?(reveal?3.35:2.75):2.2;
-  const height=Math.min(floor+(long?(reveal?2.12:1.97):1.83),ceiling-.42);
+  const reveal=performance.now()<S.revealUntil;const distance=long?(reveal?3.5:3.05):2.5;
+  const height=Math.min(floor+(long?(reveal?2.16:2.03):1.88),ceiling-.45);
   const aim=new THREE.Vector3(S.x,headY,S.z);
   // Chase camera follows real heading; room-edge clamp caused sideways views.
   const cx=S.x-face.x*distance;
@@ -183,14 +183,17 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
    const models=(scene?.children||[]).filter(o=>o!==avatar&&o!==doorGroup&&o.visible&&o.type==='Group'&&!String(o.name||'').startsWith('forge_'));
    const hits=ray.intersectObjects(models,true).filter(h=>h.object?.isMesh&&h.object.visible&&h.object.material?.transparent!==true);
    if(hits.length){
-    const near=Math.max(.50,hits[0].distance-.25);
+    const near=Math.max(.90,hits[0].distance-.35);
     desired=aim.clone().addScaledVector(direction.normalize(),near);
    }
   }
   if(instant||camera.position.distanceTo(desired)>7)camera.position.copy(desired);
   else camera.position.lerp(desired,Math.min(1,dt*9));
-  camera.near=.035;camera.updateProjectionMatrix();
-  camera.lookAt(aim.x+face.x*.25,aim.y+S.pitch*.25,aim.z+face.z*.25);
+  camera.near=.07;
+  camera.fov=long?69:64;
+  camera.updateProjectionMatrix();
+  // Look forward into the room, not down at the explorer's hat.
+  camera.lookAt(aim.x+face.x*1.05,aim.y+S.pitch*.30,aim.z+face.z*1.05);
  }
  let stride=0;
  function angleTo(current,target,amount){
