@@ -21,7 +21,7 @@ const visualGroup=new THREE.Group();scene.add(visualGroup);
 let victorianVisuals=false,visualReady=false,loadingVisuals=false,doorwayDip=0;const visualAssets=[];
 function box(x,y,z,w,h,d,mat=solid,obstacle=true){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);world.add(m);if(obstacle)blockers.push(m);return m}
 function clear(){stairMetric=null;while(world.children.length){const m=world.children[0];world.remove(m);m.geometry?.dispose()}blockers=[];doors=[];rooms=[];stairPath=null;progress=0}
-const avatar=new THREE.Group();scene.add(avatar);
+const avatar=new THREE.Group();avatar.scale.setScalar(.86);scene.add(avatar); // 14% smaller laboratory explorer for easier doorway aiming
 const body=new THREE.Mesh(new THREE.CylinderGeometry(.22,.29,.9,10),coatMat);body.position.y=1.04;avatar.add(body);
 const head=new THREE.Mesh(new THREE.SphereGeometry(.21,12,10),new THREE.MeshStandardMaterial({color:0xc9a58c}));head.position.y=1.67;avatar.add(head);
 const hat=new THREE.Mesh(new THREE.CylinderGeometry(.24,.31,.42,14),hatMat);hat.position.y=2.02;avatar.add(hat);
