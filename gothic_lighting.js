@@ -6,7 +6,7 @@ export function createGothicLighting(THREE,scene,renderer,{mobile=false}={}){
     p.name='forge_adaptive_room_light_'+i;p.castShadow=false;scene.add(p);return p;
   });
   let candidates=[],mode='day',lastUpdate=0;
-  const palettes={day:{ambient:2.0,sun:2.45,moon:.14,exposure:1.14,lamps:.10},dusk:{ambient:1.05,sun:1.18,moon:.43,exposure:1.23,lamps:1.2},night:{ambient:.65,sun:.22,moon:1.0,exposure:1.35,lamps:1.8},spectral:{ambient:.55,sun:.10,moon:1.55,exposure:1.21,lamps:.95}};
+  const palettes={day:{ambient:2.0,sun:2.45,moon:.14,exposure:1.14,lamps:.10},dusk:{ambient:.82,sun:1.08,moon:.48,exposure:1.23,lamps:1.45},night:{ambient:.52,sun:.22,moon:1.0,exposure:1.35,lamps:1.95},spectral:{ambient:.55,sun:.10,moon:1.55,exposure:1.21,lamps:.95}};
   const styleColor={library:0xffbb77,study:0xffbd79,ballroom:0xffd3a0,dining:0xffb66a,crypt:0x88b5dd,vault:0xa3bbdf,chapel:0xffd4a6,conservatory:0x98d5ad,laboratory:0x99ccd0,nursery:0xffca88,bedroom:0xffbc7e};
   const tmp=new THREE.Vector3();
   function setRooms(rooms,levels){
@@ -24,7 +24,7 @@ export function createGothicLighting(THREE,scene,renderer,{mobile=false}={}){
   function setMode(next,ambient,sun,moon){
     mode=palettes[next]?next:'day';const p=palettes[mode];
     if(ambient)ambient.intensity=p.ambient;
-    if(sun){sun.intensity=p.sun;sun.color.set(mode==='day'?0xfff0d7:0xe6e0e1)}
+    if(sun){sun.intensity=p.sun;sun.color.set(mode==='day'?0xfff0d7:mode==='dusk'?0xffd0a0:0xc5d3ed)}
     if(moon)moon.intensity=p.moon;
     renderer.toneMappingExposure=p.exposure;
     if(mode==='spectral')warm.forEach(l=>l.color.set(0x95c6f9));

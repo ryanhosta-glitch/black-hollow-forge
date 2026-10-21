@@ -108,5 +108,8 @@
   "navigation/stair_turn_path_qa.json",
   "navigation/stair_world_placement.json",
   "source.haunt",
-  "validation.json"
+  "validation.json",
+  "navigation/signature_links.json",
+  "navigation/signature_visual_report.json",
+  "navigation/source_readiness.json"
 ]

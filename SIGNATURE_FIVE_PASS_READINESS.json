@@ -1,0 +1,294 @@
+{
+  "passes": 5,
+  "gameReady": false,
+  "browserVisualVerification": "BLOCKED_WEBGL_UNAVAILABLE",
+  "checks": {
+    "sourceAudit26Rooms": "PASS",
+    "signatureGLTFLoader": "PASS",
+    "hallStairAscentDescent": "PASS",
+    "elevatorCabinHeightAndRange": "PASS",
+    "existingMovementAndDoors": "PASS",
+    "interactionEngine11Assertions": "PASS",
+    "casa113FileIntegrity": "PASS",
+    "sourceBlueprintHash": "PASS"
+  },
+  "geometry": {
+    "version": 6,
+    "units": "meters",
+    "scenes": {
+      "hall": {
+        "instances": 1670,
+        "drawCalls": 17,
+        "triangles": 63492,
+        "bytes": 180968,
+        "blockers": [
+          {
+            "id": "settee",
+            "minX": -8.5,
+            "maxX": -7.5,
+            "minZ": -9.1,
+            "maxZ": -6.9,
+            "minY": 0,
+            "maxY": 2
+          },
+          {
+            "id": "settee",
+            "minX": -8.5,
+            "maxX": -7.5,
+            "minZ": -2.1,
+            "maxZ": 0.10000000000000009,
+            "minY": 0,
+            "maxY": 2
+          },
+          {
+            "id": "settee",
+            "minX": 7.5,
+            "maxX": 8.5,
+            "minZ": -9.1,
+            "maxZ": -6.9,
+            "minY": 0,
+            "maxY": 2
+          },
+          {
+            "id": "settee",
+            "minX": 7.5,
+            "maxX": 8.5,
+            "minZ": -2.1,
+            "maxZ": 0.10000000000000009,
+            "minY": 0,
+            "maxY": 2
+          }
+        ],
+        "lights": [
+          {
+            "position": [
+              0,
+              7.85,
+              -7
+            ],
+            "color": 16759413,
+            "intensity": 65,
+            "distance": 16
+          },
+          {
+            "position": [
+              0,
+              9.25,
+              2
+            ],
+            "color": 16759413,
+            "intensity": 65,
+            "distance": 16
+          },
+          {
+            "position": [
+              0,
+              11.25,
+              11
+            ],
+            "color": 16759413,
+            "intensity": 65,
+            "distance": 16
+          }
+        ]
+      },
+      "floor13": {
+        "instances": 2900,
+        "drawCalls": 25,
+        "triangles": 157812,
+        "bytes": 323192,
+        "blockers": [
+          {
+            "id": "botanical-bed",
+            "minX": -10.1,
+            "maxX": -5.9,
+            "minZ": -11.8,
+            "maxZ": -8.2,
+            "minY": 0,
+            "maxY": 1.2
+          },
+          {
+            "id": "botanical-bed",
+            "minX": -10.1,
+            "maxX": -5.9,
+            "minZ": -4.8,
+            "maxZ": -1.2,
+            "minY": 0,
+            "maxY": 1.2
+          },
+          {
+            "id": "botanical-bed",
+            "minX": -10.1,
+            "maxX": -5.9,
+            "minZ": 3.2,
+            "maxZ": 6.8,
+            "minY": 0,
+            "maxY": 1.2
+          },
+          {
+            "id": "botanical-bed",
+            "minX": -10.1,
+            "maxX": -5.9,
+            "minZ": 9.2,
+            "maxZ": 12.8,
+            "minY": 0,
+            "maxY": 1.2
+          },
+          {
+            "id": "botanical-bed",
+            "minX": 5.9,
+            "maxX": 10.1,
+            "minZ": -11.8,
+            "maxZ": -8.2,
+            "minY": 0,
+            "maxY": 1.2
+          },
+          {
+            "id": "botanical-bed",
+            "minX": 5.9,
+            "maxX": 10.1,
+            "minZ": -4.8,
+            "maxZ": -1.2,
+            "minY": 0,
+            "maxY": 1.2
+          },
+          {
+            "id": "botanical-bed",
+            "minX": 5.9,
+            "maxX": 10.1,
+            "minZ": 3.2,
+            "maxZ": 6.8,
+            "minY": 0,
+            "maxY": 1.2
+          },
+          {
+            "id": "botanical-bed",
+            "minX": 5.9,
+            "maxX": 10.1,
+            "minZ": 9.2,
+            "maxZ": 12.8,
+            "minY": 0,
+            "maxY": 1.2
+          },
+          {
+            "id": "fountain",
+            "minX": -2.15,
+            "maxX": 2.15,
+            "minZ": -2.15,
+            "maxZ": 2.15,
+            "minY": 0,
+            "maxY": 2.5
+          },
+          {
+            "id": "settee",
+            "minX": -7.1,
+            "maxX": -4.9,
+            "minZ": -13.5,
+            "maxZ": -12.5,
+            "minY": 0,
+            "maxY": 2
+          },
+          {
+            "id": "settee",
+            "minX": -7.1,
+            "maxX": -4.9,
+            "minZ": 13.5,
+            "maxZ": 14.5,
+            "minY": 0,
+            "maxY": 2
+          },
+          {
+            "id": "settee",
+            "minX": 4.9,
+            "maxX": 7.1,
+            "minZ": -13.5,
+            "maxZ": -12.5,
+            "minY": 0,
+            "maxY": 2
+          },
+          {
+            "id": "settee",
+            "minX": 4.9,
+            "maxX": 7.1,
+            "minZ": 13.5,
+            "maxZ": 14.5,
+            "minY": 0,
+            "maxY": 2
+          },
+          {
+            "id": "research-table",
+            "minX": -11.45,
+            "maxX": -8.55,
+            "minZ": -14.575,
+            "maxZ": -13.425,
+            "minY": 0,
+            "maxY": 2
+          },
+          {
+            "id": "research-table",
+            "minX": 8.55,
+            "maxX": 11.45,
+            "minZ": -14.575,
+            "maxZ": -13.425,
+            "minY": 0,
+            "maxY": 2
+          },
+          {
+            "id": "botany-codex-desk",
+            "minX": 6.25,
+            "maxX": 8.15,
+            "minZ": -12.700000000000001,
+            "maxZ": -11.9,
+            "minY": 0,
+            "maxY": 2
+          }
+        ],
+        "lights": [
+          {
+            "position": [
+              0,
+              6.25,
+              -10
+            ],
+            "color": 16759413,
+            "intensity": 32,
+            "distance": 11
+          },
+          {
+            "position": [
+              0,
+              6.25,
+              10
+            ],
+            "color": 16759413,
+            "intensity": 32,
+            "distance": 11
+          },
+          {
+            "position": [
+              0,
+              4,
+              0
+            ],
+            "color": 8890833,
+            "intensity": 45,
+            "distance": 16
+          }
+        ]
+      }
+    },
+    "visualBrowserVerified": false
+  },
+  "productionPreflight": {
+    "canFreshCompile": false,
+    "missingSourceModules": [
+      "embellish.py",
+      "integrity.py",
+      "magical.py"
+    ],
+    "missingEnvironmentDependencies": [
+      "trimesh"
+    ],
+    "gameplayCertified": false
+  }
+}

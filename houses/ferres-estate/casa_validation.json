@@ -6,7 +6,7 @@
   "packagingStatus": "QA_PACKAGE",
   "architecturalRooms": 26,
   "floors": 4,
-  "files": 109,
+  "files": 113,
   "previewBytes": 740812,
   "issues": [
     {
@@ -18,6 +18,14 @@
       "severity": "BLOCK_GAME_READY",
       "code": "GAME_RUNTIME_NOT_INTEGRATED",
       "detail": "Black Hollow game does not yet load CASA architectural assets as its primary world."
+    },
+    {
+      "severity": "BLOCK_GAME_READY",
+      "code": "SIGNATURE_SCENE_BROWSER_VERIFICATION_PENDING"
+    },
+    {
+      "severity": "BLOCK_GAME_READY",
+      "code": "SIGNATURE_GAME_BINDINGS_PENDING"
     }
   ],
   "entries": {
@@ -28,10 +36,6 @@
     "blueprint_repair_report.json": {
       "bytes": 1202,
       "sha256": "3fbcb6d728f3b0b58dd3823918d217a2f3c9e9487950ed0677c953a8b81262bd"
-    },
-    "casa_identity.json": {
-      "bytes": 335,
-      "sha256": "761a2e7deaff2894a2f076a7c3124f669812dd55a3b1ba209a3de26da0dac458"
     },
     "exterior/street_preview.glb": {
       "bytes": 740812,
@@ -114,12 +118,12 @@
       "sha256": "9424d5ada8a7a74e1627a1f2ab30a447904cef4e23cb050befeff2ffc318e27f"
     },
     "geometry/special_floor13_conservatory.glb": {
-      "bytes": 1466352,
-      "sha256": "0425298346f80ef7e1f279cf57a0733ccedab3a666e8503dcf64e89f886c117a"
+      "bytes": 323192,
+      "sha256": "147a7d5cf5aeb922d6956b9fd689afdf9fce48d7fc0f1845ee844fa0b5ec5ad2"
     },
     "geometry/special_main_hall.glb": {
-      "bytes": 1183880,
-      "sha256": "221637a9591ae3745f4cf3666582ea2d9e33046f80854cb0b2da5414a7d491fe"
+      "bytes": 180968,
+      "sha256": "3619c1ef60caadbcb68ed8d968fb1f9303f3d3c5e998e54eab8bbe95b172f728"
     },
     "geometry/stair_candidate_connection_022.glb": {
       "bytes": 11556,
@@ -253,17 +257,13 @@
       "bytes": 9018,
       "sha256": "b6b8c92cc3f5facbc044e5ec16344404172cc47804c73390a50ac5790ba46989"
     },
-    "manifest.json": {
-      "bytes": 9569,
-      "sha256": "48cf499e7663608053c1119553ed008f20df776e3c359451cdce1abc681a4fdb"
-    },
     "navigation/century_of_decay.json": {
       "bytes": 48000,
       "sha256": "37152146b037026e86e9386d8d6e364edc4695062d9ea0c1802cf8de438111d4"
     },
     "navigation/collision.json": {
-      "bytes": 18575,
-      "sha256": "edaecf9d5a51aa24daada4175f677a506c5bf37e155bbf35b2c4ecc8bd444c21"
+      "bytes": 18692,
+      "sha256": "bc11400d5353aecabeae6ca518a328b974452b50fc6bf36ce44715b6739b44aa"
     },
     "navigation/conservatory_anchors.json": {
       "bytes": 2150,
@@ -358,8 +358,8 @@
       "sha256": "15d6ecca60dda9c667d9e8a9df973bf4635fd28fef8d66dc763034cd249a086a"
     },
     "navigation/runtime_bridge.json": {
-      "bytes": 22505,
-      "sha256": "87ad733ccf6a2df6095d3e87801681f030b0c66b962d40b3fbfd4f4622b2d9bf"
+      "bytes": 22471,
+      "sha256": "c9433abccad71e4ba132d02c85a8c9e34464b728cae4a0e747e4f38557e7f967"
     },
     "navigation/searchable_discoveries.json": {
       "bytes": 25763,
@@ -456,6 +456,18 @@
     "validation.json": {
       "bytes": 377,
       "sha256": "9b35d2fff971f44b75333e8b883c938ad8498ac6e7953942142e8d5c56beae6d"
+    },
+    "navigation/signature_links.json": {
+      "bytes": 1003,
+      "sha256": "29bbd9b9e8b768f8b891026538a9906915cdd0f3d050232b6e1c7d40629f7c51"
+    },
+    "navigation/signature_visual_report.json": {
+      "bytes": 5395,
+      "sha256": "690165d7ddbaca4522825e6cb6a6a6fa48df73eab2550bcec1bdd13ef0919f96"
+    },
+    "navigation/source_readiness.json": {
+      "bytes": 419,
+      "sha256": "8157d2d49a78ef0002091494ef214d9b31b2eddf3ab7b98fab9f4c4a373233a8"
     }
   }
 }

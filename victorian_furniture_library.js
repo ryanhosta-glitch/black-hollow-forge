@@ -10,6 +10,8 @@ export const FURNITURE_CATALOG=Object.freeze({
  dining_table:{label:'Carved Dining Table',footprint:[2.14,1.05],height:.77,rooms:['dining','banquet','ballroom'],repeatable:true},
  wardrobe:{label:'Tall Carved Wardrobe',footprint:[1.49,.67],height:2.17,rooms:['bedroom','nursery','dressing'],repeatable:true}
 });
+// Reuse finish maps across repeated furnishings rather than allocating per chair.
+const finishCache=new WeakMap();
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,Number.isFinite(+n)?+n:a));
 export function createVictorianFurniture(THREE,{type='bookcase',age=.32,variant=0,quality='standard'}={}){
  if(!FURNITURE_CATALOG[type])throw Error('Unknown furniture type '+type);
@@ -18,19 +20,21 @@ export function createVictorianFurniture(THREE,{type='bookcase',age=.32,variant=
  const mat=(color,metal=.0,rough=.65)=>new THREE.MeshStandardMaterial({color,metalness:metal,roughness:clamp(rough+wear*.13,.1,1)});
  const walnut=mat(0x39251b,.04,.53),edge=mat(0x65412b,.05,.58),dark=mat(0x231811,.07,.65),brass=mat(0x9e8448,.72,.41),velvet=mat(variant%2===0?0x50253a:0x29443f,.02,.87),tuft=mat(variant%2===0?0x6b3649:0x3a5955,.02,.83),leather=mat(0x593321,.02,.74),paper=mat(0xb1a081,0,.9);
  // Lightweight deterministic procedural texture, no external images or per-frame regeneration.
- const makeGrain=(kind)=>{if(typeof document==='undefined')return null;const c=document.createElement('canvas');c.width=c.height=128;
+ const makeGrain=(kind)=>{if(typeof document==='undefined')return null;let cache=finishCache.get(THREE);if(!cache){cache=new Map();finishCache.set(THREE,cache)}const key=kind+':'+((variant|0)%8);if(cache.has(key))return cache.get(key);const c=document.createElement('canvas');c.width=c.height=128;
   const ctx=c.getContext('2d');if(!ctx)return null;const img=ctx.createImageData(128,128);let state=101+(variant|0)*31;
   const random=()=>((state=(Math.imul(state,1664525)+1013904223)>>>0)/4294967296);
   for(let y=0;y<128;y++)for(let x=0;x<128;x++){const i=(y*128+x)*4;
    let shade=kind==='wood'?(.77+.11*Math.sin(x*.38+Math.sin(y*.028)*1.6)+.10*(random()-.5)):(.90+.07*(random()-.5));
    const v=Math.round(255*Math.max(.55,Math.min(1,shade)));img.data[i]=img.data[i+1]=img.data[i+2]=v;img.data[i+3]=255;
   }ctx.putImageData(img,0,0);const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;
-  tex.wrapS=tex.wrapT=THREE.RepeatWrapping;tex.repeat.set(2,2);return tex;
+  tex.wrapS=tex.wrapT=THREE.RepeatWrapping;tex.repeat.set(2,2);tex.anisotropy=quality==='mobile'?2:4;cache.set(key,tex);return tex;
  };
  const grain=makeGrain('wood'),weave=makeGrain('fabric');
  if(grain){for(const m of [walnut,edge,dark])m.map=grain;for(const m of [velvet,tuft])m.map=weave;}
  velvet.roughness=Math.min(1,velvet.roughness+.06);tuft.roughness=Math.min(1,tuft.roughness+.06);
- brass.metalness=.66;brass.roughness=Math.min(.92,brass.roughness+wear*.18);
+ brass.metalness=.72;brass.roughness=Math.min(.65,.30+wear*.18);
+ if(grain){for(const m of [walnut,edge,dark]){m.bumpMap=grain;m.bumpScale=.006;m.roughness=Math.max(.32,m.roughness-.12)}}
+ if(weave){for(const m of [velvet,tuft]){m.bumpMap=weave;m.bumpScale=.004}}
 
  const add=(geo,m,name,x=0,y=0,z=0)=>{const mesh=new THREE.Mesh(geo,m);mesh.position.set(x,y,z);mesh.name=name;mesh.castShadow=true;mesh.receiveShadow=true;root.add(mesh);return mesh};
  const box=(name,x,y,z,w,h,d,m)=>add(new THREE.BoxGeometry(w,h,d),m,name,x,y,z);
