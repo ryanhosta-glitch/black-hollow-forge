@@ -1,7 +1,7 @@
 // Black Hollow Forge 4.2 — cinematic explorer + verified automatic doorway crossing.
 // Reusable preview controller, not yet a certified game physics engine. Closed/locked doors require game logic.
 export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,getRoom,levelY,selectRoom,getConnections,isReady}){
- const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',directorMode:'hybrid',clock:performance.now(),hintUntil:0,revealUntil:0,facingYaw:0,cameraYaw:0,movementAnchor:null,speed:0,turnSpeed:0,lookYaw:0,lookUntil:0,lastPortal:null,lastPortalAt:0,doorState:new Map()};
+ const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',directorMode:'hybrid',clock:performance.now(),hintUntil:0,revealUntil:0,facingYaw:0,cameraYaw:0,movementAnchor:null,speed:0,turnSpeed:0,lookYaw:0,lookUntil:0,cameraRoomId:null,lastPortal:null,lastPortalAt:0,doorState:new Map()};
  const K=.3048,margin=.25,eye=1.68,radius=.23,topPitch=0.65;
  const heading=()=>new THREE.Vector3(-Math.sin(S.yaw),0,-Math.cos(S.yaw));
  const doorMeshes=new Map();
@@ -24,7 +24,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  function status(t){q('bh-walk-status').textContent=t;}
  function orient(){return heading();}
  function placeAtCenter(r){const b=bnd(r);if(!b)return;S.x=(b.minX+b.maxX)*.5;S.z=(b.minZ+b.maxZ)*.5;}
- function enter(){if(!isReady())return false;buildDoors();S.room=getRoom();const b=bnd(S.room);if(!b)return false;S.active=true;S.mode='cinematic';S.moving.clear();S.lastPortal=null;S.lastPortalAt=0;S.doorState.clear();placeAtCenter(S.room);S.yaw=0;S.facingYaw=0;S.cameraYaw=0;S.movementAnchor=null;S.pitch=0;S.speed=0;S.turnSpeed=0;S.lookYaw=0;S.lookUntil=0;controls.enabled=false;S.clock=performance.now();if(scene&&avatar.parent!==scene)scene.add(avatar);sync();follow(.05,true);status('W/↑ forward · S/↓ back · A/← turn left · D/→ turn right · camera behind explorer');return true;}
+ function enter(){if(!isReady())return false;buildDoors();S.room=getRoom();const b=bnd(S.room);if(!b)return false;S.active=true;S.mode='cinematic';S.moving.clear();S.lastPortal=null;S.lastPortalAt=0;S.doorState.clear();placeAtCenter(S.room);S.yaw=0;S.facingYaw=0;S.cameraYaw=0;S.movementAnchor=null;S.pitch=0;S.speed=0;S.turnSpeed=0;S.lookYaw=0;S.lookUntil=0;S.cameraRoomId=null;controls.enabled=false;S.clock=performance.now();if(scene&&avatar.parent!==scene)scene.add(avatar);sync();follow(.05,true);status('W/↑ forward · S/↓ back · A/← turn left · D/→ turn right · camera behind explorer');return true;}
  function exit(){S.active=false;for(const d of doorMeshes.values()){d.pivot.visible=false;d.open=0;d.pivot.rotation.y=0;}S.moving.clear();S.movementAnchor=null;S.speed=0;S.turnSpeed=0;S.mouse=false;avatar.visible=false;controls.enabled=true;camera.fov=62;camera.updateProjectionMatrix();sync();}
  function changeCamera(){S.mode=S.mode==='cinematic'?'explorer':S.mode==='explorer'?'first':'cinematic';sync();follow(.05,true)}
  // 4.3: Only a matched, same-floor architect-door is walkable. Magical elevator and stairs stay explicit.
@@ -184,64 +184,74 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   S.directorMode=modes[(i+1)%modes.length];sync();follow(.05,true);
   status('Camera director: '+S.directorMode+' · movement controls unchanged');
  }
+ // Hallway safety: the camera stays behind the explorer, never at a wall-side anchor.
+ // Projecting to a safe room segment also keeps interpolated movement within bounds.
  function follow(dt,instant=false){
   const b=bnd(S.room);if(!b)return;
-  const floor=b.y;
-  avatar.position.set(S.x,floor,S.z);
-  avatar.rotation.y=S.facingYaw;
-  // Camera bearing eases behind the body instead of snapping 90 degrees on A/D.
-  const wantedYaw=S.yaw+S.lookYaw;
-  S.cameraYaw=angleTo(S.cameraYaw,wantedYaw,instant?1:Math.min(1,dt*2.7)); // Gradual angular follow, never snap on A/D.
+  const floor=b.y,now=performance.now();
+  avatar.position.set(S.x,floor,S.z);avatar.rotation.y=S.facingYaw;
+  const width=Math.min(b.maxX-b.minX,b.maxZ-b.minZ);
+  const hallway=width<3.05;
+  const targetYaw=S.yaw+(hallway?0:S.lookYaw);
+  S.cameraYaw=angleTo(S.cameraYaw,targetYaw,instant?1:Math.min(1,dt*(hallway?4.8:2.7)));
   const face=new THREE.Vector3(-Math.sin(S.cameraYaw),0,-Math.cos(S.cameraYaw));
-  // Height comes from the authored room, never from a fixed "cinematic" offset.
-  const authoredHeight=Math.max(2.15,(Number(S.room?.boundsFeet?.h)||9)*K);
-  const ceiling=floor+authoredHeight;
-  const headY=Math.min(floor+1.06,ceiling-.68);
+  const roomHeight=Math.max(2.15,(Number(S.room?.boundsFeet?.h)||9)*K);
+  const ceiling=floor+roomHeight;
+  const headY=Math.min(floor+1.07,ceiling-.68);
   if(S.mode==='first'){
-   camera.position.set(clamp(S.x,b.minX+.08,b.maxX-.08),Math.min(floor+eye,ceiling-.38),clamp(S.z,b.minZ+.08,b.maxZ-.08));
+   camera.position.set(clamp(S.x,b.minX+.09,b.maxX-.09),Math.min(floor+eye,ceiling-.38),clamp(S.z,b.minZ+.09,b.maxZ-.09));
    camera.lookAt(S.x+face.x*5,camera.position.y+Math.tan(S.pitch)*5,S.z+face.z*5);
    avatar.visible=false;return;
   }
   avatar.visible=true;
-  // Third-person camera looks AT the character, not over a nearby ceiling beam.
-  // Keep it inside the actual ceiling, and use a short chase distance in hallways.
-  const long=S.mode==='cinematic';
-  const reveal=performance.now()<S.revealUntil;
+  const long=S.mode==='cinematic',reveal=now<S.revealUntil&&!hallway;
   const plan=directorPlan(S.room);
-  const width=Math.min(b.maxX-b.minX,b.maxZ-b.minZ);
-  const distance=S.directorMode==='chase'?2.65:S.directorMode==='dollhouse'?plan.preferredDistanceMeters:long?(width<3.0?2.05:reveal?3.35:2.85):2.15;
-  const height=Math.min(floor+(long?(reveal?2.16:2.03):1.88),ceiling-.45);
+  const distance=hallway?1.8:S.directorMode==='chase'?2.65:S.directorMode==='dollhouse'?plan.preferredDistanceMeters:long?(reveal?3.35:2.85):2.15;
+  const height=Math.min(floor+(hallway?1.48:long?(reveal?2.1:1.93):1.8),ceiling-.46);
   const aim=new THREE.Vector3(S.x,headY,S.z);
-  // Project the camera backwards along a line from the explorer. Shrink that
-  // distance where the line meets a wall, instead of clamping X and Z
-  // independently (which shifted the camera sideways and lost the player).
-  const safePad=.23;
+  const pad=Math.min(.23,Math.max(.10,width*.075));
   const back=new THREE.Vector3(-face.x,0,-face.z);
-  let allowed=distance;
-  for(const [p,d,lo,hi] of [[S.x,back.x,b.minX+safePad,b.maxX-safePad],[S.z,back.z,b.minZ+safePad,b.maxZ-safePad]]){
-   if(Math.abs(d)>1e-5)allowed=Math.min(allowed,Math.max(0,((d>0?hi:lo)-p)/d));
+  let permitted=distance;
+  for(const [p,d,lo,hi] of [[S.x,back.x,b.minX+pad,b.maxX-pad],[S.z,back.z,b.minZ+pad,b.maxZ-pad]]){
+   if(Math.abs(d)>1e-6)permitted=Math.min(permitted,Math.max(0,((d>0?hi:lo)-p)/d));
   }
-  let desired=new THREE.Vector3(S.x+back.x*Math.max(0,allowed-.035),height,S.z+back.z*Math.max(0,allowed-.035));
-  if(S.directorMode==='dollhouse'){
-   const zz=plan.dollhouseSide==='z';const side=zz?(b.maxZ-safePad):(b.maxX-safePad);
-   desired=new THREE.Vector3(zz?S.x:side,height,zz?side:S.z);
-   desired.x=clamp(desired.x,b.minX+safePad,b.maxX-safePad);
-   desired.z=clamp(desired.z,b.minZ+safePad,b.maxZ-safePad);
+  let desired=new THREE.Vector3(S.x+back.x*Math.max(0,permitted-.025),height,S.z+back.z*Math.max(0,permitted-.025));
+  if(!hallway&&S.directorMode==='dollhouse'){
+   const zz=plan.dollhouseSide==='z';
+   desired.set(zz?S.x:b.maxX-pad,height,zz?b.maxZ-pad:S.z);
   }
-  // Do not raycast against mixed viewer decoration and trim here: those
-  // meshes were forcing camera placement into an extreme close-up.
-  // The legal room bounding volume above controls camera wall containment.
-  const outsideRoom=(camera.position.x<b.minX+safePad-.015||camera.position.x>b.maxX-safePad+.015||camera.position.z<b.minZ+safePad-.015||camera.position.z>b.maxZ-safePad+.015);
-  // Snap on a real room transition: never lerp *through* the connecting wall.
-  if(instant||outsideRoom)camera.position.copy(desired);
-  else camera.position.lerp(desired,Math.min(1,dt*3.0));
-  camera.position.x=clamp(camera.position.x,b.minX+safePad,b.maxX-safePad);
-  camera.position.z=clamp(camera.position.z,b.minZ+safePad,b.maxZ-safePad);
-  camera.near=.07;
-  camera.fov=long?69:64;
-  camera.updateProjectionMatrix();
-  // Look forward into the room, not down at the explorer's hat.
-  camera.lookAt(aim.x,aim.y+S.pitch*.25,aim.z);
+  // Always keep the camera inside its current room.
+  desired.x=clamp(desired.x,b.minX+pad,b.maxX-pad);
+  desired.z=clamp(desired.z,b.minZ+pad,b.maxZ-pad);
+  const roomChanged=S.cameraRoomId!==S.room.id;
+  S.cameraRoomId=S.room.id;
+  if(instant||roomChanged)camera.position.copy(desired);
+  else camera.position.lerp(desired,Math.min(1,dt*(hallway?6.2:3.6)));
+  camera.position.x=clamp(camera.position.x,b.minX+pad,b.maxX-pad);
+  camera.position.z=clamp(camera.position.z,b.minZ+pad,b.maxZ-pad);
+  camera.near=.045;camera.fov=hallway?74:long?69:64;camera.updateProjectionMatrix();
+  camera.lookAt(aim.x,aim.y+S.pitch*.18,aim.z);
+  camera.updateMatrixWorld(true);
+  // Screen-framing and occlusion guard: sample projection + central line of sight.
+  // Use structural meshes only as an advisory; do not let decorative trim dictate camera movement.
+  const projected=aim.clone().project(camera);
+  let recovery=!Number.isFinite(projected.x)||Math.abs(projected.x)>.42||Math.abs(projected.y)>.7;
+  const delta=aim.clone().sub(camera.position),rayDistance=delta.length();
+  if(rayDistance>.35){
+   const ray=new THREE.Raycaster(camera.position,delta.clone().normalize(),.09,rayDistance-.15);
+   const candidates=(scene?.children||[]).filter(o=>o.visible&&o!==avatar&&o!==doorGroup&&o.isMesh&&o.userData?.cameraOccluder===true);
+   recovery=recovery||ray.intersectObjects(candidates,true).length>0;
+  }
+  if(recovery){
+   const safeBack=new THREE.Vector3(-Math.sin(S.yaw),0,-Math.cos(S.yaw));
+   const shortDist=Math.min(.6,permitted*.75);
+   const fallback=new THREE.Vector3(S.x-safeBack.x*shortDist,Math.min(floor+1.33,ceiling-.45),S.z-safeBack.z*shortDist);
+   fallback.x=clamp(fallback.x,b.minX+pad,b.maxX-pad);
+   fallback.z=clamp(fallback.z,b.minZ+pad,b.maxZ-pad);
+   camera.position.lerp(fallback,Math.min(1,dt*12));
+  }
+  // Aim again after fallback adjustment to preserve centered screen composition.
+  camera.lookAt(aim.x,aim.y+S.pitch*.18,aim.z);
  }
  let stride=0;
  function angleTo(current,target,amount){
