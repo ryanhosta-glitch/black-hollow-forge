@@ -2,7 +2,7 @@
 // Reusable preview controller, not yet a certified game physics engine. Closed/locked doors require game logic.
 export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas,getRoom,levelY,selectRoom,getConnections,isReady}){
  const S={active:false,room:null,x:0,z:0,yaw:0,pitch:0,moving:new Set(),mouse:false,px:0,py:0,mode:'cinematic',directorMode:'hybrid',clock:performance.now(),hintUntil:0,revealUntil:0,facingYaw:0,cameraYaw:0,movementAnchor:null,speed:0,turnSpeed:0,lookYaw:0,lookUntil:0,cameraRoomId:null,requireFreshForward:false,arrivalUntil:0,lastPortal:null,lastPortalAt:0,doorState:new Map()};
- const K=.3048,margin=.17,eye=1.68,radius=.23,topPitch=0.65;
+ const K=.3048,margin=.14,eye=1.68,radius=.20,topPitch=0.65;
  const heading=()=>new THREE.Vector3(-Math.sin(S.yaw),0,-Math.cos(S.yaw));
  const doorMeshes=new Map();
  const doorGroup=new THREE.Group();doorGroup.name='forge_43_hinged_doors';
@@ -28,7 +28,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
  function exit(){S.active=false;for(const d of doorMeshes.values()){d.pivot.visible=false;d.open=0;d.pivot.rotation.y=0;}S.moving.clear();S.movementAnchor=null;S.speed=0;S.turnSpeed=0;S.requireFreshForward=false;S.mouse=false;avatar.visible=false;controls.enabled=true;camera.fov=62;camera.updateProjectionMatrix();sync();}
  function changeCamera(){S.mode=S.mode==='cinematic'?'explorer':S.mode==='explorer'?'first':'cinematic';sync();follow(.05,true)}
  // 4.3: Only a matched, same-floor architect-door is walkable. Magical elevator and stairs stay explicit.
- function doorPortal(r,o){const b=bnd(r);if(!b||!o||o.type!=='door'||!o.shared)return null;const pos=clamp(Number(o.pos??.5),0,1),w=clamp(Number(o.width||o.widthFeet||3)*K, .65, 2.1);let x,z,axis,dir;
+ function doorPortal(r,o){const b=bnd(r);if(!b||!o||o.type!=='door'||!o.shared)return null;const pos=clamp(Number(o.pos??.5),0,1),w=clamp(Number(o.width||o.widthFeet||3.54)*K, .65, 2.1);let x,z,axis,dir;
  if(o.wall==='left'){x=b.minX;z=b.minZ+(b.maxZ-b.minZ)*pos;axis='x';dir=-1}
  else if(o.wall==='right'){x=b.maxX;z=b.minZ+(b.maxZ-b.minZ)*pos;axis='x';dir=1}
  else if(o.wall==='top'){z=b.minZ;x=b.minX+(b.maxX-b.minX)*pos;axis='z';dir=-1}
@@ -79,7 +79,12 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
    const current=bnd(S.room);if(!current)break;
    const nx=S.x+vx,nz=S.z+vz;
    const inside=nx>=current.minX+margin&&nx<=current.maxX-margin&&nz>=current.minZ+margin&&nz<=current.maxZ-margin;
-   if(inside){S.x=nx;S.z=nz;continue;}
+   // After crossing a shared wall the explorer is still within the receiving
+   // room's physical doorway strip. Let him finish walking into that room;
+   // otherwise the old inset margin pins him against the threshold.
+   const justCrossed=performance.now()-S.lastPortalAt<1250;
+   const physicallyInside=nx>=current.minX&&nx<=current.maxX&&nz>=current.minZ&&nz<=current.maxZ;
+   if(inside||(justCrossed&&physicallyInside)){S.x=nx;S.z=nz;continue;}
    const passage=findPassage(nx,nz,vx,vz);
    if(passage){
     const leaf=doorMeshes.get(passage.portal.shared);
@@ -127,7 +132,7 @@ export function createNavigation2ForgeViewer(THREE,{scene,camera,controls,canvas
     if(!other||!(getConnections(r.id)||[]).includes(other.id))continue;
     const p=doorPortal(r,o),b=bnd(r);if(!p||!b)continue;
     seen.add(o.shared);
-    const span=Math.max(.65,Math.min(1.08,Number(o.width||o.widthFeet||3)*K));
+    const span=Math.max(.65,Math.min(1.08,Number(o.width||o.widthFeet||3.54)*K));
     const height=Math.min(2.18,Math.max(1.9,(Number(r.boundsFeet.h)||9)*K-.25));
     const pivot=new THREE.Group();pivot.name='bh-door-'+o.shared;
     const center=p.axis==='x'?p.z:p.x,edge=center-span/2;
