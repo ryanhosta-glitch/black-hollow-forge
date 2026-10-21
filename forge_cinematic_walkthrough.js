@@ -251,23 +251,48 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   camera.near=.045;camera.fov=hallway?74:long?69:64;camera.updateProjectionMatrix();
   camera.lookAt(aim.x,aim.y+S.pitch*.18,aim.z);
   camera.updateMatrixWorld(true);
-  // Screen-framing and occlusion guard: sample projection + central line of sight.
-  // Use structural meshes only as an advisory; do not let decorative trim dictate camera movement.
-  const projected=aim.clone().project(camera);
-  let recovery=!Number.isFinite(projected.x)||Math.abs(projected.x)>.42||Math.abs(projected.y)>.7;
-  const delta=aim.clone().sub(camera.position),rayDistance=delta.length();
-  if(rayDistance>.35){
-   const ray=new THREE.Raycaster(camera.position,delta.clone().normalize(),.09,rayDistance-.15);
-   const candidates=(scene?.children||[]).filter(o=>o.visible&&o!==avatar&&o!==doorGroup&&o.isMesh&&o.userData?.cameraOccluder===true);
-   recovery=recovery||ray.intersectObjects(candidates,true).length>0;
+  // Hard visibility guard: doors and solid room geometry must not hide the explorer.
+  // Include hinged doors even when they are generated outside the model groups.
+  const occluders=[];
+  scene?.traverse(o=>{
+   if(!o.isMesh||!o.visible||!o.parent?.visible||o===avatar||o.userData?.cameraIgnore)return;
+   if(avatar.getObjectById(o.id))return;
+   const n=String(o.name||'').toLowerCase();
+   // Prefer structural surfaces; ignore tiny decorative items and translucent layers.
+   if(o.material?.transparent||/particle|mist|fog|smoke|flame|highlight|decay/i.test(n))return;
+   if(o.geometry?.boundingBox===null)o.geometry.computeBoundingBox();
+   const bb=o.geometry?.boundingBox;
+   const ext=bb?bb.getSize(new THREE.Vector3()):null;
+   if((ext&&Math.max(ext.x,ext.y,ext.z)>.65)||o.parent===doorGroup||n.includes('door'))occluders.push(o);
+  });
+  function blockedAt(position){
+   const target=aim.clone(),vector=target.sub(position),dist=vector.length();
+   if(dist<.17)return false;
+   const ray=new THREE.Raycaster(position,vector.normalize(),.04,dist-.12);
+   return ray.intersectObjects(occluders,false).some(hit=>hit.distance<dist-.12);
   }
+  const projected=aim.clone().project(camera);
+  let recovery=!Number.isFinite(projected.x)||Math.abs(projected.x)>.42||Math.abs(projected.y)>.7||blockedAt(camera.position);
   if(recovery){
-   const safeBack=new THREE.Vector3(-Math.sin(S.yaw),0,-Math.cos(S.yaw));
-   const shortDist=Math.min(.85,Math.max(.15,permitted*.75));
-   const fallback=new THREE.Vector3(S.x-safeBack.x*shortDist,Math.min(floor+1.33,ceiling-.45),S.z-safeBack.z*shortDist);
-   fallback.x=clamp(fallback.x,b.minX+pad,b.maxX-pad);
-   fallback.z=clamp(fallback.z,b.minZ+pad,b.maxZ-pad);
-   camera.position.lerp(fallback,Math.min(1,dt*12));
+   const center=new THREE.Vector3((b.minX+b.maxX)/2,0,(b.minZ+b.maxZ)/2);
+   const toCenter=new THREE.Vector3(center.x-S.x,0,center.z-S.z).normalize();
+   const samples=[back.clone(),toCenter,new THREE.Vector3(1,0,0),new THREE.Vector3(-1,0,0),new THREE.Vector3(0,0,1),new THREE.Vector3(0,0,-1)];
+   let best=null,bestScore=-Infinity;
+   for(const dir of samples){
+    for(const length of [1.7,1.1,.65,.32]){
+     const p=new THREE.Vector3(clamp(S.x+dir.x*length,b.minX+pad,b.maxX-pad),Math.min(floor+1.52,ceiling-.46),clamp(S.z+dir.z*length,b.minZ+pad,b.maxZ-pad));
+     if(blockedAt(p))continue;
+     const separation=Math.hypot(p.x-S.x,p.z-S.z);
+     const score=separation+.2*dir.dot(back)-.1*p.distanceTo(camera.position);
+     if(score>bestScore){bestScore=score;best=p;}
+    }
+   }
+   if(best)camera.position.lerp(best,Math.min(1,dt*12));
+   else{
+    // Extremely confined spaces: move almost into explorer's position rather
+    // than showing an opaque wall or door between camera and character.
+    camera.position.set(clamp(S.x,b.minX+pad,b.maxX-pad),Math.min(floor+1.44,ceiling-.46),clamp(S.z,b.minZ+pad,b.maxZ-pad));
+   }
   }
   // Aim again after fallback adjustment to preserve centered screen composition.
   camera.lookAt(aim.x,aim.y+S.pitch*.18,aim.z);
