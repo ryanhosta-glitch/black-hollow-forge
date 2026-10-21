@@ -229,6 +229,9 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   else camera.position.lerp(desired,Math.min(1,dt*(hallway?6.2:3.6)));
   camera.position.x=clamp(camera.position.x,b.minX+pad,b.maxX-pad);
   camera.position.z=clamp(camera.position.z,b.minZ+pad,b.maxZ-pad);
+  camera.near=.045;camera.fov=hallway?74:long?69:64;camera.updateProjectionMatrix();
+  camera.lookAt(aim.x,aim.y+S.pitch*.18,aim.z);
+  camera.updateMatrixWorld(true);
   // Screen-framing and occlusion guard: sample projection + central line of sight.
   // Use structural meshes only as an advisory; do not let decorative trim dictate camera movement.
   const projected=aim.clone().project(camera);
@@ -247,8 +250,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
    fallback.z=clamp(fallback.z,b.minZ+pad,b.maxZ-pad);
    camera.position.lerp(fallback,Math.min(1,dt*12));
   }
-  camera.near=.045;camera.fov=hallway?74:long?69:64;camera.updateProjectionMatrix();
-  // The explorer, never the doorway or room center, is the aim point.
+  // Aim again after fallback adjustment to preserve centered screen composition.
   camera.lookAt(aim.x,aim.y+S.pitch*.18,aim.z);
  }
  let stride=0;
