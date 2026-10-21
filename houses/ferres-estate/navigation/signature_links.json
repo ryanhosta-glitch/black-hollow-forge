@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "units": "meters",
+  "mode": "explicit-pocket-portals",
+  "estateEntryRoom": "fe-f1-room1",
+  "connections": [
+    {
+      "id": "estate-hall",
+      "from": {
+        "scene": "estate",
+        "roomId": "fe-f1-room1"
+      },
+      "to": {
+        "scene": "hall",
+        "position": [
+          0,
+          0,
+          -13.5
+        ]
+      },
+      "type": "door-portal",
+      "bidirectional": true
+    },
+    {
+      "id": "hall-elevator",
+      "from": {
+        "scene": "hall",
+        "position": [
+          0,
+          5.25,
+          14
+        ],
+        "radius": 1.25
+      },
+      "to": {
+        "scene": "floor13",
+        "position": [
+          0,
+          0,
+          -14.8
+        ]
+      },
+      "type": "elevator",
+      "requiresCabinEntry": true,
+      "bidirectional": true
+    }
+  ],
+  "gameOwned": [
+    "quest-floor13-unlock",
+    "elevator-animation",
+    "save-state"
+  ],
+  "runtime": "forge-inspection-only",
+  "gameplayCertified": false
+}

@@ -846,13 +846,16 @@
         "positionMeters": [
           0,
           5.25,
-          14.0
+          14
         ]
-      }
+      },
+      "signatureVersion": 6
     },
     "floor13Conservatory": {
       "scene": "geometry/special_floor13_conservatory.glb",
-      "mode": "separate-dimension"
+      "mode": "separate-dimension",
+      "signatureVersion": 6
     }
-  }
+  },
+  "signatureNavigation": "navigation/signature_links.json"
 }
