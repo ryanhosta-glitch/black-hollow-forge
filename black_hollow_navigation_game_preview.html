@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black Hollow · Navigation 2.0 Game Integration Preview</title>
+<style>body{margin:0;background:#0b0911;color:#f9e7cd;font:14px system-ui}canvas{display:block}aside{position:fixed;top:12px;left:12px;background:#150f21ed;padding:16px;border:1px solid #a48a63;border-radius:12px;width:min(330px,calc(100vw - 56px));z-index:2}h1{font:24px Georgia;margin:0 0 8px}button{background:#30243a;border:1px solid #ac8d68;color:#fff;border-radius:8px;padding:9px;margin:2px;cursor:pointer}button[aria-pressed=true]{background:#6b4665}#readout{margin-top:10px;color:#e3dfd3;line-height:1.5}small{color:#bba99c;display:block;margin-top:9px}#cross{position:fixed;left:50%;top:50%;width:6px;height:6px;border:1px solid #ffdf92;border-radius:100%;pointer-events:none}</style></head>
+<body><aside><h1>BLACK HOLLOW · GAME PREVIEW</h1><div>Navigation 2.0 movement + game-facing mansion contract. This is a test build, not the original v8.5 game.</div>
+<div><button id="rooms" aria-pressed="true">Door / Corridor</button><button id="switch">Switchback Stair</button><button id="spiral">Spiral Stair</button><button id="estate">Ferre’s Estate</button><button id="estateSwitch">Estate Switchback</button><button id="estateSpiral">Estate Spiral</button><button id="visuals">Victorian visuals: OFF</button></div>
+<div>W/S: forward/back · A/D: turn · Shift: run<br>Mouse drag: look around · E: interact · R: reset</div>
+<div id="mission" style="border:1px solid #916e4b;border-radius:7px;padding:10px;margin-top:8px"><strong>MISSION: THE FOUNDER'S REQUEST</strong><div id="objective">Loading house…</div><div id="interaction" style="color:#eec58e"></div></div><div id="readout">Initializing…</div><small>Prototype: primitive architecture and collision. Estate mode uses generated wall colliders for one floor; stair tests use guided walkable paths and continuous elevation; free-form stair collision, furniture, and CASA game integration are not certified.</small></aside><div id="cross"></div>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js';
+import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js';
+import {loadForgeContract,gameReadiness} from './game_import/forge_house_adapter.mjs';
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x12121c);
+scene.add(new THREE.HemisphereLight(0xe5e8ff,0x30283d,2.1));
+const sun=new THREE.DirectionalLight(0xffdda2,2.1);sun.position.set(5,13,8);scene.add(sun);
+const camera=new THREE.PerspectiveCamera(66,innerWidth/innerHeight,.09,180);
+const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,2));document.body.appendChild(renderer.domElement);
+const solid=new THREE.MeshStandardMaterial({color:0x64536a,roughness:.83}),floorMat=new THREE.MeshStandardMaterial({color:0x827c83}),railMat=new THREE.MeshStandardMaterial({color:0xab805a}),doorMat=new THREE.MeshStandardMaterial({color:0x613c28}),stepMat=new THREE.MeshStandardMaterial({color:0x978b86}),coatMat=new THREE.MeshStandardMaterial({color:0x20324a}),hatMat=new THREE.MeshStandardMaterial({color:0x191522});
+const world=new THREE.Group();scene.add(world);let blockers=[],doors=[],stage='rooms',rooms=[],stairPath=null,progress=0,estateData=null,estateFloor=1,stairMetric=null;
+const visualGroup=new THREE.Group();scene.add(visualGroup);
+let victorianVisuals=false,visualReady=false,loadingVisuals=false,doorwayDip=0,gameContract=null;
+const mission={hasRelic:false,completed:false};const relic=new THREE.Group();scene.add(relic);const visualAssets=[];
+function box(x,y,z,w,h,d,mat=solid,obstacle=true){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);world.add(m);if(obstacle)blockers.push(m);return m}
+function clear(){stairMetric=null;while(world.children.length){const m=world.children[0];world.remove(m);m.geometry?.dispose()}blockers=[];doors=[];rooms=[];stairPath=null;progress=0}
+const avatar=new THREE.Group();avatar.scale.setScalar(.86);scene.add(avatar); // 14% smaller laboratory explorer for easier doorway aiming
+const body=new THREE.Mesh(new THREE.CylinderGeometry(.22,.29,.9,10),coatMat);body.position.y=1.04;avatar.add(body);
+const head=new THREE.Mesh(new THREE.SphereGeometry(.21,12,10),new THREE.MeshStandardMaterial({color:0xc9a58c}));head.position.y=1.67;avatar.add(head);
+const hat=new THREE.Mesh(new THREE.CylinderGeometry(.24,.31,.42,14),hatMat);hat.position.y=2.02;avatar.add(hat);
+const brim=new THREE.Mesh(new THREE.CylinderGeometry(.36,.36,.045,14),hatMat);brim.position.y=1.85;avatar.add(brim);
+const feet=[];for(let i of [-1,1]){let foot=new THREE.Mesh(new THREE.BoxGeometry(.18,.55,.28),coatMat);foot.position.set(i*.16,.32,0);avatar.add(foot);feet.push(foot)}
+let P={x:-4,z:0,y:0,yaw:-Math.PI/2,vel:0,turn:0},camYaw=P.yaw,lookYaw=0,pointer=false,oldX=0,keys=new Set(),current='West Room',clock=performance.now(),stride=0;
+const pathPoint=(points,t)=>{const u=Math.max(0,Math.min(points.length-1.000001,t)),i=Math.floor(u),a=u-i;return new THREE.Vector3().lerpVectors(points[i],points[i+1],a)};
+function reset(){P.vel=0;P.turn=0;lookYaw=0;
+ if(stage==='rooms'){P.x=-4;P.z=0;P.y=0;P.yaw=-Math.PI/2;}else if(stage==='estate'){const r=rooms.find(r=>/grand entrance/i.test(r.name))||rooms[0];P.x=(r.minX+r.maxX)/2;P.z=(r.minZ+r.maxZ)/2;P.y=0;P.yaw=0;}
+ else{progress=0;const v=pathPoint(stairPath,0);P.x=v.x;P.z=v.z;P.y=v.y;const d=pathPoint(stairPath,.05).sub(v);P.yaw=Math.atan2(-d.x,-d.z)}
+ camYaw=P.yaw;camera.position.set(P.x+2,P.y+1.9,P.z+2);if(stairMetric){const b=stairMetric.bounds;camera.position.x=Math.max(b.minX,Math.min(b.maxX,P.x));camera.position.z=Math.max(b.minZ,Math.min(b.maxZ,P.z));camera.position.y=P.y+1.65;}}
+function buildRooms(){
+ rooms=[{name:'West Room',minX:-8,maxX:-1,minZ:-5,maxZ:5},{name:'Corridor',minX:-1,maxX:1.5,minZ:-5,maxZ:5},{name:'East Room',minX:1.5,maxX:8,minZ:-5,maxZ:5}];
+ for(const r of rooms)box((r.minX+r.maxX)/2,-.15,(r.minZ+r.maxZ)/2,r.maxX-r.minX,.3,r.maxZ-r.minZ,floorMat,false);
+ box(0,2,-5,16,4,.25);box(0,2,5,16,4,.25);box(-8,2,0,.25,4,10);box(8,2,0,.25,4,10);
+ // Clear, physically traversable openings on both edges of the corridor.
+ for(const x of [-1,1.5]){
+  box(x,2,-3.1,.22,4,3.8);box(x,2,3.1,.22,4,3.8);
+  box(x,3.25,0,.22,1.5,2.3);
+  const pivot=new THREE.Group();pivot.position.set(x,0,-1.15);world.add(pivot);
+  const leaf=new THREE.Mesh(new THREE.BoxGeometry(.09,2.45,2.25),doorMat);leaf.position.set(0,1.225,1.125);pivot.add(leaf);
+  doors.push({x,z:0,pivot,openness:0});
+ }
+ // Side posts are decorative but not blocking the actual door opening.
+}
+function buildEstate(){
+ if(!estateData)return;
+ const K=.3048,listed=estateData.rooms.filter(r=>r.floor===estateFloor);
+ rooms=listed.map(r=>({id:r.id,name:r.name,minX:r.boundsFeet.x*K,maxX:(r.boundsFeet.x+r.boundsFeet.l)*K,minZ:r.boundsFeet.y*K,maxZ:(r.boundsFeet.y+r.boundsFeet.w)*K,openings:r.openings||[]}));
+ const seen=new Set(),TH=.18,H=2.8,doorWidth=.91;
+ for(const r of rooms){
+  box((r.minX+r.maxX)/2,-.14,(r.minZ+r.maxZ)/2,r.maxX-r.minX,.25,r.maxZ-r.minZ,floorMat,false);
+  for(const [side,length] of [['left',r.maxZ-r.minZ],['right',r.maxZ-r.minZ],['top',r.maxX-r.minX],['bottom',r.maxX-r.minX]]){
+   const openings=r.openings.filter(o=>o.wall===side&&o.type==='door'&&o.shared);
+   const segments=openings.map(o=>({center:Math.max(0,Math.min(1,Number(o.pos??.5)))*length,half:doorWidth/2,id:o.shared})).sort((a,b)=>a.center-b.center);
+   let last=0;
+   for(const gap of [...segments,{center:length+doorWidth,half:doorWidth/2}]){
+    const end=Math.min(length,gap.center-gap.half);
+    const span=end-last;
+    if(span>.015){
+     if(side==='left'||side==='right')box(side==='left'?r.minX:r.maxX,H/2,r.minZ+(last+end)/2,TH,H,span);
+     else box(r.minX+(last+end)/2,H/2,side==='top'?r.minZ:r.maxZ,span,H,TH);
+    }
+    last=Math.max(last,Math.min(length,gap.center+gap.half));
+   }
+   for(const o of openings){
+    if(seen.has(o.shared))continue;
+    const other=rooms.find(q=>q.id!==r.id&&q.openings.some(v=>v.shared===o.shared));
+    if(!other)continue;
+    seen.add(o.shared);
+    const t=Math.max(0,Math.min(1,Number(o.pos??.5)));
+    const x=(side==='left'?r.minX:side==='right'?r.maxX:r.minX+(r.maxX-r.minX)*t);
+    const z=(side==='top'?r.minZ:side==='bottom'?r.maxZ:r.minZ+(r.maxZ-r.minZ)*t);
+    const isX=side==='left'||side==='right';
+    const half=doorWidth/2;
+    // Hinge sits on one jamb, not the middle of the opening.
+    // A wall at fixed X has a door leaf extending along local +Z;
+    // a wall at fixed Z has one extending along local +X.
+    const hingeX=isX?x:x-half,hingeZ=isX?z-half:z;
+    const pivot=new THREE.Group();pivot.position.set(hingeX,0,hingeZ);world.add(pivot);
+    const leaf=new THREE.Mesh(new THREE.BoxGeometry(isX?.075:doorWidth,2.48,isX?doorWidth:.075),doorMat);
+    leaf.position.set(isX?0:half,1.24,isX?half:0);pivot.add(leaf);
+    // Rotate INTO the originating room, so an open leaf parks against its wall.
+    const sign=side==='left'?1:side==='right'?-1:side==='top'?-1:1;
+    doors.push({x,z,pivot,leaf,openness:0,side,sign,width:doorWidth,kind:'estate',hold:0});
+   }
+  }
+ }
+ const entry=rooms.find(r=>/grand entrance/i.test(r.name))||rooms[0];
+ P.x=(entry.minX+entry.maxX)/2;P.z=(entry.minZ+entry.maxZ)/2;P.y=0;P.yaw=0;
+ setupQuest();
+}
+function buildEstateStair(kind){
+ const spiral=kind==='estateSpiral',K=.3048;
+ const target=estateData?.rooms.find(r=>r.floor===1&&r.id===(spiral?'fe-f1-spiral':'fe-f1-regular'));
+ const upper=estateData?.rooms.find(r=>r.floor===2&&r.id===(spiral?'fe-f2-spiral':'fe-f2-regular'));
+ if(!target||!upper)throw Error('Missing estate stair pair');
+ const b=target.boundsFeet,x=b.x*K,z=b.y*K,w=b.l*K,d=b.w*K,rise=b.h*K;
+ const points=[];
+ if(spiral){
+  const cx=x+w/2,cz=z+d/2,rad=Math.min(w,d)*.29;
+  for(let i=0;i<=120;i++){const t=i/120,a=1.5*Math.PI+2.5*Math.PI*t;points.push(new THREE.Vector3(cx+rad*Math.cos(a),rise*t,cz+rad*Math.sin(a)));}
+ }else{
+  const xa=x+w*.30,xb=x+w*.74,za=z+d*.13,zb=z+d*.85;
+  const knots=[new THREE.Vector3(xa,0,za),new THREE.Vector3(xa,rise*.5,zb),new THREE.Vector3(xb,rise*.5,zb),new THREE.Vector3(xb,rise,za)];
+  for(let k=0;k<3;k++)for(let i=0;i<36;i++)points.push(knots[k].clone().lerp(knots[k+1],i/36));
+  points.push(knots[3]);
+ }
+ stairPath=points;stairMetric={kind:spiral?'spiral':'switchback',roomId:target.id,toRoomId:upper.id,rise,bounds:{minX:x+.22,maxX:x+w-.22,minZ:z+.22,maxZ:z+d-.22}};
+ box(x+w/2,-.16,z+d/2,w+.2,.25,d+.2,floorMat,false);
+ // Leave the ENTIRE shaft open overhead; no intermediate floor slab.
+ for(let i=0;i<4;i++){if(i<2)box(i?x+w:x,rise*.5,z+d/2,.12,rise,d,solid,false);else box(x+w/2,rise*.5,i===2?z:z+d,w,rise,.12,solid,false);}
+ for(let i=0;i<=(spiral?55:34);i++){
+  const n=spiral?55:34,t=(points.length-1.00001)*i/n,p=pathPoint(points,t),q=pathPoint(points,Math.min(points.length-1.00001,t+.12)),v=q.sub(p);
+  const tread=box(p.x,p.y-.07,p.z,spiral?.82:1.02,.12,.32,stepMat,false);
+  tread.rotation.y=Math.atan2(-v.x,-v.z);
+ }
+ if(spiral)box(x+w/2,rise/2,z+d/2,.23,rise+.4,.23,railMat,false);
+}
+function buildStairs(kind){
+ // No overhead floor/ceiling across the stair shaft. Each tread is decorative,
+ // with character elevation driven by the same authored climb path.
+ const sw=kind==='switch';
+ const points=sw?[new THREE.Vector3(-6,0,2),new THREE.Vector3(-2,1.55,2),new THREE.Vector3(0,1.55,2),new THREE.Vector3(0,1.55,-1.2),new THREE.Vector3(-2,3.1,-1.2),new THREE.Vector3(-6,3.1,-1.2)]:Array.from({length:65},(_,i)=>{const t=i/64,angle=3*Math.PI*t+Math.PI;return new THREE.Vector3(1.9*Math.cos(angle),4.8*t,1.9*Math.sin(angle))});
+ stairPath=points;
+ box(0,-.18,0,18,.3,15,floorMat,false);
+ // Build narrow visual treads interpolated on the actual walkable path.
+ const n=sw?80:90;
+ for(let i=0;i<=n;i++){
+  const t=i/n*(points.length-1.00001),p=pathPoint(points,t);
+  const q=pathPoint(points,Math.min(points.length-1.00001,t+.08)),v=q.clone().sub(p);
+  const tread=box(p.x,p.y-.065,p.z,1.12,.12,.33,stepMat,false);
+  tread.rotation.y=Math.atan2(-v.x,-v.z);
+ }
+ if(!sw){box(0,2.4,0,.35,5,.35,railMat,false)}
+ else {box(-3,3.05,3.0,7,.11,.12,railMat,false);box(-3,4.5,-2.3,7,.11,.12,railMat,false)}
+}
+function load(which){stage=which;clear();if(which==='rooms')buildRooms();else if(which==='estate')buildEstate();else if(which==='estateSwitch'||which==='estateSpiral')buildEstateStair(which);else buildStairs(which);reset();for(const id of ['rooms','switch','spiral','estate','estateSwitch','estateSpiral'])document.getElementById(id).setAttribute('aria-pressed',String(id===which));syncVisuals();}
+// Visual assets are separated from the proven physics/door primitives.
+async function fetchVictorianVisuals(){
+ if(visualReady||loadingVisuals)return;loadingVisuals=true;
+ const loader=new GLTFLoader();
+ const paths=['geometry/floor_01.glb','geometry/furnishings_floor_01.glb'];
+ try{
+  for(const path of paths){
+   const asset=await new Promise((resolve,reject)=>loader.load('./houses/ferres-estate/'+path,g=>resolve(g.scene),undefined,reject)).catch(e=>{console.warn('Visual unavailable:',path,e);return null});
+   if(asset){asset.name='victorian-'+path;visualGroup.add(asset);visualAssets.push(asset);}
+  }
+  visualReady=visualAssets.length>0;
+ }finally{loadingVisuals=false;syncVisuals();}
+}
+function syncVisuals(){
+ const show=victorianVisuals&&stage==='estate'&&visualReady;
+ visualGroup.visible=show;
+ for(const m of blockers)m.visible=!show;
+ document.getElementById('visuals').textContent='Victorian visuals: '+(show?'ON':loadingVisuals?'LOADING':victorianVisuals?'UNAVAILABLE':'OFF');
+}
+function toggleVisuals(){victorianVisuals=!victorianVisuals;if(victorianVisuals&&!visualReady)fetchVictorianVisuals();syncVisuals();}
+// Integration seam: game state listens to continuous player coordinates;
+// navigation never teleports or changes control meaning for a quest interaction.
+function setupQuest(){
+ while(relic.children.length)relic.remove(relic.children[0]);
+ const room=rooms.find(r=>/midnight library/i.test(r.name))||rooms[0];
+ if(!room)return;
+ const crystal=new THREE.Mesh(new THREE.IcosahedronGeometry(.22,1),new THREE.MeshStandardMaterial({color:0xb4eaff,emissive:0x1a7497,emissiveIntensity:1.2,metalness:.25,roughness:.23}));
+ crystal.position.set((room.minX+room.maxX)/2,.9,(room.minZ+room.maxZ)/2);relic.add(crystal);relic.visible=true;
+ mission.hasRelic=false;mission.completed=false;
+ showMission();
+}
+function showMission(){
+ const el=document.getElementById('objective');
+ el.textContent=mission.completed?'Complete: The Founder has received the crystal.':mission.hasRelic?'Return to the Grand Entrance Hall with the crystal.':'Find the crystal in The Midnight Library and press E to collect it.';
+}
+function updateQuest(dt){
+ relic.visible=stage==='estate'&&!mission.hasRelic;
+ if(relic.visible)relic.rotation.y+=dt*.8;
+ const near=stage==='estate'&&!mission.hasRelic&&relic.children.length&&Math.hypot(P.x-relic.children[0].position.x,P.z-relic.children[0].position.z)<1.15;
+ const hall=rooms.find(r=>/grand entrance/i.test(r.name));
+ const report=stage==='estate'&&mission.hasRelic&&!mission.completed&&hall&&P.x>hall.minX&&P.x<hall.maxX&&P.z>hall.minZ&&P.z<hall.maxZ;
+ document.getElementById('interaction').textContent=near?'Press E: Collect crystal':report?'Press E: Report to the Founder':'';
+ if(keys.has('KeyE')){
+  if(near){mission.hasRelic=true;showMission();}
+  else if(report){mission.completed=true;showMission();}
+  keys.delete('KeyE');
+ }
+}
+function blocked(x,z){
+ const radius=.27;
+ for(const m of blockers){
+  m.updateMatrixWorld(true);const bounds=new THREE.Box3().setFromObject(m);
+  if(bounds.max.y<.65||bounds.min.y>1.45)continue;
+  if(x>bounds.min.x-radius&&x<bounds.max.x+radius&&z>bounds.min.z-radius&&z<bounds.max.z+radius)return true;
+ }
+ // Estate door leaf uses the SAME transform as its visible animated panel.
+ // Do not test the simplified original lab doors, preserving the proven control sample.
+ if(stage==='estate'){
+  const p=new THREE.Vector2(x,z);
+  for(const door of doors){
+   if(door.kind!=='estate')continue;
+   door.pivot.updateMatrixWorld(true);
+   const start=door.pivot.localToWorld(new THREE.Vector3(0,1.1,0));
+   const end=door.pivot.localToWorld(new THREE.Vector3(door.side==='left'||door.side==='right'?0:door.width,1.1,door.side==='left'||door.side==='right'?door.width:0));
+   const u=new THREE.Vector2(start.x,start.z),v=new THREE.Vector2(end.x,end.z),d=v.clone().sub(u);
+   const t=Math.max(0,Math.min(1,p.clone().sub(u).dot(d)/Math.max(1e-8,d.lengthSq())));
+   if(p.distanceTo(u.addScaledVector(d,t))<radius+.045)return true;
+  }
+ }
+ return false;
+}
+function travel(dx,dz){const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.06));for(let i=0;i<steps;i++){const x=P.x+dx/steps,z=P.z+dz/steps;if(!blocked(x,P.z))P.x=x;if(!blocked(P.x,z))P.z=z}}
+function update(dt){
+ const turn=Number(keys.has('KeyD')||keys.has('ArrowRight'))-Number(keys.has('KeyA')||keys.has('ArrowLeft'));
+ P.turn+=(-turn*1.6-P.turn)*Math.min(1,dt*9);
+ if(stage==='rooms'||stage==='estate')P.yaw+=P.turn*dt;
+ const dir=Number(keys.has('KeyW')||keys.has('ArrowUp'))-Number(keys.has('KeyS')||keys.has('ArrowDown'));
+ const speed=keys.has('ShiftLeft')||keys.has('ShiftRight')?4.1:2.35;
+ P.vel+=(dir*speed-P.vel)*Math.min(1,dt*8);
+ if(stage==='rooms'||stage==='estate'){
+  travel(-Math.sin(P.yaw)*P.vel*dt,-Math.cos(P.yaw)*P.vel*dt);
+  current=rooms.find(r=>P.x>=r.minX&&P.x<=r.maxX&&P.z>=r.minZ&&P.z<=r.maxZ)?.name||'Door threshold';
+  for(const door of doors){
+   const nearPlayer=Math.hypot(P.x-door.x,P.z-door.z)<2.0;
+   const nearCamera=Math.hypot(camera.position.x-door.x,camera.position.z-door.z)<1.75;
+   if(nearPlayer||nearCamera)door.hold=2.3;
+   else door.hold=Math.max(0,(door.hold||0)-dt);
+   const open=nearPlayer||nearCamera||door.hold>0;
+   door.openness+=(Number(open)-door.openness)*Math.min(1,dt*6);
+   door.pivot.rotation.y=door.openness*(door.sign??1)*1.56;
+  }
+ }else{
+  // Stair guided walk route is a separate lab: no room teleport; continuous 3D height.
+  progress=Math.max(0,Math.min(stairPath.length-1.00001,progress+P.vel*dt/.38));
+  const p=pathPoint(stairPath,progress),ahead=pathPoint(stairPath,Math.min(stairPath.length-1.00001,progress+.04));
+  P.x=p.x;P.y=p.y;P.z=p.z;
+  const delta=ahead.sub(p);P.yaw=Math.atan2(-delta.x,-delta.z);
+  current=(stairMetric?(stairMetric.kind==='spiral'?'Estate Serpent Spiral':'Estate Grand Switchback'):(stage==='switch'?'Switchback':'Spiral'))+' • elevation '+P.y.toFixed(2)+'m'+(stairMetric?' / '+stairMetric.rise.toFixed(2)+'m':'');
+ }
+ avatar.position.set(P.x,P.y,P.z);avatar.rotation.y=P.yaw;
+ updateQuest(dt);
+ stride+=Math.abs(P.vel)*dt*4;feet[0].rotation.x=Math.sin(stride)*.24;feet[1].rotation.x=-Math.sin(stride)*.24;
+ camYaw+=Math.atan2(Math.sin(P.yaw+lookYaw-camYaw),Math.cos(P.yaw+lookYaw-camYaw))*Math.min(1,dt*4);
+ const back=new THREE.Vector3(Math.sin(camYaw),0,Math.cos(camYaw));
+ // A subtle doorway dip, only while passing a real estate doorway.
+ const doorway=stage==='estate'&&doors.some(d=>d.kind==='estate'&&(Math.hypot(P.x-d.x,P.z-d.z)<1.15||Math.hypot(camera.position.x-d.x,camera.position.z-d.z)<.9));
+ doorwayDip+=(Number(doorway)-doorwayDip)*Math.min(1,dt*(doorway?5:2.3));
+ const target=new THREE.Vector3(P.x,P.y+1.22-doorwayDip*.13,P.z);
+ const desired=target.clone().addScaledVector(back,3.0);desired.y+=.95-doorwayDip*.68;
+ // True occlusion query: cast toward camera and retract before first opaque blocker.
+ const rayVector=desired.clone().sub(target);const length=rayVector.length();
+ if(stairMetric){
+  const b=stairMetric.bounds;
+  desired.x=Math.max(b.minX,Math.min(b.maxX,desired.x));
+  desired.z=Math.max(b.minZ,Math.min(b.maxZ,desired.z));
+  desired.y=Math.max(P.y+1.28,Math.min(P.y+2.15,desired.y));
+  if(Math.hypot(desired.x-P.x,desired.z-P.z)<.45){
+   const dx=(b.minX+b.maxX)/2-P.x,dz=(b.minZ+b.maxZ)/2-P.z,d=Math.hypot(dx,dz);
+   if(d>.15){desired.x=P.x+dx/d*Math.min(1.05,d);desired.z=P.z+dz/d*Math.min(1.05,d);}
+  }
+ }
+ if(stage==='rooms'||stage==='estate'){
+  // Camera occlusion is independent of character collision: check Victorian
+  // display meshes and both animated and structural doors.
+  const occluders=[...blockers,...doors.map(d=>d.leaf).filter(Boolean)];
+  if(visualGroup.visible)visualGroup.traverse(o=>{if(o.isMesh&&o.visible&&!(o.material?.transparent))occluders.push(o);});
+  const ray=new THREE.Raycaster(target,rayVector.clone().normalize(),.08,length);
+  const hit=ray.intersectObjects(occluders,false).find(h=>h.distance>.13);
+  if(hit){
+   const clear=Math.max(.34,hit.distance-.24);
+   desired.copy(target).addScaledVector(rayVector.normalize(),clear);
+  }
+ }
+ camera.position.lerp(desired,Math.min(1,dt*8));
+ if(stairMetric){const b=stairMetric.bounds;camera.position.x=Math.max(b.minX,Math.min(b.maxX,camera.position.x));camera.position.z=Math.max(b.minZ,Math.min(b.maxZ,camera.position.z));}
+ camera.lookAt(target);
+ document.getElementById('readout').textContent='Space: '+current+' | X '+P.x.toFixed(2)+' | Z '+P.z.toFixed(2)+' | Height '+P.y.toFixed(2)+' m | W held: '+keys.has('KeyW');
+ renderer.render(scene,camera);
+}
+document.getElementById('rooms').onclick=()=>load('rooms');document.getElementById('switch').onclick=()=>load('switch');document.getElementById('spiral').onclick=()=>load('spiral');document.getElementById('estate').onclick=()=>load('estate');document.getElementById('estateSwitch').onclick=()=>load('estateSwitch');document.getElementById('estateSpiral').onclick=()=>load('estateSpiral');document.getElementById('visuals').onclick=toggleVisuals;
+addEventListener('keydown',e=>{if(['KeyW','KeyA','KeyS','KeyD','ShiftLeft','ShiftRight','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();if(e.code==='KeyR')reset();keys.add(e.code)});
+addEventListener('keyup',e=>keys.delete(e.code));addEventListener('blur',()=>keys.clear());
+renderer.domElement.addEventListener('pointerdown',e=>{pointer=true;oldX=e.clientX;renderer.domElement.setPointerCapture(e.pointerId)});
+renderer.domElement.addEventListener('pointermove',e=>{if(pointer){lookYaw=Math.max(-1,Math.min(1,lookYaw-(e.clientX-oldX)*.005));oldX=e.clientX}});
+renderer.domElement.addEventListener('pointerup',()=>pointer=false);
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+loadForgeContract('./houses/ferres-estate').then(c=>{gameContract=c;const readiness=gameReadiness(c);estateData=c.navigation;load('estate');document.getElementById('readout').title='House contract loaded; gameplay certified: '+readiness.gameplayCertified;}).catch(e=>{console.warn(e);document.getElementById('objective').textContent='Unable to load Forge house contract: '+e.message;load('rooms')});function tick(t){const dt=Math.min(.04,(t-clock)/1000);clock=t;update(Math.max(0,dt));requestAnimationFrame(tick)}requestAnimationFrame(tick);
+</script></body></html>
