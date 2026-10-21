@@ -9,7 +9,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
  if(scene)scene.add(doorGroup);
  const panel=document.createElement('section');panel.id='bh-walk-panel';panel.innerHTML=`<style>
  #bh-walk-panel{position:fixed;z-index:1200;bottom:12px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;width:min(94vw,820px);padding:8px;background:#10131ef0;color:#f6e8d7;border:1px solid #a08462;border-radius:12px;font:12px system-ui;box-sizing:border-box}#bh-walk-panel button{background:#342839;color:#fff;border:1px solid #997a62;padding:8px;border-radius:7px;cursor:pointer}#bh-walk-panel .walking{display:none}#bh-walk-panel.active .walking{display:inline-block}#bh-walk-panel small{width:100%;text-align:center;color:#d3bfa6}#bh-walk-panel .room{font-weight:bold}#bh-walk-panel .touch{touch-action:none}#bh-walk-panel #bh-walk-status{color:#e8cc9a}</style>
- <button id="bh-walk-toggle">Enter Cinematic Explorer</button><span class="room" id="bh-walk-room">Room inspection</span><button class="walking" id="bh-walk-camera">Camera: CINEMATIC</button><button class="walking" id="bh-walk-exit">Exit</button><button class="walking touch" data-walk="forward">▲</button><button class="walking touch" data-walk="turnleft">↶</button><button class="walking touch" data-walk="backward">▼</button><button class="walking touch" data-walk="turnright">↷</button><button class="walking" id="bh-walk-next">Next linked room (QA)</button><small id="bh-walk-status">W/↑ forward · S/↓ back · A/← step left · D/→ step right · camera follows</small>`;
+ <button id="bh-walk-toggle">Enter Cinematic Explorer</button><span class="room" id="bh-walk-room">Room inspection</span><button class="walking" id="bh-walk-camera">Camera: CINEMATIC</button><button class="walking" id="bh-walk-exit">Exit</button><button class="walking touch" data-walk="forward">▲</button><button class="walking touch" data-walk="turnleft">↶</button><button class="walking touch" data-walk="backward">▼</button><button class="walking touch" data-walk="turnright">↷</button><button class="walking" id="bh-walk-next">Next linked room (QA)</button><small id="bh-walk-status">W/↑ forward · S/↓ back · A/← sidestep left · D/→ sidestep right</small>`;
  document.body.append(panel);const q=id=>panel.querySelector('#'+id);const avatar=new THREE.Group();avatar.name='forge_victorian_explorer_preview';
  const coat=new THREE.MeshStandardMaterial({color:0x27334a,roughness:.9}),vest=new THREE.MeshStandardMaterial({color:0x665344}),skin=new THREE.MeshStandardMaterial({color:0xc6a68c}),hat=new THREE.MeshStandardMaterial({color:0x191922}),cloth=new THREE.MeshStandardMaterial({color:0x252733}),boots=new THREE.MeshStandardMaterial({color:0x17161c});
  function addBox(parent,w,h,d,x,y,z,material){let a=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),material);a.position.set(x,y,z);parent.add(a);return a}
@@ -155,7 +155,7 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
   avatar.position.set(S.x,floor,S.z);
   avatar.rotation.y=S.facingYaw;
   // Camera bearing eases behind the body instead of snapping 90 degrees on A/D.
-  S.cameraYaw=angleTo(S.cameraYaw,S.facingYaw,instant?1:Math.min(1,dt*2.4));
+  S.cameraYaw=S.yaw; // The camera stays behind the explorer while A/D moves him.
   const face=new THREE.Vector3(-Math.sin(S.cameraYaw),0,-Math.cos(S.cameraYaw));
   // Height comes from the authored room, never from a fixed "cinematic" offset.
   const authoredHeight=Math.max(2.15,(Number(S.room?.boundsFeet?.h)||9)*K);
@@ -227,13 +227,12 @@ export function createCinematicWalkthrough(THREE,{scene,camera,controls,canvas,g
    if(S.movementAnchor===null)S.movementAnchor=S.yaw;
    const base=S.movementAnchor,fx=-Math.sin(base),fz=-Math.cos(base);
    const speed=S.moving.has('sprint')?5.0:2.75;
-   const dx=(fx*f-fz*side*.55)/len*speed*dt;
-   const dz=(fz*f+fx*side*.55)/len*speed*dt;
+   const dx=(fx*f-fz*side)/len*speed*dt;
+   const dz=(fz*f+fx*side)/len*speed*dt;
    step(dx,dz);
-   const target=(f<=0&&side!==0)?S.facingYaw:(f<0?S.yaw:Math.atan2(-dx,-dz));
-   S.facingYaw=angleTo(S.facingYaw,target,dt*13);
+   S.facingYaw=S.yaw; // Sidestepping does not change facing or orbit the camera.
   }else{
-   if(S.movementAnchor!==null){S.yaw=S.facingYaw;S.movementAnchor=null;}
+   if(S.movementAnchor!==null){S.movementAnchor=null;}
   }
   const moving=len>.001;
   stride+=dt*(moving?10:0);const a=moving?Math.sin(stride)*.45:0;
