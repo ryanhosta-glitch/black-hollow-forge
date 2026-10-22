@@ -14,6 +14,9 @@ export function auditHaunt(source){
  }
  for(const [shared,ends] of portals){if(ends.length!==2)issue('SHARED_OPENING_PAIR_INVALID',{shared,count:ends.length});if(ends.length===2&&ends[0].floor!==ends[1].floor)issue('SHARED_OPENING_CROSSES_FLOORS',{shared});}
  const elevators=[];for(const [id,stops] of shaft){const first=stops[0];if(stops.length<2)issue('ELEVATOR_SHAFT_SINGLE_STOP',{shaftId:id});if(new Set(stops.map(r=>r.floor)).size!==stops.length)issue('ELEVATOR_SHAFT_DUPLICATE_FLOOR',{shaftId:id});for(const r of stops)if(Math.abs(Number(r.x)-Number(first.x))>.1||Math.abs(Number(r.y)-Number(first.y))>.1)issue('ELEVATOR_SHAFT_MISALIGNED',{shaftId:id,roomId:r.id});elevators.push({id,requiresCabinEntry:true,stops:stops.map(r=>({roomId:r.id,floor:r.floor,elevationMeters:levels[r.floor]*.3048})),runtimeBound:false});}
+
+ if(rooms.length>512)issue('SOURCE_ROOM_BUDGET_EXCEEDED',{rooms:rooms.length});
+ for(let i=0;i<Math.min(rooms.length,512);i++)for(let j=i+1;j<Math.min(rooms.length,512);j++){const a=rooms[i],b=rooms[j];if(a.floor!==b.floor)continue;const dx=Math.min(+a.x+ +a.l,+b.x+ +b.l)-Math.max(+a.x,+b.x),dz=Math.min(+a.y+ +a.w,+b.y+ +b.w)-Math.max(+a.y,+b.y);if(dx>.033&&dz>.033)issue('ROOM_INTERIOR_OVERLAP',{rooms:[a.id,b.id],overlapFeet:[dx,dz]});}
  const entry=source.gameEntry,room=rooms.find(r=>r.id===entry?.roomId);if(!room||!(room.openings||[]).some(o=>o.id===entry.openingId&&o.type==='door'))issue('AUTHORED_GAME_ENTRY_INVALID');
  const runtimeRequirements=['physical-door-leaves','furniture-collision','mesh-camera-collision','continuous-stair-support','game-loader-integration'];
  return {version:1,sourceRoomCount:rooms.length,sourceUnchanged:true,gameReady:false,certification:'SOURCE_AUDIT_ONLY',floorElevationsMeters:levels.map(y=>y*.3048),elevators,issues,runtimeRequirements};

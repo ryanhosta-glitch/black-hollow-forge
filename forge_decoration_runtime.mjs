@@ -1,6 +1,7 @@
+import {circleTouchesRectangle} from './navigation/door_leaf_collision.mjs';
 import {createVictorianFurniture} from './victorian_furniture_library.js';
 import {decorationBoxes} from './forge_decoration_plan.mjs';
-export function decorationBlocked(plan,floor,x,z,y,radius=.24){return plan.colliders.some(c=>c.floor===floor&&y<c.maxY&&y+1.7>c.minY&&x+radius>c.bounds.minX&&x-radius<c.bounds.maxX&&z+radius>c.bounds.minZ&&z-radius<c.bounds.maxZ);}
+export function decorationBlocked(plan,floor,x,z,y,radius=.24){return plan.colliders.some(c=>c.floor===floor&&y<c.maxY&&y+1.7>c.minY&&circleTouchesRectangle(x,z,c.bounds.minX,c.bounds.maxX,c.bounds.minZ,c.bounds.maxZ,radius));}
 /** Inspection rendering uses the same catalog, placements and geometry as the compiler. */
 export function createDecorationGroup(THREE,plan,floor){
  const root=new THREE.Group();root.name='Forge decorations';
