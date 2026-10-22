@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "controller": [
+    {
+      "name": "Bat Manor",
+      "staticRoutesVerified": true,
+      "controllerPaths": 9,
+      "completed": 9,
+      "frames": 91,
+      "failures": [],
+      "rendered": false,
+      "gameplayCertified": false
+    },
+    {
+      "name": "Moonveil Manor — Three-Level Staircase Test Estate",
+      "staticRoutesVerified": true,
+      "controllerPaths": 53,
+      "completed": 53,
+      "frames": 5844,
+      "failures": [],
+      "rendered": false,
+      "gameplayCertified": false
+    },
+    {
+      "name": "Haunted Estate",
+      "staticRoutesVerified": true,
+      "controllerPaths": 8,
+      "completed": 8,
+      "frames": 496,
+      "failures": [],
+      "rendered": false,
+      "gameplayCertified": false
+    },
+    {
+      "name": "Aycers",
+      "staticRoutesVerified": true,
+      "controllerPaths": 19,
+      "completed": 19,
+      "frames": 1091,
+      "failures": [],
+      "rendered": false,
+      "gameplayCertified": false
+    }
+  ],
+  "compiledBatch": [
+    {
+      "name": "Bat Manor",
+      "rooms": 8,
+      "reachable": 8,
+      "stops": 8,
+      "entry": {
+        "roomId": "rh8q9mpl",
+        "openingId": "forge-main-entry"
+      },
+      "openPlanRepairs": 0,
+      "issues": [],
+      "remainingBlockingCodes": [
+        "COLLISION_PHYSICS_NOT_CERTIFIED",
+        "GAME_CASA_LOADER_NOT_INTEGRATED",
+        "GAMEPLAY_BINDINGS_NOT_INTEGRATED"
+      ],
+      "sourceUnchanged": true,
+      "staticRoutesVerified": true,
+      "checkedRoutes": 9,
+      "gameplaySlots": 6,
+      "planningBudgetPassed": true
+    },
+    {
+      "name": "Moonveil Manor — Three-Level Staircase Test Estate",
+      "rooms": 12,
+      "reachable": 12,
+      "stops": 3,
+      "entry": {
+        "roomId": "mv-foyer",
+        "openingId": "mv-front-entry"
+      },
+      "openPlanRepairs": 2,
+      "issues": [],
+      "remainingBlockingCodes": [
+        "COLLISION_PHYSICS_NOT_CERTIFIED",
+        "GAME_CASA_LOADER_NOT_INTEGRATED",
+        "GAMEPLAY_BINDINGS_NOT_INTEGRATED"
+      ],
+      "sourceUnchanged": true,
+      "staticRoutesVerified": true,
+      "checkedRoutes": 33,
+      "gameplaySlots": 6,
+      "planningBudgetPassed": true
+    },
+    {
+      "name": "Haunted Estate",
+      "rooms": 2,
+      "reachable": 2,
+      "stops": 1,
+      "entry": {
+        "roomId": "r2qacb1d",
+        "openingId": "forge-main-entry"
+      },
+      "openPlanRepairs": 0,
+      "issues": [],
+      "remainingBlockingCodes": [
+        "COLLISION_PHYSICS_NOT_CERTIFIED",
+        "GAME_CASA_LOADER_NOT_INTEGRATED",
+        "GAMEPLAY_BINDINGS_NOT_INTEGRATED"
+      ],
+      "sourceUnchanged": true,
+      "staticRoutesVerified": true,
+      "checkedRoutes": 6,
+      "gameplaySlots": 6,
+      "planningBudgetPassed": true
+    },
+    {
+      "name": "Aycers",
+      "rooms": 6,
+      "reachable": 6,
+      "stops": 4,
+      "entry": {
+        "roomId": "rnt08etw",
+        "openingId": "rzb0nn25"
+      },
+      "openPlanRepairs": 0,
+      "issues": [],
+      "remainingBlockingCodes": [
+        "COLLISION_PHYSICS_NOT_CERTIFIED",
+        "GAME_CASA_LOADER_NOT_INTEGRATED",
+        "GAMEPLAY_BINDINGS_NOT_INTEGRATED"
+      ],
+      "sourceUnchanged": true,
+      "staticRoutesVerified": true,
+      "checkedRoutes": 15,
+      "gameplaySlots": 6,
+      "planningBudgetPassed": true
+    }
+  ],
+  "meshChecks": {
+    "moonveilSamplePositions": 613,
+    "oneRoomSamplePositions": 26,
+    "playerRadiusMeters": 0.2,
+    "checks": [
+      "floor support",
+      "headroom",
+      "8 radial directions at 3 heights"
+    ],
+    "certification": "SAMPLED_EXPORTED_MESHES_ONLY",
+    "sharedDoorwayLanesChecked": true
+  },
+  "renderedBrowser": {
+    "passed": false,
+    "error": "Error creating WebGL context"
+  },
+  "actualBlackHollowGameIntegrated": false,
+  "gameplayCertified": false
+}
